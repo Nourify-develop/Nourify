@@ -20,13 +20,13 @@ const config: Config = {
         primary: "#1E1E1E",
         secondary: "#079C4E",
         yellow: "#FFA500",
-        "background-green": "#013115",
         gray: {
           1: "#F4F4F4",
           2: "#D9D9D9",
           3: "#5B5B5B",
         },
         background: {
+          default: "#013115",
           1: "#F6F5F7",
           2: "#F2F1F6",
         },
