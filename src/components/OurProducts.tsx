@@ -38,7 +38,7 @@ const OurProducts: React.FC = () => {
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
           our&nbsp;products{" "}
         </h1>
-        <p className="font-medium text-xl  flex-1">
+        <p className="font-medium text-xl text-[#1E1E1EB2]  flex-1">
           Take a look at some of our wonderful products from Nourify - we take
           delight in making sure our customers have the best of the best
         </p>
