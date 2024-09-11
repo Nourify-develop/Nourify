@@ -1,4 +1,5 @@
 import OurProducts from "@/components/OurProducts";
+import HeroSection from "@/components/HeroSection";
 
 export default function Home() {
   return (
@@ -9,7 +10,8 @@ export default function Home() {
           Lorem Ipsum is simply dummy text of the printing and typesetting
           industry.
         </p>
-        <OurProducts/>
+        <HeroSection />
+        <OurProducts />
       </main>
     </>
   );
