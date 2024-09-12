@@ -1,16 +1,21 @@
+"use client";
 import React from "react";
 import Logo from "./Logo";
 import Link from "next/link";
-import { FaSearch } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
+import { IoCartOutline } from "react-icons/io5";
+import { RxAvatar } from "react-icons/rx";
+import { usePathname } from "next/navigation";
 
 function Navbar() {
+  const pathname = usePathname();
   const MENU_LINKS = [
     { name: "Home", link: "/" },
     { name: "Shop", link: "/shop" },
     { name: "About Us", link: "/about_us" },
     { name: "Contact Us", link: "/contact_us" },
   ];
-  // max-w-[79.663rem]
+
   return (
     <header className="flex items-center justify-around h-[6rem] bg-white font-sans">
       <nav>
@@ -19,7 +24,9 @@ function Navbar() {
             <Link
               href={link}
               key={link}
-              className="text-[1.125rem] font-sans text-primary"
+              className={`${
+                pathname === link && "text-secondary font-medium"
+              } text-[1.125rem] font-medium font-sans transition-all ease-in-out duration-300 text-primary hover:text-secondary`}
             >
               {name}
             </Link>
@@ -28,13 +35,47 @@ function Navbar() {
       </nav>
       <Logo />
 
+      {/* // TODO: DELETE THESE COMMENTS AFTER
+    // max-w-[79.663rem]
+    //   <div */}
+      {/* //     className={`flex gap-2 px-6 py-3 items-center ${
+    //       darkMode ? "bg-primary" : "bg-white"
+    //     } rounded-md shadow-sm`}
+    //   >
+    //     <span>
+    //       <FcSearch size={"20px"} />
+    //     </span>
+    //     <input
+    //       className={`${darkMode ? "bg-primary" : "bg-white"} outline-none  `}
+    //       placeholder="Search for a country..."
+    //       type="text"
+    //       value={value}
+    //       name={name}
+    //     />
+    //   </div>;
+    w-[20px] h-[20px] text-primary p-[16px_148px_16px_14px] gap-0 rounded-full transition-width duration-200 ease-in-out  outline-none
+    
+    */}
+
       <div className="flex gap-[2rem] items-center">
-        <input
-          type="text"
-          placeholder="Search..."
-          className="w-[20px] h-[20px] text-white p-[16px_148px_16px_14px] gap-0 rounded-full transition-width duration-200 ease-in-out opacity-0 bg-gray-300 focus:opacity-100 hover:opacity-100 outline-none"
-        />
-        <div>CART</div>
+        <div className="flex items-center gap-[3px] bg-gray-2 rounded-full px-2 py-1">
+          <span>
+            <CiSearch className="text-primary" size={"20px"} />
+          </span>
+          <input
+            type="text"
+            placeholder="Search"
+            className="inherit bg-gray-2 rounded-full outline-none px-2 py-1"
+          />
+        </div>
+        <div className="flex items-center gap-4 bg-gray-200 px-1 py-1 rounded-full">
+          <div className="bg-[#5B5B5B] rounded-full p-1">
+            <IoCartOutline className="text-white" size={"20px"} />
+          </div>
+          <div className="bg-secondary rounded-full p-1">
+            <RxAvatar className="text-white" size={"20px"} />
+          </div>
+        </div>
       </div>
     </header>
   );
