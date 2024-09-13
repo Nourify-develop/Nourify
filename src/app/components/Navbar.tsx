@@ -58,9 +58,9 @@ function Navbar() {
     */}
 
       <div className="flex gap-[2rem] items-center">
-        <div className="flex items-center gap-[3px] bg-gray-2 rounded-full px-2 py-1 transition-all duration-300 w-[50%] hover:w-[100%]">
+        <div className="flex items-center gap-[3px] bg-gray-2 rounded-full px-2 py-2 transition-all duration-300 w-[50%] hover:w-[100%]">
           <span>
-            <CiSearch className="text-primary z-[1000]" size={"20px"} />
+            <CiSearch className="text-primary" size={"20px"} />
           </span>
           <input
             type="text"
@@ -68,12 +68,15 @@ function Navbar() {
             className="inherit bg-gray-2 rounded-full outline-none transition-all duration-300 px-2 py-1 w-[90%]"
           />
         </div>
-        <div className="flex items-center gap-4 bg-gray-200 px-1 py-1 rounded-full">
-          <div className="bg-[#5B5B5B] rounded-full p-1">
-            <IoCartOutline className="text-white" size={"20px"} />
+        <div className="flex items-center gap-5 bg-gray-200 px-2 py-1 rounded-full">
+          <div className="bg-[#5B5B5B] rounded-full p-2 relative">
+            <IoCartOutline className="text-white" size={"25px"} />
+            <p className=" absolute top-1 right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
+              2
+            </p>
           </div>
-          <div className="bg-secondary rounded-full p-1">
-            <RxAvatar className="text-white" size={"20px"} />
+          <div className="bg-secondary rounded-full p-2">
+            <RxAvatar className="text-white" size={"25px"} />
           </div>
         </div>
       </div>
