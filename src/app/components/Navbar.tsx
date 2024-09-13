@@ -58,14 +58,14 @@ function Navbar() {
     */}
 
       <div className="flex gap-[2rem] items-center">
-        <div className="flex items-center gap-[3px] bg-gray-2 rounded-full px-2 py-1">
+        <div className="flex items-center gap-[3px] bg-gray-2 rounded-full px-2 py-1 transition-all duration-300 w-[50%] hover:w-[100%]">
           <span>
-            <CiSearch className="text-primary" size={"20px"} />
+            <CiSearch className="text-primary z-[1000]" size={"20px"} />
           </span>
           <input
             type="text"
             placeholder="Search"
-            className="inherit bg-gray-2 rounded-full outline-none px-2 py-1"
+            className="inherit bg-gray-2 rounded-full outline-none transition-all duration-300 px-2 py-1 w-[90%]"
           />
         </div>
         <div className="flex items-center gap-4 bg-gray-200 px-1 py-1 rounded-full">
