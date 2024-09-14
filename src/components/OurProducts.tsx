@@ -66,7 +66,9 @@ const OurProducts: React.FC = () => {
         ))}
       </div>
       <div className="flex justify-end ">
-        <button className="bg-[#087D40] text-white rounded-[65px] font-medium text-xl py-3 px-6 flex justify-between items-center">See More  <img src="/arrow-up-right.svg" alt="arrow" /></button>
+        <button className="bg-[#087D40] text-white rounded-[65px] font-medium text-xl py-3 px-6 flex justify-between items-center">
+          See More <img src="/arrow-up-right.svg" alt="arrow" />
+        </button>
       </div>
     </div>
   );
