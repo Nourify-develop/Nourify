@@ -69,7 +69,7 @@ const OurProducts: React.FC = () => {
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
           our&nbsp;products{" "}
         </h1>
-        <p className="font-medium text-xl text-[#1E1E1EB2] flex-1">
+        <p className="font-medium text-xl text-primary-2 flex-1">
           Take a look at some of our wonderful products from Nourify - we take
           delight in making sure our customers have the best of the best
         </p>
@@ -83,21 +83,21 @@ const OurProducts: React.FC = () => {
             <img src={product.image} alt={product.name} />
             <div className="flex justify-between items-end">
               <div className="flex justify-start text-left flex-col gap-3">
-                <h3 className="text-lg font-medium">{product.name}</h3>
+                <h3 className="text-lg font-medium text-gray-4">{product.name}</h3>
                 <p className="">
                   <span className="font-bold text-2xl">{product.price}</span>
-                  <span className="text-sm text-[#858585]"> / per pack</span>
+                  <span className="text-sm text-gray-5"> / per pack</span>
                 </p>
               </div>
-              <button className="py-4 px-[1.125rem] transition-all duration-500 ease-linear rounded-md bg-[#F2F1F6] hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group">
-                <LuShoppingCart   className="h-6 w-6 transition-all duration-500 ease-linear text-[#848484] group-hover:text-white"/>
+              <button className="py-3 px-4 transition-all duration-500 ease-linear rounded-md bg-background-2 hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group">
+                <LuShoppingCart   className="h-6 w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white"/>
               </button>
             </div>
           </div>
         ))}
       </div>
       <div className="flex justify-end">
-        <button className="bg-[#087D40] text-white rounded-[65px] font-medium text-xl py-3 px-6 flex justify-between items-center">
+        <button className="bg-secondary text-white rounded-[65px] font-medium text-xl py-3 px-6 flex justify-between items-center">
           See More <img src="/arrow-up-right.svg" alt="arrow" />
         </button>
       </div>

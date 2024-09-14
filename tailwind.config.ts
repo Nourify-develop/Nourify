@@ -18,12 +18,16 @@ const config: Config = {
       },
       colors: {
         primary: "#1E1E1E",
+        "primary-2": "#1E1E1EB2",
         secondary: "#079C4E",
         yellow: "#FFA500",
         gray: {
           1: "#F4F4F4",
           2: "#D9D9D9",
           3: "#5B5B5B",
+          4: "#33333399",
+          5: "#858585",
+          6: "#848484",
         },
         background: {
           default: "#013115",
