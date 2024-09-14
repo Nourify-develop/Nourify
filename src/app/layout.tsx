@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
 export const metadata: Metadata = {
   title: "Nourify",
@@ -13,7 +14,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans">{children}</body>
+      <body>
+        <Navbar />
+        <main className="font-sans"> {children} </main>
+      </body>
     </html>
   );
 }
