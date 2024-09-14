@@ -21,7 +21,7 @@ function HeroSection() {
             showSecondImage ? "-translate-x-full" : "translate-x-0"
           }`}
           style={{
-            backgroundImage: "url('/images/bg-1.png')",
+            backgroundImage: "url('/images/bg1.png')",
           }}
         ></div>
 
@@ -30,7 +30,7 @@ function HeroSection() {
             showSecondImage ? "translate-x-0" : "translate-x-full"
           }`}
           style={{
-            backgroundImage: "url('/images/bg-2.png')",
+            backgroundImage: "url('/images/bg2.png')",
           }}
         ></div>
       </div>
