@@ -4,6 +4,8 @@ const config: Config = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/layout/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/ui/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
@@ -25,9 +27,13 @@ const config: Config = {
           1: "#F4F4F4",
           2: "#D9D9D9",
           3: "#5B5B5B",
-          4: "#33333399",
+          4: "#333333",
           5: "#858585",
           6: "#848484",
+        },
+        green: {
+          DEFAULT: "#087D40",
+          dark: "#013115",
         },
         background: {
           default: "#013115",
