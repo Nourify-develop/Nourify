@@ -64,7 +64,10 @@ const OurProducts: React.FC = () => {
   }, []);
 
   return (
-    <div className="bg-white flex flex-col py-10 gap-10 px-6 md:px-20">
+    <div
+      id="our-products"
+      className="bg-white flex flex-col py-10 gap-10 px-6 md:px-20"
+    >
       <div className="flex justify-between flex-col gap-7 md:flex-row text-center md:text-left w-full">
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
           our&nbsp;products{" "}
@@ -83,14 +86,16 @@ const OurProducts: React.FC = () => {
             <img src={product.image} alt={product.name} />
             <div className="flex justify-between items-end">
               <div className="flex justify-start text-left flex-col gap-3">
-                <h3 className="text-lg font-medium text-gray-4">{product.name}</h3>
+                <h3 className="text-lg font-medium text-gray-4">
+                  {product.name}
+                </h3>
                 <p className="">
                   <span className="font-bold text-2xl">{product.price}</span>
                   <span className="text-sm text-gray-5"> / per pack</span>
                 </p>
               </div>
               <button className="py-3 px-4 transition-all duration-500 ease-linear rounded-md bg-background-2 hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group">
-                <LuShoppingCart   className="h-6 w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white"/>
+                <LuShoppingCart className="h-6 w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white" />
               </button>
             </div>
           </div>
