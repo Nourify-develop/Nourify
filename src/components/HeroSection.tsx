@@ -3,7 +3,12 @@ import React, { useState, useEffect } from "react";
 
 function HeroSection() {
   const [showSecondImage, setShowSecondImage] = useState(false);
-
+  const handleStartShoppingClick = () => {
+    const productsSection = document.getElementById("our-products");
+    if (productsSection) {
+      productsSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   useEffect(() => {
     const interval = setInterval(() => {
       setShowSecondImage((prev) => !prev);
@@ -35,13 +40,11 @@ function HeroSection() {
         ></div>
       </div>
 
-      <div className="relative z-10 flex flex-col gap-6 justify-center px-5 lg:px-20 h-full items-start text-white">
-        <div className="flex h-fit">
+      <div className="relative z-10 flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20 h-full items-start text-white">
+        <div className="flex h-fit justify-cente w-full items-center">
           <h1
-            className={`text-5xl  lg:text-[80px] h-fit leading-[60px] lg:leading-[95px] font-extrabold uppercase transition-transform  duration-1000 ease-in-out ${
-              showSecondImage
-                ? "-translate-x-full "
-                : "translate-x-0 opaity-100"
+            className={`text-5xl  lg:text-[80px] lg:w-[1000px] h-fit leading-[60px] lg:leading-[95px] font-extrabold uppercase text-wrap transition-transform  duration-1000 ease-in-out ${
+              showSecondImage ? "-translate-x-full " : "translate-x-0"
             }`}
           >
             Fresh, <span className="font-bold text-yellow">Organic</span>{" "}
@@ -49,10 +52,8 @@ function HeroSection() {
           </h1>
 
           <h1
-            className={`absolute text-5xl  lg:text-[80px] leading-[60px] lg:leading-[95px] font-extrabold uppercase transition-transform  duration-1000 ease-in-out h-fit ${
-              showSecondImage
-                ? "translate-x-0 opaciy-100"
-                : "translate-x-full oacity-0"
+            className={`absolute text-5xl  lg:text-[80px] 00px] leading-[60px] lg:leading-[95px] font-extrabold uppercase transition-transform  duration-1000 ease-in-out h-fit ${
+              showSecondImage ? "translate-x-0 opaciy-100" : "translate-x-full "
             }`}
           >
             Indulge in our Freshly Baked{" "}
@@ -68,7 +69,10 @@ function HeroSection() {
           <img src="/general.svg" alt="General Icon" />
           Used by 15,000+ worldwide
         </span>
-        <button className="bg-secondary px-6 py-4 text-xl rounded-[64px] w-fit transition-opacity duration-1000">
+        <button
+          className="bg-secondary px-6 py-4 text-xl rounded-[64px] w-fit transition-opacity hover:duration-300 focus:outline-none hover:bg-secondary/70 "
+          onClick={handleStartShoppingClick}
+        >
           Start shopping
         </button>
       </div>
