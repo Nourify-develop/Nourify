@@ -21,8 +21,8 @@ function Navbar() {
   ];
 
   return (
-    <div className=" bg-white">
-      <header className="flex lg:container lg:mx-auto relative items-center justify-around h-[6rem] font-sans">
+    <div className=" bg-white relative">
+      <header className="fixed flex lg:container lg:mx-auto items-center justify-around h-[6rem] font-sans">
         <nav className="hidden md:flex lg:flex">
           <ul className="flex gap-[3rem]">
             {MENU_LINKS.map(({ link, name }) => (
@@ -82,7 +82,7 @@ function Navbar() {
             <div
               className={`${
                 showMobileMenu ? "block" : "hidden"
-              } absolute flex flex-col items-center self-end py-8 mt-14 space-y-6 bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
+              } absolute flex flex-col items-center self-end py-8 mt-14 z-[1000] space-y-6 bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
             >
               {MENU_LINKS.map(({ link, name }) => (
                 <Link
