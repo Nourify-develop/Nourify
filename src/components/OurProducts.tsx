@@ -12,7 +12,7 @@ const products: Product[] = [
   { id: 1, name: "Garden Cucumbers", price: "₦50,000", image: "/cucumber.svg" },
   {
     id: 2,
-    name: "Fresh Cherry Tomatoes",
+    name: " Cherry Tomatoes",
     price: "₦50,000",
     image: "/tomatoes.svg",
   },
@@ -23,7 +23,7 @@ const products: Product[] = [
   { id: 7, name: "Garden Cucumbers", price: "₦50,000", image: "/cucumber.svg" },
   {
     id: 8,
-    name: "Fresh Cherry Tomatoes",
+    name: " Cherry Tomatoes",
     price: "₦50,000",
     image: "/tomatoes.svg",
   },
@@ -66,9 +66,9 @@ const OurProducts: React.FC = () => {
   return (
     <div
       id="our-products"
-      className="bg-white flex flex-col py-10 gap-10 px-6 md:px-20"
+      className="bg-white flex flex-col py-10  md:gap-10 px-6 md:px-20"
     >
-      <div className="flex justify-between flex-col gap-7 md:flex-row text-center md:text-left w-full">
+      <div className="flex justify-between flex-col gap-7 lg:flex-row text-center md:text-left w-full">
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
           our&nbsp;products{" "}
         </h1>
@@ -84,25 +84,28 @@ const OurProducts: React.FC = () => {
             className="flex flex-col gap-6 text-center mb-14"
           >
             <img src={product.image} alt={product.name} />
-            <div className="flex justify-between items-end">
-              <div className="flex justify-start text-left flex-col gap-3">
-                <h3 className="text-lg font-medium text-gray-4">
-                  {product.name}
-                </h3>
-                <p className="">
-                  <span className="font-bold text-2xl">{product.price}</span>
-                  <span className="text-sm text-gray-5"> / per pack</span>
+            <div className="flex justify-between flex-col gap-y-2">
+              <h3 className="text-lg text-left font-medium text-gray-4 overflow-hidden text-ellipsis whitespace-nowrap">
+                {product.name}
+              </h3>
+              <div className="flex justify-between items-end">
+                <p className="text-left ">
+                  <span className="font-bold text-xl lg:text-2xl">
+                    {product.price}
+                  </span>
+                  <span className="text-xs text-gray-5"> / pack</span>
                 </p>
+
+                <button className="lg:py-3 py-2 lg:px-4 px-3 transition-all duration-500 ease-linear rounded-md bg-background-2 hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group">
+                  <LuShoppingCart className="h-5 w-5 lg:h-6 lg:w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white" />
+                </button>
               </div>
-              <button className="py-3 px-4 transition-all duration-500 ease-linear rounded-md bg-background-2 hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group">
-                <LuShoppingCart className="h-6 w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white" />
-              </button>
             </div>
           </div>
         ))}
       </div>
       <div className="flex justify-end">
-        <button className="bg-secondary text-white rounded-[65px] font-medium text-xl py-3 px-6 flex justify-between items-center">
+        <button className="bg-secondary text-white rounded-[65px] font-medium lg:text-xl text-base py-2 px-4 lg:py-3 lg:px-6 flex justify-between items-center">
           See More <img src="/arrow-up-right.svg" alt="arrow" />
         </button>
       </div>
