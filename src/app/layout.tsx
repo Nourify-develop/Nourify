@@ -1,5 +1,12 @@
 import { Metadata } from "next";
 import "./globals.css";
+import { Roboto } from "next/font/google";
+import Navbar from "./components/Navbar";
+
+const roboto = Roboto({
+  subsets: ["latin"],
+  weight: ["400", "500", "700", "900"],
+});
 
 export const metadata: Metadata = {
   title: "Nourify",
@@ -13,7 +20,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="font-sans">{children}</body>
+      <body>
+        <Navbar />
+        <main className={` ${roboto.className}`}> {children} </main>
+      </body>
     </html>
   );
 }
