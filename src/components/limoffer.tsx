@@ -11,7 +11,7 @@ const Limoffer = () => {
             Up to 20% off on Groceries and Pastries
           </h1>
           <button className="border border-white rounded-full py-[1em] px-[3em] w-[11em] font-[500] text-[16px] mx-auto md:mx-0">
-            Shop Now
+            Shop Now 
           </button>
         </div>
 
