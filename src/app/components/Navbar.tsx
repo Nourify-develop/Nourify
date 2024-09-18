@@ -21,13 +21,8 @@ function Navbar() {
   ];
 
   return (
-<<<<<<< HEAD
-    <div className=" bg-white relative">
-      <header className="fixd flex lg:container lg:mx-auto items-center justify-around h-[6rem] font-sans">
-=======
     <div className=" bg-white relative backdrop-blur-sm z-1000">
       <header className=" fixed flex lg:container lg:mx-auto items-center justify-around h-[6rem] font-sans">
->>>>>>> 0c67267ee93a419c9d71dea4eb71be78165a72e8
         <nav className="hidden md:flex lg:flex">
           <ul className="flex gap-[3rem]">
             {MENU_LINKS.map(({ link, name }) => (
