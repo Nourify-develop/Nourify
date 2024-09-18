@@ -18,7 +18,7 @@ function HeroSection() {
   }, []);
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-screen w-full overflow-hidden ">
       {/* Background Images */}
       <div className="absolute inset-0 w-full h-full">
         <div

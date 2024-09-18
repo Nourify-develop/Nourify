@@ -4,24 +4,25 @@ import Link from "next/link";
 
 const SignUp = () => {
   return (
-    <div className="flex w-full h-screen bg-white">
+    <div className="flex w-full h-full p-5 gap-6 bg-white">
       <div
-        className="h-full flex gap-4 items-end justify-end w-1/2 bg-cover bg-center"
+        className="h-auto flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
         style={{
           backgroundImage: "url('/images/bg1.png')",
         }}
       >
-        <p>
+        {/* <img src={`/images/bg1.png`} alt="" className="h-full fixe z-2" /> */}
+        <p className="text-white text-3xl h-full flex items-end">
           Welcome to Nourify, your trusted source for fresh groceries ans
           pastries. Creating an account with us is the first step to enjoying a
           seamless shopping experience
         </p>
-        <span className="text-sm pl-2.5 flex items-center gap-2.5 transition-opacity duration-1000">
+        <span className="text-sm pl-2.5 flex justify-start items-center gap-2.5 transition-opacity duration-1000">
           <img src="/general.svg" alt="General Icon" />
           Used by 15,000+ worldwide
         </span>
       </div>
-      <div className="p-10 flex flex-col h-full gap-10 w-1/2">
+      <div className="p-10 pb-32 flex flex-col h-full gap-10 w-1/2">
         <Image
           src={`/NOURIFY.svg`}
           alt="Nourify logo"
@@ -112,7 +113,7 @@ const SignUp = () => {
               </Link>
             </label>
           </div>
-          <button className="flex w-full justify-center items-center py-3.5 bg-secondary text-white text-base">
+          <button className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base">
             Create account
           </button>
         </form>
