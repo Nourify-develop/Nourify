@@ -1,11 +1,13 @@
 // OurProducts.tsx
 "use client";
 import React from "react";
+import { useRouter } from "next/navigation";
 import { products } from "../../ui/landing/_data";
 import { Product } from "../../types";
 import ProductGrid from "../../components/ProductGrid"; // Adjust the path
 
 const OurProducts: React.FC = () => {
+  const router = useRouter();
   const getProductsToDisplay = () => {
     if (typeof window !== "undefined") {
       const width = window.innerWidth;
@@ -35,6 +37,9 @@ const OurProducts: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const handleSeeMoreClick = () => {
+    router.push("/shop"); // Navigate to the /shop page
+  };
 
   return (
     <div
@@ -50,10 +55,12 @@ const OurProducts: React.FC = () => {
           delight in making sure our customers have the best of the best
         </p>
       </div>
-      {/* Use ProductGrid component and pass visibleProducts */}
       <ProductGrid products={visibleProducts} />
       <div className="flex justify-end">
-        <button className="bg-secondary text-white rounded-[65px] font-medium lg:text-xl text-base py-2 px-4 lg:py-3 lg:px-6 flex justify-between items-center">
+        <button
+          onClick={handleSeeMoreClick}
+          className="bg-secondary text-white rounded-[65px] font-medium lg:text-xl text-base py-2 px-4 lg:py-3 lg:px-6 flex justify-between items-center"
+        >
           See More <img src="/arrow-up-right.svg" alt="arrow" />
         </button>
       </div>

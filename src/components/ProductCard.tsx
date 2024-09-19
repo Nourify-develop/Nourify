@@ -2,13 +2,16 @@
 "use client";
 import React from "react";
 import { LuShoppingCart } from "react-icons/lu";
-import { Product } from "../types"; // Assuming your Product type is in types.ts
+import { Product } from "../types"; // Use the Product interface from types.ts
 
-interface ProductCardProps {
-  product: Product;
-}
+const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
+  // Format the price with commas and ₦ symbol
+  const formattedPrice = new Intl.NumberFormat('en-NG', {
+    style: 'currency',
+    currency: 'NGN',
+    minimumFractionDigits: 0,
+  }).format(product.price);
 
-const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div key={product.id} className="flex flex-col gap-6 text-center mb-14">
       <img src={product.image} alt={product.name} />
@@ -19,7 +22,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
         <div className="flex justify-between items-end">
           <p className="text-left">
             <span className="font-bold text-xl lg:text-2xl">
-              ₦{product.price}
+              {formattedPrice}
             </span>
             <span className="text-xs text-gray-5"> / pack</span>
           </p>
