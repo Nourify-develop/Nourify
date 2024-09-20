@@ -69,6 +69,14 @@ body {
   }
 }
 
+
+/* footer {
+  position: relative;
+  background-image: url("/images/NOURIFY.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+} */
+
 @font-face {
   font-family: "SF Pro Display";
   src: url("/fonts/SFPRODISPLAYMEDIUM.OTF") format("opentype");
@@ -89,3 +97,4 @@ body {
   font-weight: 500;
   font-style: normal;
 }
+
