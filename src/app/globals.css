@@ -69,9 +69,32 @@ body {
   }
 }
 
+
 /* footer {
   position: relative;
   background-image: url("/images/NOURIFY.png");
   background-repeat: no-repeat;
   background-position: bottom;
 } */
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYMEDIUM.OTF") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/public/fonts/SFPRODISPLAYBOLD.OTF") format("opentype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "SF Pro Display";
+  src: url("/fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
+  font-weight: 500;
+  font-style: normal;
+}
+
