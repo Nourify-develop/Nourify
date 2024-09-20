@@ -28,8 +28,8 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-[#013115]  pb-[14rem]">
-      <div className="container relative mx-auto">
+    <footer className="bg-[#013115] relative">
+      <div className="container mx-auto">
         {/* TODO: div left */}
         <div className="flex flex-col relative gap-8 md:flex-row text-center md:text-left md:justify-between pt-12 pb-12 pr-[2.5rem] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[1px] before:bg-gradient-to-r from-[#013115] via-white to-[#013115]">
           <div>
@@ -103,13 +103,10 @@ function Footer() {
             </Link>
           </div>
         </div>
+        <div className="w-[100%] text-center">
+          <p className="footer-text  text-white opacity-10">NOURIFY</p>
+        </div>
       </div>
-
-      <img
-        src="/images/NOURIFY.png"
-        alt="Nourify Footer Logo"
-        className="absolute opacity-10 top-[15rem] left-[5rem] w-[50rem]"
-      />
     </footer>
   );
 }

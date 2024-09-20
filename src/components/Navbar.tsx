@@ -9,8 +9,14 @@ import { usePathname } from "next/navigation";
 
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+  const [showSignUpMenu, setShowSignUpMenu] = useState(false);
+
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current);
+  }, []);
+
+  const toggleSignUpMenu = useCallback(() => {
+    setShowSignUpMenu((current) => !current);
   }, []);
   const pathname = usePathname();
   const MENU_LINKS = [
@@ -48,7 +54,7 @@ function Navbar() {
             <input
               type="text"
               placeholder="Search"
-              className="inherit bg-gray-2 rounded-full outline-none transition-all duration-300 lg:px-2 lg:py-1 w-[90%]"
+              className=" md:bg-gray-2 md:rounded-full outline-none transition-all duration-300 lg:px-2 lg:py-1 w-[90%]"
             />
           </div>
           <div className="hidden md:flex items-center md:gap-3 lg:gap-5 bg-gray-200 md:px-1 md:py-1 rounded-full">
@@ -59,8 +65,23 @@ function Navbar() {
               </p>
             </div>
             <div className="bg-secondary rounded-full md:p-1 lg:p-2">
-              <RxAvatar className="text-white" size={"25px"} />
+              <RxAvatar
+                className="text-white cursor-pointer"
+                onClick={toggleSignUpMenu}
+                size={"25px"}
+              />
             </div>
+          </div>
+
+          {/* TODO: MAKE A MENU FOR THE LOG-IN AND SIGNUP PAGES. */}
+          {/* FIXME: WORKS */}
+          <div
+            className={`${
+              showSignUpMenu ? "block" : "hidden"
+            } absolute flex flex-col items-center self-end py-8 mt-14 top-[3rem] z-[1000] space-y-6 bg-white backdrop-blur-md sm:w-auto sm:self-center px-[2rem] right-2 drop-shadow-md`}
+          >
+            <Link href="/signup">Create Account</Link>
+            <Link href="/login">Log In</Link>
           </div>
 
           {/* TODO: HAMBURGER ICON and add the "OPEN"  class dynamically.*/}
@@ -68,7 +89,7 @@ function Navbar() {
           <button
             onClick={toggleMobileMenu}
             className={`${showMobileMenu ? "open" : null}
-            "block hamburger ml-10 mt-[0.5rem] md:hidden focus:outline-none`}
+            "block hamburger cursor-pointer ml-10 mt-[0.5rem] md:hidden focus:outline-none`}
           >
             <span className="hamburger-top"></span>
             <span className="hamburger-middle"></span>

@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Sedgwick+Ave+Display&display=swap");
 @import url("https://fonts.cdnfonts.com/css/sf-pro-display?styles=98774,98773,98770");
 
 @tailwind base;
@@ -12,6 +13,7 @@
 
 body {
   font-family: "SF Pro Display", sans-serif;
+  overflow-x: hidden;
 }
 
 body {
@@ -75,3 +77,13 @@ body {
   background-repeat: no-repeat;
   background-position: bottom;
 } */
+
+.footer-text {
+  font-family: "Sedgwick Ave Display", serif;
+  height: 625px;
+  top: 359px;
+  font-size: 410px;
+  font-weight: 400;
+  line-height: 624.5px;
+  margin-bottom: -200px;
+}
