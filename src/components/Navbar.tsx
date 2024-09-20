@@ -21,8 +21,8 @@ function Navbar() {
   ];
 
   return (
-    <div className=" bg-white relative backdrop-blur-sm z-1000">
-      <header className=" fixed flex lg:container lg:mx-auto items-center justify-around h-[6rem] font-sans">
+    <div className=" bg-white sticky top-0 backdrop-blur-sm z-[1000]">
+      <header className="flex lg:container lg:mx-auto items-center justify-around h-[6rem] font-sans relative">
         <nav className="hidden md:flex lg:flex">
           <ul className="flex gap-[3rem]">
             {MENU_LINKS.map(({ link, name }) => (
@@ -41,7 +41,7 @@ function Navbar() {
         <Logo />
 
         <div className="flex md:gap-[1rem] lg:gap-[2rem] items-center">
-          <div className="flex items-center md:gap-[1px] lg:gap-[3px] bg-gray-2 rounded-full ml-4 md:ml-0 md:px-1 md:py-1 lg:px-2 lg:py-2 transition-all duration-300 w-[60%] md:w-[30S%] lg:hover:w-[100%]">
+          <div className="flex items-center md:gap-[1px] lg:gap-[3px] bg-gray-2 rounded-full ml-4 md:ml-0 md:px-1 md:py-1 lg:px-2 lg:py-2 transition-all duration-300 w-[60%] md:w-[100%]">
             <span>
               <CiSearch className="text-primary pl-2 md:pl-0" size={"20px"} />
             </span>
@@ -82,7 +82,7 @@ function Navbar() {
             <div
               className={`${
                 showMobileMenu ? "block" : "hidden"
-              } absolute flex flex-col items-center self-end py-8 mt-14 z-[1000] space-y-6 bg-white sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
+              } absolute flex flex-col items-center self-end py-8 mt-14 z-[1000] space-y-6 bg-white backdrop-blur-md sm:w-auto sm:self-center left-6 right-6 drop-shadow-md`}
             >
               {MENU_LINKS.map(({ link, name }) => (
                 <Link
