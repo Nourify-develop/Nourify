@@ -35,7 +35,7 @@ const Typo = ({
 const h1 = ({ children, className, isGreen, ...props }: TypographyProps) => (
   <Typo
     level="h1"
-    className={`${isGreen ? "text-[#013115]" :"text-black"} ${className}`}
+    className={`${isGreen ? "text-[#013115]" : "text-black"} ${className}`}
     {...props}
   >
     {children}
@@ -45,7 +45,7 @@ const h1 = ({ children, className, isGreen, ...props }: TypographyProps) => (
 const h2 = ({ children, className, isGreen, ...props }: TypographyProps) => (
   <Typo
     level="h2"
-    className={`${isGreen ? "text-[#013115]" :"text-black"} ${className}`}
+    className={`${isGreen ? "text-[#013115]" : "text-black"} ${className}`}
     {...props}
   >
     {children}
@@ -53,13 +53,21 @@ const h2 = ({ children, className, isGreen, ...props }: TypographyProps) => (
 );
 
 const h3 = ({ children, className, isGreen, ...props }: TypographyProps) => (
-  <Typo level="h3" className={`${isGreen ? "text-[#013115]" :"text-black"} ${className}`} {...props}>
+  <Typo
+    level="h3"
+    className={`${isGreen ? "text-[#013115]" : "text-black"} ${className}`}
+    {...props}
+  >
     {children}
   </Typo>
 );
 
 const h4 = ({ children, className, isGreen, ...props }: TypographyProps) => (
-  <Typo level="h4" className={`${isGreen ? "text-[#013115]" :"text-black"} ${className}`} {...props}>
+  <Typo
+    level="h4"
+    className={`${isGreen ? "text-[#013115]" : "text-black"} ${className}`}
+    {...props}
+  >
     {children}
   </Typo>
 );
