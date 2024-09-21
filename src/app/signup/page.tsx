@@ -1,28 +1,31 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import Typography from "@/components/typography";
+import Wrapper from "@/layout/wrapper";
 
 const SignUp = () => {
   return (
-    <div className="flex w-full h-full p-5 gap-6 bg-white">
-      <div
-        className="h-auto flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
+    <Wrapper className="flex w-full h-full lg:h-full  !p-2 gap-6 bg-white">
+      <section
+        className="hidden
+        h-auto lg:h-auto sm:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
         style={{
-          backgroundImage: "url('/images/bg1.png')",
+          backgroundImage: "url('/images/bg-1.png')",
         }}
       >
         {/* <img src={`/images/bg1.png`} alt="" className="h-full fixe z-2" /> */}
-        <p className="text-white text-3xl h-full flex items-end">
+        <Typography.p className="text-white !text-3xl">
           Welcome to Nourify, your trusted source for fresh groceries ans
           pastries. Creating an account with us is the first step to enjoying a
-          seamless shopping experience
-        </p>
-        <span className="text-sm pl-2.5 flex justify-start items-center gap-2.5 transition-opacity duration-1000">
+          seamless shopping experience.
+        </Typography.p>
+        <Typography.s className="!text-sm text-white/80 pl-2.5 flex justify-start items-center gap-2.5 transition-opacity duration-1000">
           <img src="/general.svg" alt="General Icon" />
           Used by 15,000+ worldwide
-        </span>
-      </div>
-      <div className="p-10 pb-32 flex flex-col h-full gap-10 w-1/2">
+        </Typography.s>
+      </section>
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full sm:w-1/2">
         <Image
           src={`/NOURIFY.svg`}
           alt="Nourify logo"
@@ -30,13 +33,15 @@ const SignUp = () => {
           height={40}
         />
         <div className="flex flex-col w-full gap-3">
-          <h2 className="text-3xl text-primary/90">Create an account</h2>
-          <span className="text-primary/70 text-base ">
+          <Typography.h2 className="!text-3xl !text-primary/90">
+            Create an account
+          </Typography.h2>
+          <Typography.p className="text-primary/70 text-base ">
             Already have an account ?{" "}
             <Link href={``} className="text-secondary underline ">
               Log in{" "}
             </Link>
-          </span>
+          </Typography.p>
         </div>
         <div className="flex flex-col gap-5">
           <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]">
@@ -53,8 +58,8 @@ const SignUp = () => {
           <p>OR</p>
           <hr className="w-full" />
         </div>
-        <form action="" className="flex flex-col gap-5">
-          <div className="flex gap-5 w-full">
+        <form action="" className="flex flex-col s gap-5">
+          <div className="flex sm:flex-row flex-col gap-5 w-full">
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="">First name</label>
               <input
@@ -117,8 +122,8 @@ const SignUp = () => {
             Create account
           </button>
         </form>
-      </div>
-    </div>
+      </section>
+    </Wrapper>
   );
 };
 
