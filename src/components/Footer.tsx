@@ -35,7 +35,7 @@ function Footer() {
           <div>
             <div className="flex justify-center">
               <img
-                src="/images/NOURIFY.png"
+                src="/images/NOURIFY.svg"
                 alt="Nourify Footer Logo"
                 className="mb-4"
               />
@@ -103,10 +103,12 @@ function Footer() {
             </Link>
           </div>
         </div>
-        <div className="w-[100%] text-center">
-          <p className="footer-text  text-white opacity-10">NOURIFY</p>
-        </div>
       </div>
+      <img
+        src="/images/footer.svg"
+        alt="Nourify Footer Logo"
+        className="w-full mt-[2rem]"
+      />
     </footer>
   );
 }
