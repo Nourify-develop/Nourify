@@ -3,13 +3,13 @@ import Image from "next/image";
 import Link from "next/link";
 import Typography from "@/components/typography";
 import Wrapper from "@/layout/wrapper";
-import Container from "@/layout/container";
+
 const SignUp = () => {
   return (
-    <Wrapper className="flex w-full h-screen  !p-2 gap-6 bg-white">
+    <Wrapper className="flex w-full h-full lg:h-full  !p-2 gap-6 bg-white">
       <section
-        className="
-        h-auto flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
+        className="hidden
+        h-auto lg:h-auto sm:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
         style={{
           backgroundImage: "url('/images/bg-1.png')",
         }}
@@ -25,7 +25,7 @@ const SignUp = () => {
           Used by 15,000+ worldwide
         </Typography.s>
       </section>
-      <section className="p-10 pb-32 flex flex-col h-full gap-10 w-1/2">
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full sm:w-1/2">
         <Image
           src={`/NOURIFY.svg`}
           alt="Nourify logo"
@@ -58,8 +58,8 @@ const SignUp = () => {
           <p>OR</p>
           <hr className="w-full" />
         </div>
-        <form action="" className="flex flex-col gap-5">
-          <div className="flex gap-5 w-full">
+        <form action="" className="flex flex-col s gap-5">
+          <div className="flex sm:flex-row flex-col gap-5 w-full">
             <div className="flex flex-col gap-2 w-full">
               <label htmlFor="">First name</label>
               <input
