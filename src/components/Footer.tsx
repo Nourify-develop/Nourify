@@ -45,7 +45,7 @@ function Footer() {
               Where Healthy Choices Meet Peak Freshness.
             </p>
           </div>
-          <div className="grid md:grid-cols-3 w-auto text-white gap-[4rem]">
+          <div className="grid md:grid-cols-3 w-auto text-white gap-[3rem]">
             <div>
               <h4 className="mb-5 text-[1.5rem]">Shop</h4>
               <div className="flex flex-col gap-4 font-normal text-[0.875rem]">

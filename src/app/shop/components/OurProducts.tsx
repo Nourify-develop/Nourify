@@ -14,6 +14,7 @@ const OurProducts: React.FC = () => {
   const productsPerPage = 10; // Number of products per page
 
   // Filter products based on search, category, price, size, limited offer, and express delivery
+
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name
       .toLowerCase()
