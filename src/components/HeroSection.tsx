@@ -45,7 +45,7 @@ function HeroSection() {
       x: 0,
       transition: {
         duration: 1,
-        when: "beforeChildren", // Start child animations before main transition finishes
+        when: "beforeChildren",
       },
     },
     exit: {
@@ -53,7 +53,7 @@ function HeroSection() {
       x: -50,
       transition: {
         duration: 1,
-        when: "afterChildren", // Only exit after child animations are complete
+        when: "afterChildren",
       },
     },
   };
@@ -68,8 +68,8 @@ function HeroSection() {
   return (
     <div className="relative h-screen w-full overflow-hidden">
       {/* Overlay for darkening effect */}
-      <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
-
+      <div className="absolute inset-0 bg-black opacity-45 z-10"></div>{" "}
+      {/* Adjusted overlay for better darkening */}
       <div className="absolute inset-0 w-full h-full">
         <motion.div
           initial="enter"
@@ -79,6 +79,7 @@ function HeroSection() {
           className="absolute inset-0 w-full h-full bg-cover bg-center"
           style={{
             backgroundImage: "url('/images/bg1.png')",
+            opacity: 0.4, // Adjusted opacity for better blending
           }}
         />
         <motion.div
@@ -89,17 +90,17 @@ function HeroSection() {
           className="absolute inset-0 w-full h-full bg-cover bg-center"
           style={{
             backgroundImage: "url('/images/bg2.png')",
+            opacity: 0.4, // Adjusted opacity for better blending
           }}
         />
       </div>
-
-      <div className="relative z-10 flex flex-col gap-6 justify-center  h-full items-start text-white">
+      <div className="relative z-20 flex flex-col gap-6 justify-center h-full items-start text-white">
         <motion.div
           initial="enter"
           animate={showSecondContent ? "exit" : "center"}
           exit="exit"
           variants={contentVariants}
-          className="absolute  flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20"
+          className="absolute flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20"
         >
           <Typography.h1 className="!text-5xl lg:!text-[80px] !leading-[60px] lg:!leading-[95px] !font-bold text-white uppercase">
             Fresh, <span className="font-bold text-yellow">Organic</span>{" "}
@@ -126,9 +127,9 @@ function HeroSection() {
           animate={showSecondContent ? "center" : "exit"}
           exit="exit"
           variants={contentVariants}
-          className="absolute  flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20"
+          className="absolute flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20"
         >
-          <Typography.h1 className="!text-5xl  lg:!text-[80px] !leading-[60px] lg:!leading-[95px] !font-bold text-white uppercase">
+          <Typography.h1 className="!text-5xl lg:!text-[80px] !leading-[60px] lg:!leading-[95px] !font-bold text-white uppercase">
             Indulge in our Freshly Baked
             <span className="font-bold text-yellow"> Pastries</span>
           </Typography.h1>

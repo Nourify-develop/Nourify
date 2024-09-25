@@ -14,7 +14,7 @@ const Login = () => {
   };
 
   return (
-    <Wrapper className="flex w-full h-full lg:h-full  !p-2 gap-6 bg-white">
+    <Wrapper className="flex w-full !h-screen lg:h-full  !p-2 gap-6 bg-white">
       <section
         className="hidden h-auto lg:h-auto md:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
         style={{
@@ -33,10 +33,10 @@ const Login = () => {
             Used by<span className="font-bold">15,000+</span>worldwide
           </Typography.s>
         </div>
-				<div className="relative z-10 flex gap-1 justify-center items-center">
-					<div className="w-10 h-1 rounded-full bg-gray-3"></div>
-					<div className="w-36 h-1 rounded-full bg-white"></div>
-				</div>
+        <div className="relative z-10 flex gap-1 justify-center items-center">
+          <div className="w-10 h-1 rounded-full bg-gray-3"></div>
+          <div className="w-36 h-1 rounded-full bg-white"></div>
+        </div>
       </section>
 
       <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full md:w-1/2">
@@ -78,7 +78,7 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none px-5"
+                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none"
               />
             </div>
           </div>
