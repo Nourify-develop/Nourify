@@ -16,7 +16,7 @@ const SignUp = () => {
       >
         {/* <img src={`/images/bg1.png`} alt="" className="h-full fixe z-2" /> */}
         <Typography.p className="text-white !text-3xl">
-          Welcome to Nourify, your trusted source for fresh groceries ans
+          Welcome to Nourify, your trusted source for fresh groceries and
           pastries. Creating an account with us is the first step to enjoying a
           seamless shopping experience.
         </Typography.p>
