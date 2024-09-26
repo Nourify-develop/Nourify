@@ -98,30 +98,43 @@ const OurProducts: React.FC = () => {
         <ul className="flex gap-4">
           <li
             onClick={resetFilters}
-            className={`cursor-pointer ${
+            className={`transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer ${
               limitedOffer === null &&
               expressDelivery === null &&
               !selectedPrice &&
               !selectedSize
-                ? "font-bold"
-                : ""
+                ? "bg-[#444444CC] text-white"
+                : "bg-[#F5F5F5] text-[#1E1E1EB2]"
             }`}
           >
             All
           </li>
           <li
-            className={limitedOffer === true ? "font-bold" : ""}
+            className={` transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+              ${
+                limitedOffer === true
+                  ? "bg-[#444444CC] text-white"
+                  : "bg-[#F5F5F5] text-[#1E1E1EB2]"
+              }
+           `}
             onClick={toggleLimitedOffer}
           >
             Limited Offer
           </li>
           <li
-            className={expressDelivery === true ? "font-bold" : ""}
+            className={`transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+              ${
+                expressDelivery === true
+                  ? "bg-[#444444CC] text-white"
+                  : "bg-[#F5F5F5] text-[#1E1E1EB2]"
+              }
+           `}
             onClick={toggleExpressDelivery}
           >
             Express Delivery
           </li>
           <li>
+            
             <select value={selectedPrice || ""} onChange={handlePriceChange}>
               <option value="">Price</option>
               <option value="10000">₦10,000</option>
@@ -151,7 +164,7 @@ const OurProducts: React.FC = () => {
           <p
             className={
               category === "groceries"
-                ? "font-bold text-green-500 underline"
+                ? "font-bold text-green-700 underline"
                 : ""
             }
             onClick={() => handleCategoryClick("groceries")}
