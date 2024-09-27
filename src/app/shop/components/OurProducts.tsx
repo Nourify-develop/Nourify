@@ -98,14 +98,14 @@ const OurProducts: React.FC = () => {
       id="our-products"
       className="bg-white flex flex-col py-10 md:gap-10 px-6 md:px-20"
     >
-      <div className="flex justify-between flex-col gap-7 lg:flex-row text-center md:text-left w-full">
+      <div className="flex justify-between items-center flex-col gap-7 xl:flex-row text-center md:text-left w-full">
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
           our&nbsp;products
         </h1>
-        <ul className="flex gap-4 justify-between items-center text-[1.125rem] font-medium">
+        <ul className="grid grid-cols-3 gap-4 md:grid-cols-5 justify-between items-center md:text-sm xl:text-lg font-medium">
           <li
             onClick={resetFilters}
-            className={`transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer ${
+            className={`hidden md:flex transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer ${
               limitedOffer === null &&
               expressDelivery === null &&
               !selectedPrice &&
@@ -117,7 +117,7 @@ const OurProducts: React.FC = () => {
             All
           </li>
           <li
-            className={` transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+            className={`hidden md:flex transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
               ${
                 limitedOffer === true
                   ? "bg-gray-7 text-white"
@@ -129,7 +129,7 @@ const OurProducts: React.FC = () => {
             Limited Offer
           </li>
           <li
-            className={`transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+            className={`hidden md:flex transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
               ${
                 expressDelivery === true
                   ? "bg-gray-7 text-white"
@@ -140,9 +140,36 @@ const OurProducts: React.FC = () => {
           >
             Express Delivery
           </li>
+          <li className="flex md:hidden">
+            <Select
+              onValueChange={(value) => {
+                if (value === "all") {
+                  resetFilters();
+                } else if (value === "limitedOffer") {
+                  toggleLimitedOffer();
+                } else if (value === "expressDelivery") {
+                  toggleExpressDelivery();
+                }
+              }}
+            >
+              <SelectTrigger className="bg-gray-10 md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
+                <SelectValue placeholder="Filter" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup>
+                  <SelectItem value="all">All</SelectItem>
+                  <SelectItem value="limitedOffer">Limited Offer</SelectItem>
+                  <SelectItem value="expressDelivery">
+                    Express Delivery
+                  </SelectItem>
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </li>
+
           <li>
             <Select onValueChange={handlePriceChange}>
-              <SelectTrigger className="bg-gray-10 text-[1.125rem] font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
                 <SelectValue placeholder="Price" />
               </SelectTrigger>
               <SelectContent>
@@ -163,7 +190,7 @@ const OurProducts: React.FC = () => {
           </li>
           <li>
             <Select onValueChange={handleSizeChange}>
-              <SelectTrigger className="bg-gray-10 text-[1.125rem] font-mediu m h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 md:text-base xl:text-lg font-mediu m h-full text-primary-2 rounded-[4rem] px-6 py-3">
                 <SelectValue placeholder="Size" />
               </SelectTrigger>
               <SelectContent>
@@ -177,8 +204,8 @@ const OurProducts: React.FC = () => {
           </li>
         </ul>
       </div>
-      <div className="flex justify-between items-center mt-5">
-        <div className="flex gap-12 text-[1.875rem] font-medium">
+      <div className="flex flex-col md:flex-row py-8 gap-y-4  justify-between items-center mt-2">
+        <div className="flex gap-6 lg:gap-8  xl:gap-12  md:text-xl lg:text-2xl xl:text-3xl font-medium">
           <p
             className={`border-2 border-white 
               ${
