@@ -28,7 +28,7 @@ function Footer() {
   ];
 
   return (
-    <footer className="bg-[#013115]">
+    <footer className="bg-green-dark">
       <div className="container relative mx-auto">
         {/* TODO: div left */}
         <div className="flex flex-col relative gap-8 md:flex-row text-center md:text-left md:justify-between pt-12 pb-12 pr-[2.5rem] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[1px] before:bg-gradient-to-r from-[#013115] via-white to-[#013115]">

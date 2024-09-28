@@ -12,7 +12,7 @@ const SignUp = () => {
     setPasswordVisible(!passwordVisible);
   };
   return (
-    <Wrapper className="flex w-full !h-screen lg:h-full  !p-2 gap-6 bg-white">
+    <Wrapper className="flex w-full !h-screen lg:h-full !p-2 gap-6 bg-white">
       <section
         className="hidden
         h-auto lg:h-auto sm:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
@@ -31,12 +31,14 @@ const SignUp = () => {
         </Typography.s>
       </section>
       <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full sm:w-1/2">
-        <Image
-          src={`/NOURIFY.svg`}
-          alt="Nourify logo"
-          width={128}
-          height={40}
-        />
+        <Link href={`/`}>
+          <Image
+            src={`/NOURIFY.svg`}
+            alt="Nourify logo"
+            width={128}
+            height={40}
+          />
+        </Link>
         <div className="flex flex-col w-full gap-3">
           <Typography.h2 className="!text-3xl !text-primary/90">
             Create an account

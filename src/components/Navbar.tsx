@@ -59,7 +59,7 @@ function Navbar() {
             />
           </div>
           <div className="flex items-center gap-5 bg-gray-200 px-1 py-1 rounded-full">
-            <div className="bg-[#5B5B5B] rounded-full p-1 lg:p-2 relative">
+            <div className="bg-gray-3 rounded-full p-1 lg:p-2 relative">
               <IoCartOutline className="text-white" size={" 25px"} />
               <p className=" absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
                 2
@@ -71,7 +71,6 @@ function Navbar() {
               className="bg-secondary rounded-full md:p-1 lg:p-2"
             >
               <RxAvatar className="text-white" size={"25px"} />
-
             </div>
           </div>
 
@@ -93,7 +92,6 @@ function Navbar() {
             )}
             S
           </AnimatePresence>
-
 
           {/* TODO: HAMBURGER ICON and add the "OPEN"  class dynamically.*/}
           {/* FIXME: WORKS */}
@@ -134,7 +132,6 @@ function Navbar() {
                 </motion.div>
               )}{" "}
             </AnimatePresence>
-
           </div>
         </div>
       </header>

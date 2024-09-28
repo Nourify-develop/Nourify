@@ -40,12 +40,14 @@ const Login = () => {
       </section>
 
       <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full md:w-1/2">
-        <Image
-          src={`/NOURIFY.svg`}
-          alt="Nourify logo"
-          width={128}
-          height={40}
-        />
+        <Link href={`/`}>
+          <Image
+            src={`/NOURIFY.svg`}
+            alt="Nourify logo"
+            width={128}
+            height={40}
+          />
+        </Link>
         <div className="flex flex-col w-full gap-3">
           <Typography.h2 className="!text-3xl !text-primary/90">
             Log into your account
