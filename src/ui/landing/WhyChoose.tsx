@@ -5,34 +5,34 @@ import { why_nourify } from './_data'
 
 export default function WhyChoose() {
   return (
-    <Wrapper className='relative flex flex-col gap-y-8'>
-      <Typography.h2 isGreen className='mx-auto'>Why Choose Nourify?</Typography.h2>
-      <section className='grid md:grid-cols-2 gap-y-8 place-content-center'>
-        <Image
+    <Wrapper className='relative flex flex-col gap-y-8 bg-white'>
+      <Typography.h2 isGreen className='text-gray-4 !font-bold uppercase'>Why Choose Nourify?</Typography.h2>
+      <section className='grid md:grid-cols-2 gap-8 r items-center '>
+        <div className="flex justify-center">
+          <Image
           src="/images/why-choose-img.svg"
           alt=''
           width={0}
           height={0}
-          className='w-auto h-auto'
+          className='w-full h-auto place-items-center'
         />
+        </div>
+        
 
-        <aside className='flex flex-col gap-y-8'>
-          <Typography.p>
-            At Nourify, we deliver top-quality groceries and pastries to your door.
-            Our focus on freshness, convenience, and sustainability sets us apart.
-          </Typography.p>
-          <section className='grid md:grid-cols-2 gap-4'>
+        <aside className='flex flex-col justify-between'>
+          
+          <section className='grid gap-8 lg:gap-12'>
             {why_nourify.map((item) => (
               <span key={item.title} className='flex items-center gap-x-4'>
-                <span className='p-5 bg-green rounded-md'>
+                <span className='p-4 bg-[#F6F5F7] rounded-md'>
                   <Image
-                    src='/icons/plant.svg'
+                    src='/icons/green_plant.svg'
                     title={item.title}  
                     alt={item.title}
                     aria-label={item.title}
                     aria-labelledby={item.title}
-                    width={82}
-                    height={82}
+                    width={50}
+                    height={50}
                   />
                 </span>
                 <aside className='flex flex-col gap-y-0.5'>
