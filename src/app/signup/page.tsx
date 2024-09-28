@@ -1,12 +1,18 @@
-import React from "react";
+"use client";
+import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Typography from "@/components/typography";
 import Wrapper from "@/layout/wrapper";
+import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const SignUp = () => {
+  const [passwordVisible, setPasswordVisible] = useState(false);
+  const togglePasswordVisibility = () => {
+    setPasswordVisible(!passwordVisible);
+  };
   return (
-    <Wrapper className="flex w-full h-full lg:h-full  !p-2 gap-6 bg-white">
+    <Wrapper className="flex w-full !h-screen lg:h-full  !p-2 gap-6 bg-white">
       <section
         className="hidden
         h-auto lg:h-auto sm:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
@@ -14,9 +20,8 @@ const SignUp = () => {
           backgroundImage: "url('/images/bg-1.png')",
         }}
       >
-        {/* <img src={`/images/bg1.png`} alt="" className="h-full fixe z-2" /> */}
         <Typography.p className="text-white !text-3xl">
-          Welcome to Nourify, your trusted source for fresh groceries ans
+          Welcome to Nourify, your trusted source for fresh groceries and
           pastries. Creating an account with us is the first step to enjoying a
           seamless shopping experience.
         </Typography.p>
@@ -38,7 +43,7 @@ const SignUp = () => {
           </Typography.h2>
           <Typography.p className="text-primary/70 text-base ">
             Already have an account ?{" "}
-            <Link href={``} className="text-secondary underline ">
+            <Link href={`/login`} className="text-secondary underline ">
               Log in{" "}
             </Link>
           </Typography.p>
@@ -47,10 +52,6 @@ const SignUp = () => {
           <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]">
             <img src="/googleg logo 1.svg" />
             Continue with Google
-          </button>
-          <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]">
-            <img src="/Apple logo 1.svg" />
-            Continue with Apple
           </button>
         </div>
         <div className="flex gap-2 w-full items-center">
@@ -81,14 +82,14 @@ const SignUp = () => {
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="">Email</label>
-            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2  rounded-[50px] py-3.5 ">
+            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2.5  rounded-[50px] py-3.5 ">
               <span className="bg">
                 <img src="/mail-01.svg" />
               </span>
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none px-5"
+                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none "
               />
             </div>
           </div>
@@ -99,10 +100,20 @@ const SignUp = () => {
                 <img src="/lock-key.svg" />
               </span>
               <input
-                type="password"
+                type={passwordVisible ? "text" : "password"}
                 placeholder="Enter your password"
                 className=" placeholder:text-sm text-sm w-full bg-transparent focus:outline-none appearance-none"
               />
+              <span
+                className="absolute right-5 text-[#1e1e1e85] !text-base cursor-pointer"
+                onClick={togglePasswordVisibility}
+              >
+                {passwordVisible ? (
+                  <IoEyeOffOutline className="" />
+                ) : (
+                  <IoEyeOutline />
+                )}
+              </span>
             </div>
           </div>
           <div className="flex gap-2 items-center ">

@@ -10,13 +10,16 @@ import { AnimatePresence, motion } from "framer-motion";
 
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
+
   const [showLoginMenu, setShowLoginMenu] = useState<boolean>(false);
+
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current);
   }, []);
   const toggleLoginMenu = useCallback(() => {
     setShowLoginMenu((current) => !current);
   }, []);
+
   const pathname = usePathname();
   const MENU_LINKS = [
     { name: "Home", link: "/" },
@@ -45,7 +48,7 @@ function Navbar() {
         </nav>
         <Logo />
         <div className="flex md:gap-[1rem] lg:gap-[2rem] items-center">
-          <div className="flex items-center md:gap-[1px] lg:gap-[3px] bg-gray-2 rounded-full ml-4 md:ml-0 md:px-1 md:py-1 lg:px-2 lg:py-2 transition-all duration-300 w-[60%] md:w-[100%]">
+          <div className="absolute md:relative top-full left-0 w-full flex items-center gap-[5px] md:gap-[1px] lg:gap-[3px] bg-gray-2 md:rounded-full md:ml-4  md:px-1 md:py-1 lg:px-2 lg:py-2 transition-all duration-300 md:w-[100%]">
             <span>
               <CiSearch className="text-primary pl-2 md:pl-0" size={"20px"} />
             </span>
@@ -55,18 +58,20 @@ function Navbar() {
               className="inherit bg-gray-2 rounded-full outline-none transition-all duration-300 lg:px-2 lg:py-1 w-[90%]"
             />
           </div>
-          <div className="hidden md:flex items-center md:gap-3 lg:gap-5 bg-gray-200 md:px-1 md:py-1 rounded-full">
-            <div className="bg-[#5B5B5B] rounded-full md:p-1 lg:p-2 relative">
-              <IoCartOutline className="text-white" size={"25px"} />
-              <p className=" absolute top-1 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
+          <div className="flex items-center gap-5 bg-gray-200 px-1 py-1 rounded-full">
+            <div className="bg-[#5B5B5B] rounded-full p-1 lg:p-2 relative">
+              <IoCartOutline className="text-white" size={" 25px"} />
+              <p className=" absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
                 2
               </p>
             </div>
+
             <div
               onClick={toggleLoginMenu}
               className="bg-secondary rounded-full md:p-1 lg:p-2"
             >
               <RxAvatar className="text-white" size={"25px"} />
+
             </div>
           </div>
 
@@ -89,12 +94,13 @@ function Navbar() {
             S
           </AnimatePresence>
 
+
           {/* TODO: HAMBURGER ICON and add the "OPEN"  class dynamically.*/}
           {/* FIXME: WORKS */}
           <button
             onClick={toggleMobileMenu}
             className={`${showMobileMenu ? "open" : null}
-            "block hamburger ml-10 mt-[0.5rem] md:hidden focus:outline-none`}
+            "block hamburger ml-10 mt-[0.5rem] cursor-pointer md:hidden focus:outline-none`}
           >
             <span className="hamburger-top"></span>
             <span className="hamburger-middle"></span>
@@ -128,6 +134,7 @@ function Navbar() {
                 </motion.div>
               )}{" "}
             </AnimatePresence>
+
           </div>
         </div>
       </header>
