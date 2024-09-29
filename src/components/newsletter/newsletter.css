@@ -1,4 +1,5 @@
 .newsletter{
-background-image: url("/public//newsletter.jpeg");
+background-image: url("/public/Newsletter.svg");
+background-repeat: no-repeat;
 
 }

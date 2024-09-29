@@ -3,7 +3,7 @@ import "./newsletter.css";
 
 const newsletter = () => {
   return (
-    <div className="p-[5em]  w-[80%] rounded-3xl newsletter gap-[1em] text-center bg-blue-500 my-[2em] flex flex-col ">
+    <div className="p-[5em]  w-[80%] rounded-3xl newsletter sgap-[1em] text-center  my-[2em] flex flex-col ">
       <h1 className="text-[46px] font-[700] ">SUBSCRIBE TO OUR NEWSLETTER</h1>
       <p className="text-[20px] font-[500] text-[#FFFFFFB2] w-[70%] mx-auto ">
         Enjoy the best deals and freshest finds every week. Stay updated with
