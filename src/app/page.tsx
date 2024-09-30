@@ -3,6 +3,7 @@ import HeroSection from "@/components/HeroSection";
 import LimitedOffer from "@/components/limoffer";
 import WhyChoose from "@/ui/landing/WhyChoose";
 import Navbar from "@/components/Navbar";
+import Testimonials from "@/ui/landing/Testimonials";
 
 export default function Home() {
   return (
@@ -14,6 +15,7 @@ export default function Home() {
         <OurProducts />
         <LimitedOffer />
         <WhyChoose />
+        <Testimonials />
       </main>
     </>
   );
