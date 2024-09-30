@@ -15,8 +15,8 @@ export default function Testimonials() {
           manualControls
           stopOnManual={false}
           contentClassName="py-8"
-          slidesInView={3}
-          mediaQueries={{768: 1, 1280: 3, 1378: 4}}
+          mediaQueries={{768: 2, 1280: 3, 1378: 4}}
+          buttonClassName="bottom-0 md:bottom-[1.25em]"
         >
           {testimonials.map((item) => (
             <SliderContent key={item.full_name}>
