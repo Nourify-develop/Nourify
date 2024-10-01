@@ -12,7 +12,7 @@ const SignUp = () => {
     setPasswordVisible(!passwordVisible);
   };
   return (
-    <Wrapper className="flex w-full !h-screen lg:h-full !p-2 gap-6 bg-white">
+    <Wrapper className="flex w-full !h-auto lg:h-full !p-2 gap-6 bg-white">
       <section
         className="hidden
         h-auto lg:h-auto sm:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
@@ -30,7 +30,7 @@ const SignUp = () => {
           Used by 15,000+ worldwide
         </Typography.s>
       </section>
-      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full sm:w-1/2">
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full sm:w-1/2">
         <Link href={`/`}>
           <Image
             src={`/NOURIFY.svg`}
@@ -40,7 +40,7 @@ const SignUp = () => {
           />
         </Link>
         <div className="flex flex-col w-full gap-3">
-          <Typography.h2 className="!text-3xl !text-primary/90">
+          <Typography.h2 className="!text-3xl !text-primary/90 !font-bold">
             Create an account
           </Typography.h2>
           <Typography.p className="text-primary/70 text-base ">
@@ -51,7 +51,7 @@ const SignUp = () => {
           </Typography.p>
         </div>
         <div className="flex flex-col gap-5">
-          <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]">
+          <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px] hover:shadow-md">
             <img src="/googleg logo 1.svg" />
             Continue with Google
           </button>
@@ -68,7 +68,7 @@ const SignUp = () => {
               <input
                 type="text"
                 name="FirstName"
-                className="w-full px-5 py-3.5 placeholder:text-sm focus:outline-none text-sm bg-gray-1 rounded-[50px]"
+                className="input-field w-full px-5 py-3.5 placeholder:text-sm focus:outline-0 text-sm bg-gray-1 border border-gray-1 rounded-[50px]"
                 placeholder="Enter your first name"
               />
             </div>
@@ -77,34 +77,36 @@ const SignUp = () => {
               <input
                 type="text"
                 name="LastName"
-                className="w-full py-3.5 placeholder:text-sm focus:outline-none text-sm bg-gray-1 px-5  rounded-[50px]"
+                className="input-field w-full py-3.5 placeholder:text-sm focus:outline-none text-sm bg-gray-1 border border-gray-1 px-5  rounded-[50px]"
                 placeholder="Enter your last name"
               />
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="">Email</label>
-            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2.5  rounded-[50px] py-3.5 ">
-              <span className="bg">
+            <div className=" relative flex justify-start border border-gray-1 items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
+              <span className="bg absolute left-5">
                 <img src="/mail-01.svg" />
               </span>
+
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none "
+                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
+                
               />
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="">Password</label>
-            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2 py-3.5  rounded-[50px] ">
-              <span className="bg">
-                <img src="/lock-key.svg" />
+            <div className=" relative flex justify-start  items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
+              <span className="bg absolute left-5">
+                <img src="/lock-key.svg" alt="Lock Icon" />
               </span>
               <input
                 type={passwordVisible ? "text" : "password"}
                 placeholder="Enter your password"
-                className=" placeholder:text-sm text-sm w-full bg-transparent focus:outline-none appearance-none"
+                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
               />
               <span
                 className="absolute right-5 text-[#1e1e1e85] !text-base cursor-pointer"
