@@ -21,7 +21,7 @@ export default function WhyChoose() {
 
         <aside className='h-full '>
           
-          <section className='h-full flex flex-col justify-between gap-5 md:gap-0 py-2 '>
+          <section className='h-full flex flex-col justify-between gap-5 md:gap-0 py-1 '>
             {why_nourify.map((item) => (
               <span key={item.title} className='flex items-center gap-x-4'>
                 <span className='p-4 bg-[#F6F5F7] rounded-md'>
