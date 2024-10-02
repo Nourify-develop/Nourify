@@ -113,10 +113,10 @@ const OurProducts: React.FC = () => {
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
           our&nbsp;products
         </h1>
-        <ul className="grid grid-cols-3 gap-4 md:grid-cols-5 justify-between items-center md:text-sm xl:text-lg font-medium">
+        <ul className="flex  gap-4  justify-between items-center md:text-xs lg:text-sm xl:text-lg font-medium">
           <li
             onClick={resetFilters}
-            className={`hidden md:flex transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer ${
+            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer ${
               limitedOffer === null &&
               expressDelivery === null &&
               !selectedPrice &&
@@ -128,7 +128,7 @@ const OurProducts: React.FC = () => {
             All
           </li>
           <li
-            className={`hidden md:flex transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
               ${
                 limitedOffer === true
                   ? "bg-gray-7 text-white"
@@ -140,7 +140,7 @@ const OurProducts: React.FC = () => {
             Limited Offer
           </li>
           <li
-            className={`hidden md:flex transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
               ${
                 expressDelivery === true
                   ? "bg-gray-7 text-white"
@@ -163,7 +163,7 @@ const OurProducts: React.FC = () => {
                 }
               }}
             >
-              <SelectTrigger className="bg-gray-10 md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>
@@ -180,7 +180,7 @@ const OurProducts: React.FC = () => {
 
           <li>
             <Select onValueChange={handlePriceChange}>
-              <SelectTrigger className="bg-gray-10 md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
                 <SelectValue placeholder="Price" />
               </SelectTrigger>
               <SelectContent>
@@ -201,7 +201,7 @@ const OurProducts: React.FC = () => {
           </li>
           <li>
             <Select onValueChange={handleSizeChange}>
-              <SelectTrigger className="bg-gray-10 md:text-base xl:text-lg font-mediu m h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-mediu m h-full text-primary-2 rounded-[4rem] px-6 py-3">
                 <SelectValue placeholder="Size" />
               </SelectTrigger>
               <SelectContent>
@@ -231,11 +231,7 @@ const OurProducts: React.FC = () => {
           </p>
           <p
             className={`border-2 border-white 
-            ${
-              category === "pastries"
-                ? " border-b-green-700    "
-                : "text-gray-8"
-            }
+            ${category === "pastries" ? " border-b-green-700" : "text-gray-8"}
           `}
             onClick={() => handleCategoryClick("pastries")}
           >

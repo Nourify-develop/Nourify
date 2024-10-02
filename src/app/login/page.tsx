@@ -8,10 +8,12 @@ import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
-
+ 
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+ 
 
   return (
     <Wrapper className="flex w-full !h-screen lg:h-full  !p-2 gap-6 bg-white">
@@ -39,7 +41,7 @@ const Login = () => {
         </div>
       </section>
 
-      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full md:w-1/2">
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full md:w-1/2">
         <Link href={`/`}>
           <Image
             src={`/NOURIFY.svg`}
@@ -49,7 +51,7 @@ const Login = () => {
           />
         </Link>
         <div className="flex flex-col w-full gap-3">
-          <Typography.h2 className="!text-3xl !text-primary/90">
+          <Typography.h2 className="!text-3xl !text-primary/90 !font-bold">
             Log into your account
           </Typography.h2>
           <Typography.p className="text-primary/70 text-base ">
@@ -71,29 +73,31 @@ const Login = () => {
           <hr className="w-full" />
         </div>
         <form action="" className="flex flex-col s gap-5">
-          <div className="flex flex-col gap-2">
+          <div className=" input-container flex flex-col gap-2 ">
             <label htmlFor="">Email</label>
-            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2  rounded-[50px] py-3.5 ">
-              <span className="bg">
+            <div className=" relative flex justify-start border border-gray-1 items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
+              <span className="bg absolute left-5">
                 <img src="/mail-01.svg" />
               </span>
+
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none"
+                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
+                
               />
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="">Password</label>
-            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2 py-3.5 rounded-[50px]">
-              <span className="bg">
+            <div className=" relative flex justify-start  items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
+              <span className="bg absolute left-5">
                 <img src="/lock-key.svg" alt="Lock Icon" />
               </span>
               <input
                 type={passwordVisible ? "text" : "password"}
                 placeholder="Enter your password"
-                className="placeholder:text-sm text-sm w-full bg-transparent focus:outline-none appearance-none"
+                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
               />
               <span
                 className="absolute right-5 text-[#1e1e1e85] !text-base cursor-pointer"
@@ -120,3 +124,17 @@ const Login = () => {
 };
 
 export default Login;
+
+<style jsx>{`
+  .input-field {
+    transition: all ease-in-out 0.3s;
+  }
+
+  .input-field input:not(:placeholder-shown) ~ .icon-wrapper {
+    opacity: 0; /* Hide icon when typing */
+  }
+
+  .icon-wrapper {
+    transition: opacity 0.3s;
+  }
+`}</style>;
