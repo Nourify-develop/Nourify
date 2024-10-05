@@ -26,13 +26,13 @@ const Login = () => {
         <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-black/50   top-0 left-0 rounded-xl z-0"></div>
 
         <div className="relative z-10 space-y-4">
-          <Typography.p className="text-white !text-3xl font-extralight">
+          <Typography.p className="text-white !text-3xl font-semibold">
             Log in to continue your journey with fresh groceries and delicious
             pastries delivered straight to your door.
           </Typography.p>
           <Typography.s className="!text-sm text-white/80 pl-2.5 flex justify-start items-center gap-2.5 transition-opacity duration-1000">
             <img src="/general.svg" alt="General Icon" />
-            Used by<span className="font-bold">15,000+</span>worldwide
+            Used by<span className="font-bold text-white">15,000+</span>worldwide
           </Typography.s>
         </div>
         <div className="relative z-10 flex gap-1 justify-center items-center">
@@ -54,7 +54,7 @@ const Login = () => {
           <Typography.h2 className="!text-3xl !text-primary/90 !font-bold">
             Log into your account
           </Typography.h2>
-          <Typography.p className="text-primary/70 text-base ">
+          <Typography.p className="text-primary/70 text-base font-medium ">
             Don't have an account ?{" "}
             <Link href={`/signup`} className="text-secondary underline ">
               Sign Up{" "}
@@ -62,7 +62,7 @@ const Login = () => {
           </Typography.p>
         </div>
         <div className="flex flex-col gap-5">
-          <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]">
+          <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 hover:bg-gray-2 transition rounded-[50px]">
             <img src="/googleg logo 1.svg" />
             Continue with Google
           </button>
@@ -72,9 +72,9 @@ const Login = () => {
           <p>OR</p>
           <hr className="w-full" />
         </div>
-        <form action="" className="flex flex-col s gap-5">
+        <form action="" className="flex flex-col gap-5">
           <div className=" input-container flex flex-col gap-2 ">
-            <label htmlFor="">Email</label>
+            <label htmlFor="">Email Address</label>
             <div className=" relative flex justify-start border border-gray-1 items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
               <span className="bg absolute left-5">
                 <img src="/mail-01.svg" />
@@ -111,11 +111,11 @@ const Login = () => {
               </span>
             </div>
           </div>
-          <div className="flex gap-2 items-center text-sm justify-end text-secondary ">
+          <div className="flex gap-2 items-center text-sm justify-end text-secondary font-medium">
             <Link href={``}>Forgot Password?</Link>
           </div>
-          <button className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base">
-            Create account
+          <button className="flex w-full justify-center items-center py-3.5 bg-secondary hover:bg-green-dark transition rounded-[60px] text-white ">
+            Login
           </button>
         </form>
       </section>
@@ -125,16 +125,4 @@ const Login = () => {
 
 export default Login;
 
-<style jsx>{`
-  .input-field {
-    transition: all ease-in-out 0.3s;
-  }
 
-  .input-field input:not(:placeholder-shown) ~ .icon-wrapper {
-    opacity: 0; /* Hide icon when typing */
-  }
-
-  .icon-wrapper {
-    transition: opacity 0.3s;
-  }
-`}</style>;
