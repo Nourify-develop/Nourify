@@ -38,7 +38,7 @@ const SignUp = () => {
           <div className="w-36 h-1 rounded-full bg-white"></div>
         </div>
       </section>
-      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full sm:w-1/2">
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full md:w-1/2">
         <Link href={`/`}>
           <Image
             src={`/NOURIFY.svg`}
