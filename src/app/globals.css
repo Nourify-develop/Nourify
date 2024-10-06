@@ -76,6 +76,12 @@ body {
   transition: all ease-in-out .2s;
 
 }
+.transition{
+  transition: all ease-in-out .2s;
+}
+.transition:hover{
+  transition: all ease-in-out .2s;
+}
 
 
 @layer utilities {
