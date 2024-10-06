@@ -14,14 +14,14 @@ export default function WhyChoose() {
           alt=''
           width={0}
           height={0}
-          className='w-full h-auto place-items-center'
+          className='w-full h-auto place-items-center rounded-md'
         />
         </div>
         
 
-        <aside className='flex flex-col justify-between'>
+        <aside className='h-full '>
           
-          <section className='grid gap-8 lg:gap-12'>
+          <section className='h-full flex flex-col justify-between gap-5 md:gap-0 py-1 '>
             {why_nourify.map((item) => (
               <span key={item.title} className='flex items-center gap-x-4'>
                 <span className='p-4 bg-[#F6F5F7] rounded-md'>
@@ -36,8 +36,8 @@ export default function WhyChoose() {
                   />
                 </span>
                 <aside className='flex flex-col gap-y-0.5'>
-                  <Typography.h4 className='!text-gray-4'>{item.title}</Typography.h4>
-                  <Typography.p isGray className='!text-[0.875em]'>{item.text}</Typography.p>
+                  <Typography.h4 className='!text-gray-4 '>{item.title}</Typography.h4>
+                  <Typography.p isGray className='!text-[0.875em] lg:w-[80%]'>{item.text}</Typography.p>
                 </aside>
               </span>
             ))}
