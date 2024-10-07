@@ -185,8 +185,8 @@ const Login = () => {
             <Link href={``}>Forgot Password?</Link>
           </div>
           <button
-            type="submit" // Ensure the button submits the form
-            disabled={loading} // Disable button when loading
+            type="submit" 
+            disabled={loading} 
             className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base"
           >
             Create account

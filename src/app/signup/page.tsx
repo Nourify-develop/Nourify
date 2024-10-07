@@ -16,6 +16,7 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { TailSpin } from "react-loader-spinner";
 
 const SignUp = () => {
   const auth = getAuth(app);
@@ -248,7 +249,20 @@ const SignUp = () => {
             className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base"
             disabled={loading}
           >
-            {loading ? "Signing up..." : "Create account"}
+            {loading ? (
+              <TailSpin
+                visible={true}
+                height="24"
+                width="24"
+                color="#ffffff"
+                ariaLabel="tail-spin-loading"
+                radius="4"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            ) : (
+              "Create account"
+            )}
           </button>
         </form>
       </section>
