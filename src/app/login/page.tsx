@@ -17,55 +17,44 @@ import app from "@/lib/firebaseConfig";
 import { TailSpin } from "react-loader-spinner";
 
 const Login = () => {
+  // State declarations
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
+  
+  // Router and auth initialization
   const router = useRouter();
   const auth = getAuth(app);
   const googleProvider = new GoogleAuthProvider();
+
+  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
+  // Handle login with email and password
   const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login successful!");
+      
       // Redirect to the home page after login
       setTimeout(() => {
         router.push("/");
       }, 2000);
     } catch (error: any) {
-      console.log(error.message);
-      // Handle specific error messages
-      switch (error.code) {
-        case "auth/invalid-email":
-          toast.error("Invalid email format.");
-          break;
-        case "auth/invalid-credential":
-          toast.error("Invalid Credentials.");
-          break;
-        case "auth/user-not-found":
-          toast.error("No user found with this email.");
-          break;
-        case "auth/wrong-password":
-          toast.error("Incorrect password.");
-          break;
-        case "auth/network-request-failed":
-          toast.error(
-            "Network error. Please check your internet connection and try again."
-          );
-          break;
-        default:
-          toast.error("An error occurred. Please try again.");
-          break;
-      }
+
+        // Handle specific error messages
+        handleError(error);
     } finally {
       setLoading(false);
     }
   };
+  
+  // Handle login with Google
   const handleGoogleSignIn = async () => {
     setLoading(true);
     try {
@@ -79,6 +68,30 @@ const Login = () => {
       toast.error("An error occurred while logging in with Google.");
     } finally {
       setLoading(false);
+    }
+  };
+
+  // Handle error messages based on error code
+  const handleError = (error: any) => {
+    switch (error.code) {
+      case "auth/invalid-email":
+        toast.error("Invalid email format.");
+        break;
+      case "auth/invalid-credential":
+        toast.error("Invalid Credentials.");
+        break;
+      case "auth/user-not-found":
+        toast.error("No user found with this email.");
+        break;
+      case "auth/wrong-password":
+        toast.error("Incorrect password.");
+        break;
+      case "auth/network-request-failed":
+        toast.error("Network error. Please check your internet connection and try again.");
+        break;
+      default:
+        toast.error("An error occurred. Please try again.");
+        break;
     }
   };
   return (
