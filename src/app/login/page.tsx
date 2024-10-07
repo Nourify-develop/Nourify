@@ -14,6 +14,7 @@ import {
 } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import app from "@/lib/firebaseConfig";
+import { TailSpin } from "react-loader-spinner";
 
 const Login = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -189,7 +190,20 @@ const Login = () => {
             disabled={loading} 
             className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base"
           >
-            Create account
+         {loading ? (
+              <TailSpin
+                visible={true}
+                height="24"
+                width="24"
+                color="#ffffff"
+                ariaLabel="tail-spin-loading"
+                radius="4"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            ) : (
+              "Log in"
+            )}
           </button>
         </form>
       </section>
