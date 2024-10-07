@@ -33,7 +33,9 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login successful!");
       // Redirect to the home page after login
-      router.push("/");
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } catch (error: any) {
       console.log(error.message);
       // Handle specific error messages
@@ -68,8 +70,10 @@ const Login = () => {
     try {
       await signInWithPopup(auth, googleProvider);
       toast.success("Login successful!");
-  
-      router.push("/");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
     } catch (error: any) {
       toast.error("An error occurred while logging in with Google.");
     } finally {
