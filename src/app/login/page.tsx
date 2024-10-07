@@ -31,13 +31,16 @@ const Login = () => {
       // Redirect to the home page after login
       router.push("/");
     } catch (error: any) {
-      setError(error.message);
+   
       console.log(error.message);
       // Handle specific error messages
       switch (error.code) {
         case "auth/invalid-email":
           toast.error("Invalid email format.");
           break;
+          case "auth/invalid-credential":
+            toast.error("Invalid Credentials.");
+            break;
         case "auth/user-not-found":
           toast.error("No user found with this email.");
           break;
