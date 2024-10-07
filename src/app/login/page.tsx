@@ -29,8 +29,10 @@ const Login = () => {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login successful!");
       // Redirect to the home page after login
-    
+      router.push("/");
     } catch (error: any) {
+      setError(error.message);
+      console.log(error.message);
       // Handle specific error messages
       switch (error.code) {
         case "auth/invalid-email":
@@ -53,7 +55,6 @@ const Login = () => {
       }
     } finally {
       setLoading(false);
-      router.push("/");
     }
   };
   const handleGoogleSignIn = async () => {
