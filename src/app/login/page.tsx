@@ -56,7 +56,6 @@ const Login = () => {
 
   // Handle login with Google
   const handleGoogleSignIn = async () => {
-    setLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
       toast.success("Login successful!");
@@ -66,8 +65,6 @@ const Login = () => {
       }, 2000);
     } catch (error: any) {
       toast.error("An error occurred while logging in with Google.");
-    } finally {
-      setLoading(false);
     }
   };
 

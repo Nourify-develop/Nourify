@@ -63,6 +63,17 @@ const OurProducts: React.FC = () => {
     indexOfLastProduct
   );
 
+  // CREATING DUMMY CONSTANTS FOR NOW, WILL REMOVE LATER ONCE FUNCTIONALITY IS APPLIED
+  const indexOfFourthProduct = indexOfFirstProduct + 4;
+  const firstToFourthProducts = filteredProducts.slice(
+    indexOfFirstProduct,
+    indexOfFourthProduct
+  );
+  // const shuffledProducts = [...filteredProducts].sort(() => Math.random() - 0.5);
+  // const firstToFourthProducts = shuffledProducts.slice(0, 4);
+  // END OF DUMMY CONSTANTS
+  // /////////////
+
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   const handleCategoryClick = (newCategory: string | null) => {
@@ -269,6 +280,23 @@ const OurProducts: React.FC = () => {
         >
           Next
         </button>
+      </div>
+
+      {/* RECENTLY VIEWED  */}
+      <div
+        className="border-t"
+        style={{ borderTopWidth: "0.5px", borderTopColor: "#F6F5F7" }}
+      >
+        {" "}
+        <h1 className="uppercase font-bold text-[2rem] leading-9 pt-[3rem] flex-1 mb-[2.5rem]">
+          recently viewed
+        </h1>
+        <ProductGrid products={firstToFourthProducts}></ProductGrid>
+      </div>
+      <div className="flex items-center justify-center w-full gap-1">
+        <span className="w-[161px] h-[3px] bg-[#079C4E]"></span>
+        <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
+        <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
       </div>
     </div>
   );

@@ -64,7 +64,6 @@ const SignUp = () => {
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
-    setLoading(true);
     try {
       const result = await signInWithPopup(auth, provider);
       const user = result.user;
@@ -78,8 +77,6 @@ const SignUp = () => {
     } catch (error: any) {
       setError(error.message);
       handleAuthError(error);
-    } finally {
-      setLoading(false);
     }
   };
   const handleAuthError = (error: any) => {
