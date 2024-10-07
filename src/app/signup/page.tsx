@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -21,6 +22,8 @@ import { TailSpin } from "react-loader-spinner";
 const SignUp = () => {
   const auth = getAuth(app);
   const db = getFirestore(app);
+  const router = useRouter();
+
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -28,10 +31,11 @@ const SignUp = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
-  const router = useRouter();
+
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+
   const handleSignUp = async (e: React.FormEvent) => {
     e.preventDefault();
     setLoading(true);
@@ -48,32 +52,16 @@ const SignUp = () => {
         email,
         uid: user.uid,
       });
+      router.push("/"); // Redirect to the home page after sign-up
     } catch (error: any) {
       setError(error.message);
       console.log(error.message);
-      switch (error.code) {
-        case "auth/invalid-email":
-          toast.error("Invalid email format.");
-          break;
-        case "auth/email-already-in-use":
-          toast.error("This email is already in use.");
-          break;
-        case "auth/weak-password":
-          toast.error("Password should be at least 6 characters.");
-          break;
-        case "auth/network-request-failed": // Added handling for network errors
-          toast.error(
-            "Network error. Please check your internet connection and try again."
-          );
-          break;
-        default:
-          toast.error("An error occurred. Please try again.");
-          break;
-      }
+      handleAuthError(error);
     } finally {
       setLoading(false);
     }
   };
+
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     setLoading(true);
@@ -86,31 +74,39 @@ const SignUp = () => {
         email: user.email,
         uid: user.uid,
       });
-      // You can redirect the user or show a success message here
       router.push("/"); // Redirect to the home page after sign-in
     } catch (error: any) {
       setError(error.message);
-      switch (error.code) {
-        case "auth/popup-closed-by-user":
-          toast.error("Sign-in popup closed before completion.");
-          break;
-        case "auth/network-request-failed":
-          toast.error("Network error. Please check your connection.");
-          break;
-        case "auth/operation-not-allowed":
-          toast.error("Google sign-in is not enabled.");
-          break;
-        case "auth/network-request-failed": // Added handling for network errors
-          toast.error(
-            "Network error. Please check your internet connection and try again."
-          );
-          break;
-        default:
-          toast.error("An error occurred. Please try again.");
-          break;
-      }
+      handleAuthError(error);
     } finally {
       setLoading(false);
+    }
+  };
+  const handleAuthError = (error: any) => {
+    switch (error.code) {
+      case "auth/invalid-email":
+        toast.error("Invalid email format.");
+        break;
+      case "auth/email-already-in-use":
+        toast.error("This email is already in use.");
+        break;
+      case "auth/weak-password":
+        toast.error("Password should be at least 6 characters.");
+        break;
+      case "auth/network-request-failed":
+        toast.error(
+          "Network error. Please check your internet connection and try again."
+        );
+        break;
+      case "auth/popup-closed-by-user":
+        toast.error("Sign-in popup closed before completion.");
+        break;
+      case "auth/operation-not-allowed":
+        toast.error("Google sign-in is not enabled.");
+        break;
+      default:
+        toast.error("An error occurred. Please try again.");
+        break;
     }
   };
   return (
@@ -152,7 +148,6 @@ const SignUp = () => {
         </div>
         <div className="flex flex-col gap-5">
           <button
-          type="submit"
             onClick={handleGoogleSignIn}
             className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]"
           >
