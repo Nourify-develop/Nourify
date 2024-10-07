@@ -21,13 +21,14 @@ const Login = () => {
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-  const handleLogin = async (e) => {
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     try {
       await signInWithEmailAndPassword(auth, email, password);
+      toast.success("Login successful!");
       // Redirect to the home page after login
-      router.push("/");
+    
     } catch (error: any) {
       // Handle specific error messages
       switch (error.code) {
@@ -51,6 +52,7 @@ const Login = () => {
       }
     } finally {
       setLoading(false);
+      router.push("/");
     }
   };
 
@@ -109,7 +111,7 @@ const Login = () => {
           <p>OR</p>
           <hr className="w-full" />
         </div>
-        <form action="" className="flex flex-col s gap-5">
+        <form onSubmit={handleLogin} className="flex flex-col s gap-5">
           <div className="flex flex-col gap-2">
             <label htmlFor="">Email</label>
             <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2  rounded-[50px] py-3.5 ">
@@ -155,7 +157,11 @@ const Login = () => {
           <div className="flex gap-2 items-center text-sm justify-end text-secondary ">
             <Link href={``}>Forgot Password?</Link>
           </div>
-          <button className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base">
+          <button
+            type="submit" // Ensure the button submits the form
+            disabled={loading} // Disable button when loading
+            className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base"
+          >
             Create account
           </button>
         </form>
