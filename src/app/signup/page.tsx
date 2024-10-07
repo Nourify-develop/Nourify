@@ -152,6 +152,7 @@ const SignUp = () => {
         </div>
         <div className="flex flex-col gap-5">
           <button
+          type="submit"
             onClick={handleGoogleSignIn}
             className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]"
           >
