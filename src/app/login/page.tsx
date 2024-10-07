@@ -1,4 +1,5 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -11,10 +12,10 @@ import {
   GoogleAuthProvider,
   signInWithEmailAndPassword,
   signInWithPopup,
-} from "firebase/auth";
-import { getAuth } from "firebase/auth";
-import app from "@/lib/firebaseConfig";
-import { TailSpin } from "react-loader-spinner";
+  getAuth,
+} from "firebase/auth"; // Importing Firebase methods
+import app from "@/lib/firebaseConfig"; // Firebase configuration
+import { TailSpin } from "react-loader-spinner"; // Loading spinner component
 
 const Login = () => {
   // State declarations
@@ -22,7 +23,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-  
+
   // Router and auth initialization
   const router = useRouter();
   const auth = getAuth(app);
@@ -40,20 +41,19 @@ const Login = () => {
     try {
       await signInWithEmailAndPassword(auth, email, password);
       toast.success("Login successful!");
-      
+
       // Redirect to the home page after login
       setTimeout(() => {
         router.push("/");
       }, 2000);
     } catch (error: any) {
-
-        // Handle specific error messages
-        handleError(error);
+      // Handle specific error messages
+      handleError(error);
     } finally {
       setLoading(false);
     }
   };
-  
+
   // Handle login with Google
   const handleGoogleSignIn = async () => {
     setLoading(true);
@@ -87,7 +87,9 @@ const Login = () => {
         toast.error("Incorrect password.");
         break;
       case "auth/network-request-failed":
-        toast.error("Network error. Please check your internet connection and try again.");
+        toast.error(
+          "Network error. Please check your internet connection and try again."
+        );
         break;
       default:
         toast.error("An error occurred. Please try again.");
@@ -199,11 +201,11 @@ const Login = () => {
             <Link href={``}>Forgot Password?</Link>
           </div>
           <button
-            type="submit" 
-            disabled={loading} 
+            type="submit"
+            disabled={loading}
             className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base"
           >
-         {loading ? (
+            {loading ? (
               <TailSpin
                 visible={true}
                 height="24"
