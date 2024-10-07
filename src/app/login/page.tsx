@@ -18,6 +18,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
   const router = useRouter();
   const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
@@ -58,7 +59,7 @@ const Login = () => {
   const handleGoogleSignIn = async () => {
     setLoading(true);
     try {
-      await signInWithPopup(auth, GoogleAuthProvider);
+      await signInWithPopup(auth, googleProvider);
       toast.success("Google login successful!");
       // Redirect to the home page after login
       router.push("/");
