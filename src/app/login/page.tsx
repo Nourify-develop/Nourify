@@ -7,7 +7,11 @@ import Wrapper from "@/layout/wrapper";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import app from "@/lib/firebaseConfig";
 
@@ -31,16 +35,15 @@ const Login = () => {
       // Redirect to the home page after login
       router.push("/");
     } catch (error: any) {
-   
       console.log(error.message);
       // Handle specific error messages
       switch (error.code) {
         case "auth/invalid-email":
           toast.error("Invalid email format.");
           break;
-          case "auth/invalid-credential":
-            toast.error("Invalid Credentials.");
-            break;
+        case "auth/invalid-credential":
+          toast.error("Invalid Credentials.");
+          break;
         case "auth/user-not-found":
           toast.error("No user found with this email.");
           break;
@@ -64,8 +67,8 @@ const Login = () => {
     setLoading(true);
     try {
       await signInWithPopup(auth, googleProvider);
-      toast.success("Google login successful!");
-      // Redirect to the home page after login
+      toast.success("Login successful!");
+  
       router.push("/");
     } catch (error: any) {
       toast.error("An error occurred while logging in with Google.");
@@ -118,8 +121,11 @@ const Login = () => {
           </Typography.p>
         </div>
         <div className="flex flex-col gap-5">
-          <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]">
-            <img src="/googleg logo 1.svg" />
+          <button
+            onClick={handleGoogleSignIn} // Handle Google sign-in
+            className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]"
+          >
+            <img src="/googleg logo 1.svg" alt="Google Logo" />
             Continue with Google
           </button>
         </div>
