@@ -7,7 +7,7 @@ import Wrapper from "@/layout/wrapper";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { getAuth } from "firebase/auth";
 import app from "@/lib/firebaseConfig";
 
@@ -55,7 +55,19 @@ const Login = () => {
       router.push("/");
     }
   };
-
+  const handleGoogleSignIn = async () => {
+    setLoading(true);
+    try {
+      await signInWithPopup(auth, GoogleAuthProvider);
+      toast.success("Google login successful!");
+      // Redirect to the home page after login
+      router.push("/");
+    } catch (error: any) {
+      toast.error("An error occurred while logging in with Google.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <Wrapper className="flex w-full !h-screen lg:h-full  !p-2 gap-6 bg-white">
       <section
