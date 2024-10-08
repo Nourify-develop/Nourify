@@ -1,4 +1,4 @@
-import OurProducts from "@/app/components/OurProducts";
+import OurProducts from "@/ui/landing/OurProducts";
 import HeroSection from "@/components/HeroSection";
 import LimitedOffer from "@/components/limoffer";
 import WhyChoose from "@/ui/landing/WhyChoose";

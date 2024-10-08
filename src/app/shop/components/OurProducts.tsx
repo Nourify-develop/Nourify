@@ -1,26 +1,35 @@
 "use client";
-import React, { useState } from "react";
-import { products } from "@/ui/landing/_data";
-import ProductGrid from "@/components/ProductGrid"; // Adjust the path
+import React, { useState, useEffect } from "react";
+import { usePathname, useSearchParams } from "next/navigation";
+import { products } from "@/ui/products/_data";
+import ProductGrid from "@/ui/products/ProductGrid";
+import { IoSearchOutline } from "react-icons/io5";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { IoSearchOutline } from "react-icons/io5";
+import Limoffer from "@/components/limoffer";
+import Wrapper from "@/layout/wrapper";
+
 const OurProducts: React.FC = () => {
+  const searchParams = useSearchParams();
+  const pathName = usePathname();
   const [searchTerm, setSearchTerm] = useState("");
-  const [category, setCategory] = useState<string | null>(null);
+  const [category, setCategory] = useState<string | null>(searchParams.get("category"));
   const [selectedPrice, setSelectedPrice] = useState<string | null>(null);
   const [limitedOffer, setLimitedOffer] = useState<boolean | null>(null);
   const [expressDelivery, setExpressDelivery] = useState<boolean | null>(null);
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const productsPerPage = 10; // Number of products per page
+
+  useEffect(() => {
+    setCategory(searchParams.get("category"));
+  }, [searchParams]);
 
   // Filter products based on search, category, price, size, limited offer, and express delivery
   const filteredProducts = products.filter((product) => {
@@ -76,8 +85,18 @@ const OurProducts: React.FC = () => {
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
   const handleCategoryClick = (newCategory: string | null) => {
-    setCategory(category === newCategory ? null : newCategory);
+    const updatedCategory = category === newCategory ? null : newCategory;
+    setCategory(updatedCategory);
+
+    const params = new URLSearchParams(searchParams.toString());
+    if (updatedCategory) {
+      params.set("category", updatedCategory);
+    } else {
+      params.delete("category");
+    }
+    window.history.pushState(null, '', `?${params.toString()}`);
   };
+
   const handlePriceChange = (value: string) => {
     setSelectedPrice(value);
   };
@@ -105,18 +124,33 @@ const OurProducts: React.FC = () => {
   };
 
   return (
-    <div
-      id="our-products"
-      className="bg-white flex flex-col py-10 md:gap-10 px-6 md:px-20"
-    >
+    <Wrapper id="our-products" className="bg-white flex flex-col gap-y-12 !py-0">
+      <span className="capitalize flex items-center gap-x-2 text-gray-5 border-b border-gray-2 py-2">
+        <p>{pathName.replace('/', '')}</p> / 
+        <p 
+          className={`cursor-pointer ${!category ? 'text-black' : 'text-gray-5'}`} 
+          onClick={() => {
+            setCategory(null);
+            const params = new URLSearchParams(searchParams.toString());
+            params.delete("category");
+            window.history.pushState(null, '', `?${params.toString()}`);
+          }}
+        >
+          Products
+        </p> /&nbsp;
+        <p className={`${category ? 'text-black' : 'text-gray-5'}`}>{category}</p>
+      </span>
+
+      <Limoffer />
+
       <div className="flex justify-between items-center flex-col gap-7 xl:flex-row text-center md:text-left w-full">
-        <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
+        <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1 text-gray-4">
           our&nbsp;products
         </h1>
-        <ul className="flex  gap-4  justify-between items-center md:text-xs lg:text-sm xl:text-lg font-medium">
+        <ul className="flex gap-4 justify-between items-center md:text-xs lg:text-sm xl:text-lg font-medium">
           <li
             onClick={resetFilters}
-            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer ${
+            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-1.5 text-base cursor-pointer ${
               limitedOffer === null &&
               expressDelivery === null &&
               !selectedPrice &&
@@ -128,7 +162,7 @@ const OurProducts: React.FC = () => {
             All
           </li>
           <li
-            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-1.5 text-base cursor-pointer
               ${
                 limitedOffer === true
                   ? "bg-gray-7 text-white"
@@ -140,7 +174,7 @@ const OurProducts: React.FC = () => {
             Limited Offer
           </li>
           <li
-            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-3 cursor-pointer
+            className={`hidden md:flex w-fit transition duration-700 ease-linear rounded-[4rem] px-6 py-1.5 text-base cursor-pointer
               ${
                 expressDelivery === true
                   ? "bg-gray-7 text-white"
@@ -163,7 +197,7 @@ const OurProducts: React.FC = () => {
                 }
               }}
             >
-              <SelectTrigger className="bg-gray-10 w-fit md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>
@@ -180,7 +214,7 @@ const OurProducts: React.FC = () => {
 
           <li>
             <Select onValueChange={handlePriceChange}>
-              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
                 <SelectValue placeholder="Price" />
               </SelectTrigger>
               <SelectContent>
@@ -201,7 +235,7 @@ const OurProducts: React.FC = () => {
           </li>
           <li>
             <Select onValueChange={handleSizeChange}>
-              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-mediu m h-full text-primary-2 rounded-[4rem] px-6 py-3">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-mediu m h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
                 <SelectValue placeholder="Size" />
               </SelectTrigger>
               <SelectContent>
@@ -217,26 +251,26 @@ const OurProducts: React.FC = () => {
       </div>
       <div className="flex flex-col md:flex-row py-8 gap-y-4  justify-between items-center mt-2">
         <div className="flex gap-6 lg:gap-8  xl:gap-12  md:text-xl lg:text-2xl xl:text-3xl font-medium">
-          <p
+          <button
             className={`border-2 border-white 
               ${
                 category === "groceries"
-                  ? " border-b-green-700    "
+                  ? " border-b-green-700 text-gray-4"
                   : "text-gray-8"
               }
             `}
             onClick={() => handleCategoryClick("groceries")}
           >
             Groceries
-          </p>
-          <p
+          </button>
+          <button
             className={`border-2 border-white 
-            ${category === "pastries" ? " border-b-green-700" : "text-gray-8"}
+            ${category === "pastries" ? " border-b-green-700 text-gray-4" : "text-gray-8"}
           `}
             onClick={() => handleCategoryClick("pastries")}
           >
             Pastries
-          </p>
+          </button>
         </div>
         <div className="relative">
           <div className="absolute inset-y-0 left-0 flex items-center pl-3">
@@ -257,7 +291,7 @@ const OurProducts: React.FC = () => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-6 py-3 border text-white  rounded-[3.125rem] disabled:opacity-50 bg-green-1 disabled:bg-white disabled:text-black"
+          className="px-6 py-1.5 text-base border text-white  rounded-[3.125rem] disabled:opacity-50 bg-green-1 disabled:bg-white disabled:text-black"
         >
           Previous
         </button>
@@ -265,7 +299,7 @@ const OurProducts: React.FC = () => {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={`px-6 py-3 mx-5 rounded-[3.125rem] border  ${
+            className={`px-6 py-1.5 text-base mx-5 rounded-[3.125rem] border  ${
               currentPage === index + 1 ? "bg-gray-500 text-white " : ""
             }`}
           >
@@ -275,7 +309,7 @@ const OurProducts: React.FC = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-6 py-3 border text-white  rounded-[3.125rem] disabled:opacity-50 bg-green-1 disabled:bg-white disabled:text-black"
+          className="px-6 py-1.5 text-base border text-white  rounded-[3.125rem] disabled:opacity-50 bg-green-1 disabled:bg-white disabled:text-black"
         >
           Next
         </button>
@@ -297,7 +331,7 @@ const OurProducts: React.FC = () => {
         <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
         <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

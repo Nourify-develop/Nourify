@@ -15,7 +15,7 @@ export default function Testimonials() {
           manualControls
           stopOnManual={false}
           contentClassName="py-8"
-          mediaQueries={{768: 2, 1280: 3, 1378: 4}}
+          mediaQueries={{768: 3, 1280: 3}}
           buttonClassName="bottom-0 md:bottom-[1.25em]"
         >
           {testimonials.map((item) => (

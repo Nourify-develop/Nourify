@@ -38,7 +38,7 @@ function Navbar() {
                 href={link}
                 key={link}
                 className={`${
-                  pathname === link && "text-secondary font-medium"
+                  (link === "/" && pathname === "/") || (link !== "/" && pathname.startsWith(link)) ? "text-secondary font-medium" : "text-gray-7"
                 } md:text-[0.775rem] lg:text-[1.125rem] font-medium font-sans transition-all ease-in-out duration-300 text-primary hover:text-secondary`}
               >
                 {name}
