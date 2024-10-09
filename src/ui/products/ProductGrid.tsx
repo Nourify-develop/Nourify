@@ -1,8 +1,5 @@
-// components/ProductGrid.tsx
-"use client";
-import React from "react";
-import ProductCard from "./ProductCard"; // Adjust path as needed
-import { Product } from "../types"; // Assuming your Product type is in types.ts
+import ProductCard from "./ProductCard";
+import { Product } from "../../types";
 
 interface ProductGridProps {
   products: Product[];
