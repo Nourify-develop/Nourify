@@ -1,6 +1,7 @@
 import type { Config } from "tailwindcss";
 
 const config: Config = {
+  darkMode: ["class"],
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
@@ -19,30 +20,72 @@ const config: Config = {
         sans: ["SF Pro Display"],
       },
       colors: {
-        primary: "#1E1E1E",
-        "primary-2": "#1E1E1EB2",
-        secondary: "#079C4E",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        "primary-2": "#1E1E1E",
+        secondary: {
+          DEFAULT: "#079C4E",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
         yellow: "#FFA500",
         gray: {
-          1: "#F4F4F4",
-          2: "#D9D9D9",
-          3: "#5B5B5B",
-          4: "#333333",
-          5: "#858585",
-          6: "#848484",
+          "1": "#F4F4F4",
+          "2": "#D9D9D9",
+          "3": "#5B5B5B",
+          "4": "#333333",
+          "5": "#858585",
+          "6": "#848484",
+          "7": "#444444CC",
+          "8": "#40404080",
+          "10": "#F5F5F5",
         },
         green: {
           DEFAULT: "#087D40",
           dark: "#013115",
+          1: "#079C4E",
         },
-        background: {
-          default: "#013115",
-          1: "#F6F5F7",
-          2: "#F2F1F6",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        chart: {
+          "1": "hsl(var(--chart-1))",
+          "2": "hsl(var(--chart-2))",
+          "3": "hsl(var(--chart-3))",
+          "4": "hsl(var(--chart-4))",
+          "5": "hsl(var(--chart-5))",
+        },
+      },
+      borderRadius: {
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
     },
   },
-  plugins: [],
+  plugins: [require("tailwindcss-animate")],
 };
 export default config;

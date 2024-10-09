@@ -1,12 +1,16 @@
-import React from "react";
 import OurProducts from "./components/OurProducts";
+import Limoffer from "@/components/limoffer";
+import Review from "./components/Review/reviews"
 
-const page = () => {
+const Shop = () => {
+
   return (
-    <div>
+    <div className="bg-white">
+      <Limoffer/>
       <OurProducts />
+      <Review/>
     </div>
   );
 };
 
-export default page;
+export default Shop;
