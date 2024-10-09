@@ -55,3 +55,28 @@ export const testimonials = [
     avatar: "/icons/avatar.svg",
   }
 ];
+export const reviewsData = [
+  {
+    name: "David Carl",
+    image: "/David.svg",
+    review:
+      "The cucumbers I bought were fresh and crunchy! Perfect for my salads and snacks. They had a great flavor and lasted a good week in my fridge without going bad. Definitely will be purchasing again.",
+  },
+  {
+    name: "Sonia",
+    image: "/Sonia.svg",
+    review:
+      "The cucumbers were decent, but a few were a little softer than I expected. Most were fresh, though, and worked well in my salad. Not the best batch I've gotten, but still usable.",
+  },
+];
+
+export const ratingData = {
+  totalRating: 4.5,
+  ratings: {
+    5.0: 30,
+    4.0: 20,
+    3.0: 10,
+    2.0: 5,
+    1.0: 5,
+  },
+};
