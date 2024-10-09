@@ -64,6 +64,27 @@ body {
 .open .hamburger-bottom {
   transform: rotate(-45deg) translateY(6px) translate(-6px);
 }
+
+
+.input-field:not(:placeholder-shown){
+  background-color: white;
+  border: 1px solid #079C4E;
+  transition: all ease-in-out .2s;
+}
+
+.input-field:placeholder-shown {
+  background-color: #F4F4F4; 
+  transition: all ease-in-out .2s;
+
+}
+.transition{
+  transition: all ease-in-out .2s;
+}
+.transition:hover{
+  transition: all ease-in-out .2s;
+}
+
+
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -89,4 +110,89 @@ body {
   src: url("/fonts/SFPRODISPLAYREGULAR.OTF") format("opentype");
   font-weight: 500;
   font-style: normal;
+}
+
+progress {
+  appearance: none;
+  -webkit-appearance: none;
+  height: 0.3em;
+  border-radius: 3em;
+  overflow: hidden;
+  width: 100%;
+}
+
+progress::-webkit-progress-bar {
+  background-color: #e0e0e0;
+}
+
+progress::-webkit-progress-value {
+  background-color: #ffb800;
+}
+
+progress::-moz-progress-bar {
+  background-color: #ffb800;
+}
+
+progress {
+  background-color: #e0e0e0;
+  color: #ffb800;
+}
+
+
+@layer base {
+  
+:root  {
+  --background: 149 100% 95%;
+  --foreground: 149 5% 0%;
+  --card: 149 50% 90%;
+  --card-foreground: 149 5% 10%;
+  --popover: 149 100% 95%;
+  --popover-foreground: 149 100% 0%;
+  --primary: 149 91.4% 32%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 149 30% 70%;
+  --secondary-foreground: 0 0% 0%;
+  --muted: 111 30% 85%;
+  --muted-foreground: 149 5% 35%;
+  --accent: 111 30% 80%;
+  --accent-foreground: 149 5% 10%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 149 5% 90%;
+  --border: 149 30% 50%;
+  --input: 149 30% 18%;
+  --ring: 149 91.4% 32%;
+  --radius: 0.5rem;
+}
+.dark  {
+  --background: 149 50% 5%;
+  --foreground: 149 5% 90%;
+  --card: 149 50% 0%;
+  --card-foreground: 149 5% 90%;
+  --popover: 149 50% 5%;
+  --popover-foreground: 149 5% 90%;
+  --primary: 149 91.4% 32%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 149 30% 10%;
+  --secondary-foreground: 0 0% 100%;
+  --muted: 111 30% 15%;
+  --muted-foreground: 149 5% 60%;
+  --accent: 111 30% 15%;
+  --accent-foreground: 149 5% 90%;
+  --destructive: 0 100% 30%;
+  --destructive-foreground: 149 5% 90%;
+  --border: 149 30% 18%;
+  --input: 149 30% 18%;
+  --ring: 149 91.4% 32%;
+  --radius: 0.5rem;
+}
+
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
 }

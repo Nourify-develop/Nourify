@@ -77,7 +77,7 @@ const p = ({ children, className, isGray, ...props }: ParagraphProps) => {
     <>
       <p
         {...props}
-        className={`text-base text-neutral-900 leading-normal ${roboto.className} ${className}`}
+        className={`text-base text-gray-4 leading-normal ${roboto.className} ${className}`}
       >
         {children}
       </p>
@@ -89,7 +89,7 @@ const p = ({ children, className, isGray, ...props }: ParagraphProps) => {
     <>
       <p
         {...props}
-        className={`text-base text-gray-4 leading-normal ${roboto.className} ${className}`}
+        className={`text-base text-neutral-900 leading-normal ${roboto.className} ${className}`}
       >
         {children}
       </p>
@@ -105,7 +105,7 @@ const s = ({ children, isGray, className, ...props }: SmallTextProps) => {
     <>
       <p
         {...props}
-        className={`text-neutral-900 text-[0.75em] leading-normal ${roboto.className} ${className}`}
+        className={`text-gray-6 text-[0.75em] leading-normal ${roboto.className} ${className}`}
       >
         {children}
       </p>
@@ -117,7 +117,7 @@ const s = ({ children, isGray, className, ...props }: SmallTextProps) => {
     <>
       <p
         {...props}
-        className={`text-gray-4 text-[0.75em] leading-normal ${roboto.className} ${className}`}
+        className={`text-neutral-900 text-[0.75em] leading-normal ${roboto.className} ${className}`}
       >
         {children}
       </p>

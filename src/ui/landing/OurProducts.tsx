@@ -2,9 +2,9 @@
 "use client";
 import React from "react";
 import { useRouter } from "next/navigation";
-import { products } from "../../ui/landing/_data";
+import { products } from "../products/_data";
 import { Product } from "../../types";
-import ProductGrid from "../../components/ProductGrid"; // Adjust the path
+import ProductGrid from "../products/ProductGrid"; // Adjust the path
 
 const OurProducts: React.FC = () => {
   const router = useRouter();
