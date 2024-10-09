@@ -6,7 +6,7 @@ const Shop = () => {
 
   return (
     <div className="bg-white">
-      <Limoffer/>
+     
       <OurProducts />
       <Review/>
     </div>
