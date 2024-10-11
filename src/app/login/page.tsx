@@ -1,20 +1,108 @@
 "use client";
+
 import React, { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import Typography from "@/components/typography";
 import Wrapper from "@/layout/wrapper";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  getAuth,
+} from "firebase/auth"; // Importing Firebase methods
+import app from "@/lib/firebaseConfig"; // Firebase configuration
+import { TailSpin } from "react-loader-spinner"; // Loading spinner component
 
 const Login = () => {
+  // State declarations
   const [passwordVisible, setPasswordVisible] = useState(false);
- 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [loading, setLoading] = useState(false);
+
+  // Router and auth initialization
+  const router = useRouter();
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
+
+  // Toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
 
- 
+  // Handle login with email and password
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    try {
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
 
+      // Check if email is verified
+      if (!user.emailVerified) {
+        await auth.signOut(); // Sign out unverified users
+        toast.error("Please verify your email before logging in.");
+        setLoading(false);
+        return;
+      }
+
+      toast.success("Login successful!");
+
+      // Redirect to the home page after login
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } catch (error: any) {
+      // Handle specific error messages
+      handleError(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle login with Google
+  const handleGoogleSignIn = async () => {
+    try {
+      await signInWithPopup(auth, googleProvider);
+      toast.success("Login successful!");
+
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } catch (error: any) {
+      toast.error("An error occurred while logging in with Google.");
+    }
+  };
+
+  // Handle error messages based on error code
+  const handleError = (error: any) => {
+    switch (error.code) {
+      case "auth/invalid-email":
+        toast.error("Invalid email format.");
+        break;
+      case "auth/invalid-credential":
+        toast.error("Invalid Credentials.");
+        break;
+      case "auth/user-not-found":
+        toast.error("No user found with this email.");
+        break;
+      case "auth/wrong-password":
+        toast.error("Incorrect password.");
+        break;
+      case "auth/network-request-failed":
+        toast.error(
+          "Network error. Please check your internet connection and try again."
+        );
+        break;
+      default:
+        toast.error("An error occurred. Please try again.");
+        break;
+    }
+  };
   return (
     <Wrapper className="flex w-full !h-screen lg:h-full  !p-2 gap-6 bg-white">
       <section
@@ -41,17 +129,15 @@ const Login = () => {
         </div>
       </section>
 
-      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full md:w-1/2">
-        <Link href={`/`}>
-          <Image
-            src={`/NOURIFY.svg`}
-            alt="Nourify logo"
-            width={128}
-            height={40}
-          />
-        </Link>
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full md:w-1/2">
+        <Image
+          src={`/NOURIFY.svg`}
+          alt="Nourify logo"
+          width={128}
+          height={40}
+        />
         <div className="flex flex-col w-full gap-3">
-          <Typography.h2 className="!text-3xl !text-primary/90 !font-bold">
+          <Typography.h2 className="!text-3xl !text-primary/90">
             Log into your account
           </Typography.h2>
           <Typography.p className="text-primary/70 text-base ">
@@ -62,8 +148,11 @@ const Login = () => {
           </Typography.p>
         </div>
         <div className="flex flex-col gap-5">
-          <button className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]">
-            <img src="/googleg logo 1.svg" />
+          <button
+            onClick={handleGoogleSignIn} // Handle Google sign-in
+            className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]"
+          >
+            <img src="/googleg logo 1.svg" alt="Google Logo" />
             Continue with Google
           </button>
         </div>
@@ -72,32 +161,36 @@ const Login = () => {
           <p>OR</p>
           <hr className="w-full" />
         </div>
-        <form action="" className="flex flex-col s gap-5">
-          <div className=" input-container flex flex-col gap-2 ">
+        <form onSubmit={handleLogin} className="flex flex-col s gap-5">
+          <div className="flex flex-col gap-2">
             <label htmlFor="">Email</label>
-            <div className=" relative flex justify-start border border-gray-1 items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
-              <span className="bg absolute left-5">
+            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2  rounded-[50px] py-3.5 ">
+              <span className="bg">
                 <img src="/mail-01.svg" />
               </span>
-
               <input
                 type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
-                
+                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none"
+                required
               />
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="">Password</label>
-            <div className=" relative flex justify-start  items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
-              <span className="bg absolute left-5">
+            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2 py-3.5 rounded-[50px]">
+              <span className="bg">
                 <img src="/lock-key.svg" alt="Lock Icon" />
               </span>
               <input
                 type={passwordVisible ? "text" : "password"}
                 placeholder="Enter your password"
-                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="placeholder:text-sm text-sm w-full bg-transparent focus:outline-none appearance-none"
+                required
               />
               <span
                 className="absolute right-5 text-[#1e1e1e85] !text-base cursor-pointer"
@@ -114,8 +207,25 @@ const Login = () => {
           <div className="flex gap-2 items-center text-sm justify-end text-secondary ">
             <Link href={``}>Forgot Password?</Link>
           </div>
-          <button className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base">
-            Create account
+          <button
+            type="submit"
+            disabled={loading}
+            className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base"
+          >
+            {loading ? (
+              <TailSpin
+                visible={true}
+                height="24"
+                width="24"
+                color="#ffffff"
+                ariaLabel="tail-spin-loading"
+                radius="4"
+                wrapperStyle={{}}
+                wrapperClass=""
+              />
+            ) : (
+              "Log in"
+            )}
           </button>
         </form>
       </section>
@@ -124,17 +234,3 @@ const Login = () => {
 };
 
 export default Login;
-
-<style jsx>{`
-  .input-field {
-    transition: all ease-in-out 0.3s;
-  }
-
-  .input-field input:not(:placeholder-shown) ~ .icon-wrapper {
-    opacity: 0; /* Hide icon when typing */
-  }
-
-  .icon-wrapper {
-    transition: opacity 0.3s;
-  }
-`}</style>;

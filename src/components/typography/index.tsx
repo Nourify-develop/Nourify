@@ -77,7 +77,7 @@ const p = ({ children, className, isGray, ...props }: ParagraphProps) => {
     <>
       <p
         {...props}
-        className={`text-base text-neutral-900 leading-normal ${roboto.className} ${className}`}
+        className={`text-base text-gray-4 leading-normal ${roboto.className} ${className}`}
       >
         {children}
       </p>
@@ -89,7 +89,7 @@ const p = ({ children, className, isGray, ...props }: ParagraphProps) => {
     <>
       <p
         {...props}
-        className={`text-base text-gray-4 leading-normal ${roboto.className} ${className}`}
+        className={`text-base text-neutral-900 leading-normal ${roboto.className} ${className}`}
       >
         {children}
       </p>

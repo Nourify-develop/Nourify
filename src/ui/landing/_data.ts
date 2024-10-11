@@ -18,172 +18,6 @@ export const why_nourify = [
   },
 ];
 
-export const products = [
-  {
-    id: 1,
-    name: "Garden Cucumbers",
-    price: 50000,
-    image: "/cucumber.svg",
-    category: "pastries",
-    size: "small",
-    limitedOffer: false,
-    expressDelivery: false,
-    
-  },
-  {
-    id: 2,
-    name: "Cherry Tomatoes",
-    price: 10000,
-    image: "/tomatoes.svg",
-    category: "pastries",
-    size: "small",
-    limitedOffer: true,
-    expressDelivery: true,
-  },
-  {
-    id: 3,
-    name: "Fresh Cilantro",
-    price: 20000,
-    image: "/cilantro.svg",
-    category: "pastries",
-    size: "medium",
-    limitedOffer: false,
-    expressDelivery: true,
-  },
-  {
-    id: 4,
-    name: "Garden Cucumbers",
-    price: 40000,
-    image: "/cucumber.svg",
-    category: "pastries",
-    size: "large",
-    limitedOffer: false,
-    expressDelivery: true,
-  },
-  {
-    id: 5,
-    name: "Garden Cucumbers",
-    price: 50000,
-    image: "/cucumber.svg",
-    category: "pastries",
-    size: "medium",
-    limitedOffer: true,
-    expressDelivery: false,
-  },
-  {
-    id: 6,
-    name: "Fresh Cilantro",
-    price: 50000,
-    image: "/cilantro.svg",
-    category: "pastries",
-    size: "small",
-    limitedOffer: false,
-    expressDelivery: true,
-  },
-  {
-    id: 7,
-    name: "Garden Cucumbers",
-    price: 50000,
-    image: "/cucumber.svg",
-    category: "pastries",
-    size: "large",
-    limitedOffer: true,
-    expressDelivery: true,
-  },
-  {
-    id: 8,
-    name: "Cherry Tomatoes",
-    price: 70000,
-    image: "/tomatoes.svg",
-    category: "pastries",
-    size: "medium",
-    limitedOffer: false,
-    expressDelivery: true,
-  },
-  {
-    id: 9,
-    name: "Garden Cucumbers",
-    price: 60000,
-    image: "/cucumber.svg",
-    category: "groceries",
-    size: "medium",
-    limitedOffer: true,
-    expressDelivery: false,
-    
-  },
-  {
-    id: 10,
-    name: "Cherry Tomatoes",
-    price: 70000,
-    image: "/tomatoes.svg",
-    category: "groceries",
-    size: "small",
-    limitedOffer: false,
-    expressDelivery: true,
-  },
-  {
-    id: 11,
-    name: "Fresh Cilantro",
-    price: 30000,
-    image: "/cilantro.svg",
-    category: "groceries",
-    size: "large",
-    limitedOffer: true,
-    expressDelivery: true,
-  },
-  {
-    id: 12,
-    name: "Garden Cucumbers",
-    price: 10000,
-    image: "/cucumber.svg",
-    category: "groceries",
-    size: "medium",
-    limitedOffer: true,
-    expressDelivery: true,
-  },
-  {
-    id: 13,
-    name: "Garden Cucumbers",
-    price: 20000,
-    image: "/cucumber.svg",
-    category: "groceries",
-    size: "small",
-    limitedOffer: false,
-    expressDelivery: true,
-  },
-  {
-    id: 14,
-    name: "Fresh Cilantro",
-    price: 50000,
-    image: "/cilantro.svg",
-    category: "groceries",
-    size: "small",
-    limitedOffer: true,
-    expressDelivery: false,
-    
-  },
-  {
-    id: 15,
-    name: "Garden Cucumbers",
-    price: 90000,
-    image: "/cucumber.svg",
-    category: "groceries",
-    size: "medium",
-    limitedOffer: true,
-    expressDelivery: true,
-  },
-  {
-    id: 16,
-    name: "Cherry Tomatoes",
-    price: 80000,
-    image: "/tomatoes.svg",
-    category: "groceries",
-    size: "small",
-    limitedOffer: false,
-    expressDelivery: true,
-  },
-];
-
 export const testimonials = [
   {
     full_name: "Ejere David",
@@ -221,3 +55,28 @@ export const testimonials = [
     avatar: "/icons/avatar.svg",
   }
 ];
+export const reviewsData = [
+  {
+    name: "David Carl",
+    image: "/David.svg",
+    review:
+      "The cucumbers I bought were fresh and crunchy! Perfect for my salads and snacks. They had a great flavor and lasted a good week in my fridge without going bad. Definitely will be purchasing again.",
+  },
+  {
+    name: "Sonia",
+    image: "/Sonia.svg",
+    review:
+      "The cucumbers were decent, but a few were a little softer than I expected. Most were fresh, though, and worked well in my salad. Not the best batch I've gotten, but still usable.",
+  },
+];
+
+export const ratingData = {
+  totalRating: 4.5,
+  ratings: {
+    5.0: 30,
+    4.0: 20,
+    3.0: 10,
+    2.0: 5,
+    1.0: 5,
+  },
+};

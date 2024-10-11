@@ -1,23 +1,23 @@
+// OurProducts.tsx
 "use client";
 import React from "react";
-import { LuShoppingCart } from "react-icons/lu";
-import { products } from "./_data";
-import { Product } from "@/types";
+import { useRouter } from "next/navigation";
+import { products } from "../products/_data";
+import { Product } from "../../types";
+import ProductGrid from "../products/ProductGrid"; // Adjust the path
 
 const OurProducts: React.FC = () => {
+  const router = useRouter();
   const getProductsToDisplay = () => {
     if (typeof window !== "undefined") {
       const width = window.innerWidth;
 
       if (width >= 1024) {
-        // Desktop (8 items)
-        return products.slice(0, 8);
+        return products.slice(0, 8); // Desktop (8 items)
       } else if (width >= 768) {
-        // Tablet (6 items)
-        return products.slice(0, 6);
+        return products.slice(0, 6); // Tablet (6 items)
       } else {
-        // Mobile (4 items)
-        return products.slice(0, 4);
+        return products.slice(0, 4); // Mobile (4 items)
       }
     }
     return products.slice(0, 4); // Default for server-side rendering
@@ -37,50 +37,30 @@ const OurProducts: React.FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+  const handleSeeMoreClick = () => {
+    router.push("/shop"); // Navigate to the /shop page
+  };
 
   return (
     <div
       id="our-products"
-      className="bg-white flex flex-col py-10  md:gap-10 px-6 md:px-20"
+      className="bg-white flex flex-col py-10 md:gap-10 px-6 md:px-20"
     >
       <div className="flex justify-between flex-col gap-7 lg:flex-row text-center md:text-left w-full">
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
-          our&nbsp;products{" "}
+          our&nbsp;products
         </h1>
         <p className="font-medium text-xl text-primary-2 flex-1">
           Take a look at some of our wonderful products from Nourify - we take
           delight in making sure our customers have the best of the best
         </p>
       </div>
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-        {visibleProducts.map((product) => (
-          <div
-            key={product.id}
-            className="flex flex-col gap-6 text-center mb-14"
-          >
-            <img src={product.image} alt={product.name} />
-            <div className="flex justify-between flex-col gap-y-2">
-              <h3 className="text-lg text-left font-medium text-gray-4 overflow-hidden text-ellipsis whitespace-nowrap">
-                {product.name}
-              </h3>
-              <div className="flex justify-between items-end">
-                <p className="text-left ">
-                  <span className="font-bold text-xl lg:text-2xl">
-                    {product.price}
-                  </span>
-                  <span className="text-xs text-gray-5"> / pack</span>
-                </p>
-
-                <button className="lg:py-3 py-2 lg:px-4 px-3 transition-all duration-500 ease-linear rounded-md bg-background-2 hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group">
-                  <LuShoppingCart className="h-5 w-5 lg:h-6 lg:w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white" />
-                </button>
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
+      <ProductGrid products={visibleProducts} />
       <div className="flex justify-end">
-        <button className="bg-secondary text-white rounded-[65px] font-medium lg:text-xl text-base py-2 px-4 lg:py-3 lg:px-6 flex justify-between items-center">
+        <button
+          onClick={handleSeeMoreClick}
+          className="bg-secondary text-white rounded-[65px] font-medium lg:text-xl text-base py-2 px-4 lg:py-3 lg:px-6 flex justify-between items-center"
+        >
           See More <img src="/arrow-up-right.svg" alt="arrow" />
         </button>
       </div>
