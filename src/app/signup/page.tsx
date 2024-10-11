@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import {
   createUserWithEmailAndPassword,
+  sendEmailVerification,
   GoogleAuthProvider,
   signInWithPopup,
 } from "firebase/auth";
@@ -52,7 +53,18 @@ const SignUp = () => {
         email,
         uid: user.uid,
       });
-      router.push("/"); // Redirect to the home page after sign-up
+
+      // Send verification email
+      await sendEmailVerification(user);
+      toast.success("Verification email sent! Please check your inbox.");
+     
+      setTimeout(() => {
+        toast.success("Redirecting to Login page.");
+      }, 3000);
+       setTimeout(() => {
+        router.push("/login");
+      }, 6000);
+   
     } catch (error: any) {
       setError(error.message);
       console.log(error.message);
@@ -73,7 +85,10 @@ const SignUp = () => {
         email: user.email,
         uid: user.uid,
       });
-      router.push("/"); // Redirect to the home page after sign-in
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+     
     } catch (error: any) {
       setError(error.message);
       handleAuthError(error);

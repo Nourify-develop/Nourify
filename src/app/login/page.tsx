@@ -39,7 +39,17 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const user = userCredential.user;
+
+      // Check if email is verified
+      if (!user.emailVerified) {
+        await auth.signOut(); // Sign out unverified users
+        toast.error("Please verify your email before logging in.");
+        setLoading(false);
+        return;
+      }
+
       toast.success("Login successful!");
 
       // Redirect to the home page after login
