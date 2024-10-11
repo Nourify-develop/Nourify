@@ -1,62 +1,8 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import { motion } from "framer-motion";
-import Typography from "./typography";
 
 function HeroSection() {
-  const [showSecondContent, setShowSecondContent] = useState(false);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowSecondContent((prev) => !prev); // Toggle between the first and second content
-    }, 5000);
-
-    return () => clearInterval(interval); // Cleanup interval on unmount
-  }, []);
-
-  const contentVariants = {
-    enter: {
-      opacity: 0,
-      scale: 0.95,
-    },
-    center: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 1,
-      },
-    },
-    exit: {
-      opacity: 0,
-      scale: 1.05,
-      transition: {
-        duration: 1,
-      },
-    },
-  };
-
-  const imageVariants = {
-    enter: {
-      opacity: 0,
-      x: 50,
-    },
-    center: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 1,
-        when: "beforeChildren",
-      },
-    },
-    exit: {
-      opacity: 0,
-      x: -50,
-      transition: {
-        duration: 1,
-        when: "afterChildren",
-      },
-    },
-  };
+  const [showSecondImage, setShowSecondImage] = useState(false);
 
   const handleStartShoppingClick = () => {
     const productsSection = document.getElementById("our-products");
@@ -65,89 +11,75 @@ function HeroSection() {
     }
   };
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowSecondImage((prev) => !prev);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <div className="relative h-screen w-full overflow-hidden">
-      {/* Overlay for darkening effect */}
-      <div className="absolute inset-0 bg-black opacity-45 z-10"></div>{" "}
-      {/* Adjusted overlay for better darkening */}
+      {/* Background Images */}
       <div className="absolute inset-0 w-full h-full">
-        <motion.div
-          initial="enter"
-          animate={showSecondContent ? "exit" : "center"}
-          exit="exit"
-          variants={imageVariants}
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
+        <div
+          className={`absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-1000 ease-in-out ${
+            showSecondImage ? "-translate-x-full" : "translate-x-0"
+          }`}
           style={{
             backgroundImage: "url('/images/bg1.png')",
-            opacity: 0.4, // Adjusted opacity for better blending
           }}
-        />
-        <motion.div
-          initial="enter"
-          animate={showSecondContent ? "center" : "exit"}
-          exit="exit"
-          variants={imageVariants}
-          className="absolute inset-0 w-full h-full bg-cover bg-center"
+        ></div>
+
+        <div
+          className={`absolute inset-0 w-full h-full bg-cover bg-center transition-transform duration-1000 ease-in-out ${
+            showSecondImage ? "translate-x-0" : "translate-x-full"
+          }`}
           style={{
             backgroundImage: "url('/images/bg2.png')",
-            opacity: 0.4, // Adjusted opacity for better blending
           }}
-        />
+        ></div>
       </div>
-      <div className="relative z-20 flex flex-col gap-6 justify-center h-full items-start text-white">
-        <motion.div
-          initial="enter"
-          animate={showSecondContent ? "exit" : "center"}
-          exit="exit"
-          variants={contentVariants}
-          className="absolute flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20"
-        >
-          <Typography.h1 className="!text-5xl lg:!text-[80px] !leading-[60px] lg:!leading-[95px] !font-bold text-white uppercase">
+
+      <div className="relative z-10 flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20 h-full items-start text-white">
+        <div className="flex h-fit justify-cente w-full items-center">
+          <h1
+            className={`text-5xl  lg:text-[80px] lg:w-[1000px] h-fit leading-[60px] lg:leading-[95px] font-extrabold uppercase text-wrap transition-transform  duration-1000 ease-in-out ${
+              showSecondImage ? "-translate-x-full " : "translate-x-0"
+            }`}
+          >
             Fresh, <span className="font-bold text-yellow">Organic</span>{" "}
             Groceries to your doorstep
-          </Typography.h1>
-          <Typography.p className="!text-2xl text-white/90">
-            Experience the ease of speedy delivery with Nourify – where healthy
-            choices meet peak freshness.
-          </Typography.p>
-          <span className="text-sm pl-2.5 flex items-center gap-2.5">
-            <img src="/general.svg" alt="General Icon" />
-            Used by 15,000+ worldwide
-          </span>
-          <button
-            className="bg-secondary px-6 py-4 text-xl rounded-[64px] w-fit hover:duration-300 focus:outline-none hover:bg-secondary/70"
-            onClick={handleStartShoppingClick}
-          >
-            Start shopping
-          </button>
-        </motion.div>
+          </h1>
 
-        <motion.div
-          initial="enter"
-          animate={showSecondContent ? "center" : "exit"}
-          exit="exit"
-          variants={contentVariants}
-          className="absolute flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20"
-        >
-          <Typography.h1 className="!text-5xl lg:!text-[80px] !leading-[60px] lg:!leading-[95px] !font-bold text-white uppercase">
-            Indulge in our Freshly Baked
-            <span className="font-bold text-yellow"> Pastries</span>
-          </Typography.h1>
-          <Typography.p className="!text-2xl text-white/90">
-            Experience the joy of freshly baked goods delivered to your door.
-          </Typography.p>
-          <span className="text-sm pl-2.5 flex items-center gap-2.5">
-            <img src="/general.svg" alt="General Icon" />
-            Used by 15,000+ worldwide
-          </span>
-          <button
-            className="bg-secondary px-6 py-4 text-xl rounded-[64px] w-fit hover:duration-300 focus:outline-none hover:bg-secondary/70"
-            onClick={handleStartShoppingClick}
+          <h1
+            className={`absolute text-5xl  lg:text-[80px] 00px] leading-[60px] lg:leading-[95px] font-extrabold uppercase transition-transform  duration-1000 ease-in-out h-fit ${
+              showSecondImage ? "translate-x-0 opaciy-100" : "translate-x-full "
+            }`}
           >
-            Start shopping
-          </button>
-        </motion.div>
+            Indulge in our Freshly Baked{" "}
+            <span className="font-bold text-yellow">Pastries</span>
+          </h1>
+        </div>
+
+        <p className="m2 text-2xl text-white/90 transition-opacity duration-1000">
+          Experience the ease of speedy delivery with Nourify – where healthy
+          choices meet peak freshness.
+        </p>
+        <span className="text-sm pl-2.5 flex items-center gap-2.5 transition-opacity duration-1000">
+          <img src="/general.svg" alt="General Icon" />
+          Used by 15,000+ worldwide
+        </span>
+        <button
+          className="bg-secondary px-6 py-4 text-xl rounded-[64px] w-fit transition-opacity hover:duration-300 focus:outline-none hover:bg-secondary/70 "
+          onClick={handleStartShoppingClick}
+        >
+          Start shopping
+        </button>
       </div>
+
+      <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
     </div>
   );
 }

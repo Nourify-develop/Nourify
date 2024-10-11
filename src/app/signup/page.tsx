@@ -93,7 +93,6 @@ const SignUp = () => {
                 type="email"
                 placeholder="Enter your email address"
                 className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
-                
               />
             </div>
           </div>

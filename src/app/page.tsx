@@ -8,7 +8,7 @@ import Testimonials from "@/ui/landing/Testimonials";
 export default function Home() {
   return (
     <>
-      <main className="flex min-h-screen flex-col items-center justify-between  font-sans">
+      <main className="flex min-h-screen w-screen flex-col items-center justify-between  font-sans">
         {/* <Navbar /> */}
 
         <HeroSection />
