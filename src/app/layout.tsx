@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { usePathname } from "next/navigation";
 import Footer from "@/components/Footer";
 import { Roboto } from "next/font/google";
+import { Toaster } from "sonner";
 
 const roboto = Roboto({
   subsets: ["latin"],
@@ -31,6 +32,7 @@ export default function RootLayout({
         {showNavbarFooter && <Navbar />}
         <main className={` ${roboto.className}`}> {children} </main>
         {showNavbarFooter && <Footer />}
+        <Toaster position="top-right" expand={false} richColors />
       </body>
     </html>
   );
