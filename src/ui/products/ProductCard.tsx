@@ -18,7 +18,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
       <div className="flex justify-between flex-col gap-y-2"
         onClick={() => router.push(`/shop/${product.category}/${product.name}`)}
       >
-        <Image src={product.image} width={0} height={0} alt={product.name} className="w-auto h-auto" title={product.name} aria-label={product.name} aria-labelledby={product.name} />
+        <Image src={product.image} width={0} height={0} alt={product.name} className="w-auto h-auto cursor-pointer" title={product.name} aria-label={product.name} aria-labelledby={product.name} />
         <h3 className="text-lg text-left font-medium text-gray-4 overflow-hidden text-ellipsis whitespace-nowrap">
           {product.name}
         </h3>

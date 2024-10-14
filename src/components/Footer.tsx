@@ -50,7 +50,11 @@ function Footer() {
               <h4 className="mb-5 text-[1.5rem]">Shop</h4>
               <div className="flex flex-col gap-4 font-normal text-[0.875rem]">
                 {FOOTER_LINKS_ONE.map(({ link, name }) => (
-                  <Link href={link} key={name}>
+                  <Link
+                    href={link}
+                    key={name}
+                    className="transition-all ease-in-out duration-200 hover:underline"
+                  >
                     {name}
                   </Link>
                 ))}
@@ -60,7 +64,11 @@ function Footer() {
               <h4 className="mb-5 text-[1.5rem]">Help</h4>
               <div className="flex flex-col gap-4 font-normal text-[0.875rem]">
                 {FOOTER_LINKS_TWO.map(({ link, name }) => (
-                  <Link href={link} key={name}>
+                  <Link
+                    href={link}
+                    key={name}
+                    className="transition-all ease-in-out duration-200 hover:underline"
+                  >
                     {name}
                   </Link>
                 ))}
@@ -70,7 +78,11 @@ function Footer() {
               <h4 className="mb-5 text-[1.5rem]">About</h4>
               <div className="flex flex-col gap-4 font-normal text-[0.875rem]">
                 {FOOTER_LINKS_THREE.map(({ link, name }) => (
-                  <Link href={link} key={name}>
+                  <Link
+                    href={link}
+                    key={name}
+                    className="transition-all ease-in-out duration-200 hover:underline"
+                  >
                     {name}
                   </Link>
                 ))}
