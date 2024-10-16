@@ -13,6 +13,8 @@ function Navbar() {
 
   const [showLoginMenu, setShowLoginMenu] = useState<boolean>(false);
 
+  const [hoverState, setHoverState] = useState("none");
+
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current);
   }, []);
@@ -79,7 +81,7 @@ function Navbar() {
           <div className="flex items-center gap-5 bg-gray-200 px-1 py-1 rounded-full">
             <div className="bg-gray-3 rounded-full p-1 lg:p-2 relative cursor-pointer">
               <IoCartOutline className="text-white" size={" 25px"} />
-              <p className=" absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
+              <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
                 2
               </p>
             </div>
@@ -102,14 +104,30 @@ function Navbar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="absolute flex flex-col items-center self-end top-[6rem] right-[4.5rem] z-[1000] space-y-6 bg-white backdrop-blur-md sm:w-auto sm:self-center py-6  px-8 drop-shadow-md transition-all ease-in duration-300 hover:bg-gray-200 "
+                className="absolute flex flex-col items-center self-end top-[6rem] right-[4.5rem] z-[1000] overflow-hidden bg-white backdrop-blur-md sm:w-auto sm:self-center py-6  px-8 drop-shadow-md  "
+                style={{
+                  background: `linear-gradient(to bottom, 
+          ${hoverState === "signup" ? "rgb(229 231 235)" : "white"} 0%, 
+          ${hoverState === "signup" ? "rgb(229 231 235)" : "white"} 50%, 
+          ${hoverState === "login" ? "rgb(229 231 235)" : "white"} 50%, 
+          ${hoverState === "login" ? "rgb(229 231 235)" : "white"} 100%)`,
+                  transition: "background 0.3s ease-in-out",
+                }}
               >
-                <li>
+                <li
+                  className="w-full text-center py-3 transition-all ease-in duration-500"
+                  onMouseEnter={() => setHoverState("signup")}
+                  onMouseLeave={() => setHoverState("none")}
+                >
                   {" "}
                   <Link href="/signup">Create an account</Link>
                 </li>
 
-                <li>
+                <li
+                  className="w-full text-center py-3 transition-all ease-in duration-300"
+                  onMouseEnter={() => setHoverState("login")}
+                  onMouseLeave={() => setHoverState("none")}
+                >
                   <Link href="/login">Log in</Link>{" "}
                 </li>
               </motion.ul>
@@ -117,7 +135,7 @@ function Navbar() {
             S
           </AnimatePresence>
 
-          {/* TODO: HAMBURGER ICON and add the "OPEN"  class dynamically.*/}
+          {/* TODO: HAMBURGER ICON and add the "OPEN" class dynamically.*/}
           {/* FIXME: WORKS */}
           <button
             onClick={toggleMobileMenu}
