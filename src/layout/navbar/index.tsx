@@ -16,7 +16,7 @@ function Navbar() {
   const MENU_LINKS = [
     { name: "Home", link: "/" },
     { name: "Shop", link: "/shop" },
-    { name: "About Us", link: "/about_us" },
+    { name: "About_Us", link: "/about_us" },
     { name: "Contact Us", link: "/contact_us" },
   ];
 
@@ -29,9 +29,9 @@ function Navbar() {
               <Link
                 href={link}
                 key={link}
-                className={`${
-                  pathname === link && "text-secondary font-medium"
-                } md:text-[0.775rem] lg:text-[1.125rem] font-medium font-sans transition-all ease-in-out duration-300 text-primary hover:text-secondary`}
+                className={`md:text-[0.775rem] lg:text-[1.125rem] font-medium font-sans transition-all ease-in-out duration-300 text-primary hover:text-secondary  ${
+                  pathname === link && "text-secondary font-medium "
+                } `}
               >
                 {name}
               </Link>
