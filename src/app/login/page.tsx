@@ -39,7 +39,11 @@ const Login = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       const user = userCredential.user;
 
       // Check if email is verified
@@ -130,17 +134,19 @@ const Login = () => {
       </section>
 
       <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full md:w-1/2">
-        <Image
-          src={`/NOURIFY.svg`}
-          alt="Nourify logo"
-          width={128}
-          height={40}
-        />
+        <Link href={"/"}>
+          <Image
+            src={`/NOURIFY.svg`}
+            alt="Nourify logo"
+            width={128}
+            height={40}
+          />
+        </Link>
         <div className="flex flex-col w-full gap-3">
-          <Typography.h2 className="!text-3xl !text-primary/90">
-            Log into your account
+          <Typography.h2 className="!text-3xl !text-primary-2/90 !font-bold">
+            Log into your accounts
           </Typography.h2>
-          <Typography.p className="text-primary/70 text-base ">
+          <Typography.p className="text-primary-2/70 text-base font-medium">
             Don't have an account ?{" "}
             <Link href={`/signup`} className="text-secondary underline ">
               Sign Up{" "}
@@ -150,38 +156,38 @@ const Login = () => {
         <div className="flex flex-col gap-5">
           <button
             onClick={handleGoogleSignIn} // Handle Google sign-in
-            className="w-full text-primary/70 flex justify-center gap-2 items-center py-3 bg-gray-1 rounded-[50px]"
+            className="w-full text-primary-2/70 flex justify-center gap-2 items-center py-3 bg-gray-1 hover:bg-gray-2 duration-300 rounded-[50px]"
           >
             <img src="/googleg logo 1.svg" alt="Google Logo" />
             Continue with Google
           </button>
         </div>
-        <div className="flex gap-2 w-full items-center">
-          <hr className="border w-full" />
+        <div className="flex gap-2 w-full items-center ">
+          <hr className="!bg-primary-2/40 w-full" />
           <p>OR</p>
           <hr className="w-full" />
         </div>
-        <form onSubmit={handleLogin} className="flex flex-col s gap-5">
-          <div className="flex flex-col gap-2">
-            <label htmlFor="">Email</label>
-            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2  rounded-[50px] py-3.5 ">
-              <span className="bg">
+        <form onSubmit={handleLogin} className="flex flex-col gap-5">
+          <div className=" input-container flex flex-col gap-2 ">
+            <label htmlFor="">Email Address</label>
+            <div className=" relative flex justify-start border border-gray-1 items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
+              <span className="bg absolute left-5">
                 <img src="/mail-01.svg" />
               </span>
+
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 placeholder="Enter your email address"
-                className=" placeholder:text-sm text-sm bg-transparent w-full focus:outline-none appearance-none"
-                required
+                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
               />
             </div>
           </div>
           <div className="flex flex-col gap-2">
             <label htmlFor="">Password</label>
-            <div className="relative flex justify-start bg-gray-1 items-center w-full px-5 gap-2 py-3.5 rounded-[50px]">
-              <span className="bg">
+            <div className=" relative flex justify-start  items-center w-full  gap-2  rounded-[50px] h-12 transition-all  ">
+              <span className="bg absolute left-5">
                 <img src="/lock-key.svg" alt="Lock Icon" />
               </span>
               <input
@@ -189,8 +195,7 @@ const Login = () => {
                 placeholder="Enter your password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                className="placeholder:text-sm text-sm w-full bg-transparent focus:outline-none appearance-none"
-                required
+                className=" input-field placeholder:text-sm text-sm  px-12 w-full h-full rounded-[50px] focus:outline-0 appearance-none "
               />
               <span
                 className="absolute right-5 text-[#1e1e1e85] !text-base cursor-pointer"
@@ -204,13 +209,13 @@ const Login = () => {
               </span>
             </div>
           </div>
-          <div className="flex gap-2 items-center text-sm justify-end text-secondary ">
+          <div className="flex gap-2 items-center text-sm justify-end text-secondary font-medium hover:underline hover:underline-offset-1">
             <Link href={``}>Forgot Password?</Link>
           </div>
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full justify-center items-center py-3.5 bg-secondary rounded-[60px] text-white text-base"
+            className="flex w-full justify-center items-center py-3.5 bg-secondary hover:bg-green-dark transition rounded-[60px] text-white "
           >
             {loading ? (
               <TailSpin
