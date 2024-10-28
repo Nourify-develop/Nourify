@@ -144,7 +144,7 @@ const Login = () => {
         </Link>
         <div className="flex flex-col w-full gap-3">
           <Typography.h2 className="!text-3xl !text-primary-2/90 !font-bold">
-            Log into your account
+            Log into your accounts
           </Typography.h2>
           <Typography.p className="text-primary-2/70 text-base font-medium">
             Don't have an account ?{" "}
