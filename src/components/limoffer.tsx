@@ -3,11 +3,11 @@ import React from "react";
 
 const Limoffer = () => {
   return (
-    <div className="md:px-[3em] px-[1em] w-full my-[4em] bg-white">
+    <div className="md:px-[2em] px-[1em] w-full my-[2.5em] bg-white">
       <div className="text-center gap-2 md:text-left flex flex-col md:flex-row bg-gradient-to-r from-gray-900 via-green-700 to-green-600 rounded-3xl justify-between items-center overflow-hidden md:overflow-visible ">
-        <div className="px-[3em] py-4 text-white flex flex-col gap-[0.7em] md:w-[50%]">
+        <div className="pl-[2em] py-4 text-white flex flex-col gap-[0.7em] md:w-[50%]">
           <h3>Limited offer</h3>
-          <h1 className="font-[700] text-[25px] md:text-[20px] lg:text-[35px]  text-wrap">
+          <h1 className="font-[700] text-2xl md:text-[20px] lg:text-4xl">
             Up to 20% off on Groceries and Pastries
           </h1>
           <button className="border border-white rounded-full py-[1em] px-[3em] w-[11em] font-[500] text-[16px] mx-auto md:mx-0">
