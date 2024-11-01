@@ -104,16 +104,20 @@ function Navbar() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.3 }}
-                className="absolute flex flex-col items-start justify-start self-end top-[5rem] rounded-xl right-[4rem] z-[1000] overflow-hidden bg-white backdrop-blur-md sm:w-auto sm:self-center py-2  px-3 drop-shadow-md  "
+                className="absolute flex flex-col items-start justify-start self-end top-[5rem] duration-300 rounded-xl right-[4rem] z-[1000] overflow-hidden bg-white backdrop-blur-md sm:w-auto sm:self-center py-2  px-3 drop-shadow-md  "
                 style={{
                   background: `linear-gradient(to bottom, 
-                  ${hoverState === "signup" ? "rgb(229 231 235)" : "white"} 0%, 
                   ${
-                    hoverState === "signup" ? "rgb(229 231 235)" : "white"
+                    hoverState === "signup" ? "rgb(229 231 235) " : "white"
+                  } 0%, 
+                  ${
+                    hoverState === "signup" ? "rgb(229 231 235) " : "white"
                   } 50%, 
-                  ${hoverState === "login" ? "rgb(229 231 235)" : "white"} 50%, 
                   ${
-                    hoverState === "login" ? "rgb(229 231 235)" : "white"
+                    hoverState === "login" ? "rgb(229 231 235) " : "white"
+                  } 50%, 
+                  ${
+                    hoverState === "login" ? "rgb(229 231 235) " : "white"
                   } 100%)`,
                   transition: "background 0.3s ease-in-out",
                 }}
