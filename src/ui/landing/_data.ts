@@ -1,18 +1,22 @@
 export const why_nourify = [
   {
+    id: 1,
     title: "100% Organic",
     text: "We offer a wide range of organic products, ensuring you eat clean and healthy.",
   },
   {
+    id: 2,
     title: "Fast Delivery",
     text: "Get your orders delivered on the same day, keeping them fresh always.",
   },
   {
+    id: 3,
     title: "100% Organic",
     text: "We offer a wide range of organic products, ensuring you eat clean and healthy.",
   },
- 
+
   {
+    id: 4,
     title: "100% Organic",
     text: "We offer a wide range of organic products, ensuring you eat clean and healthy.",
   },
@@ -53,7 +57,7 @@ export const testimonials = [
     star_level: 4,
     text: "I've been using Nourify for a few months now, and I'm impressed by the consistency and quality. Great for people who want to stay healthy!",
     avatar: "/icons/avatar.svg",
-  }
+  },
 ];
 export const reviewsData = [
   {

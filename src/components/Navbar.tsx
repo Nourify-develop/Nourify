@@ -24,10 +24,10 @@ function Navbar() {
 
   const pathname = usePathname();
   const MENU_LINKS = [
-    { name: "Home", link: "/" },
-    { name: "Shop", link: "/shop" },
-    { name: "About Us", link: "/about_us" },
-    { name: "Contact Us", link: "/contact_us" },
+    { name: "Home", link: "/", id: 1 },
+    { name: "Shop", link: "/shop", id: 2 },
+    { name: "About Us", link: "/about_us", id: 3 },
+    { name: "Contact Us", link: "/contact_us", id: 4 },
   ];
 
   const removeLoginMenu = () => {
@@ -43,20 +43,20 @@ function Navbar() {
     >
       <header className="flex lg:max-w-[1250px] lg:mx-auto items-center justify-between h-[6rem] font-sans px-4 sm:px-6 lg:px-8 relative">
         <nav className="hidden md:flex lg:flex">
-          <ul className="flex gap-[3rem] ">
-            {MENU_LINKS.map(({ link, name }) => (
-              <li className="relative">
+          <ul className="flex gap-[2.5rem] xl:gap-[3rem] ">
+            {MENU_LINKS.map((products) => (
+              <li className="relative" key={products.id}>
                 <Link
-                  href={link}
-                  key={link}
+                  href={products.link}
                   className={`${
-                    (link === "/" && pathname === "/") ||
-                    (link !== "/" && pathname.startsWith(link))
+                    (products.link === "/" && pathname === "/") ||
+                    (products.link !== "/" &&
+                      pathname.startsWith(products.link))
                       ? "active"
                       : "!text-gray-7"
                   } md:text-[0.775rem] lg:text-[1.125rem] font-medium font-sans transition-all ease-in-out duration-300 nav_links`}
                 >
-                  {name}
+                  {products.name}
                 </Link>
               </li>
             ))}
@@ -123,7 +123,7 @@ function Navbar() {
                 }}
               >
                 <li
-                  className="w-full text-center py-3 transition-all ease-in duration-500"
+                  className="w-full text- py-1.5 transition-all ease-in duration-500"
                   onMouseEnter={() => setHoverState("signup")}
                   onMouseLeave={() => setHoverState("none")}
                 >
@@ -132,11 +132,11 @@ function Navbar() {
                 </li>
 
                 <li
-                  className="w-full text-center py-3 transition-all ease-in duration-300"
+                  className="w-full text-center py-1.5 transition-all ease-in duration-300"
                   onMouseEnter={() => setHoverState("login")}
                   onMouseLeave={() => setHoverState("none")}
                 >
-                  <Link href="/login">Log in</Link>{" "}
+                  <Link href="/login">Log in to your account</Link>{" "}
                 </li>
               </motion.ul>
             )}
