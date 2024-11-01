@@ -3,15 +3,15 @@ import "./newsletter.css";
 
 const newsletter = () => {
   return (
-    <div className="lg:p-[5em] px-[1em] py-[2em]  w-[92%] rounded-3xl newsletter gap-[1em] text-center  my-[2em] flex flex-col ">
+    <div className="lg:p-[5em] px-[1em] py-[2em]  w-[92%] rounded-3xl newsletter gap-[0.2em] text-center  my-[2em] flex flex-col ">
       <h1 className="lg:text-[46px] text-[25px] font-[700] text-white ">
         SUBSCRIBE TO OUR NEWSLETTER
       </h1>
-      <p className="text-[20px] font-[500] text-[#FFFFFFB2] w-[70%] mx-auto ">
+      <p className="text-[20px] font-[500] text-[#FFFFFFB2] w-[85%] mx-auto ">
         Enjoy the best deals and freshest finds every week. Stay updated with
         the latest grocery offers and more.
       </p>
-      <div className="flex justify-center lg:mt-6 w-[90%] md:w-[50%] lg:w-[50%] mx-auto">
+      <div className="flex justify-center lg:mt-6 w-[90%] md:w-[50%] lg:w-[85%] mx-auto">
         <form className="flex items-center w-full   px-[3px] py-[2px] md:py-[4px] lg:px-[5px]  bg-white  rounded-full z-20">
           <input
             type="email"

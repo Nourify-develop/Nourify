@@ -1,5 +1,14 @@
-import React, { useState, useRef, useEffect, ReactNode, CSSProperties, useCallback, SVGProps } from 'react';
-import { useSwipeable } from 'react-swipeable';
+import React, {
+  useState,
+  useRef,
+  useEffect,
+  ReactNode,
+  CSSProperties,
+  useCallback,
+  SVGProps,
+} from "react";
+import { useSwipeable } from "react-swipeable";
+import Typography from "@/components/typography";
 
 interface SliderProps {
   children: ReactNode[];
@@ -19,7 +28,7 @@ interface SliderProps {
   buttonStyle?: CSSProperties;
   dotClassName?: string;
   dotStyle?: CSSProperties;
-  svgProps?: SVGProps<SVGSVGElement>
+  svgProps?: SVGProps<SVGSVGElement>;
 }
 
 export const Slider: React.FC<SliderProps> = ({
@@ -29,7 +38,7 @@ export const Slider: React.FC<SliderProps> = ({
   slideDuration = 3000,
   highlightActive = false,
   slidesInView = 1,
-  gapsBetween = '0px',
+  gapsBetween = "0px",
   mediaQueries = {},
   stopOnManual = false,
   containerClassName,
@@ -50,7 +59,11 @@ export const Slider: React.FC<SliderProps> = ({
   const containerRef = useRef<HTMLDivElement | null>(null);
 
   const centerSlideIndex = Math.floor(slidesToShow / 2);
-  const slides = [...children.slice(-slidesToShow), ...children, ...children.slice(0, slidesToShow)];
+  const slides = [
+    ...children.slice(-slidesToShow),
+    ...children,
+    ...children.slice(0, slidesToShow),
+  ];
 
   // Handle window resize and media queries
   useEffect(() => {
@@ -68,9 +81,9 @@ export const Slider: React.FC<SliderProps> = ({
     };
 
     updateSlidesToShow();
-    window.addEventListener('resize', updateSlidesToShow);
+    window.addEventListener("resize", updateSlidesToShow);
 
-    return () => window.removeEventListener('resize', updateSlidesToShow);
+    return () => window.removeEventListener("resize", updateSlidesToShow);
   }, [slidesInView, mediaQueries]);
 
   const nextSlide = () => {
@@ -120,13 +133,10 @@ export const Slider: React.FC<SliderProps> = ({
   }, [transitionEnabled]);
 
   // Combine refs for swipe handling
-  const setRefs = useCallback(
-    (node: HTMLDivElement) => {
-      containerRef.current = node;
-      swipeHandlers.ref(node);
-    },
-    []
-  );
+  const setRefs = useCallback((node: HTMLDivElement) => {
+    containerRef.current = node;
+    swipeHandlers.ref(node);
+  }, []);
 
   const swipeHandlers = useSwipeable({
     onSwipedLeft: nextSlide,
@@ -136,16 +146,26 @@ export const Slider: React.FC<SliderProps> = ({
 
   return (
     <div
-      className={`slider ${containerClassName}`}
-      style={{ width: '100%', ...containerStyle }}
+      className={`slider flex flex-col gap-20 ${containerClassName}`}
+      style={{ width: "100%", ...containerStyle }}
       ref={setRefs}
     >
+      <div className="flex justify-between lg:px-6">
+        <Typography.h2 className="uppercase text-gray-4">
+          Testimonial
+        </Typography.h2>
+        <Typography.h3 className="!font-normal text-primary-2/80">
+          Here’s what others have to say about Nourify
+        </Typography.h3>
+      </div>
       <div
         className={`slider-content ${contentClassName}`}
         style={{
-          display: 'flex',
-          transition: transitionEnabled ? 'transform 0.5s ease-in-out' : 'none',
-          transform: `translateX(-${(currentIndex - centerSlideIndex) * (100 / slidesToShow)}%)`,
+          display: "flex",
+          transition: transitionEnabled ? "transform 0.5s ease-in-out" : "none",
+          transform: `translateX(-${
+            (currentIndex - centerSlideIndex) * (100 / slidesToShow)
+          }%)`,
           gap: gapsBetween,
           ...contentStyle,
         }}
@@ -153,12 +173,19 @@ export const Slider: React.FC<SliderProps> = ({
         {slides.map((child, index) => (
           <div
             key={index}
-            className={`slide-item rounded-lg ${highlightActive ? 'transition-transform duration-500 ease-in-out' : ''} ${index === currentIndex ? 'scale-105 brightness-100 shadow-md' : 'scale-95 brightness-65'
-              }`}
+            className={`slide-item rounded-lg ${
+              highlightActive
+                ? "transition-transform duration-500 ease-in-out"
+                : ""
+            } ${
+              index === currentIndex
+                ? "scale-105 brightness-100 shadow-md"
+                : "scale-95 brightness-65"
+            }`}
             style={{
               flex: `0 0 calc(${100 / slidesToShow}% - ${gapsBetween})`,
-              transition: 'opacity 0.5s ease, transform 0.5s ease',
-              transform: index === currentIndex ? 'scale(1.1)' : 'scale(1)',
+              transition: "opacity 0.5s ease, transform 0.5s ease",
+              transform: index === currentIndex ? "scale(1.1)" : "scale(1)",
               opacity: index === currentIndex ? 1 : 0.5,
             }}
           >
@@ -168,17 +195,27 @@ export const Slider: React.FC<SliderProps> = ({
       </div>
 
       {/* Navigation Dots */}
-      <div className="slider-dots" style={{ display: 'flex', justifyContent: 'center', marginTop: '10px' }}>
+      <div
+        className="slider-dots"
+        style={{ display: "flex", justifyContent: "center", marginTop: "10px" }}
+      >
         {children.map((_, index) => (
           <button
             key={index}
-            className={`dot ${dotClassName} ${index === (currentIndex - slidesToShow) % children.length ? 'active' : ''}`}
+            className={`dot ${dotClassName} ${
+              index === (currentIndex - slidesToShow) % children.length
+                ? "active"
+                : ""
+            }`}
             style={{
-              width: '10px',
-              height: '10px',
-              borderRadius: '50%',
-              margin: '0 5px',
-              backgroundColor: index === (currentIndex - slidesToShow) % children.length ? 'green' : 'gray',
+              width: "10px",
+              height: "10px",
+              borderRadius: "50%",
+              margin: "0 5px",
+              backgroundColor:
+                index === (currentIndex - slidesToShow) % children.length
+                  ? "green"
+                  : "gray",
               ...dotStyle,
             }}
             onClick={() => {
@@ -197,8 +234,17 @@ export const Slider: React.FC<SliderProps> = ({
             className={`prev-btn hover:scale-95 transition-all duration-150 ease-in-out ${buttonClassName}`}
             style={buttonStyle}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 16 16" {...svgProps}>
-              <path fill="currentColor" d="M10.354 3.146a.5.5 0 0 1 0 .708L6.207 8l4.147 4.146a.5.5 0 0 1-.708.708l-4.5-4.5a.5.5 0 0 1 0-.708l4.5-4.5a.5.5 0 0 1 .708 0"></path>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.2rem"
+              height="1.2rem"
+              viewBox="0 0 16 16"
+              {...svgProps}
+            >
+              <path
+                fill="currentColor"
+                d="M10.354 3.146a.5.5 0 0 1 0 .708L6.207 8l4.147 4.146a.5.5 0 0 1-.708.708l-4.5-4.5a.5.5 0 0 1 0-.708l4.5-4.5a.5.5 0 0 1 .708 0"
+              ></path>
             </svg>
           </button>
           <button
@@ -206,8 +252,17 @@ export const Slider: React.FC<SliderProps> = ({
             className={`next-btn hover:scale-95 transition-all duration-150 ease-in-out ${buttonClassName}`}
             style={buttonStyle}
           >
-            <svg xmlns="http://www.w3.org/2000/svg" width="1.2rem" height="1.2rem" viewBox="0 0 12 12" {...svgProps}>
-              <path fill="currentColor" d="M4.646 2.146a.5.5 0 0 0 0 .708L7.793 6L4.646 9.146a.5.5 0 1 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"></path>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="1.2rem"
+              height="1.2rem"
+              viewBox="0 0 12 12"
+              {...svgProps}
+            >
+              <path
+                fill="currentColor"
+                d="M4.646 2.146a.5.5 0 0 0 0 .708L7.793 6L4.646 9.146a.5.5 0 1 0 .708.708l3.5-3.5a.5.5 0 0 0 0-.708l-3.5-3.5a.5.5 0 0 0-.708 0"
+              ></path>
             </svg>
           </button>
         </div>
@@ -232,7 +287,7 @@ export const Slider: React.FC<SliderProps> = ({
           gap: 20px;
           margin: 0 0 0 -2em;
         }
-        	.next-btn {
+        .next-btn {
           background: rgb(7, 156, 78);
           color: white;
           /* border: 2px solid white; */
@@ -241,7 +296,7 @@ export const Slider: React.FC<SliderProps> = ({
           border-radius: 9999px;
           border: none;
         }
-        .prev-btn{
+        .prev-btn {
           margin-left: auto;
           background: rgb(213, 231, 222);
           color: rgb(7, 156, 78);

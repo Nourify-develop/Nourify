@@ -1,21 +1,12 @@
+// layout.tsx
 "use client";
-import { Metadata } from "next";
 import "./globals.css";
+import Head from "next/head";
 import Navbar from "../components/Navbar";
 import { usePathname } from "next/navigation";
 import Footer from "@/components/Footer";
-import { Roboto } from "next/font/google";
 import { Toaster } from "sonner";
-
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-});
-
-const metadata: Metadata = {
-  title: "Nourify",
-  description: "Where Healthy Choices Meet Peak Freshness",
-};
+import MetadataComponent from "./Metadata";
 
 export default function RootLayout({
   children,
@@ -28,9 +19,21 @@ export default function RootLayout({
 
   return (
     <html lang="en">
+      <Head>
+        <title>Nourify</title>
+        <meta
+          name="description"
+          content="Where Healthy Choices Meet Peak Freshness"
+        />
+      </Head>
+      <link
+        href="https://fonts.cdnfonts.com/css/sf-pro-display?styles=98774,98773,98770"
+        rel="stylesheet"
+      ></link>
+
       <body>
         {showNavbarFooter && <Navbar />}
-        <main className={` ${roboto.className}`}> {children} </main>
+        <main> {children} </main>
         {showNavbarFooter && <Footer />}
         <Toaster position="top-right" expand={false} richColors />
       </body>

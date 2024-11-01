@@ -29,11 +29,11 @@ function Footer() {
 
   return (
     <footer className="bg-green-dark">
-      <div className="container relative mx-auto">
+      <div className="container relative px-12 xl:mx-auto">
         {/* TODO: div left */}
-        <div className="flex flex-col relative gap-8 md:flex-row text-center md:text-left md:justify-between pt-12 pb-12 pr-[2.5rem] before:absolute before:left-0 before:bottom-0 before:w-full before:h-[1px] before:bg-gradient-to-r from-[#013115] via-white to-[#013115]">
-          <div>
-            <div className="flex justify-center">
+        <div className="flex flex-col relative gap-8 md:flex-row text-center md:text-left md:justify-between pt-12 pb-12  before:absolute before:left-0 before:bottom-0 before:w-full before:h-[1px] before:bg-gradient-to-r from-[#013115] via-white to-[#013115]">
+          <div className="flex flex-col gap-2">
+            <div className="">
               <img
                 src="/images/NOURIFY.png"
                 alt="Nourify Footer Logo"
