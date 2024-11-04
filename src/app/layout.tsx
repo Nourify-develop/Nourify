@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
 import MetadataComponent from "./Metadata";
+import { AuthProvider } from "@/context/AuthContext";
 
 export default function RootLayout({
   children,
@@ -32,10 +33,12 @@ export default function RootLayout({
       ></link>
 
       <body>
-        {showNavbarFooter && <Navbar />}
-        <main> {children} </main>
-        {showNavbarFooter && <Footer />}
-        <Toaster position="top-right" expand={false} richColors />
+        <AuthProvider>
+          {showNavbarFooter && <Navbar />}
+          <main> {children} </main>
+          {showNavbarFooter && <Footer />}
+          <Toaster position="top-right" expand={false} richColors />
+        </AuthProvider>{" "}
       </body>
     </html>
   );

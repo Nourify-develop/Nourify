@@ -6,6 +6,7 @@ import Link from "next/link";
 import Typography from "@/components/typography";
 import Wrapper from "@/layout/wrapper";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
+import { doc, getFirestore, setDoc, getDoc } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import {
@@ -23,7 +24,7 @@ const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
-
+  const db = getFirestore(app);
   // Router and auth initialization
   const router = useRouter();
   const auth = getAuth(app);
@@ -45,35 +46,85 @@ const Login = () => {
         password
       );
       const user = userCredential.user;
-
-      // Check if email is verified
+  
       if (!user.emailVerified) {
-        await auth.signOut(); // Sign out unverified users
+        await auth.signOut();
         toast.error("Please verify your email before logging in.");
         setLoading(false);
         return;
       }
-
-      toast.success("Login successful!");
-
-      // Redirect to the home page after login
-      setTimeout(() => {
-        router.push("/");
-      }, 2000);
+  
+      // Get the Firebase ID token
+      const token = await user.getIdToken();
+  
+      // Fetch user data from Firestore
+      const userDoc = await getDoc(doc(db, "users", user.uid));
+      if (userDoc.exists()) {
+        const userData = userDoc.data();
+  
+        // Add the token to the user data object
+        const userDataWithToken = { ...userData, token };
+  
+        // Store the updated user data with the token in localStorage
+        localStorage.setItem("userData", JSON.stringify(userDataWithToken));
+  
+        toast.success("Login successful!");
+  
+        setTimeout(() => {
+          router.push("/");
+        }, 2000);
+      } else {
+        throw new Error("User data not found.");
+      }
     } catch (error: any) {
-      // Handle specific error messages
       handleError(error);
     } finally {
       setLoading(false);
     }
   };
-
+  
+  
+  
   // Handle login with Google
   const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
     try {
-      await signInWithPopup(auth, googleProvider);
-      toast.success("Login successful!");
-
+      const googleSigninData = await signInWithPopup(auth, provider);
+      const user = googleSigninData.user;
+  
+      // Get the Firebase ID token
+      const token = await user.getIdToken();
+  
+      // Reference to Firestore document
+      const userDocRef = doc(db, "users", user.uid);
+      const userDoc = await getDoc(userDocRef);
+  
+      let userData;
+  
+      if (userDoc.exists()) {
+        // If user data exists in Firestore, get it
+        userData = { ...userDoc.data(), token };
+      } else {
+        // If user data does not exist, prepare new data
+        userData = {
+          firstName: user.displayName?.split(" ")[0] || "",
+          lastName: user.displayName?.split(" ")[1] || "",
+          email: user.email,
+          uid: user.uid,
+          image: user.photoURL,
+          token,
+        };
+        // Optionally save this new data to Firestore
+        await setDoc(userDocRef, userData);
+      }
+  
+      // Save user data to local storage
+      localStorage.setItem("userData", JSON.stringify(userData));
+  
+      // Log user data to the console
+      console.log("User Data:", userData);
+  
+      // Redirect after a timeout
       setTimeout(() => {
         router.push("/");
       }, 2000);
@@ -81,6 +132,8 @@ const Login = () => {
       toast.error("An error occurred while logging in with Google.");
     }
   };
+  
+  
 
   // Handle error messages based on error code
   const handleError = (error: any) => {

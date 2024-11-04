@@ -76,14 +76,31 @@ const SignUp = () => {
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
-      const result = await signInWithPopup(auth, provider);
-      const user = result.user;
-      await setDoc(doc(db, "users", user.uid), {
+      const googleSigninData = await signInWithPopup(auth, provider);
+      const user = googleSigninData.user;
+  
+      // Get the Firebase ID token
+      const token = await user.getIdToken();
+  
+      // Prepare user data for Firestore
+      const userData = {
         firstName: user.displayName?.split(" ")[0] || "",
         lastName: user.displayName?.split(" ")[1] || "",
         email: user.email,
         uid: user.uid,
-      });
+        image: user.photoURL,
+        token, // Include the token in user data
+      };
+  
+      // Save user data to Firestore
+      await setDoc(doc(db, "users", user.uid), userData);
+  
+      // Save user data to local storage
+      localStorage.setItem("userData", JSON.stringify(userData));
+  
+      // Log user data to the console
+      console.log("User Data:", userData);
+      // Redirect after a timeout
       setTimeout(() => {
         router.push("/");
       }, 2000);
@@ -92,6 +109,7 @@ const SignUp = () => {
       handleAuthError(error);
     }
   };
+  
   const handleAuthError = (error: any) => {
     switch (error.code) {
       case "auth/invalid-email":
