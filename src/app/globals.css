@@ -80,7 +80,7 @@ body {
   transform: rotate(-45deg) translateY(6px) translate(-6px);
 }
 
-.input-field:not(:placeholder-shown) {
+.input-field:not(:placeholder-shown) , .input-field_:focus {
   background-color: white;
   border: 1px solid #079c4e;
   transition: all ease-in-out 0.2s;
@@ -90,6 +90,7 @@ body {
   background-color: #f4f4f4;
   transition: all ease-in-out 0.2s;
 }
+
 .transition {
   transition: all ease-in-out 0.2s;
 }
