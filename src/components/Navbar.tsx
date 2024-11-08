@@ -43,7 +43,7 @@ function Navbar() {
     >
       <header className="flex lg:max-w-[1250px] lg:mx-auto items-center justify-between h-[6rem] font-sans px-4 sm:px-6 lg:px-8 relative">
         <nav className="hidden md:flex lg:flex">
-          <ul className="flex gap-[2.5rem] xl:gap-[3rem] ">
+          <ul className="flex gap-4 lg:gap-[2.5rem] xl:gap-[3rem] ">
             {MENU_LINKS.map((products) => (
               <li className="relative" key={products.id}>
                 <Link
