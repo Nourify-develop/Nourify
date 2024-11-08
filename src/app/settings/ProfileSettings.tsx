@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import Input, { Button, TextArea } from "../../../components/ui/input";
+import Input, { Button, TextArea } from "../../components/ui/input";
 import React, { useState } from "react";
 import { FaUser } from "react-icons/fa6";
 
@@ -61,20 +61,20 @@ const ProfileSettings = () => {
             />
             <label
               htmlFor="uploadBtn"
-              className="inline-block select-none cursor-pointer rounded-full py-2 px-8  w-full sm:w-auto bg-green-1 border border-green-1 text-white "
+              className="inline-block select-none  cursor-pointer rounded-full py-2 px-8  w-full sm:w-auto bg-green-1 border border-green-1 text-white duration-300 hover:bg-green-dark hover:border-green-dark "
             >
               Upload new
             </label>
           </div>
           <Button
             text="Delete avatar"
-            border="border-green-1"
-            color="text-green-1"
+            border="border-green-1 hover:border-green-dark"
+            color="text-green-1 d hover:bg-green-dark  hover:text-white "
             onclick={handleImgDelete}
           />
         </div>
       </div>
-      <div className="">
+      <div className=" ">
         <form action="" className=" space-y-10">
           <div className="grid sm:grid-cols-3 gap-5">
             {InputFields.map((input, index) => (
@@ -96,18 +96,18 @@ const ProfileSettings = () => {
           <div className="  w-full flex items-center  justify-between flex-col gap-3 sm:flex-row">
             <Button
               text="Save Changes"
-              border="border-green-1"
+              border="border-green-1 hover:border-green-dark"
               color="text-white"
-              bg="bg-green-1"
+              bg="bg-green-1 hover:bg-green-dark"
             />
-            <div className="flex items-center gap-3 w-full sm:w-auto flex-col sm:flex-row">
+            <div className="flex items-center  gap-3 w-full sm:w-auto flex-col sm:flex-row">
               <Button
                 text="Delete Account"
-                border="border-brown"
+                border="border-brown hover:border-[#702200]"
                 color="text-white"
-                bg="bg-brown"
+                bg="bg-brown hover:bg-[#702200] "
               />
-              <Button text="Log out" border="border-brown" color="text-brown" />
+              <Button text="Log out" border="border-brown hover:border-[#702200] hover:bg-[#702200]" color="text-brown hover:text-white" />
             </div>
           </div>
         </form>
