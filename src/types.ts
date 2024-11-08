@@ -37,3 +37,5 @@ export interface Product {
   limitedOffer: boolean;
   expressDelivery: boolean;
 }
+
+export type Tab = "profile" | "password";

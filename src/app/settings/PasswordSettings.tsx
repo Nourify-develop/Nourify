@@ -1,9 +1,9 @@
 "use client";
 import React, { useState } from "react";
-import Input, { Button } from "../../../components/ui/input";
+import Input, { Button } from "../../components/ui/input";
 import { IoEyeOutline, IoEyeOffOutline } from "react-icons/io5";
 
-const page = () => {
+const PasswordSettings = () => {
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [password, setPassword] = useState("");
   const togglePasswordVisibility = () => {
@@ -125,4 +125,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default PasswordSettings;
