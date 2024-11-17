@@ -143,10 +143,12 @@ const SignUp = () => {
         className="hidden
         h-auto lg:h-auto sm:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
         style={{
-          backgroundImage: "url('/images/bg-1.png')",
+          backgroundImage: "url('/images/bg-1.jpg')",
         }}
       >
-        <Typography.p className="text-white !text-3xl">
+              <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
+
+        <Typography.p className="text-white !text-2xl xl:!text-3xl font-bold">
           Welcome to Nourify, your trusted source for fresh groceries and
           pastries. Creating an account with us is the first step to enjoying a
           seamless shopping experience.
@@ -186,9 +188,9 @@ const SignUp = () => {
           </button>
         </div>
         <div className="flex gap-2 w-full items-center">
-          <hr className=" w-full" />
-          <p>OR</p>
-          <hr className="w-full" />
+          <hr className=" w-full bg-primary-2" />
+          <p className="text-xs text-primary-2/40">OR</p>
+          <hr className="w-full !bg-primary-2/40" />
         </div>
         <form onSubmit={handleSignUp} className="flex flex-col gap-5">
           <div className="flex sm:flex-row flex-col gap-5 w-full">
