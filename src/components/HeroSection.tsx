@@ -2,6 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import Wrapper from "@/layout/wrapper";
 
 const HeroSection: React.FC = () => {
   const slides = [
@@ -55,7 +56,7 @@ const HeroSection: React.FC = () => {
                 className="absolute inset-0 flex max-w-screen-xl items-center justify-center min-w-full h-full bg-cover bg-center"
                 style={{ backgroundImage: slide.backgroundImage }}
               >
-                <div className="relative z-10 flex flex-col gap-6 px-5 lg:px-10 xl:px-20 h-full justify-center items-start">
+                <Wrapper className="relative z-10 flex flex-col gap-6 px-5 lg:px-10 xl:px-20 h-full justify-center items-start">
                   <h1 className="text-5xl lg:text-[70px] leading-[60px] lg:leading-[95px] font-extrabold uppercase">
                     {slide.title.split(" ").map((word, i) =>
                       word === "ORGANIC" || word === "PASTRIES" ? (
@@ -80,7 +81,7 @@ const HeroSection: React.FC = () => {
                   >
                     {slide.buttonText}
                   </button>
-                </div>
+                </Wrapper>
                 <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
               </motion.div>
             )

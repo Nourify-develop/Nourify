@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ProfileSettings from "./ProfileSettings";
 import PasswordSettings from "./PasswordSettings";
 import { Tab } from "@/types";
+import Wrapper from "@/layout/wrapper";
 
 const Page: React.FC = () => {
   const [activeTab, setActiveTab] = useState<Tab>("profile");
@@ -14,8 +15,8 @@ const Page: React.FC = () => {
   const isActive = (tab: Tab) => activeTab === tab;
 
   return (
-    <div>
-      <div className="p-5 sm:px-10">
+    <Wrapper>
+      <div className="p-">
         <h1 className="text-2xl text-primary-2/85 font-bold border-b border-primary-2/40 uppercase py-3 sm:pt-0">
           Account Settings
         </h1>
@@ -39,7 +40,7 @@ const Page: React.FC = () => {
 
         {activeTab === "profile" ? <ProfileSettings /> : <PasswordSettings />}
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

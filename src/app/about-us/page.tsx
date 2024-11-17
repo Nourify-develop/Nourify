@@ -1,6 +1,7 @@
 "use client";
 
 import Typography from "@/components/typography";
+import Wrapper from "@/layout/wrapper";
 import React from "react";
 
 function page() {
@@ -11,30 +12,30 @@ function page() {
         style={{ backgroundImage: "url('/images/about-bg.png')" }}
       >
         {/* Overlay for darkening effect */}
-        <div className="absolute  bg-[#00000060] w-full h-full z-10 ">
-          <div className="xl:px-20 px-5 flex flex-col h-full justify-end ">
+        <Wrapper className="absolute  bg-[#00000060] w-full h-full z-10 ">
+          <div className="  flex flex-col h-full justify-end ">
             <h1 className="text-[80px] font-bold text-white uppercase ">
-              about <span className="text-[#FFA500]">us</span>{" "}
+              about <span className="text-yellow">us</span>{" "}
             </h1>
           </div>
-        </div>
+        </Wrapper>
       </section>
 
-      <section className="flex lg:px-16 xl:px-20 px-5 pt-20 pb-8 bg-white h-full items-center">
-        <main className="flex justify-between gap-20 w-full">
+      <Wrapper className="flex l bg-white h-full items-center">
+        <main className="flex justify-between md:gap-20 lg:gap-32 w-full">
           <Typography.h2 className="uppercase !text-[2rem] !font-bold text-nowrap">
             our mission
           </Typography.h2>
           <div className="w-full text-xl space-y-8">
             <div className="text-gray-9">
-              <p>
+              <p className="text-justify">
                 At Nourify, our mission is simple: to offer you the finest
                 groceries and pastries while ensuring unbeatable freshness and
                 quality. We are dedicated to sourcing top-tier products that
                 enrich your meals, helping you enjoy delicious moments every
                 day.
               </p>
-              <p>
+              <p className="text-justify">
                 At Nourify, our mission is simple: to offer you the finest
                 groceries and pastries while ensuring unbeatable freshness and
                 quality. We are dedicated to sourcing top-tier products that
@@ -48,9 +49,9 @@ function page() {
             </button>
           </div>
         </main>
-      </section>
-      <section className="flex xl:px-20 px-5 h-[664px] items-center">
-        <div className="w-[651px] text-[#1e1e1e] space-y-8">
+      </Wrapper>
+      <Wrapper className="flex !py-4 justify-between gap-10 bg-gray-1 items-center">
+        <div className="w-full text-primary-2 flex flex-col gap-6 ">
           <h3 className="capitalize font-medium text-4xl">
             Got Questions? We're Here to Help You Navigate Nourify
           </h3>
@@ -60,23 +61,20 @@ function page() {
             <br />
             —reach out anytime!
           </p>
-          <button className="capitalize text-[#079C4E] border border-[#079C4E] rounded-[65px] px-6 py-3">
+          <button className="capitalize text-secondary mt-2 border w-fit border-secondary rounded-[65px] px-6 py-3">
             contact us
           </button>
         </div>
-        <div>
-          <img src="/images/contactusimage.png" alt="" />
+        <div className="w-full">
+          <img src="/icons/Group 21.svg" alt="" />
         </div>
-      </section>
+      </Wrapper>
 
-      <section className="flex justify-end xl:px-20 px-5 py-4 bg-white">
-        <main className="w-[75px] ">
-          <p className="text-[#079C4E] text-lg font-medium cursor-pointer">
+      <Wrapper className="flex justify-end xl:px-20 px-5 py-4 bg-white">
+          <p className="text-secondary text-lg font-medium underline cursor-pointer">
             Lets chat
           </p>
-          <div className="w-full h-[1px] bg-[#079C4E]" />
-        </main>
-      </section>
+      </Wrapper>
     </>
   );
 }

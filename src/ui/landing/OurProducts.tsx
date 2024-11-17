@@ -6,6 +6,7 @@ import { products } from "../products/_data";
 import { Product } from "../../types";
 import ProductGrid from "../products/ProductGrid"; // Adjust the path
 import { ArrowUpRight } from "lucide-react";
+import Wrapper from "@/layout/wrapper";
 
 const OurProducts: React.FC = () => {
   const router = useRouter();
@@ -43,9 +44,9 @@ const OurProducts: React.FC = () => {
   };
 
   return (
-    <div
+    <Wrapper
       id="our-products"
-      className="bg-white flex flex-col py-10 gap-7 md:gap-10 px-6 md:px-20"
+      className="bg-white flex flex-col py-10 gap-7 "
     >
       <div className="flex justify-between flex-col gap-7 lg:flex-row text-center md:text-left w-full">
         <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
@@ -65,7 +66,7 @@ const OurProducts: React.FC = () => {
           See More <ArrowUpRight/> 
         </button>
       </div>
-    </div>
+    </Wrapper>
   );
 };
 

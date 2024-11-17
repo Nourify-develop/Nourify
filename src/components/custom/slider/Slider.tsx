@@ -150,8 +150,8 @@ export const Slider: React.FC<SliderProps> = ({
       style={{ width: "100%", ...containerStyle }}
       ref={setRefs}
     >
-      <div className="flex justify-between lg:px-6">
-        <Typography.h2 className="uppercase text-gray-4">
+      <div className="flex justify-between">
+        <Typography.h2 className="uppercase text-gray-4 !font-bold">
           Testimonial
         </Typography.h2>
         <Typography.h3 className="!font-normal text-primary-2/80">

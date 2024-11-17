@@ -171,11 +171,11 @@ const Login = () => {
         <div className="absolute w-full h-full bg-gradient-to-b from-transparent to-black/50   top-0 left-0 rounded-xl z-0"></div>
 
         <div className="relative z-10 space-y-4">
-          <Typography.p className="text-white !text-3xl font-extralight">
+          <Typography.p className="text-white !text-3xl font-bold">
             Log in to continue your journey with fresh groceries and delicious
             pastries delivered straight to your door.
           </Typography.p>
-          <Typography.s className="!text-sm text-white/80 pl-2.5 flex justify-start items-center gap-2.5 transition-opacity duration-1000">
+          <Typography.s className="!text-sm !text-white/80 pl-2.5 !font-medium flex justify-start items-center gap-2.5 transition-opacity duration-1000">
             <img src="/general.svg" alt="General Icon" />
             Used by<span className="font-bold">15,000+</span>worldwide
           </Typography.s>
@@ -186,7 +186,7 @@ const Login = () => {
         </div>
       </section>
 
-      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full md:w-1/2">
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full md:w-1/2">
         <Link href={"/"}>
           <Image
             src={`/NOURIFY.svg`}
@@ -197,7 +197,7 @@ const Login = () => {
         </Link>
         <div className="flex flex-col w-full gap-3">
           <Typography.h2 className="!text-3xl !text-primary-2/90 !font-bold">
-            Log into your accounts
+            Log into your account
           </Typography.h2>
           <Typography.p className="text-primary-2/70 text-base font-medium">
             Don't have an account ?{" "}
@@ -217,8 +217,8 @@ const Login = () => {
         </div>
         <div className="flex gap-2 w-full items-center ">
           <hr className="!bg-primary-2/40 w-full" />
-          <p>OR</p>
-          <hr className="w-full" />
+          <p className="text-xs">OR</p>
+          <hr className="w-full !bg-primary-2/40" />
         </div>
         <form onSubmit={handleLogin} className="flex flex-col gap-5">
           <div className=" input-container flex flex-col gap-2 ">
