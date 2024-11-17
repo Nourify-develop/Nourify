@@ -141,12 +141,11 @@ const SignUp = () => {
     <Wrapper className="flex w-full !h-screen lg:h-full  !p-2 gap-6 bg-white">
       <section
         className="hidden
-        h-auto lg:h-auto sm:flex flex-col gap-4 rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
+        h-auto lg:h-auto sm:flex flex-col gap-4 font-sans rounded-xl justify-end w-1/2 bg-cover bg-center p-7 relative"
         style={{
           backgroundImage: "url('/images/bg-1.jpg')",
         }}
       >
-              <div className="absolute inset-0 bg-black opacity-40 z-0"></div>
 
         <Typography.p className="text-white !text-2xl xl:!text-3xl font-bold">
           Welcome to Nourify, your trusted source for fresh groceries and
@@ -155,8 +154,9 @@ const SignUp = () => {
         </Typography.p>
         <Typography.s className="!text-sm text-white/80 pl-2.5 flex justify-start items-center gap-2.5 transition-opacity duration-1000">
           <img src="/general.svg" alt="General Icon" />
-          Used by 15,000+ worldwide
+          Used by <span className="font-bold">15,000+</span> worldwide
         </Typography.s>
+        
       </section>
       <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full md:w-1/2">
         <Link href={`/`}>
@@ -171,7 +171,7 @@ const SignUp = () => {
           <Typography.h2 className="!text-3xl !text-primary-2/90 !font-bold">
             Create an account
           </Typography.h2>
-          <Typography.p className="text-primary-2/70 text-base font-medium ">
+          <Typography.p className="!text-primary-2/70 !text-base font-medium ">
             Already have an account ?{" "}
             <Link href={`/login`} className="text-secondary underline ">
               Log in{" "}
@@ -295,6 +295,7 @@ const SignUp = () => {
           </button>
         </form>
       </section>
+      
     </Wrapper>
   );
 };

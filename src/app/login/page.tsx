@@ -175,7 +175,7 @@ const Login = () => {
             Log in to continue your journey with fresh groceries and delicious
             pastries delivered straight to your door.
           </Typography.p>
-          <Typography.s className="!text-sm text-white/80 pl-2.5 !font-medium flex justify-start items-center gap-2.5 transition-opacity duration-1000">
+          <Typography.s className="!text-sm !text-white/80 pl-2.5 !font-medium flex justify-start items-center gap-2.5 transition-opacity duration-1000">
             <img src="/general.svg" alt="General Icon" />
             Used by<span className="font-bold">15,000+</span>worldwide
           </Typography.s>
@@ -186,7 +186,7 @@ const Login = () => {
         </div>
       </section>
 
-      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-10 w-full md:w-1/2">
+      <section className="p-5 lg:p-10 pb-32 flex flex-col h-full gap-5 md:gap-6 w-full md:w-1/2">
         <Link href={"/"}>
           <Image
             src={`/NOURIFY.svg`}

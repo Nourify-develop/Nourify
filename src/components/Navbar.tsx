@@ -27,7 +27,7 @@ function Navbar() {
   const MENU_LINKS = [
     { name: "Home", link: "/", id: 1 },
     { name: "Shop", link: "/shop", id: 2 },
-    { name: "About Us", link: "/about_us", id: 3 },
+    { name: "About Us", link: "/about-us", id: 3 },
     { name: "Contact Us", link: "/contact_us", id: 4 },
   ];
 
