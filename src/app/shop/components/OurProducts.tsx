@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Limoffer from "@/components/limoffer";
+import Limoffer from "@/ui/landing/limoffer";
 import Wrapper from "@/layout/wrapper";
 
 const OurProducts: React.FC = () => {
