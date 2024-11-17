@@ -10,7 +10,6 @@ const Shop = () => {
       <Suspense>
         <OurProducts />
       </Suspense>
-      <Review />
     </div>
   );
 };

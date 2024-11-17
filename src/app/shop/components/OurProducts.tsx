@@ -31,6 +31,19 @@ const OurProducts: React.FC = () => {
     setCategory(searchParams.get("category"));
   }, [searchParams]);
 
+
+useEffect(() => {
+  const initialCategory = searchParams.get("category") || "groceries";
+  setCategory(initialCategory);
+
+  // Update URL if no category is set initially
+  if (!searchParams.get("category")) {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("category", "groceries");
+    window.history.pushState(null, "", `?${params.toString()}`);
+  }
+}, [searchParams]);
+
   // Filter products based on search, category, price, size, limited offer, and express delivery
   const filteredProducts = products.filter((product) => {
     const matchesSearch = product.name
@@ -144,8 +157,8 @@ const OurProducts: React.FC = () => {
 
       <Limoffer />
 
-      <div className="flex justify-between items-center flex-col gap-7 xl:flex-row text-center md:text-left w-full">
-        <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1 text-gray-4">
+      <div className="flex justify-between items-center flex-col gap-7 lg:flex-row text-center md:text-left w-full">
+        <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1 text-primary-2/85">
           our&nbsp;products
         </h1>
         <ul className="flex gap-4 justify-between items-center md:text-xs lg:text-sm xl:text-lg font-medium">
@@ -215,7 +228,7 @@ const OurProducts: React.FC = () => {
 
           <li>
             <Select onValueChange={handlePriceChange}>
-              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-xs border-0 lg:text-sm xl:text-lg flex gap-1 font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
                 <SelectValue placeholder="Price" />
               </SelectTrigger>
               <SelectContent>
@@ -236,7 +249,7 @@ const OurProducts: React.FC = () => {
           </li>
           <li>
             <Select onValueChange={handleSizeChange}>
-              <SelectTrigger className="bg-gray-10 w-fit md:text-xs lg:text-sm xl:text-lg font-mediu m h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-xs border-0 lg:text-sm xl:text-lg font-medium h-full text-primary-2 flex gap-1 rounded-[4rem] px-6 py-1.5 text-base">
                 <SelectValue placeholder="Size" />
               </SelectTrigger>
               <SelectContent>
@@ -322,12 +335,12 @@ const OurProducts: React.FC = () => {
         style={{ borderTopWidth: "0.5px", borderTopColor: "#F6F5F7" }}
       >
         {" "}
-        <h1 className="uppercase font-bold text-[2rem] leading-9 pt-[3rem] flex-1 mb-[2.5rem]">
+        <h1 className="uppercase text-primary-2/85 font-bold text-[2rem] leading-9 pt-[3rem] flex-1 mb-[2.5rem]">
           recently viewed
         </h1>
         <ProductGrid products={firstToFourthProducts}></ProductGrid>
       </div>
-      <div className="flex items-center justify-center w-full gap-1">
+      <div className="flex items-center justify-center w-full gap-1 py-4">
         <span className="w-[161px] h-[3px] bg-[#079C4E]"></span>
         <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
         <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
