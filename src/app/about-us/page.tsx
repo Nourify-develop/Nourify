@@ -71,9 +71,9 @@ function page() {
       </Wrapper>
 
       <Wrapper className="flex justify-end xl:px-20 px-5 py-4 bg-white">
-          <p className="text-secondary text-lg font-medium underline cursor-pointer">
-            Lets chat
-          </p>
+        <p className="text-secondary text-lg font-medium underline cursor-pointer">
+          Lets chat
+        </p>
       </Wrapper>
     </>
   );
