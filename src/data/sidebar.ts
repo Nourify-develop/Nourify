@@ -1,57 +1,56 @@
 import {
-  LayoutDashboard,
-  ChevronDown,
-  Heart,
-  Home,
-  LucideProps,
-  Mail,
-  User,
-  Search,
-  SquarePlus,
-} from "lucide-react";
+  Dashboard,
+  Customers,
+  Help,
+  Order,
+  Products,
+  Settings,
+  Transaction,
+} from "../../public/icons";
+
 const sideItems = [
   {
     route: "Overview",
     link: "/admin",
-    icon: LayoutDashboard,
+    icon: Dashboard,
     id: "admin",
   },
   {
     route: "Orders",
     link: "/admin/orders",
-    icon: User,
+    icon: Order,
     id: "orders",
   },
   {
     route: "Transactions",
     link: "/admin/transactions",
-    icon: Home,
+    icon: Transaction,
     id: "transactions",
   },
   {
     route: "Products",
     link: "/admin/products",
-    icon: Mail,
+    icon: Products,
     id: "products",
   },
   {
     route: "Customers",
     link: "/admin/customers",
-    icon: Heart,
+    icon: Customers,
     id: "customers",
   },
   {
     route: "Help",
-    link: '/admin/help',
-    icon: Search,
+    link: "/admin/help",
+    icon: Help,
     id: "help",
   },
   {
     route: "Settings",
-    link: '/admin/settings',
-    icon: Search,
+    link: "/admin/settings",
+    icon: Settings,
     id: "settings",
   },
 ];
 
-export default sideItems
+export default sideItems;
