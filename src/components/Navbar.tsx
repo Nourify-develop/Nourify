@@ -28,7 +28,7 @@ function Navbar() {
     { name: "Home", link: "/", id: 1 },
     { name: "Shop", link: "/shop", id: 2 },
     { name: "About Us", link: "/about-us", id: 3 },
-    { name: "Contact Us", link: "/contact_us", id: 4 },
+    { name: "Contact Us", link: "/contact-us", id: 4 },
   ];
 
   const removeLoginMenu = () => {
@@ -141,7 +141,6 @@ function Navbar() {
                 </li>
               </motion.ul>
             )}
-            
           </AnimatePresence>
 
           {/* TODO: HAMBURGER ICON and add the "OPEN" class dynamically.*/}
