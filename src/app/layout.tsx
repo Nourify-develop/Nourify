@@ -1,44 +1,26 @@
-// layout.tsx
-"use client";
+// app/layout.tsx (Server Component)
 import "./globals.css";
+import { Metadata } from "next";
 import Head from "next/head";
-import Navbar from "../components/Navbar";
-import { usePathname } from "next/navigation";
-import Footer from "@/components/Footer";
-import { Toaster } from "sonner";
-import MetadataComponent from "./Metadata";
-import { AuthProvider } from "@/context/AuthContext";
+import RootClientLayout from "./RootClientLayout ";
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const pathname = usePathname();
-  const noNavbarFooterRoutes = ["/signup", "/login"];
-  const showNavbarFooter = !noNavbarFooterRoutes.includes(pathname);
+export const metadata: Metadata = {
+  title: "Nourify",
+  description: "Where Healthy Choices Meet Peak Freshness",
+};
 
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <Head>
-        <title>Nourify</title>
-        <meta
-          name="description"
-          content="Where Healthy Choices Meet Peak Freshness"
+      <head>
+        
+        <link
+          href="https://fonts.cdnfonts.com/css/sf-pro-display?styles=98774,98773,98770"
+          rel="stylesheet"
         />
-      </Head>
-      <link
-        href="https://fonts.cdnfonts.com/css/sf-pro-display?styles=98774,98773,98770"
-        rel="stylesheet"
-      ></link>
-
+      </head>
       <body>
-        <AuthProvider>
-          {showNavbarFooter && <Navbar />}
-          <main> {children} </main>
-          {showNavbarFooter && <Footer />}
-          <Toaster position="top-right" expand={false} richColors />
-        </AuthProvider>{" "}
+        <RootClientLayout>{children}</RootClientLayout>
       </body>
     </html>
   );

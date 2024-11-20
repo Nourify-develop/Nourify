@@ -42,6 +42,7 @@ const config: Config = {
           "9": "#626262",
           "10": "#F5F5F5",
           "11": "#F2F1F6",
+          light: "#EBEBEB",
         },
         brown: "#9C3407",
         green: {
