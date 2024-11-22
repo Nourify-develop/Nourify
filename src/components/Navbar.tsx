@@ -80,12 +80,12 @@ function Navbar() {
             />
           </div>
           <div className="flex items-center gap-5 bg-gray-200 px-1 sm:ml-3 lg:ml-[1rem] py-1 rounded-full">
-            <div className="bg-gray-3 rounded-full p-1 lg:p-2 relative cursor-pointer">
+            <Link href={'/cart'} className="bg-gray-3 rounded-full p-1 lg:p-2 relative cursor-pointer">
               <IoCartOutline className="text-white" size={" 25px"} />
               <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
                 2
               </p>
-            </div>
+            </Link>
 
             <div
               onClick={toggleLoginMenu}

@@ -100,7 +100,7 @@ const ProfileSettings = () => {
               color="text-white"
               bg="bg-green-1 hover:bg-green-dark"
             />
-            <div className="flex items-center  gap-3 w-full sm:w-auto flex-col sm:flex-row">
+            <div className="flex items-center  gap-3 w-full sm:w-auto flex-row">
               <Button
                 text="Delete Account"
                 border="border-brown hover:border-[#702200]"
