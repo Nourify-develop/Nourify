@@ -15,6 +15,7 @@ import {
 import Limoffer from "@/ui/landing/limoffer";
 import Wrapper from "@/layout/wrapper";
 import { ChevronUp } from "lucide-react";
+import { Pagination } from "./ui/pagination";
 
 const OurProducts: React.FC = () => {
   const searchParams = useSearchParams();
@@ -91,16 +92,8 @@ const OurProducts: React.FC = () => {
     indexOfLastProduct
   );
 
-  // CREATING DUMMY CONSTANTS FOR NOW, WILL REMOVE LATER ONCE FUNCTIONALITY IS APPLIED
-  const indexOfFourthProduct = indexOfFirstProduct + 4;
-  const firstToFourthProducts = filteredProducts.slice(
-    indexOfFirstProduct,
-    indexOfFourthProduct
-  );
-  // const shuffledProducts = [...filteredProducts].sort(() => Math.random() - 0.5);
-  // const firstToFourthProducts = shuffledProducts.slice(0, 4);
-  // END OF DUMMY CONSTANTS
-  // /////////////
+
+ 
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
@@ -328,50 +321,13 @@ const OurProducts: React.FC = () => {
       </div>
       {/* Use ProductGrid component and pass filteredProducts */}
       <ProductGrid products={currentProducts} />
-      <div className="flex items-center justify-center mt-4">
-        <button
-          onClick={() => handlePageChange(currentPage - 1)}
-          disabled={currentPage === 1}
-          className="px-6 py-3 text-base  text-white  rounded-[3.125rem] disabled:bg-opacity-30 bg-green-1 "
-        >
-          Previous
-        </button>
-        {[...Array(totalPages)].map((_, index) => (
-          <button
-            key={index + 1}
-            onClick={() => handlePageChange(index + 1)}
-            className={`px-6 py-3 text-base mx-5 rounded-[3.125rem]   ${
-              currentPage === index + 1 ? "bg-brown-1 text-white " : ""
-            }`}
-          >
-            {index + 1}
-          </button>
-        ))}
-        <button
-          onClick={() => handlePageChange(currentPage + 1)}
-          disabled={currentPage === totalPages}
-          className="px-6 py-3 text-base  text-white  rounded-[3.125rem] disabled:opacity-30 bg-green-1  "
-        >
-          Next
-        </button>
-      </div>
+      <Pagination
+        totalPages={totalPages}
+        currentPage={currentPage}
+        onPageChange={handlePageChange}
+      />
 
-      {/* RECENTLY VIEWED  */}
-      <div
-        className="border-t"
-        style={{ borderTopWidth: "0.5px", borderTopColor: "#F6F5F7" }}
-      >
-        {" "}
-        <h1 className="uppercase text-primary-2/85 font-bold text-[2rem] leading-9 pt-[3rem] flex-1 mb-[2.5rem]">
-          recently viewed
-        </h1>
-        <ProductGrid products={firstToFourthProducts}></ProductGrid>
-      </div>
-      <div className="flex items-center justify-center w-full gap-1 py-4">
-        <span className="w-[161px] h-[3px] bg-[#079C4E]"></span>
-        <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
-        <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
-      </div>
+    
     </Wrapper>
   );
 };
