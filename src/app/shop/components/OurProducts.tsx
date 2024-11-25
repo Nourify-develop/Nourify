@@ -33,7 +33,7 @@ const OurProducts: React.FC = () => {
   const toggleRotation = () => {
     setIsRotated((prev) => !prev);
   };
-  const productsPerPage = 10; // Number of products per page
+  const productsPerPage = 1; // Number of products per page
 
   useEffect(() => {
     setCategory(searchParams.get("category"));
@@ -332,7 +332,7 @@ const OurProducts: React.FC = () => {
         <button
           onClick={() => handlePageChange(currentPage - 1)}
           disabled={currentPage === 1}
-          className="px-6 py-1.5 text-base border text-white  rounded-[3.125rem] disabled:opacity-50 bg-green-1 disabled:bg-white disabled:text-black"
+          className="px-6 py-3 text-base  text-white  rounded-[3.125rem] disabled:bg-opacity-30 bg-green-1 "
         >
           Previous
         </button>
@@ -340,8 +340,8 @@ const OurProducts: React.FC = () => {
           <button
             key={index + 1}
             onClick={() => handlePageChange(index + 1)}
-            className={`px-6 py-1.5 text-base mx-5 rounded-[3.125rem] border  ${
-              currentPage === index + 1 ? "bg-gray-500 text-white " : ""
+            className={`px-6 py-3 text-base mx-5 rounded-[3.125rem]   ${
+              currentPage === index + 1 ? "bg-brown-1 text-white " : ""
             }`}
           >
             {index + 1}
@@ -350,7 +350,7 @@ const OurProducts: React.FC = () => {
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
-          className="px-6 py-1.5 text-base border text-white  rounded-[3.125rem] disabled:opacity-50 bg-green-1 disabled:bg-white disabled:text-black"
+          className="px-6 py-3 text-base  text-white  rounded-[3.125rem] disabled:opacity-30 bg-green-1  "
         >
           Next
         </button>
