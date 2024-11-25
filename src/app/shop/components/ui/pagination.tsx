@@ -66,7 +66,7 @@ export const Pagination: React.FC<{
       <button
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="px-3 md:px-4 lg:px-6 py-2 md:py-3 text-sm lg:text-base  text-white  rounded-[3.125rem] disabled:opacity-30 bg-green-1"
+        className="px-3 md:px-4 lg:px-6 py-2 md:py-3 text-sm lg:text-base  text-white  rounded-[3.125rem] disabled:opacity-30 bg-green-1 hover:bg-green-1/80"
       >
         Previous
       </button>
@@ -74,7 +74,7 @@ export const Pagination: React.FC<{
       <button
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="px-3 md:px-4 lg:px-6 py-2 md:py-3 text-sm lg:text-base  text-white  rounded-[3.125rem] disabled:opacity-30 bg-green-1"
+        className="px-3 md:px-4 lg:px-6 py-2 md:py-3 text-sm lg:text-base  text-white  rounded-[3.125rem] disabled:opacity-30 bg-green-1 hover:bg-green-1/80"
       >
         Next
       </button>
