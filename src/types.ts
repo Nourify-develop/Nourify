@@ -36,6 +36,23 @@ export interface Product {
   size: string;
   limitedOffer: boolean;
   expressDelivery: boolean;
+  
+}
+export interface AdminProduct {
+  id: number;
+  image: string;
+  name: string;
+  productId: number;
+  category: string;
+  quantity: number;
+  price: number;
+  status: string;
+  
+  
+}
+export interface Column {
+  key: string;
+  header: string;
 }
 
 export type Tab = "profile" | "password";
