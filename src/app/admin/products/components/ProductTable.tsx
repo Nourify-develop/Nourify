@@ -6,7 +6,6 @@ interface ProductTableProps {
   data: Record<string, any>[]; // Array of row data
 }
 
-// Format the price with commas and ₦ symbol
 
 const ProductTable: React.FC<ProductTableProps> = ({ columns, data }) => {
   const [showOptions, setShowOptions] = useState<number | null>(null);
