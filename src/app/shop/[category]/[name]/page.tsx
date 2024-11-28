@@ -11,6 +11,7 @@ import { ArrowRight, Dot, Minus, Plus } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { CaretRightIcon } from "@radix-ui/react-icons"
+import Maylike from "../../components/alsolike"
 
 export default function ProductDisplay() {
   const { category, name } = useParams()
@@ -174,6 +175,8 @@ export default function ProductDisplay() {
           })}
         </aside>
       </section>
+      <Maylike/>
+ 
     </Wrapper>
   )
 }
