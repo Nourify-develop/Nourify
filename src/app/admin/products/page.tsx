@@ -11,7 +11,6 @@ const page = () => {
 
   return (
     <>
-      <ProductTable data={Products} columns={columns} />
 
       {/* modal part */}
       <div>
@@ -26,6 +25,8 @@ const page = () => {
           <AddProducts />
         </Modal>
       </div>
+      <ProductTable data={Products} columns={columns} />
+
     </>
   );
 };
