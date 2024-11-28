@@ -2,19 +2,16 @@
 import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
 import { Button } from "../../components/ui/input";
+import { IoMdArrowDropdown } from "react-icons/io";
 
 interface FormValues {
   name: string;
-  email: string;
-  phoneNumber: string;
   selectValue: string;
   message: string;
 }
 const page = () => {
   const [formValues, setFormValues] = useState<FormValues>({
     name: "",
-    email: "",
-    phoneNumber: "",
     selectValue: "",
     message: "",
   });
@@ -37,8 +34,6 @@ const page = () => {
     console.log("Form submitted with values:", formValues);
     setFormValues({
       name: "",
-      email: "",
-      phoneNumber: "",
       selectValue: "",
       message: "",
     });
@@ -99,19 +94,27 @@ const page = () => {
             <label htmlFor="subject" className="mt-3 inline-block">
               Subject
             </label>
-            <select
-              name="Other"
-              id="Other"
-              aria-placeholder="Other"
-              value={formValues.selectValue}
-              onChange={handleInputChange("selectValue")}
-              className="placeholder:text-sm text-sm text-gray-3 p-4 w-full h-full rounded-[50px] focus:outline-0 bg-gray-1  hover:bg-gray-200 transition-colors ease-in duration-150 "
-            >
-              <option value="" disabled hidden>
-                Other
-              </option>
-              <option value="Other">Other</option>
-            </select>
+            <div className="relative w-full">
+              <select
+                name="Other"
+                id="Other"
+                aria-placeholder="Other"
+                value={formValues.selectValue}
+                onChange={handleInputChange("selectValue")}
+                className="placeholder:text-sm text-sm text-gray-3 p-4 w-full h-full rounded-[50px] appearance-none focus:outline-0 bg-gray-1  hover:bg-gray-200 transition-colors ease-in duration-150 "
+              >
+                <option value="" disabled hidden>
+                  Other
+                </option>
+                <option value="Other">Other</option>
+                <option value="Option 1">Option 1</option>
+                <option value="Option 2">Option 2</option>
+              </select>
+              <span>
+                <IoMdArrowDropdown className="text-gray-3 absolute right-8 top-4" />
+              </span>
+                        
+            </div>
             <textarea
               name="Message"
               id="Message"
