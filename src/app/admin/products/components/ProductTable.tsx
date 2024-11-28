@@ -1,31 +1,20 @@
+import React from "react";
+import ProductRows from "./ProductRows";
 import { Column } from "@/types";
-import React, { useState } from "react";
 
 interface ProductTableProps {
-  columns: Column[]; // Array of column definitions
-  data: Record<string, any>[]; // Array of row data
+  columns: Column[];
+  data: Record<string, any>[];
 }
 
 const ProductTable: React.FC<ProductTableProps> = ({ columns, data }) => {
-  const [showOptions, setShowOptions] = useState<number | null>(null);
-  const handleOpenOptions = (rowId: number) => {
-    setShowOptions((prevId) => (prevId === rowId ? null : rowId));
-    console.log(showOptions);
-  };
-
-  const formattedPrice = (price: number) =>
-    new Intl.NumberFormat("en-NG", {
-      style: "currency",
-      currency: "NGN",
-      minimumFractionDigits: 0,
-    }).format(price);
-
   return (
     <div className="">
-      <table className=" w-full text-left">
+      <table className="w-full text-left">
         <thead className="text-gray-5">
           <tr>
             {columns.map((col) => (
+
               <th
                 key={col.key}
                 className=" font-normal text-base py-5 text-nowrap"
@@ -36,6 +25,7 @@ const ProductTable: React.FC<ProductTableProps> = ({ columns, data }) => {
           </tr>
         </thead>
         <tbody>
+
           {data.map((row, index) => (
             <tr
               key={row.id || index}
@@ -96,6 +86,8 @@ const ProductTable: React.FC<ProductTableProps> = ({ columns, data }) => {
                 )}
               </td>
             </tr>
+          {data.map((product) => (
+            <ProductRows key={product.id} product={product} />
           ))}
         </tbody>
       </table>

@@ -59,9 +59,11 @@ export const Products = [
     price: 25000,
     status: "In stock",
   },
+
 ];
 export const columns = [
   { key: "image", header: "Product Image" },
+
   { key: "name", header: "Product Name" },
   { key: "category", header: "Category" },
   { key: "quantity", header: "Quantity" },
