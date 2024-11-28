@@ -10,51 +10,100 @@ import { Plus, Search } from "lucide-react";
 const page = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const Filters = ["All", "Groceries", "Pastries", "In stock", "Out of stock"];
-  return (
-    <>
-      {/* modal part */}
-      <div>
-        <div className="flex flex-col gap-11">
-          {" "}
-          <div className="flex w-full justify-between">
-            <div className="relative w-full max-w-sm text-primary-2/70 ">
-              <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
-                <Search />
-              </div>
+  const [searchTerm, setSearchTerm] = useState<string>("");
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedStock, setSelectedStock] = useState<string | null>(null);
 
-              <input
-                type="text"
-                className="w-full border rounded-[50px] pl-12 px-3.5 py-3 placeholder:text-primary-2/70"
-                placeholder="Search for products..."
-              />
+  const handleFilterClick = (filter: string) => {
+    if (filter === "All") {
+      setSelectedCategory(null);
+      setSelectedStock(null);
+    } else if (filter === "Groceries" || filter === "Pastries") {
+      setSelectedCategory((prev) => (prev === filter ? null : filter));
+    } else if (filter === "In stock" || filter === "Out of stock") {
+      setSelectedStock((prev) => (prev === filter ? null : filter));
+    }
+  };
+
+  const filteredProducts = Products.filter((product) => {
+    const matchesSearch =
+      searchTerm === "" ||
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.quantity.toString().includes(searchTerm) ||
+      product.price.toString().includes(searchTerm);
+
+    const matchesCategory =
+      !selectedCategory ||
+      selectedCategory.toLowerCase() === product.category.toLowerCase();
+
+    const matchesStock =
+      !selectedStock ||
+      (selectedStock === "In stock" &&
+        product.status.toLowerCase() === "in stock") ||
+      (selectedStock === "Out of stock" &&
+        product.status.toLowerCase() === "out of stock");
+
+    return matchesSearch && matchesCategory && matchesStock;
+  });
+
+  return (
+    <div className="py-5">
+      <div className="flex flex-col gap-11">
+        {" "}
+        <div className="flex w-full gap-2 justify-between">
+          <div className="relative w-full max-w-sm text-primary-2/70 ">
+            <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+              <Search />
             </div>
 
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="flex gap-2 items-center bg-primary text-white py-2.5 hover:bg-primary/90 px-6 rounded-[4rem] text-base"
-            >
-              <Plus /> New product
-            </button>
+            <input
+              type="text"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className="w-full bg-gray-10 rounded-[50px] pl-12 px-3.5 py-3 placeholder:text-primary-2/70"
+              placeholder="Search for products..."
+            />
           </div>
-          <ul className="flex flex-wrap gap-5 text-lg text-primary-2/70">
-            {Filters.map((filter, index) => (
-              <button key={index} className="px-6 py-3 rounded-[4rem] border">
-                {filter}
-              </button>
-            ))}
-          </ul>
-        </div>
 
-        <Modal
-          isModalOpen={isModalOpen}
-          onClose={() => setIsModalOpen(false)}
-          modalHeader="new product" //dynamic header for the modal
-        >
-          <AddProducts />
-        </Modal>
+          <button
+            onClick={() => setIsModalOpen(true)}
+            className="flex gap-2 items-center bg-primary text-white py-2.5 hover:bg-primary/90 px-6 rounded-[4rem] text-base"
+          >
+            <Plus /> New&nbsp;product
+          </button>
+        </div>
+        <ul className="flex flex-wrap gap-5 text-lg text-primary-2/70">
+          {Filters.map((filter, index) => (
+            <button
+              key={index}
+              onClick={() => handleFilterClick(filter)}
+              className={`px-6 py-3 rounded-[4rem] ${
+                selectedCategory === filter ||
+                selectedStock === filter ||
+                (filter === "All" && !selectedCategory && !selectedStock)
+                  ? "bg-gray-7 text-white border-transparent"
+                  : "bg-gray-10 text-primary-2 border border-gray-light-2"
+              }`}
+            >
+              {filter}
+            </button>
+          ))}
+        </ul>
       </div>
-      <ProductTable data={Products} columns={columns} productsPerPage={1} />
-    </>
+
+      <ProductTable
+        data={filteredProducts}
+        columns={columns}
+        productsPerPage={10}
+      />
+      <Modal
+        isModalOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        modalHeader="new product" //dynamic header for the modal
+      >
+        <AddProducts />
+      </Modal>
+    </div>
   );
 };
 

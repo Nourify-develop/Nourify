@@ -24,14 +24,14 @@ const Modal: React.FC<ModalProps> = ({
     <AnimatePresence>
       {isModalOpen && (
         <motion.div
-          className="fixed inset-0 h-screen w-full flex items-start  justify-center md:p-6 md:justify-end bg-black bg-opacity-50 z-50 transition-all duration-150"
+          className="fixed inset-0 h-screen w-full flex items-center justify-center md:p-6 md:justify-end bg-black bg-opacity-50 z-50 transition-all duration-150"
           onClick={onClose}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className=" flex flex-col gap-6 bg-white py-4 px-4 rounded-lg shadow-lg w-11/12 max-w-sm h-fit "
+            className=" flex flex-col gap-6 bg-white py-4 px-4 rounded-lg shadow-lg w-11/12 max-w-sm h-full"
             variants={slideVariants}
             initial="hidden"
             animate="visible"
