@@ -12,7 +12,7 @@ const AlsoLike = () => {
       {/* YOU MAY ALSO LIKE  */}
       <div
         className="border-t"
-        style={{ borderTopWidth: "0.5px", borderTopColor: "#F6F5F7" }}
+        style={{ borderTopWidth: "0.5px", borderTopColor: "#1E1E1E66" }}
       >
         {" "}
         <h1 className="uppercase text-primary-2/85 font-bold text-[2rem] leading-9 pt-[3rem] flex-1 mb-[2.5rem]">
