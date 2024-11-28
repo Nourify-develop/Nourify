@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
 import { Button } from "../../components/ui/input";
 import { IoMdArrowDropdown } from "react-icons/io";
+import { inputFields } from "./_data";
 
 interface FormValues {
   name: string;
@@ -39,23 +40,6 @@ const page = () => {
     });
   };
 
-  const inputFields = [
-    {
-      name: "name",
-      placeholder: "Name",
-      type: "text",
-    },
-    {
-      name: "email",
-      placeholder: "Email",
-      type: "email",
-    },
-    {
-      name: "phoneNumber",
-      placeholder: "Phone Number",
-      type: "number",
-    },
-  ];
   return (
     <div>
       <section

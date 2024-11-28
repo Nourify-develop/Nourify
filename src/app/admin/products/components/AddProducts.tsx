@@ -1,8 +1,8 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/input";
 import { RiArrowDropDownLine } from "react-icons/ri";
-import { formSelectFields, formInputFields } from "../data";
+import { formSelectFields, formInputFields } from "./_data";
 
 interface FormValues {
   productName: string;
@@ -48,7 +48,6 @@ const AddProducts = () => {
   };
 
   // click 2 upload
-
   const handleDivClick = () => {
     fileInputRef.current?.click();
   };
@@ -86,7 +85,7 @@ const AddProducts = () => {
           onChange={handleImgUpload}
         />
         <img
-          src={!image ? "images/vector.svg" : image}
+          src={!image ? "/images/vector.svg" : image}
           alt="vector-img"
           className="mb-4 w-[44px]"
         />
