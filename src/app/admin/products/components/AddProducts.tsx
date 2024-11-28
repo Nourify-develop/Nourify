@@ -71,7 +71,7 @@ const AddProducts = () => {
   return (
     <>
       <div
-        className="flex flex-col justify-center items-center p-8 bg-gray-1 border border-dashed border-gray-2 rounded-lg cursor-pointer"
+        className="flex flex-col justify-center overflow-scroll items-center p-8 bg-gray-1 border border-dashed border-gray-2 rounded-lg cursor-pointer"
         onClick={handleDivClick}
         onDragOver={preventDefault}
         onDragEnter={preventDefault}
