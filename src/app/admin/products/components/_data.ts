@@ -64,7 +64,7 @@ export const Products = [
 ]
 export   const columns = [
    
-  { key: "image", header: "Product Image" },
+  { key: "image", header: "Product Photo" },
   { key: "name", header: "Product Name" },
   { key: "category", header: "Category" },
   { key: "quantity", header: "Quantity" },
