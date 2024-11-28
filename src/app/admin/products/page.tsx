@@ -9,7 +9,6 @@ const page = () => {
 
   return (
     <>
-   
       <ProductTable data={Products} columns={columns} />
     </>
   );
