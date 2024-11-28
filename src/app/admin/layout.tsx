@@ -1,4 +1,5 @@
-import { Suspense } from "react";
+"use client";
+import { Suspense, useState } from "react";
 
 import UserNavbar from "./components/navbar";
 import SettingsSidebar from "./components/sidebar";
