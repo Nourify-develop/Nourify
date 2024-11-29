@@ -17,7 +17,7 @@ interface FormValues {
   productId?: string;
   image: string;
   name: string;
-  price: number;
+  price: number | undefined; 
   description?: string;
   category?: string;
   size?: string;
@@ -33,7 +33,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
       product || {
         image: "",
         name: "",
-        price: 0,
+        price: undefined,
         status: "In Stock",
         category: "",
         description: "",
@@ -47,18 +47,22 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
     large: "LG",
   };
   const handleInputChange =
-    (field: keyof FormValues) =>
-    (
-      e: React.ChangeEvent<
-        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-      >
-    ) => {
-      setFormValues((prev) => ({
-        ...prev,
-        [field]: e.target.value,
-      }));
-    };
+  (field: keyof FormValues) =>
+  (
+    e: React.ChangeEvent<
+      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+    >
+  ) => {
+    const value =
+      field === "price" && e.target.type === "number"
+        ? Number(e.target.value) || undefined // Convert to number or set undefined for invalid input
+        : e.target.value;
 
+    setFormValues((prev) => ({
+      ...prev,
+      [field]: value,
+    }));
+  };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (product) {
@@ -102,7 +106,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
     setFormValues({
       image: "",
       name: "",
-      price: 0,
+      price: undefined,
       status: "",
       category: "",
       size: "",
@@ -179,7 +183,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
                   </label>
                   <input
                     type={type}
-                    value={formValues[name as keyof FormValues]}
+                    value={formValues[name as keyof FormValues] }
                     onChange={handleInputChange(name as keyof FormValues)}
                     className="bg-gray-100 placeholder:text-sm p-2 w-full h-full rounded-[50px] focus:outline-0 hover:bg-gray-200 transition-colors ease-in duration-150 "
                   />
