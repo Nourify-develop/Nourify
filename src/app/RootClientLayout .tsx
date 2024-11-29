@@ -33,7 +33,7 @@ export default function RootClientLayout({ children }: { children: ReactNode }) 
     const originalPush = router.push;
     router.push = async (...args) => {
       handleStart();
-      await originalPush(...args);
+      originalPush(...args);
       handleComplete();
     };
 
