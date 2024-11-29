@@ -5,7 +5,7 @@ import ProductGrid from "@/ui/products/ProductGrid";
 import React from "react";
 
 const RecentlyViewed = () => {
-    const limitedProducts = products.slice(0, 4);
+  const limitedProducts = products.slice(-4);
   return (
     <Wrapper>
       {" "}
