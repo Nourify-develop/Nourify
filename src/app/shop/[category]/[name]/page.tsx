@@ -72,7 +72,7 @@ export default function ProductDisplay() {
               <Typography.p className="!text-primary-2/70">{product.description}</Typography.p>
 
               <span>
-                <small className={`w-max flex items-center gap-x-1 px-2 py-0.5 rounded-2xl ${product.stock === "In Stock" ? "text-green-1 bg-green-1/30" : "text-red-600 bg-red-600/30"}`}><Dot />{product.stock}</small>
+                <small className={`w-max flex items-center gap-x-1 px-2 py-0.5 rounded-2xl ${product.status === "In Stock" ? "text-green-1 bg-green-1/30" : "text-red-600 bg-red-600/30"}`}><Dot />{product.status}</small>
                 <span></span>
               </span>
 
@@ -113,7 +113,7 @@ export default function ProductDisplay() {
           <nav className="flex itemc justify-between">
             <aside>
               <Typography.h3 className="!text-gray-4">Reviews</Typography.h3>
-              <Typography.s className="!text-gray-5">({product.reviews.length} out of {product.totalReviews})</Typography.s>
+              <Typography.s className="!text-gray-5">({product.reviews?.length} out of {product.totalReviews})</Typography.s>
             </aside>
 
             <Select>
@@ -131,10 +131,10 @@ export default function ProductDisplay() {
           </nav>
 
           <span className="flex flex-col gap-y-6">
-            {product.reviews.map((item) => (
+            {product.reviews?.map((item) => (
               <div className="flex flex-col gap-y-2">
                 <span className="flex items-center gap-x-4">
-                  <Image src={"/icons/avatar.svg"} width={0} height={0} className="w-auto h-auto" alt={item.user} />
+                  <Image src={"/icons/avatar.svg"} width={0} height={0} className="w-auto h-auto" alt={item?.user || ''} />
                   <span>
                     <Typography.h4>{item.user}</Typography.h4>
                     <span>{item.rating}</span>
