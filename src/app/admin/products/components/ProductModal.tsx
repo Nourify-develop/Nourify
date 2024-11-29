@@ -6,6 +6,7 @@ import { formSelectFields, formInputFields } from "./_data";
 import useProducts from "@/hooks/useProducts";
 import { products } from "../../../../ui/products/_data";
 import { Product } from "@/types";
+import { useUniqueImage } from "@/hooks/useUniqueImages";
 
 interface ProductModalProps {
   product?: Product | null;
@@ -17,7 +18,7 @@ interface FormValues {
   productId?: string;
   image: string;
   name: string;
-  price: number | undefined; 
+  price: number | undefined;
   description?: string;
   category?: string;
   size?: string;
@@ -25,6 +26,7 @@ interface FormValues {
 }
 const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
   const { setProducts, updateProductById } = useProducts();
+  const randomImage = useUniqueImage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
   console.log("product", product);
@@ -47,22 +49,22 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
     large: "LG",
   };
   const handleInputChange =
-  (field: keyof FormValues) =>
-  (
-    e: React.ChangeEvent<
-      HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-    >
-  ) => {
-    const value =
-      field === "price" && e.target.type === "number"
-        ? Number(e.target.value) || undefined // Convert to number or set undefined for invalid input
-        : e.target.value;
+    (field: keyof FormValues) =>
+    (
+      e: React.ChangeEvent<
+        HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+      >
+    ) => {
+      const value =
+        field === "price" && e.target.type === "number"
+          ? Number(e.target.value) || undefined // Convert to number or set undefined for invalid input
+          : e.target.value;
 
-    setFormValues((prev) => ({
-      ...prev,
-      [field]: value,
-    }));
-  };
+      setFormValues((prev) => ({
+        ...prev,
+        [field]: value,
+      }));
+    };
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (product) {
@@ -95,7 +97,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
       id: newId,
       productId: newProductId,
       quantity: randomQuantity,
-      image,
+      image: randomImage,
     };
 
     // Update localStorage with the new product
@@ -183,7 +185,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
                   </label>
                   <input
                     type={type}
-                    value={formValues[name as keyof FormValues] }
+                    value={formValues[name as keyof FormValues]}
                     onChange={handleInputChange(name as keyof FormValues)}
                     className="bg-gray-100 placeholder:text-sm p-2 w-full h-full rounded-[50px] focus:outline-0 hover:bg-gray-200 transition-colors ease-in duration-150 "
                   />

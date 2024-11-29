@@ -9,27 +9,26 @@ import { Plus, Search } from "lucide-react";
 import useProducts from "@/hooks/useProducts";
 import { Product } from "@/types";
 import ProductModal from "./components/ProductModal";
-import { useUniqueImages } from "@/hooks/useUniqueImages";
+
 
 const page = () => {
   const { products, setProducts } = useProducts();
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [editingProduct, setEditingProduct] = useState<Product | null>(null);
-
   const Filters = ["All", "Groceries", "Pastries", "In Stock", "Out of stock"];
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedStock, setSelectedStock] = useState<string | null>(null);
-  const uniqueImages = useUniqueImages();
+
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product); // Set product to be edited
     setIsModalOpen(true);
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false);
-    setEditingProduct(null); // Reset after closing modal
-  };
+  // const closeModal = () => {
+  //   setIsModalOpen(false);
+  //   setEditingProduct(null); // Reset after closing modal
+  // };
 
   const handleFilterClick = (filter: string) => {
     if (filter === "All") {
@@ -62,13 +61,9 @@ const page = () => {
 
     return matchesSearch && matchesCategory && matchesStock;
   });
-  // Log unique images whenever they change
-  useEffect(() => {
-    console.log("Unique Images:", uniqueImages);
-  }, [uniqueImages]);
+
   return (
     <div className="py-5">
-      
       <div className="flex flex-col gap-11">
         {" "}
         <div className="flex w-full gap-2 justify-between">
@@ -123,7 +118,10 @@ const page = () => {
         onClose={() => setIsModalOpen(false)}
         modalHeader="new product" //dynamic header for the modal
       >
-        <ProductModal product={editingProduct} closeModal={() => setIsModalOpen(false)}/>
+        <ProductModal
+          product={editingProduct}
+          closeModal={() => setIsModalOpen(false)}
+        />
       </Modal>
     </div>
   );
