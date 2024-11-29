@@ -4,29 +4,40 @@ import { Button } from "@/components/ui/input";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { formSelectFields, formInputFields } from "./_data";
 import useProducts from "@/hooks/useProducts";
+import { products } from "../../../../ui/products/_data";
+import { Product } from "@/types";
 
+
+interface AddProductsProps {
+  product?: Product | null;
+}
 interface FormValues {
   id?: number;
   status?: string;
-  productId?: number;
+  productId?: string;
   image: string;
   name: string;
-  price: string;
+  price: number;
   message?: string;
   category?: string;
   size?: string;
   quantity?: number;
 }
-const AddProducts = () => {
+const AddProducts: React.FC<AddProductsProps> = ({ product }) => {
+  const { setProducts, updateProductById } = useProducts();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
-  const [formValues, setFormValues] = useState<FormValues>({
-    image: "",
-    name: "",
-    price: "",
-    status: "In Stock",
-    category: "",
-    size: "",
+  const [formValues, setFormValues] = useState<FormValues>(() => {
+    return (
+      product || {
+        image: "",
+        name: "",
+        price: 0,
+        status: "In Stock",
+        category: "",
+        size: "",
+      }
+    );
   });
   const sizeMapping: { [key: string]: string } = {
     small: "SM",
@@ -48,7 +59,11 @@ const AddProducts = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
+    if (product) {
+      updateProductById(product.id, formValues); // Update existing product
+    } else {
+      // Add new product logic
+    }
     // Retrieve existing data from localStorage
     const existingData = localStorage.getItem("products");
     const parsedData: FormValues[] = existingData
@@ -85,7 +100,7 @@ const AddProducts = () => {
     setFormValues({
       image: "",
       name: "",
-      price: "",
+      price: 0,
       status: "",
       category: "",
       size: "",

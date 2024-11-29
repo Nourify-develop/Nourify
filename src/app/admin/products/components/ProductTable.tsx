@@ -1,19 +1,21 @@
 "use client";
 import React, { useState } from "react";
 import ProductRows from "./ProductRows";
-import { Column } from "@/types";
+import { Column, Product } from "@/types";
 import { Pagination } from "@/app/shop/components/ui/pagination";
 
 interface ProductTableProps {
   columns: Column[];
-  data: Record<string, any>[];
+  data: Product[];
   productsPerPage: number;
+  onEditProduct: (product: Product) => void; 
 }
 
 const ProductTable: React.FC<ProductTableProps> = ({
   columns,
   data,
   productsPerPage,
+  onEditProduct
 }) => {
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -46,7 +48,7 @@ const ProductTable: React.FC<ProductTableProps> = ({
           </thead>
           <tbody>
             {currentData.map((product) => (
-              <ProductRows key={product.id} product={product} />
+              <ProductRows key={product.id} product={product}   onEdit={onEditProduct} />
             ))}
           </tbody>
         </table>

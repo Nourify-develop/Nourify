@@ -28,7 +28,7 @@ export type ModalProps = {
 };
 
 export interface Product {
-  id?: number;
+  id: number;
   productId?: string;
   name: string;
   description?: string;

@@ -7,25 +7,27 @@ import Modal from "../components/ui/modal";
 import AddProducts from "./components/AddProducts";
 import { Plus, Search } from "lucide-react";
 import useProducts from "@/hooks/useProducts";
-interface Product {
-  id: number;
-  image: string;
-  name: string;
-  productId: number;
-  category: string;
-  quantity: number;
-  price: number;
-  status: string;
-}
+import { Product } from "@/types";
+
 const page = () => {
   const { products, setProducts } = useProducts();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [editingProduct, setEditingProduct] = useState<Product | null>(null);
+
   const Filters = ["All", "Groceries", "Pastries", "In Stock", "Out of stock"];
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedStock, setSelectedStock] = useState<string | null>(null);
  
-
+  const handleEditProduct = (product: Product) => {
+    setEditingProduct(product); // Set product to be edited
+    setIsModalOpen(true);
+  };
+  
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setEditingProduct(null); // Reset after closing modal
+  };
 
   const handleFilterClick = (filter: string) => {
     if (filter === "All") {
@@ -108,13 +110,14 @@ const page = () => {
         data={filteredProducts}
         columns={columns}
         productsPerPage={10}
+        onEditProduct={handleEditProduct}
       />
       <Modal
         isModalOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
         modalHeader="new product" //dynamic header for the modal
       >
-        <AddProducts />
+        <AddProducts product={editingProduct}/>
       </Modal>
     </div>
   );

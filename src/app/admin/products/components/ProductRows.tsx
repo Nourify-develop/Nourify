@@ -1,18 +1,30 @@
-"use client"
+"use client";
+import useProducts from "@/hooks/useProducts";
+import { Product } from "@/types";
 import React, { useState } from "react";
 
 interface ProductRowProps {
-  product: Record<string, any>;
+  product: Product;
+  onEdit: (product: Product) => void;
 }
 
-const ProductRows: React.FC<ProductRowProps> = ({ product }) => {
+const ProductRows: React.FC<ProductRowProps> = ({ product, onEdit }) => {
   const [isOpen, setIsOpen] = useState(false);
-
+  const { deleteProductById } = useProducts();
   // Function to toggle options menu
   const toggleOptions = () => {
     setIsOpen((prev) => !prev);
   };
 
+  const handleDelete = () => {
+    deleteProductById(product.id);
+    setIsOpen(false); // Close the dropdown after deletion
+  };
+
+  const handleEdit = () => {
+    onEdit(product); // Pass product details to open edit modal
+    setIsOpen(false);
+  };
   // Function to format price
   const formattedPrice = (price: number) =>
     new Intl.NumberFormat("en-NG", {
@@ -64,10 +76,16 @@ const ProductRows: React.FC<ProductRowProps> = ({ product }) => {
         {isOpen && (
           <div className="absolute -left-10 z-10">
             <div className="bg-white rounded-[15px] shadow-md w-[100px] h-auto flex flex-col items-start font-medium">
-              <button className="text-primary-2 w-full duration-300 hover:bg-gray-1 p-3 text-left">
+              <button
+                onClick={handleEdit}
+                className="text-primary-2 w-full duration-300 hover:bg-gray-1 p-3 text-left"
+              >
                 Edit
               </button>
-              <button className="text-[#EB4E4E] w-full transition duration-300 hover:bg-gray-1 p-3 text-left">
+              <button
+                onClick={handleDelete}
+                className="text-[#EB4E4E] w-full transition duration-300 hover:bg-gray-1 p-3 text-left"
+              >
                 Delete
               </button>
             </div>
