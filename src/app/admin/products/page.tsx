@@ -1,18 +1,31 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ProductTable from "./components/ProductTable";
-import { columns, Products } from "./components/_data";
+import { columns, products as initialProducts } from "./components/_data";
 import Modal from "../components/ui/modal";
 import AddProducts from "./components/AddProducts";
 import { Plus, Search } from "lucide-react";
-
+import useProducts from "@/hooks/useProducts";
+interface Product {
+  id: number;
+  image: string;
+  name: string;
+  productId: number;
+  category: string;
+  quantity: number;
+  price: number;
+  status: string;
+}
 const page = () => {
+  const { products, setProducts } = useProducts();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const Filters = ["All", "Groceries", "Pastries", "In stock", "Out of stock"];
+  const Filters = ["All", "Groceries", "Pastries", "In Stock", "Out of stock"];
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedStock, setSelectedStock] = useState<string | null>(null);
+ 
+
 
   const handleFilterClick = (filter: string) => {
     if (filter === "All") {
@@ -20,12 +33,12 @@ const page = () => {
       setSelectedStock(null);
     } else if (filter === "Groceries" || filter === "Pastries") {
       setSelectedCategory((prev) => (prev === filter ? null : filter));
-    } else if (filter === "In stock" || filter === "Out of stock") {
+    } else if (filter === "In Stock" || filter === "Out of stock") {
       setSelectedStock((prev) => (prev === filter ? null : filter));
     }
   };
 
-  const filteredProducts = Products.filter((product) => {
+  const filteredProducts = products.filter((product) => {
     const matchesSearch =
       searchTerm === "" ||
       product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -38,7 +51,7 @@ const page = () => {
 
     const matchesStock =
       !selectedStock ||
-      (selectedStock === "In stock" &&
+      (selectedStock === "In Stock" &&
         product.status.toLowerCase() === "in stock") ||
       (selectedStock === "Out of stock" &&
         product.status.toLowerCase() === "out of stock");

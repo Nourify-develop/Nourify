@@ -3,23 +3,32 @@ import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/input";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { formSelectFields, formInputFields } from "./_data";
+import useProducts from "@/hooks/useProducts";
 
 interface FormValues {
-  productName: string;
+  id?: number;
+  status?: string;
+  productId?: number;
+  image: string;
+  name: string;
   price: string;
-  message: string;
-  category: string;
-  size: string;
+  message?: string;
+  category?: string;
+  size?: string;
+  quantity?: number;
 }
 const AddProducts = () => {
+  const { products, setProducts } = useProducts();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
   const [formValues, setFormValues] = useState<FormValues>({
-    productName: "",
+    id: 7,
+    productId: 48575656,
+    image: "",
+    name: "",
     price: "",
-    message: "",
-    category: "",
-    size: "",
+    quantity: 12,
+    status: "In stock",
   });
   const handleInputChange =
     (field: keyof FormValues) =>
@@ -36,13 +45,31 @@ const AddProducts = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted with values:", { ...formValues, image });
+
+    const completeFormValues = {
+      ...formValues,
+      image, // Include Base64 image
+    };
+
+    // Retrieve existing data from "products"
+    const existingData = localStorage.getItem("products");
+    const parsedData = existingData ? JSON.parse(existingData) : []; // Parse or initialize as an empty array
+
+    // Append the new product
+    const updatedData = [...parsedData, completeFormValues];
+
+    // Save back to localStorage
+    localStorage.setItem("products", JSON.stringify(updatedData));
+
+    // Clear the form fields
     setFormValues({
-      productName: "",
+      id: 7,
+      productId: 48575656,
+      image: "",
+      name: "",
       price: "",
-      message: "",
-      category: "",
-      size: "",
+      quantity: 12,
+      status: "In stock",
     });
     setImage("");
   };
@@ -51,8 +78,16 @@ const AddProducts = () => {
   const handleDivClick = () => {
     fileInputRef.current?.click();
   };
-  const handleImgUpload = (e: any) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+  const handleImgUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const base64 = reader.result as string;
+        setImage(base64); // Save Base64 string in state
+      };
+      reader.readAsDataURL(file); // Convert file to Base64
+    }
   };
 
   // drag n drop
@@ -70,33 +105,34 @@ const AddProducts = () => {
 
   return (
     <>
-      <div
-        className="flex flex-col justify-center overflow-scroll items-center p-8 bg-gray-1 border border-dashed border-gray-2 rounded-lg cursor-pointer"
-        onClick={handleDivClick}
-        onDragOver={preventDefault}
-        onDragEnter={preventDefault}
-        onDrop={handleDrop}
-      >
-        <input
-          ref={fileInputRef}
-          type="file"
-          className="hidden"
-          accept="image/*"
-          onChange={handleImgUpload}
-        />
-        <img
-          src={!image ? "/images/vector.svg" : image}
-          alt="vector-img"
-          className="mb-4 w-[44px]"
-        />
-        <p className="font-bold mb-2">
-          <span className="text-green">Click to upload</span> or drag and drop
-        </p>
-        <p className="text-gray-3">JPG, JPEG, PNG less than 1MB</p>
-      </div>
       {/*  */}
-      <div className="w-full border-[0.2px] border-gray-2"></div>
+
       <form onSubmit={handleSubmit}>
+        <div
+          className="flex flex-col justify-center overflow-scroll items-center p-8 bg-gray-1 border border-dashed border-gray-2 rounded-lg cursor-pointer"
+          onClick={handleDivClick}
+          onDragOver={preventDefault}
+          onDragEnter={preventDefault}
+          onDrop={handleDrop}
+        >
+          <input
+            ref={fileInputRef}
+            type="file"
+            className="hidden"
+            accept="image/*"
+            onChange={handleImgUpload}
+          />
+          <img
+            src={!image ? "/images/vector.svg" : image}
+            alt="vector-img"
+            className="mb-4 w-[44px]"
+          />
+          <p className="font-bold mb-2">
+            <span className="text-green">Click to upload</span> or drag and drop
+          </p>
+          <p className="text-gray-3">JPG, JPEG, PNG less than 1MB</p>
+        </div>
+        <div className="w-full border-[0.2px] border-gray-2"></div>
         <div className="flex flex-col gap-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="flex flex-col gap-6">

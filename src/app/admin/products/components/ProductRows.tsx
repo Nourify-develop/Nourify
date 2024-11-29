@@ -45,7 +45,7 @@ const ProductRows: React.FC<ProductRowProps> = ({ product }) => {
       <td className="align-middle py-5">
         <span
           className={`rounded-full py-1 px-3 text-xs text-nowrap font-semibold ${
-            product.status === "In stock"
+            product.status === "In Stock"
               ? "text-[#14CF3D] bg-[#14CF3D]/10"
               : "text-[#EB4E4E] bg-[#EB4E4E]/10"
           }`}
