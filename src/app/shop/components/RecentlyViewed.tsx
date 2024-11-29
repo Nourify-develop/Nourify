@@ -7,7 +7,7 @@ import React from "react";
 
 const RecentlyViewed = () => {
   const { products } = useProducts();
-  const limitedProducts = products.slice(-4);
+  const limitedProducts = products.slice(0, 4);
   return (
     <Wrapper>
       {" "}
