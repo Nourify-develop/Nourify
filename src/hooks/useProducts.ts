@@ -1,16 +1,8 @@
 import { useEffect, useState } from "react";
 import { products as initialProducts } from "../ui/products/_data"; // Import here, not in the Page component
+import { Product } from "@/types";
 
-interface Product {
-  id: number;
-  image: string;
-  name: string;
-  productId: number;
-  category: string;
-  quantity: number;
-  price: number;
-  status: string;
-}
+
 const useProducts = () => {
     const [products, setProducts] = useState<Product[]>(() => {
       const storedProducts = localStorage.getItem("products");

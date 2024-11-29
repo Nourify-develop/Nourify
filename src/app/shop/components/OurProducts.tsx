@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { products } from "@/ui/products/_data";
 import ProductGrid from "@/ui/products/ProductGrid";
 import { IoSearchOutline } from "react-icons/io5";
 import {
@@ -16,8 +15,10 @@ import Limoffer from "@/ui/landing/limoffer";
 import Wrapper from "@/layout/wrapper";
 import { ChevronUp } from "lucide-react";
 import { Pagination } from "./ui/pagination";
+import useProducts from "@/hooks/useProducts";
 
 const OurProducts: React.FC = () => {
+  const { products } = useProducts();
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const [searchTerm, setSearchTerm] = useState("");
@@ -34,7 +35,7 @@ const OurProducts: React.FC = () => {
   const toggleRotation = () => {
     setIsRotated((prev) => !prev);
   };
-  const productsPerPage = 20; // Number of products per page
+  const productsPerPage = 8; // Number of products per page
 
   useEffect(() => {
     setCategory(searchParams.get("category"));
