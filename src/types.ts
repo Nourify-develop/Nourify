@@ -28,24 +28,33 @@ export type ModalProps = {
 };
 
 export interface Product {
+  // Identification
   id: number;
   productId?: string;
+
+  // Basic Details
   name: string;
   description?: string;
   price: number;
   image: string;
   category: string;
+
+  // Attributes
   size?: string;
   quantity: number;
   limitedOffer?: boolean;
   expressDelivery?: boolean;
+
+  // Status
   status: string;
+
+  // Reviews
   rating?: number;
   reviews?: Array<{
     user?: string;
     comment?: string;
     rating?: number;
-  }>; // Correctly defines an array of review objects
+  }>;
   totalReviews?: number;
 }
 

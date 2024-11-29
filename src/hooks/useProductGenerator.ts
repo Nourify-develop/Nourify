@@ -32,14 +32,22 @@ export const useProductGenerator = () => {
   };
 
   const generateProductData = (
-    products: Product[]
-  ): (Product & { id?: number; productId?: string })[] => {
-    return products.map((product, index) => ({
-      ...product,
-      id: index + 1, // Sequential ID
-      productId: generateCategoryBasedProductId(product.category, product.size), // Category-based productId
-      size: product.size || "MD", // Default size to 'MD' if not provided
-    }));
+    products: Omit<Product, "id" | "productId">[] // Exclude `id` and `productId`
+  ): Product[] => {
+    return (
+      products
+        .map((product, index) => ({
+          ...product,
+          id: index + 1, // Sequential ID
+          productId: generateCategoryBasedProductId(
+            product.category,
+            product.size
+          ), // Category-based productId
+          size: product.size || "MD", // Default size to 'MD' if not provided
+        }))
+        // Arrange the products based on a chosen criterion (e.g., ID, category)
+        .sort((a, b) => a.id - b.id) // Sort by ID in ascending order
+    );
   };
 
   return { generateProductData };

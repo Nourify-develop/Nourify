@@ -18,7 +18,7 @@ interface FormValues {
   image: string;
   name: string;
   price: number;
-  message?: string;
+  description?: string;
   category?: string;
   size?: string;
   quantity?: number;
@@ -27,6 +27,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
   const { setProducts, updateProductById } = useProducts();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
+  console.log("product", product);
   const [formValues, setFormValues] = useState<FormValues>(() => {
     return (
       product || {
@@ -35,6 +36,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
         price: 0,
         status: "In Stock",
         category: "",
+        description: "",
         size: "",
       }
     );
@@ -221,8 +223,8 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
             <textarea
               name="/"
               id="/"
-              value={formValues.message}
-              onChange={handleInputChange("message")}
+              value={formValues.description}
+              onChange={handleInputChange("description")}
               className="bg-gray-100 placeholder:text-sm px-4 pt-2 pb-5 w-full h-full rounded-[1rem] focus:outline-0  hover:bg-gray-200 transition-colors ease-in duration-150 "
             ></textarea>
           </div>
