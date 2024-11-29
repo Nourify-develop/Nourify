@@ -25,7 +25,7 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
             width={0}
             height={0}
             alt={product.name}
-            className="w-full h-full cursor-pointer bg-gray-10 p-2 rounded-[8px]"
+            className="w-full h-full cursor-pointer bg-gray-10 px-2 py-6 rounded-[8px]"
             title={product.name}
             aria-label={product.name}
             aria-labelledby={product.name}
