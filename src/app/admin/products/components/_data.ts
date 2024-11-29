@@ -81,7 +81,7 @@ export const formInputFields = [
   {
     label: "Price",
     name: "price",
-    type: "text",
+    type: "number",
   },
 ];
 
