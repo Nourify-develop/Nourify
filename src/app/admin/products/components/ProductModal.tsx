@@ -7,6 +7,7 @@ import useProducts from "@/hooks/useProducts";
 import { products } from "../../../../ui/products/_data";
 import { Product } from "@/types";
 import { useUniqueImage } from "@/hooks/useUniqueImages";
+import { toast } from "sonner";
 
 interface ProductModalProps {
   product?: Product | null;
@@ -80,40 +81,44 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
     e.preventDefault();
     if (product) {
       updateProductById(product.id, formValues); // Update existing product
+      toast.success("Product updated successfully!");
     } else {
-      // Add new product logic
+      // Adding a new product
+      const existingData = localStorage.getItem("products");
+      const parsedData: FormValues[] = existingData
+        ? JSON.parse(existingData)
+        : [];
+
+      // Generate new id
+      const newId =
+        parsedData.length > 0
+          ? Math.max(...parsedData.map((p) => p.id || 0)) + 1
+          : 1;
+
+      // Generate new productId
+      const categoryCode =
+        formValues.category?.slice(0, 3).toUpperCase() || "OTH"; // Default to "OTH" if no category
+      const randomDigits = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
+      const sizeCode =
+        sizeMapping[formValues.size?.toLowerCase() || ""] || "MD"; // Default to "MD" if size is invalid
+      const newProductId = `${categoryCode}-${randomDigits}-${sizeCode}`;
+      const randomQuantity = Math.floor(Math.random() * (10 - 2 + 1) + 2) * 5;
+
+      // Add id and productId to formValues
+      const completeFormValues = {
+        ...formValues,
+        id: newId,
+        productId: newProductId,
+        quantity: randomQuantity,
+        image: randomImage,
+      };
+
+      // Update localStorage with the new product
+      const updatedData = [...parsedData, completeFormValues];
+      localStorage.setItem("products", JSON.stringify(updatedData));
+
+      toast.success("Product added successfully!");
     }
-    // Retrieve existing data from localStorage
-    const existingData = localStorage.getItem("products");
-    const parsedData: FormValues[] = existingData
-      ? JSON.parse(existingData)
-      : [];
-
-    // Generate new id
-    const newId =
-      parsedData.length > 0
-        ? Math.max(...parsedData.map((p) => p.id || 0)) + 1
-        : 1;
-
-    // Generate new productId
-    const categoryCode =
-      formValues.category?.slice(0, 3).toUpperCase() || "OTH"; // Default to "UNK" if no category
-    const randomDigits = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
-    const sizeCode = sizeMapping[formValues.size?.toLowerCase() || ""] || "MD"; // Default to "XX" if size is invalid
-    const newProductId = `${categoryCode}-${randomDigits}-${sizeCode}`;
-    const randomQuantity = Math.floor(Math.random() * (10 - 2 + 1) + 2) * 5;
-    // Add id and productId to formValues
-    const completeFormValues = {
-      ...formValues,
-      id: newId,
-      productId: newProductId,
-      quantity: randomQuantity,
-      image: randomImage,
-    };
-
-    // Update localStorage with the new product
-    const updatedData = [...parsedData, completeFormValues];
-    localStorage.setItem("products", JSON.stringify(updatedData));
 
     // Reset form
     setFormValues({
@@ -126,6 +131,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
     });
     setImage("");
     closeModal();
+
+    setTimeout(() => {
+      window.location.reload(); // Refresh the page after 1 second
+    }, 1000);
   };
   // click 2 upload
   const handleDivClick = () => {
