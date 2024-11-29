@@ -9,6 +9,7 @@ import { Plus, Search } from "lucide-react";
 import useProducts from "@/hooks/useProducts";
 import { Product } from "@/types";
 import ProductModal from "./components/ProductModal";
+import { useUniqueImages } from "@/hooks/useUniqueImages";
 
 const page = () => {
   const { products, setProducts } = useProducts();
@@ -19,7 +20,7 @@ const page = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedStock, setSelectedStock] = useState<string | null>(null);
-
+  const uniqueImages = useUniqueImages();
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product); // Set product to be edited
     setIsModalOpen(true);
@@ -61,9 +62,13 @@ const page = () => {
 
     return matchesSearch && matchesCategory && matchesStock;
   });
-
+  // Log unique images whenever they change
+  useEffect(() => {
+    console.log("Unique Images:", uniqueImages);
+  }, [uniqueImages]);
   return (
     <div className="py-5">
+      
       <div className="flex flex-col gap-11">
         {" "}
         <div className="flex w-full gap-2 justify-between">
