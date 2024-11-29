@@ -1,4 +1,4 @@
-export const Products = [
+export const products = [
   {
     id: 1,
     image: "/cake.svg",
@@ -74,14 +74,14 @@ export const columns = [
 // formfields
 export const formInputFields = [
   {
-    label: "Product Name",
-    name: "productName",
+    label: "Name",
+    name: "name",
     type: "text",
   },
   {
     label: "Price",
     name: "price",
-    type: "text",
+    type: "number",
   },
 ];
 

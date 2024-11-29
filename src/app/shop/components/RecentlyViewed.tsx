@@ -1,11 +1,13 @@
 "use client";
+import useProducts from "@/hooks/useProducts";
 import Wrapper from "@/layout/wrapper";
-import { products } from "@/ui/products/_data";
+
 import ProductGrid from "@/ui/products/ProductGrid";
 import React from "react";
 
 const RecentlyViewed = () => {
-    const limitedProducts = products.slice(0, 4);
+  const { products } = useProducts();
+  const limitedProducts = products.slice(0, 4);
   return (
     <Wrapper>
       {" "}

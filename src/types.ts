@@ -28,16 +28,36 @@ export type ModalProps = {
 };
 
 export interface Product {
+  // Identification
   id: number;
+  productId?: string;
+
+  // Basic Details
   name: string;
+  description?: string;
   price: number;
   image: string;
   category: string;
-  size: string;
-  limitedOffer: boolean;
-  expressDelivery: boolean;
-  
+
+  // Attributes
+  size?: string;
+  quantity: number;
+  limitedOffer?: boolean;
+  expressDelivery?: boolean;
+
+  // Status
+  status: string;
+
+  // Reviews
+  rating?: number;
+  reviews?: Array<{
+    user?: string;
+    comment?: string;
+    rating?: number;
+  }>;
+  totalReviews?: number;
 }
+
 export interface AdminProduct {
   id: number;
   image: string;

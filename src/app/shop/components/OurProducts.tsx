@@ -1,7 +1,6 @@
 "use client";
 import React, { useState, useEffect } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { products } from "@/ui/products/_data";
 import ProductGrid from "@/ui/products/ProductGrid";
 import { IoSearchOutline } from "react-icons/io5";
 import {
@@ -16,8 +15,10 @@ import Limoffer from "@/ui/landing/limoffer";
 import Wrapper from "@/layout/wrapper";
 import { ChevronUp } from "lucide-react";
 import { Pagination } from "./ui/pagination";
+import useProducts from "@/hooks/useProducts";
 
 const OurProducts: React.FC = () => {
+  const { products } = useProducts();
   const searchParams = useSearchParams();
   const pathName = usePathname();
   const [searchTerm, setSearchTerm] = useState("");
@@ -30,11 +31,11 @@ const OurProducts: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState<string | null>(null);
   const [currentPage, setCurrentPage] = useState(1);
   const [isRotated, setIsRotated] = useState(false);
-
+  console.log("products", products);
   const toggleRotation = () => {
     setIsRotated((prev) => !prev);
   };
-  const productsPerPage = 1; // Number of products per page
+  const productsPerPage = 8; // Number of products per page
 
   useEffect(() => {
     setCategory(searchParams.get("category"));
@@ -91,9 +92,6 @@ const OurProducts: React.FC = () => {
     indexOfFirstProduct,
     indexOfLastProduct
   );
-
-
- 
 
   const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
@@ -313,7 +311,7 @@ const OurProducts: React.FC = () => {
           <input
             type="text"
             placeholder="Search for groceries..."
-            className="border rounded-[3.125rem]  h-full p-2 pl-10 bg-gray-1 w-96 placeholder:text-[#1E1E1EB2] text-[#1E1E1EB2] outline-none" // pl-10 adds padding for the icon
+            className=" rounded-[3.125rem]  h-full p-2 pl-10 bg-gray-1 w-96 placeholder:text-[#1E1E1EB2] text-[#1E1E1EB2] outline-none" // pl-10 adds padding for the icon
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
           />
@@ -326,8 +324,6 @@ const OurProducts: React.FC = () => {
         currentPage={currentPage}
         onPageChange={handlePageChange}
       />
-
-    
     </Wrapper>
   );
 };
