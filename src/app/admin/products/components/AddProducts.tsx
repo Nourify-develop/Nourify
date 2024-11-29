@@ -18,11 +18,11 @@ interface FormValues {
   quantity?: number;
 }
 const AddProducts = () => {
-  const { products, setProducts } = useProducts();
+
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
   const [formValues, setFormValues] = useState<FormValues>({
-    id: 7,
+    id: 70,
     productId: 48575656,
     image: "",
     name: "",
@@ -43,37 +43,47 @@ const AddProducts = () => {
       }));
     };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    const completeFormValues = {
-      ...formValues,
-      image, // Include Base64 image
+    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+      e.preventDefault();
+    
+      // Log form values before submission
+      console.log("Form Values Before Submission:", formValues);
+      console.log("Image Base64 Value:", image);
+    
+      const completeFormValues = {
+        ...formValues,
+        image, // Include Base64 image
+      };
+    
+      // Retrieve existing data from "products"
+      const existingData = localStorage.getItem("products");
+      console.log("Existing Data from localStorage:", existingData);
+    
+      const parsedData = existingData ? JSON.parse(existingData) : []; // Parse or initialize as an empty array
+      console.log("Parsed Data:", parsedData);
+    
+      // Append the new product
+      const updatedData = [...parsedData, completeFormValues];
+      console.log("Updated Data (after appending new product):", updatedData);
+    
+      // Save back to localStorage
+      localStorage.setItem("products", JSON.stringify(updatedData));
+      console.log("Data saved to localStorage:", JSON.stringify(updatedData));
+    
+      // Clear the form fields
+      setFormValues({
+        id: 70,
+        productId: 48575656,
+        image: "",
+        name: "",
+        price: "",
+        quantity: 12,
+        status: "In stock",
+      });
+      setImage("");
+      console.log("Form values cleared, reset to initial state.");
     };
-
-    // Retrieve existing data from "products"
-    const existingData = localStorage.getItem("products");
-    const parsedData = existingData ? JSON.parse(existingData) : []; // Parse or initialize as an empty array
-
-    // Append the new product
-    const updatedData = [...parsedData, completeFormValues];
-
-    // Save back to localStorage
-    localStorage.setItem("products", JSON.stringify(updatedData));
-
-    // Clear the form fields
-    setFormValues({
-      id: 7,
-      productId: 48575656,
-      image: "",
-      name: "",
-      price: "",
-      quantity: 12,
-      status: "In stock",
-    });
-    setImage("");
-  };
-
+    
   // click 2 upload
   const handleDivClick = () => {
     fileInputRef.current?.click();
