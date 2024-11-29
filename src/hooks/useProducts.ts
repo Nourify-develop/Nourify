@@ -1,3 +1,4 @@
+"use client"
 import { useEffect, useState } from "react";
 import { products as initialProducts } from "../ui/products/_data"; // Import here, not in the Page component
 import { Product } from "@/types";
