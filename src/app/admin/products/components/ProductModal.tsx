@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/input";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { formSelectFields, formInputFields } from "./_data";
@@ -30,9 +30,20 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
   console.log("product", product);
-  const [formValues, setFormValues] = useState<FormValues>(() => {
-    return (
-      product || {
+  const [formValues, setFormValues] = useState<FormValues>({
+    image: "",
+    name: "",
+    price: undefined,
+    status: "In Stock",
+    category: "",
+    description: "",
+    size: "",
+  });
+  useEffect(() => {
+    if (product) {
+      setFormValues(product); // Populate form values if editing a product
+    } else {
+      setFormValues({
         image: "",
         name: "",
         price: undefined,
@@ -40,9 +51,9 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
         category: "",
         description: "",
         size: "",
-      }
-    );
-  });
+      }); // Reset form values for new product
+    }
+  }, [product]);
   const sizeMapping: { [key: string]: string } = {
     small: "SM",
     medium: "MD",

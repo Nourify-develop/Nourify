@@ -116,11 +116,14 @@ const page = () => {
       <Modal
         isModalOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
-        modalHeader="new product" //dynamic header for the modal
+        modalHeader={editingProduct ? "Edit Product" : "New Product"}
       >
         <ProductModal
           product={editingProduct}
-          closeModal={() => setIsModalOpen(false)}
+          closeModal={() => {
+            setIsModalOpen(false);
+            setEditingProduct(null); // Ensure editingProduct is reset
+          }}
         />
       </Modal>
     </div>
