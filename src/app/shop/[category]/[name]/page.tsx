@@ -164,7 +164,7 @@ export default function ProductDisplay() {
 
           {/* Display Ratings */}
           {Object.entries(ratingCounts).map(([rating, count]) => {
-            const percentage = ((count / totalRatings) * 100).toFixed(1);
+            const percentage = ((count / product?.totalReviews) * 100).toFixed(1);
             return (
               <div className="flex items-center gap-x-4 py-2" key={rating}>
                 <span className="text-gray-8 font-bold ">{rating}.0</span>

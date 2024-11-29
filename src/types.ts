@@ -55,7 +55,7 @@ export interface Product {
     comment?: string;
     rating?: number;
   }>;
-  totalReviews?: number;
+  totalReviews: number;
 }
 
 export interface AdminProduct {
