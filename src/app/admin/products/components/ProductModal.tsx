@@ -7,6 +7,7 @@ import useProducts from "@/hooks/useProducts";
 import { products } from "../../../../ui/products/_data";
 import { Product } from "@/types";
 import { useUniqueImage } from "@/hooks/useUniqueImages";
+import { toast } from "sonner";
 
 interface ProductModalProps {
   product?: Product | null;
@@ -126,6 +127,10 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
     });
     setImage("");
     closeModal();
+    toast.success("Products added successfully");
+    setTimeout(() => {
+      window.location.reload(); // Refresh the page after 1 second
+    }, 1000);
   };
   // click 2 upload
   const handleDivClick = () => {

@@ -2,6 +2,7 @@
 import useProducts from "@/hooks/useProducts";
 import { Product } from "@/types";
 import React, { useState } from "react";
+import { toast } from "sonner";
 
 interface ProductRowProps {
   product: Product;
@@ -19,11 +20,16 @@ const ProductRows: React.FC<ProductRowProps> = ({ product, onEdit }) => {
   const handleDelete = () => {
     deleteProductById(product.id);
     setIsOpen(false); // Close the dropdown after deletion
+    toast.success("Products deleted successfully");
+    setTimeout(() => {
+      window.location.reload(); // Refresh the page after 1 second
+    }, 1000);
   };
 
   const handleEdit = () => {
     onEdit(product); // Pass product details to open edit modal
     setIsOpen(false);
+   
   };
   // Function to format price
   const formattedPrice = (price: number) =>
