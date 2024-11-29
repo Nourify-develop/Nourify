@@ -18,18 +18,21 @@ interface FormValues {
   quantity?: number;
 }
 const AddProducts = () => {
-
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
   const [formValues, setFormValues] = useState<FormValues>({
-    id: 70,
-    productId: 48575656,
     image: "",
     name: "",
     price: "",
-    quantity: 12,
-    status: "In stock",
+    status: "In Stock",
+    category: "",
+    size: "",
   });
+  const sizeMapping: { [key: string]: string } = {
+    small: "SM",
+    medium: "MD",
+    large: "LG",
+  };
   const handleInputChange =
     (field: keyof FormValues) =>
     (
@@ -43,47 +46,52 @@ const AddProducts = () => {
       }));
     };
 
-    const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-      e.preventDefault();
-    
-      // Log form values before submission
-      console.log("Form Values Before Submission:", formValues);
-      console.log("Image Base64 Value:", image);
-    
-      const completeFormValues = {
-        ...formValues,
-        image, // Include Base64 image
-      };
-    
-      // Retrieve existing data from "products"
-      const existingData = localStorage.getItem("products");
-      console.log("Existing Data from localStorage:", existingData);
-    
-      const parsedData = existingData ? JSON.parse(existingData) : []; // Parse or initialize as an empty array
-      console.log("Parsed Data:", parsedData);
-    
-      // Append the new product
-      const updatedData = [...parsedData, completeFormValues];
-      console.log("Updated Data (after appending new product):", updatedData);
-    
-      // Save back to localStorage
-      localStorage.setItem("products", JSON.stringify(updatedData));
-      console.log("Data saved to localStorage:", JSON.stringify(updatedData));
-    
-      // Clear the form fields
-      setFormValues({
-        id: 70,
-        productId: 48575656,
-        image: "",
-        name: "",
-        price: "",
-        quantity: 12,
-        status: "In stock",
-      });
-      setImage("");
-      console.log("Form values cleared, reset to initial state.");
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    // Retrieve existing data from localStorage
+    const existingData = localStorage.getItem("products");
+    const parsedData: FormValues[] = existingData
+      ? JSON.parse(existingData)
+      : [];
+
+    // Generate new id
+    const newId =
+      parsedData.length > 0
+        ? Math.max(...parsedData.map((p) => p.id || 0)) + 1
+        : 1;
+
+    // Generate new productId
+    const categoryCode =
+      formValues.category?.slice(0, 3).toUpperCase() || "OTH"; // Default to "UNK" if no category
+    const randomDigits = Math.floor(100000 + Math.random() * 900000); // 6-digit random number
+    const sizeCode = sizeMapping[formValues.size?.toLowerCase() || ""] || "MD"; // Default to "XX" if size is invalid
+    const newProductId = `${categoryCode}-${randomDigits}-${sizeCode}`;
+    const randomQuantity = Math.floor(Math.random() * (10 - 2 + 1) + 2) * 5;
+    // Add id and productId to formValues
+    const completeFormValues = {
+      ...formValues,
+      id: newId,
+      productId: newProductId,
+      quantity: randomQuantity,
+      image,
     };
-    
+
+    // Update localStorage with the new product
+    const updatedData = [...parsedData, completeFormValues];
+    localStorage.setItem("products", JSON.stringify(updatedData));
+
+    // Reset form
+    setFormValues({
+      image: "",
+      name: "",
+      price: "",
+      status: "",
+      category: "",
+      size: "",
+    });
+    setImage("");
+  };
   // click 2 upload
   const handleDivClick = () => {
     fileInputRef.current?.click();
