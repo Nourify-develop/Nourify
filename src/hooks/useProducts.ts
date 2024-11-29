@@ -8,12 +8,13 @@ const useProducts = () => {
     const storedProducts = localStorage.getItem("products");
     if (storedProducts) {
       try {
-        return JSON.parse(storedProducts);
+        const parsedProducts = JSON.parse(storedProducts);
+        return parsedProducts.reverse();
       } catch (error) {
         console.error("Error parsing products from localStorage:", error);
       }
     }
-    return initialProducts; // Fallback to initialProducts if localStorage is empty or invalid
+    return initialProducts.reverse(); // Fallback to initialProducts if localStorage is empty or invalid
   });
 
   useEffect(() => {

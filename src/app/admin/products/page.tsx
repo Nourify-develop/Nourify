@@ -4,10 +4,11 @@ import React, { useEffect, useState } from "react";
 import ProductTable from "./components/ProductTable";
 import { columns, products as initialProducts } from "./components/_data";
 import Modal from "../components/ui/modal";
-import AddProducts from "./components/AddProducts";
+
 import { Plus, Search } from "lucide-react";
 import useProducts from "@/hooks/useProducts";
 import { Product } from "@/types";
+import ProductModal from "./components/ProductModal";
 
 const page = () => {
   const { products, setProducts } = useProducts();
@@ -18,12 +19,12 @@ const page = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedStock, setSelectedStock] = useState<string | null>(null);
- 
+
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product); // Set product to be edited
     setIsModalOpen(true);
   };
-  
+
   const closeModal = () => {
     setIsModalOpen(false);
     setEditingProduct(null); // Reset after closing modal
@@ -117,7 +118,7 @@ const page = () => {
         onClose={() => setIsModalOpen(false)}
         modalHeader="new product" //dynamic header for the modal
       >
-        <AddProducts product={editingProduct}/>
+        <ProductModal product={editingProduct} closeModal={() => setIsModalOpen(false)}/>
       </Modal>
     </div>
   );

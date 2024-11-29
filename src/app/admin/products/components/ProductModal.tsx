@@ -7,9 +7,9 @@ import useProducts from "@/hooks/useProducts";
 import { products } from "../../../../ui/products/_data";
 import { Product } from "@/types";
 
-
-interface AddProductsProps {
+interface ProductModalProps {
   product?: Product | null;
+  closeModal: () => void;
 }
 interface FormValues {
   id?: number;
@@ -23,7 +23,7 @@ interface FormValues {
   size?: string;
   quantity?: number;
 }
-const AddProducts: React.FC<AddProductsProps> = ({ product }) => {
+const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
   const { setProducts, updateProductById } = useProducts();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
@@ -106,6 +106,7 @@ const AddProducts: React.FC<AddProductsProps> = ({ product }) => {
       size: "",
     });
     setImage("");
+    closeModal();
   };
   // click 2 upload
   const handleDivClick = () => {
@@ -237,4 +238,4 @@ const AddProducts: React.FC<AddProductsProps> = ({ product }) => {
   );
 };
 
-export default AddProducts;
+export default ProductModal;
