@@ -20,7 +20,7 @@ export const useUniqueImage = () => {
     return Array.from(imageSet);
   }, [products]);
 
-  
+
   // Select one random image
   const randomImage = useMemo(() => {
     if (uniqueImages.length > 0) {
@@ -30,5 +30,6 @@ export const useUniqueImage = () => {
     return null; // Return null if there are no images
   }, [uniqueImages]);
 
+  
   return randomImage;
 };
