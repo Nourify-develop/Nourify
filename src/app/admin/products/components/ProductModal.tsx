@@ -187,7 +187,7 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
           <img
             src={!image ? "/images/vector.svg" : image}
             alt="vector-img"
-            className="mb-4 w-[44px]"
+            className="mb-4 w-[70px]"
           />
           <p className="font-bold mb-2">
             <span className="text-green">Click to upload</span> or drag and drop
