@@ -82,7 +82,7 @@ export default function ProductDisplay() {
       <section className="w-full py-6">
         <article className="flex items-center justify-between gap-x-9">
           <Image
-            src={product.image}
+           src={`/images${product.image}`}
             width={0}
             height={0}
             alt={product.name}
