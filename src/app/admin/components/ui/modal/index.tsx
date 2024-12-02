@@ -31,7 +31,7 @@ const Modal: React.FC<ModalProps> = ({
           exit={{ opacity: 0 }}
         >
           <motion.div
-            className=" flex flex-col gap-6 bg-white py-4 px-4 rounded-lg shadow-lg w-11/12 max-w-lg h-full"
+            className=" flex flex-col gap-6 bg-white py-4 px-4 rounded-lg shadow-lg w-11/12 max-w-lg md:w-[50%] h-full"
             variants={slideVariants}
             initial="hidden"
             animate="visible"
