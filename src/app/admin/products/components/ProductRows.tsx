@@ -7,9 +7,16 @@ import { toast } from "sonner";
 interface ProductRowProps {
   product: Product;
   onEdit: (product: Product) => void;
+  setLoading: (loading: boolean) => void;
+  loading: boolean;
 }
 
-const ProductRows: React.FC<ProductRowProps> = ({ product, onEdit }) => {
+const ProductRows: React.FC<ProductRowProps> = ({
+  product,
+  onEdit,
+  loading,
+  setLoading,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
   const { deleteProductById } = useProducts();
   // Function to toggle options menu
@@ -18,18 +25,24 @@ const ProductRows: React.FC<ProductRowProps> = ({ product, onEdit }) => {
   };
 
   const handleDelete = () => {
+    setLoading(true);
+    console.log("loading now", loading)
     deleteProductById(product.id);
     setIsOpen(false); // Close the dropdown after deletion
     toast.success("Products deleted successfully");
     setTimeout(() => {
-      window.location.reload(); // Refresh the page after 1 second
-    }, 1000);
+      setLoading(false);
+      
+    }, 2000);
+  
+    
   };
-
+  // React.useEffect(() => {
+  //   console.log("Loading state changed to:", loading);
+  // }, [loading]);
   const handleEdit = () => {
     onEdit(product); // Pass product details to open edit modal
     setIsOpen(false);
-   
   };
   // Function to format price
   const formattedPrice = (price: number) =>

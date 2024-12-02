@@ -19,7 +19,7 @@ const page = () => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   const [selectedStock, setSelectedStock] = useState<string | null>(null);
-
+  const [loading, setLoading] = useState(true);
   const handleEditProduct = (product: Product) => {
     setEditingProduct(product); // Set product to be edited
     setIsModalOpen(true);
@@ -112,6 +112,8 @@ const page = () => {
         columns={columns}
         productsPerPage={10}
         onEditProduct={handleEditProduct}
+        setLoading={setLoading}
+        loading={loading}
       />
       <Modal
         isModalOpen={isModalOpen}

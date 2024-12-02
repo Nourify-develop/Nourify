@@ -569,17 +569,6 @@ const rawProducts = [
     ],
     totalReviews: 30,
   },
-
-  // {
-  //   image: "/cinnamon-roll.svg",
-  //   name: "Cinnamon Roll",
-  //   category: "pastries",
-  //   size: "medium",
-  //   quantity: 60,
-  //   price: 10000,
-  //   status: "In stock",
-  // },
-
   {
     image: "/danish-pastry.svg",
     name: "Danish Pastry",
