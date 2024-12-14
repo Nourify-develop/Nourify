@@ -7,10 +7,10 @@ const newsletter = () => {
     <Wrapper className="">
       <div className="lg:p-[5em] px-[1em] py-[2em]  rounded-2xl newsletter flex flex-col items-center gap-7">
         <div className="flex flex-col gap-4 text-center lg:w-[760px]">
-          <h1 className="lg:text-[46px] text-2xl sm:text-3xl font-bold text-white ">
+          <h1 className="lg:text-[46px] text-lg sm:text-3xl font-bold text-white ">
             SUBSCRIBE TO OUR NEWSLETTER
           </h1>
-          <p className="text-base lg:text-[20px] font-medium text-white/70 sm:px-10 lg:px-4 text-center ">
+          <p className="text-sm lg:text-[20px] font-medium text-white/70 sm:px-10 lg:px-4 text-center ">
             Enjoy the best deals and freshest finds every week. Stay updated with
             the latest grocery offers and more.
           </p>

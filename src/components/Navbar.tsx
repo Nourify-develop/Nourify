@@ -63,12 +63,16 @@ function Navbar() {
             ))}
           </ul>
         </nav>
-        <Logo />
-        <div className="flex items-center">
-          <div className="absolute md:relative top-full left-0 w-full flex items-center gap-[5px] md:gap-[1px] lg:gap-[3px] bg-[#F4F4F4] md:rounded-full md:ml-4 lg:mr-[1rem]  md:px-1 md:py-1 lg:px-2 lg:py-2 transition-all duration-300 md:w-[100%]">
+        <div className="">
+          <Logo />
+        </div>
+
+        
+        <div className="flex items-center justify-end">
+          <div className="relative w-[60%] sm:w-auto   flex items-center gap-[5px] md:gap-[1px] lg:gap-[3px] bg-[#F4F4F4] rounded-full ml-4 mr-[.5rem]  px-2 py-2 transition-all duration-300 ">
             <span>
               <CiSearch
-                className="text-primary pl-2 md:pl-0"
+                className="text-primary pl-0"
                 size={"20px"}
                 color={"#777"}
               />
@@ -79,8 +83,11 @@ function Navbar() {
               className="text-gray-3 bg-[#F4F4F4] rounded-full outline-none transition-all duration-300 lg:px-2 lg:py-1 w-[90%]"
             />
           </div>
-          <div className="flex items-center gap-5 bg-gray-200 px-1 sm:ml-3 lg:ml-[1rem] py-1 rounded-full">
-            <Link href={'/cart'} className="bg-gray-3 rounded-full p-1 lg:p-2 relative cursor-pointer">
+          <div className="hidden md:flex items-center  gap-5 bg-gray-200 px-1 sm:ml-3 lg:ml-[1rem] py-1 rounded-full">
+            <Link
+              href={"/cart"}
+              className="bg-gray-3 rounded-full p-1 lg:p-2 relative cursor-pointer"
+            >
               <IoCartOutline className="text-white" size={" 25px"} />
               <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
                 2
@@ -145,16 +152,17 @@ function Navbar() {
 
           {/* TODO: HAMBURGER ICON and add the "OPEN" class dynamically.*/}
           {/* FIXME: WORKS */}
-          <button
-            onClick={toggleMobileMenu}
-            className={`${showMobileMenu ? "open" : null}
-            "block hamburger ml-10 mt-[0.5rem] cursor-pointer md:hidden focus:outline-none`}
-          >
-            <span className="hamburger-top"></span>
-            <span className="hamburger-middle"></span>
-            <span className="hamburger-bottom"></span>
-          </button>
-
+          <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 rounded-full flex justify-center items-center">
+            <button
+              onClick={toggleMobileMenu}
+              className={`${showMobileMenu ? "open" : null}
+            "hamburger  cursor-pointer  focus:outline-none flex flex-col gap-1 justify-center items-center`}
+            >
+              <span className="hamburger-top"></span>
+              <span className="hamburger-middle"></span>
+              <span className="hamburger-bottom"></span>
+            </button>
+          </div>
           {/* TODO: MOBILE MENU - make sure the hidden class is applied and then removed dynamically.*/}
           {/* FIXME: WORKS */}
 
