@@ -187,14 +187,14 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
           <img
             src={!image ? "/images/vector.svg" : image}
             alt="vector-img"
-            className="mb-4 w-[44px]"
+            className="mb-4 w-[70px]"
           />
           <p className="font-bold mb-2">
             <span className="text-green">Click to upload</span> or drag and drop
           </p>
           <p className="text-gray-3">JPG, JPEG, PNG less than 1MB</p>
         </div>
-        <div className="w-full border-[0.2px] border-gray-2"></div>
+        <div className="w-full my-10 border-[0.2px] border-gray-2"></div>
         <div className="flex flex-col gap-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div className="flex flex-col gap-6">

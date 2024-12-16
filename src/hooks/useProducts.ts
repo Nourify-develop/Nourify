@@ -4,23 +4,27 @@ import { products as initialProducts } from "../ui/products/_data"; // Import he
 import { Product } from "@/types";
 
 const useProducts = () => {
-  const [products, setProducts] = useState<Product[]>(() => {
-    const storedProducts = localStorage.getItem("products");
-    if (storedProducts) {
-      try {
-        const parsedProducts = JSON.parse(storedProducts);
-        return parsedProducts.reverse();
-      } catch (error) {
-        console.error("Error parsing products from localStorage:", error);
+  const [products, setProducts] = useState<Product[]>(initialProducts.reverse());
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        // This ensures the code runs only in the browser
+        const storedProducts = localStorage.getItem("products");
+        if (storedProducts) {
+          try {
+            const parsedProducts = JSON.parse(storedProducts);
+            setProducts(parsedProducts.reverse());
+          } catch (error) {
+            console.error("Error parsing products from localStorage:", error);
+          }
+        }
       }
-    }
-    return initialProducts.reverse(); // Fallback to initialProducts if localStorage is empty or invalid
-  });
+    }, []);
 
-  useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
-  }, [products]);
-
+    useEffect(() => {
+      if (typeof window !== "undefined") {
+        localStorage.setItem("products", JSON.stringify(products));
+      }
+    }, [products]);
   // Function to get a product by ID
   const getProductById = (id: number): Product | undefined => {
     return products.find((product) => product.id === id);

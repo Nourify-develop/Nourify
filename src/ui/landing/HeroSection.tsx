@@ -41,7 +41,7 @@ function HeroSection() {
       </div>
 
       <div className="relative z-10 flex flex-col gap-6 justify-center px-5 lg:px-10 xl:px-20 h-full items-start text-white">
-        <div className="flex h-fit justify-cente w-full items-center">
+        <div className="flex h-fit justify-center w-full items-center">
           <h1
             className={`text-5xl  lg:text-[80px] lg:w-[1000px] h-fit leading-[60px] lg:leading-[95px] font-extrabold uppercase text-wrap transition-transform  duration-1000 ease-in-out ${
               showSecondImage ? "-translate-x-full " : "translate-x-0"
