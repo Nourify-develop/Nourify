@@ -146,11 +146,11 @@ export const Slider: React.FC<SliderProps> = ({
 
   return (
     <div
-      className={`slider flex relative flex-col gap-8 sm:gap-20 ${containerClassName}`}
+      className={`slider flex relative flex-col gap-8 md:gap-20 ${containerClassName}`}
       style={{ width: "100%", ...containerStyle }}
       ref={setRefs}
     >
-      <div className="flex justify-between sm:flex-row flex-col text-center">
+      <div className="flex justify-between md:flex-row flex-col text-center">
         <Typography.h2 className="uppercase text-gray-4 !font-bold ">
           Testimonials
         </Typography.h2>
@@ -228,7 +228,7 @@ export const Slider: React.FC<SliderProps> = ({
 
       {/* Manual Controls */}
       {manualControls && (
-        <div className="slider-controls flex justify-center mt-0 sm:-mt-16 items-center  ">
+        <div className="slider-controls flex justify-center mt-0 md:-mt-16 items-center  ">
           <button
             onClick={prevSlide}
             className={`prev-btn hover:scale-95 transition-all duration-150 ease-in-out ${buttonClassName}`}

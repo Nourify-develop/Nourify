@@ -57,7 +57,7 @@ const OurProducts: React.FC = () => {
         </p>
       </div>
       <ProductGrid products={visibleProducts} />
-      <div className="flex justify-center sm:justify-end">
+      <div className="flex justify-center md:justify-end">
         <button
           onClick={handleSeeMoreClick}
           className="bg-secondary border border-secondary hover:bg-white hover:text-secondary transition duration-1000 ease-in-out text-white rounded-[65px] font-medium lg:text-lg text-base py-2 px-4 lg:py-3 lg:px-6 flex justify-between items-center"

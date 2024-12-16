@@ -42,7 +42,7 @@ const HeroSection: React.FC = () => {
   };
 
   return (
-    <div className="relative overflow-hidden w-screen h-[80vh] text-center sm:text-left sm:h-[60vh] lg:h-screen xl:h-[90vh] text-white">
+    <div className="relative overflow-hidden w-screen h-[80vh] text-center md:text-left sm:h-[60vh] lg:h-screen xl:h-[90vh] text-white">
       <AnimatePresence>
         {slides.map(
           (slide, index) =>
@@ -68,15 +68,15 @@ const HeroSection: React.FC = () => {
                       )
                     )}
                   </h1>
-                  <p className="text-md sm:text-2xl text-white/90 max-w-screen-md">
+                  <p className="text-md md:text-2xl text-white/90 max-w-screen-md">
                     {slide.description}
                   </p>
-                  <span className="text-sm pl-2.5 self-center sm:self-start flex items-center gap-2.5">
+                  <span className="text-md pl-2.5 self-center md:self-start flex items-center gap-2.5">
                     <img src="/general.svg" alt="General Icon" />
                     Used by 15,000+ worldwide
                   </span>
                   <button
-                    className="bg-secondary px-6 py-4 text-xl self-center sm:self-start rounded-[64px] w-fit transition-all duration-300 focus:outline-none hover:bg-secondary/70"
+                    className="bg-secondary px-6 py-4 text-xl self-center md:self-start rounded-[64px] w-fit transition-all duration-300 focus:outline-none hover:bg-secondary/70"
                     onClick={handleStartShoppingClick}
                   >
                     {slide.buttonText}
