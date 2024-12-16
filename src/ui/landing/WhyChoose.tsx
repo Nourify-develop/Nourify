@@ -6,7 +6,7 @@ import { why_nourify } from "./_data";
 export default function WhyChoose() {
   return (
     <Wrapper className="relative flex flex-col gap-y-8 bg-white">
-      <Typography.h2 isGreen className="text-gray-4 !font-bold uppercase">
+      <Typography.h2 isGreen className="text-gray-4 !font-bold text-center md:text-left uppercase">
         Why Choose Nourify?
       </Typography.h2>
       <section className="grid md:grid-cols-2 gap-8 r items-center ">
