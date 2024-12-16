@@ -46,30 +46,30 @@ const Login = () => {
         password
       );
       const user = userCredential.user;
-  
+
       if (!user.emailVerified) {
         await auth.signOut();
         toast.error("Please verify your email before logging in.");
         setLoading(false);
         return;
       }
-  
+
       // Get the Firebase ID token
       const token = await user.getIdToken();
-  
+
       // Fetch user data from Firestore
       const userDoc = await getDoc(doc(db, "users", user.uid));
       if (userDoc.exists()) {
         const userData = userDoc.data();
-  
+
         // Add the token to the user data object
         const userDataWithToken = { ...userData, token };
-  
+
         // Store the updated user data with the token in localStorage
         localStorage.setItem("userData", JSON.stringify(userDataWithToken));
-  
+
         toast.success("Login successful!");
-  
+
         setTimeout(() => {
           router.push("/");
         }, 2000);
@@ -82,25 +82,23 @@ const Login = () => {
       setLoading(false);
     }
   };
-  
-  
-  
+
   // Handle login with Google
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
     try {
       const googleSigninData = await signInWithPopup(auth, provider);
       const user = googleSigninData.user;
-  
+
       // Get the Firebase ID token
       const token = await user.getIdToken();
-  
+
       // Reference to Firestore document
       const userDocRef = doc(db, "users", user.uid);
       const userDoc = await getDoc(userDocRef);
-  
+
       let userData;
-  
+
       if (userDoc.exists()) {
         // If user data exists in Firestore, get it
         userData = { ...userDoc.data(), token };
@@ -117,13 +115,13 @@ const Login = () => {
         // Optionally save this new data to Firestore
         await setDoc(userDocRef, userData);
       }
-  
+
       // Save user data to local storage
       localStorage.setItem("userData", JSON.stringify(userData));
-  
+
       // Log user data to the console
       console.log("User Data:", userData);
-  
+
       // Redirect after a timeout
       setTimeout(() => {
         router.push("/");
@@ -132,8 +130,6 @@ const Login = () => {
       toast.error("An error occurred while logging in with Google.");
     }
   };
-  
-  
 
   // Handle error messages based on error code
   const handleError = (error: any) => {
@@ -215,11 +211,7 @@ const Login = () => {
             Continue with Google
           </button>
         </div>
-        <div className="flex gap-2 w-full items-center ">
-          <hr className="!bg-primary-2/40 w-full" />
-          <p className="text-xs">OR</p>
-          <hr className="w-full !bg-primary-2/40" />
-        </div>
+
         <form onSubmit={handleLogin} className="flex flex-col gap-5">
           <div className=" input-container flex flex-col gap-2 ">
             <label htmlFor="">Email Address</label>

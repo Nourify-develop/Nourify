@@ -10,7 +10,6 @@ import useProducts from "@/hooks/useProducts";
 import { Product } from "@/types";
 import ProductModal from "./components/ProductModal";
 
-
 const page = () => {
   const { products, setProducts } = useProducts();
   const [isModalOpen, setIsModalOpen] = useState(false);

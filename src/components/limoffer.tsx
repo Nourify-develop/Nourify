@@ -4,7 +4,7 @@ import React from "react";
 
 const Limoffer = () => {
   return (
-    <Wrapper className=" bg-white">
+    <Wrapper className=" bg-white"
       <div className=" gap-2 text-left flex  bg-gradient-to-r from-gray-900 via-green-700 to-green-600 rounded-3xl justify-between items-center overflow-hidden md:overflow-visible ">
         <div className="pl-[2em] py-4  text-white flex flex-col gap-[0.7em] w-[40%] md:w-[50%]">
           <h3 className="text-[12px] sm:text-sm md:text-lg !font-light">Limited offer</h3>
