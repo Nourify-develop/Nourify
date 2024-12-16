@@ -146,15 +146,15 @@ export const Slider: React.FC<SliderProps> = ({
 
   return (
     <div
-      className={`slider flex flex-col gap-20 ${containerClassName}`}
+      className={`slider flex relative flex-col gap-8 md:gap-20 ${containerClassName}`}
       style={{ width: "100%", ...containerStyle }}
       ref={setRefs}
     >
-      <div className="flex justify-between">
-        <Typography.h2 className="uppercase text-gray-4 !font-bold">
-          Testimonial
+      <div className="flex justify-between md:flex-row flex-col text-center">
+        <Typography.h2 className="uppercase text-gray-4 !font-bold ">
+          Testimonials
         </Typography.h2>
-        <Typography.h3 className="!font-normal text-primary-2/80">
+        <Typography.h3 className="!font-normal text-primary-2/80 !text-base">
           Here’s what others have to say about Nourify
         </Typography.h3>
       </div>
@@ -228,7 +228,7 @@ export const Slider: React.FC<SliderProps> = ({
 
       {/* Manual Controls */}
       {manualControls && (
-        <div className="slider-controls">
+        <div className="slider-controls flex justify-center mt-0 md:-mt-16 items-center  ">
           <button
             onClick={prevSlide}
             className={`prev-btn hover:scale-95 transition-all duration-150 ease-in-out ${buttonClassName}`}
@@ -279,13 +279,13 @@ export const Slider: React.FC<SliderProps> = ({
           position: relative;
         }
         .slider-controls {
-          position: absolute;
-          bottom: 1.25em;
+          /* position: absolute; */
+          /* bottom: 1.25em; */
           width: 100%;
-          left: auto;
+          /* left: auto; */
           display: flex;
           gap: 20px;
-          margin: 0 0 0 -2em;
+          /* margin: 0 0 0 -2em; */
         }
         .next-btn {
           background: rgb(7, 156, 78);
@@ -297,7 +297,7 @@ export const Slider: React.FC<SliderProps> = ({
           border: none;
         }
         .prev-btn {
-          margin-left: auto;
+          /* margin-left: auto; */
           background: rgb(213, 231, 222);
           color: rgb(7, 156, 78);
           cursor: pointer;
