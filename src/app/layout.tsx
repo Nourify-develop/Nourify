@@ -1,38 +1,26 @@
-"use client";
-import { Metadata } from "next";
+// app/layout.tsx (Server Component)
 import "./globals.css";
-import Navbar from "../components/Navbar";
-import { usePathname } from "next/navigation";
-import Footer from "@/components/Footer";
-import { Roboto } from "next/font/google";
-import { Toaster } from "sonner";
+import { Metadata } from "next";
+import Head from "next/head";
+import RootClientLayout from "./RootClientLayout ";
 
-const roboto = Roboto({
-  subsets: ["latin"],
-  weight: ["400", "500", "700", "900"],
-});
-
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Nourify",
   description: "Where Healthy Choices Meet Peak Freshness",
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
-  const pathname = usePathname();
-  const noNavbarFooterRoutes = ["/signup", "/login"];
-  const showNavbarFooter = !noNavbarFooterRoutes.includes(pathname);
-
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
+      <head>
+        
+        <link
+          href="https://fonts.cdnfonts.com/css/sf-pro-display?styles=98774,98773,98770"
+          rel="stylesheet"
+        />
+      </head>
       <body>
-        {showNavbarFooter && <Navbar />}
-        <main className={` ${roboto.className}`}> {children} </main>
-        {showNavbarFooter && <Footer />}
-        <Toaster position="top-right" expand={false} richColors />
+        <RootClientLayout>{children}</RootClientLayout>
       </body>
     </html>
   );

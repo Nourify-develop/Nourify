@@ -7,7 +7,7 @@ function Logo() {
 
     <Link href="/">
       <img
-        src="/images/Screenshot_2024-07-23_at_2.34.36_PM-removebg-preview 1@2x.png"
+        src="/icons/Nourify.svg"
         alt="Nourify Logo"
         className="w-[7.55rem] h-[4rem] md:w-[8rem] md:h-[4rem] lg:w-[8.55rem] lg:h-[4.375rem] drop-shadow-xl transition-all duration-300"
       />
