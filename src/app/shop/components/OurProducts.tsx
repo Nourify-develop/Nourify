@@ -141,13 +141,12 @@ const OurProducts: React.FC = () => {
     e.stopPropagation();
     setIsSearchClicked(true);
     inputRef.current?.focus();
-    console.log("clicked open");
+    // console.log("clicked open");
   };
   const handleSearchBarClickClose = (e: any) => {
     e.stopPropagation();
     setIsSearchClicked(false);
-    console.log("clicked close");
-    // console.log("clicked");
+    // console.log("clicked close");
   };
 
   const handleFilterClick = (e: any) => {
@@ -188,7 +187,7 @@ const OurProducts: React.FC = () => {
           our&nbsp;products
         </h1>
         <ul
-          className={`gap-4 justify-between items-center absolute md:static top-[20rem] md:top-0 right-[1.5rem] w-1/4 p-4 rounded-lg md:rounded-none md:w-auto bg-white md:bg-transparent md:p-0 shadow-lg md:shadow-none flex flex-col md:flex-row md:flex md:text-xs lg:text-sm xl:text-lg font-medium transition-opacity duration-300 ease-in-out ${
+          className={`gap-4 justify-between items-center absolute md:static top-[20.2rem] md:top-0 right-[1rem] w-1/2 p-4 rounded-lg md:rounded-none md:w-auto bg-[#f5f5f5e7] md:bg-transparent md:p-0 shadow-lg md:shadow-none flex flex-col md:flex-row md:flex md:text-xs lg:text-sm xl:text-lg font-medium transition-opacity duration-300 ease-in-out ${
             isFilterDropdownOpen
               ? "opacity-100 md:opacity-0 pointer-events-auto"
               : "opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto"
@@ -243,7 +242,7 @@ const OurProducts: React.FC = () => {
                 }
               }}
             >
-              <SelectTrigger className="bg-gray-10 w-fit md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-base xl:text-lg border-none font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>
@@ -304,7 +303,10 @@ const OurProducts: React.FC = () => {
           </li>
         </ul>
       </div>
-      <div className="flex md:flex-row py-2 gap-y-4  justify-between items-center">
+      <div
+        className="flex md:flex-row py-2 gap-y-4  justify-between items-center"
+        onClick={() => setIsFilterDropdownOpen(false)}
+      >
         <div className="flex gap-6 lg:gap-8  xl:gap-12  md:text-xl lg:text-2xl xl:text-3xl font-medium">
           <button
             className={`border-2 border-white 
@@ -352,7 +354,7 @@ const OurProducts: React.FC = () => {
               type="text"
               placeholder="Search for groceries..."
               className={`transition-all duration-300 ease-in-out rounded-[3.125rem]   ${
-                isSearchClicked ? "w-28" : "w-9"
+                isSearchClicked ? "w-36" : "w-9"
               } md:w-96 h-full p-2 pl-10 bg-gray-1 placeholder:text-[#1E1E1EB2] text-[#1E1E1EB2] outline-none`}
               // className=" md:block rounded-[3.125rem] w-5 md:w-96  h-full p-2 pl-10 bg-gray-1 placeholder:text-[#1E1E1EB2] text-[#1E1E1EB2] outline-none" // pl-10 adds padding for the icon
               value={searchTerm}
