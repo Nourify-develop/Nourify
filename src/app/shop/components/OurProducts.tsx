@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { usePathname, useSearchParams } from "next/navigation";
 import ProductGrid from "@/ui/products/ProductGrid";
 import { IoSearchOutline } from "react-icons/io5";
@@ -33,6 +33,7 @@ const OurProducts: React.FC = () => {
   const [isRotated, setIsRotated] = useState(false);
   const [isSearchClicked, setIsSearchClicked] = useState(false);
   const [isFilterDropdownOpen, setIsFilterDropdownOpen] = useState(false);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   console.log("products", products);
   const toggleRotation = () => {
@@ -136,11 +137,18 @@ const OurProducts: React.FC = () => {
   const handlePageChange = (pageNumber: number) => {
     setCurrentPage(pageNumber);
   };
-  const handleSearchBarClick = (e: any) => {
+  const handleSearchBarClickOpen = (e: any) => {
     e.stopPropagation();
-    setIsSearchClicked(!isSearchClicked);
-    // console.log("clicked");
+    setIsSearchClicked(true);
+    inputRef.current?.focus();
+    // console.log("clicked open");
   };
+  const handleSearchBarClickClose = (e: any) => {
+    e.stopPropagation();
+    setIsSearchClicked(false);
+    // console.log("clicked close");
+  };
+
   const handleFilterClick = (e: any) => {
     e.stopPropagation();
     setIsFilterDropdownOpen(!isFilterDropdownOpen);
@@ -151,6 +159,7 @@ const OurProducts: React.FC = () => {
     <Wrapper
       id="our-products"
       className="bg-white flex flex-col gap-y-3 md:gap-y-14 !py-0 relative"
+      onClick={handleSearchBarClickClose}
     >
       <span className="capitalize flex items-center gap-x-2 text-gray-5 border-b border-gray-2 py-2">
         <p>{pathName.replace("/", "")}</p> /
@@ -172,15 +181,13 @@ const OurProducts: React.FC = () => {
           {category}
         </p>
       </span>
-
       <Limoffer />
-
       <div className="flex justify-between items-center flex-col gap-7 lg:flex-row text-center md:text-left w-full">
         <h1 className="hidden md:flex uppercase font-bold text-[2rem] leading-9 flex-1 text-primary-2/85">
           our&nbsp;products
         </h1>
         <ul
-          className={`gap-4 justify-between items-center absolute md:static top-[20rem] md:top-0 right-4 w-64 rounded-lg md:rounded-none md:w-auto bg-white md:bg-transparent p-4 md:p-0 shadow-lg md:shadow-none flex flex-col md:flex-row md:flex md:text-xs lg:text-sm xl:text-lg font-medium transition-opacity duration-300 ease-in-out ${
+          className={`gap-4 justify-between items-center absolute md:static top-[20.2rem] md:top-0 right-[1rem] w-1/2 p-4 rounded-lg md:rounded-none md:w-auto bg-[#f5f5f5e7] md:bg-transparent md:p-0 shadow-lg md:shadow-none flex flex-col md:flex-row md:flex md:text-xs lg:text-sm xl:text-lg font-medium transition-opacity duration-300 ease-in-out ${
             isFilterDropdownOpen
               ? "opacity-100 md:opacity-0 pointer-events-auto"
               : "opacity-0 pointer-events-none md:opacity-100 md:pointer-events-auto"
@@ -235,7 +242,7 @@ const OurProducts: React.FC = () => {
                 }
               }}
             >
-              <SelectTrigger className="bg-gray-10 w-fit md:text-base xl:text-lg font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
+              <SelectTrigger className="bg-gray-10 w-fit md:text-base xl:text-lg border-none font-medium h-full text-primary-2 rounded-[4rem] px-6 py-1.5 text-base">
                 <SelectValue placeholder="Filter" />
               </SelectTrigger>
               <SelectContent>
@@ -298,7 +305,7 @@ const OurProducts: React.FC = () => {
       </div>
       <div
         className="flex md:flex-row py-2 gap-y-4  justify-between items-center"
-        // onClick={() => setIsSearchClicked(false)}
+        onClick={() => setIsFilterDropdownOpen(false)}
       >
         <div className="flex gap-6 lg:gap-8  xl:gap-12  md:text-xl lg:text-2xl xl:text-3xl font-medium">
           <button
@@ -326,31 +333,33 @@ const OurProducts: React.FC = () => {
             Pastries
           </button>
         </div>
-        <div className="flex gap-2 md:relative">
-          {/* laptop screens */}
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3">
-            <IoSearchOutline className="text-[#1E1E1EB2]" />
-          </div>
+        <div className="flex gap-2 relative">
           <div
             className="flex justify-center items-center gap-2 relative"
-            onClick={handleSearchBarClick}
+            // onClick={handleSearchBarClickClose}
           >
+            {/* MOBILE VIEW */}
             <div
               className="absolute md:hidden left-[0.82rem] top-3"
-              onClick={handleSearchBarClick}
+              onClick={handleSearchBarClickOpen}
             >
               <IoSearchOutline className="text-[#1E1E1EB2]" size={20} />
             </div>
+            {/* laptop screens */}
+            <div className="absolute hidden inset-y-0 left-0 md:flex items-center pl-3">
+              <IoSearchOutline className="text-[#1E1E1EB2]" />
+            </div>
             <input
+              ref={inputRef}
               type="text"
               placeholder="Search for groceries..."
               className={`transition-all duration-300 ease-in-out rounded-[3.125rem]   ${
-                isSearchClicked ? "w-24" : "w-4"
+                isSearchClicked ? "w-36" : "w-9"
               } md:w-96 h-full p-2 pl-10 bg-gray-1 placeholder:text-[#1E1E1EB2] text-[#1E1E1EB2] outline-none`}
               // className=" md:block rounded-[3.125rem] w-5 md:w-96  h-full p-2 pl-10 bg-gray-1 placeholder:text-[#1E1E1EB2] text-[#1E1E1EB2] outline-none" // pl-10 adds padding for the icon
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              onClick={handleSearchBarClick}
+              onClick={handleSearchBarClickOpen}
             />
             <div
               className="bg-gray-1 p-3 rounded-full cursor-pointer md:hidden"
