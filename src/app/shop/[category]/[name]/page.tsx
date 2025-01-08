@@ -60,7 +60,7 @@ export default function ProductDisplay() {
     "2": 4,
     "1": 2,
   };
-
+console.log(product)
   return (
     <Wrapper className="bg-white ">
       <nav className="flex items-center gap-x-3 text-gray-5 border-b border-gray-2 py-2">
@@ -88,6 +88,7 @@ export default function ProductDisplay() {
             alt={product.name}
             className="md:w-[50%] w-full h-auto"
           />
+          
           <aside className="md:w-[50%] w-full flex flex-col gap-y-4">
             <section className="flex flex-col gap-y-6">
               <div className="flex justify-between items-center pt-4">
@@ -206,9 +207,9 @@ export default function ProductDisplay() {
             </Select>
           </nav>
 
-          <span className="flex flex-col gap-y-6">
+          <span className="flex flex-col gap-y-6  ">
             {product.reviews?.map((item) => (
-              <div className="flex flex-col gap-y-2">
+              <div className="flex flex-col gap-y-2 border-b border-[#D9D9D9] pb-[30px]">
                 <span className="flex items-center gap-x-4">
                   <Image
                     src={"/icons/avatar.svg"}
@@ -223,10 +224,10 @@ export default function ProductDisplay() {
                     <span>{item.rating}</span>
                   </span>
                 </span>
-                <Typography.p isGray className="text-primary-2/70">
+                <Typography.p isGray className="text-primary-2/70 text-sm font-medium mt-[10px]">
                   {item.comment}
                 </Typography.p>
-                <div className="flex items-center gap-x-4">
+                <div className="flex items-center gap-x-[10px] mt-5">
                   <span className="text-green-1">Reply</span> <Dot />
                   <span className="text-green-1">View replies</span>
                 </div>
@@ -241,7 +242,7 @@ export default function ProductDisplay() {
 
         <aside className="w-full pt-4">
           <nav className="flex items-center justify-between">
-            <Typography.h3 className="!text-gray-4">Ratings</Typography.h3>
+            <Typography.h3 className="!text-gray-4 md:text-[22px] text-base font-medium ">Ratings</Typography.h3>
             <span>
               <Typography.h3 className="!text-gray-4 flex items-center">
                 {product.rating}{" "}
@@ -262,7 +263,7 @@ export default function ProductDisplay() {
               <div className="flex items-center gap-x-4" key={rating}>
                 <span className="text-gray-5">{rating}.0</span>
                 <progress
-                  className="w-full h-4 !rounded-full"
+                  className="w-full h-[6px] !rounded-full"
                   value={percentage}
                   max="100"
                 ></progress>

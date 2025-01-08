@@ -5,7 +5,7 @@ import ProductGrid from "@/ui/products/ProductGrid";
 import React from "react";
 
 const AlsoLike = () => {
-    const limitedProducts = products.slice(0, 4);
+    const limitedProducts = products.slice(0, 5);
   return (
     <Wrapper>
       {" "}
@@ -20,11 +20,7 @@ const AlsoLike = () => {
         </h1>
         <ProductGrid products={limitedProducts} />
       </div>
-      <div className="flex items-center justify-center w-full gap-1 py-4">
-        <span className="w-[161px] h-[3px] bg-[#079C4E]"></span>
-        <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
-        <span className="w-[30px] h-[3px] bg-[#A0A0A0]"></span>
-      </div>
+     
     </Wrapper>
   );
 };
