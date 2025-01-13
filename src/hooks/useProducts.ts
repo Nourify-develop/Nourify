@@ -27,10 +27,10 @@ const useProducts = () => {
 
   const deleteProductById = (id: number): void => {
     const updatedProducts = products.filter((product) => product.id !== id);
-    setProducts(updatedProducts.reverse()); // Reverse after deleting
+    setProducts(updatedProducts); // No need to reverse again here
     localStorage.setItem("products", JSON.stringify(updatedProducts));
   };
-
+  
   const updateProductById = (id: number, updatedData: Partial<Product>): void => {
     const updatedProducts = products.map((product) =>
       product.id === id ? { ...product, ...updatedData } : product

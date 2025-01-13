@@ -43,7 +43,7 @@ const ProductTable: React.FC<ProductTableProps> = ({
   }, [currentPage, data, productsPerPage]);
 
   const totalPages = Math.ceil(data.length / productsPerPage);
-
+  
   const handlePageChange = (page: number) => {
     setCurrentPage(page);
   };

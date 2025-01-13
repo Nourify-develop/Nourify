@@ -23,6 +23,7 @@ const page = () => {
     setEditingProduct(product); // Set product to be edited
     setIsModalOpen(true);
   };
+  
 console.log("useproducts", products)
   // const closeModal = () => {
   //   setIsModalOpen(false);

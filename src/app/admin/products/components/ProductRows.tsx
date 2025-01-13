@@ -3,6 +3,7 @@ import useProducts from "@/hooks/useProducts";
 import { Product } from "@/types";
 import React, { useState } from "react";
 import { toast } from "sonner";
+import { useModal } from "../../context/ModalContext";
 
 interface ProductRowProps {
   product: Product;
@@ -19,20 +20,26 @@ const ProductRows: React.FC<ProductRowProps> = ({
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const { deleteProductById } = useProducts();
+  const { showModal } = useModal();
   // Function to toggle options menu
   const toggleOptions = () => {
     setIsOpen((prev) => !prev);
   };
 
-  const handleDelete = () => {
+  const confirmDelete = () => {
     setLoading(true);
     deleteProductById(product.id);
-    setIsOpen(false); // Close the dropdown after deletion
-    toast.success("Products deleted successfully");
+    setIsOpen(false);
+    toast.success("Product deleted successfully");
     setTimeout(() => {
       setLoading(false);
     }, 2000);
   };
+
+  const handleDelete = () => {
+    showModal("Are you sure you want to delete this product?", confirmDelete);
+  };
+
   const handleEdit = () => {
     onEdit(product); // Pass product details to open edit modal
     setIsOpen(false);
