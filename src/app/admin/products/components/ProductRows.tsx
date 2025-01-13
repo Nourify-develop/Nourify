@@ -26,20 +26,13 @@ const ProductRows: React.FC<ProductRowProps> = ({
 
   const handleDelete = () => {
     setLoading(true);
-    console.log("loading now", loading)
     deleteProductById(product.id);
     setIsOpen(false); // Close the dropdown after deletion
     toast.success("Products deleted successfully");
     setTimeout(() => {
       setLoading(false);
-      
     }, 2000);
-  
-    
   };
-  // React.useEffect(() => {
-  //   console.log("Loading state changed to:", loading);
-  // }, [loading]);
   const handleEdit = () => {
     onEdit(product); // Pass product details to open edit modal
     setIsOpen(false);
@@ -51,13 +44,12 @@ const ProductRows: React.FC<ProductRowProps> = ({
       currency: "NGN",
       minimumFractionDigits: 0,
     }).format(price);
-
   return (
     <tr className="text-gray-4/90 capitalize font-bold border-t-[.5px] border-primary-2/20 p-5">
       <td className="align-middle py-5">
         <div className="flex justify-start">
           <img
-            src={`/images${product.image}`}
+            src={product.image}
             alt={product.name}
             className="w-[70px] h-[70px] bg-gray-10 p-2 rounded-[8px]"
           />

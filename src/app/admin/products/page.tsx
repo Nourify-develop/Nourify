@@ -23,7 +23,7 @@ const page = () => {
     setEditingProduct(product); // Set product to be edited
     setIsModalOpen(true);
   };
-
+console.log("useproducts", products)
   // const closeModal = () => {
   //   setIsModalOpen(false);
   //   setEditingProduct(null); // Reset after closing modal
@@ -39,27 +39,29 @@ const page = () => {
       setSelectedStock((prev) => (prev === filter ? null : filter));
     }
   };
-
-  const filteredProducts = products.filter((product) => {
-    const matchesSearch =
-      searchTerm === "" ||
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.quantity.toString().includes(searchTerm) ||
-      product.price.toString().includes(searchTerm);
-
-    const matchesCategory =
-      !selectedCategory ||
-      selectedCategory.toLowerCase() === product.category.toLowerCase();
-
-    const matchesStock =
-      !selectedStock ||
-      (selectedStock === "In Stock" &&
-        product.status.toLowerCase() === "in stock") ||
-      (selectedStock === "Out of stock" &&
-        product.status.toLowerCase() === "out of stock");
-
-    return matchesSearch && matchesCategory && matchesStock;
-  });
+  const filteredProducts = React.useMemo(() => {
+    return products.filter((product) => {
+      const matchesSearch =
+        searchTerm === "" ||
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.quantity.toString().includes(searchTerm) ||
+        product.price.toString().includes(searchTerm);
+  
+      const matchesCategory =
+        !selectedCategory ||
+        selectedCategory.toLowerCase() === product.category.toLowerCase();
+  
+      const matchesStock =
+        !selectedStock ||
+        (selectedStock === "In Stock" &&
+          product.status.toLowerCase() === "in stock") ||
+        (selectedStock === "Out of stock" &&
+          product.status.toLowerCase() === "out of stock");
+  
+      return matchesSearch && matchesCategory && matchesStock;
+    });
+  }, [products, searchTerm, selectedCategory, selectedStock]);
+  
 
   return (
     <div className="py-5">

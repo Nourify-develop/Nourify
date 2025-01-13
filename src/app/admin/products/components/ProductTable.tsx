@@ -26,19 +26,21 @@ const ProductTable: React.FC<ProductTableProps> = ({
   const [currentData, setCurrentData] = useState<Product[]>([]);
 
   useEffect(() => {
-    setLoading(true); // Set loading true only if it's currently false
+    const totalPages = Math.ceil(data.length / productsPerPage);
 
-    const timer = setTimeout(() => {
+    // If the current page exceeds the total number of pages, reset to page 1
+    if (currentPage > totalPages) {
+      setCurrentPage(1);
+    } else {
       const slicedData = data.slice(
         (currentPage - 1) * productsPerPage,
         currentPage * productsPerPage
       );
       setCurrentData(slicedData);
-      setLoading(false); // Stop loading after data is set
-    }, 500); // Adjust the delay as needed
+    }
 
-    return () => clearTimeout(timer);
-  }, [currentPage, data, productsPerPage, setLoading, loading]);
+    setLoading(false);
+  }, [currentPage, data, productsPerPage]);
 
   const totalPages = Math.ceil(data.length / productsPerPage);
 
