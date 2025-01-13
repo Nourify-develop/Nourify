@@ -10,7 +10,7 @@ export default function Testimonials() {
       <SliderContainer>
         <Slider
           loop
-          containerClassName="py-6"
+          containerClassName="md:py-6"
           gapsBetween={"30px"}
           manualControls
           stopOnManual={false}

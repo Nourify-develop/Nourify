@@ -6,7 +6,7 @@ const rawProducts = [
     description:
       "Crisp, refreshing, and hydrating, cucumbers are a versatile and nutritious vegetable perfect for snacking, salads, and a variety of culinary dishes. With a mild, slightly sweet flavor, cucumbers offer a satisfying crunch and are known for their high water content, making them a great choice for staying hydrated. Rich in essential vitamins, minerals, and antioxidants, cucumbers can also promote skin health, aid digestion, and support overall wellness",
     price: 50000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     size: "small",
     quantity: 25,
@@ -32,7 +32,7 @@ const rawProducts = [
   },
   {
     name: "Cherry Tomatoes",
-    image: "/tomatoes.svg",
+    image: "/images/tomatoes.svg",
     description:
       "Bursting with flavor, cherry tomatoes are small, round, and incredibly sweet. These bite-sized delights are perfect for snacking, salads, or adding a pop of color and taste to various dishes. Packed with vitamins, antioxidants, and lycopene, cherry tomatoes not only taste great but also offer numerous health benefits, supporting heart health and potentially reducing the risk of certain cancers.",
     price: 10000,
@@ -63,7 +63,7 @@ const rawProducts = [
     description:
       "Fresh cilantro, also known as coriander leaves, is a vibrant herb with a distinctive, citrusy flavor that adds a bright, fresh taste to a wide variety of cuisines. This aromatic herb is rich in antioxidants and vitamins, potentially offering benefits such as improved digestion, reduced inflammation, and support for heart health. Its versatile nature makes it a staple in many kitchens, perfect for garnishing, flavoring sauces, or adding zest to salads and salsas.",
     price: 20000,
-    image: "/cilantro.svg",
+    image: "/images/cilantro.svg",
     category: "groceries",
     quantity: 15,
     size: "medium",
@@ -90,7 +90,7 @@ const rawProducts = [
     description:
       "These large garden cucumbers are perfect for those who love generous portions or for preparing big batches of refreshing salads and pickles. With their crisp texture and mild, cool flavor, these cucumbers are versatile enough for a wide range of culinary applications. They're an excellent source of hydration and packed with nutrients, making them a healthy addition to any meal or snack.",
     price: 40000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     quantity: 20,
     size: "large",
@@ -117,7 +117,7 @@ const rawProducts = [
     description:
       "Our medium-sized garden cucumbers offer the perfect balance between convenience and versatility. Ideal for slicing into salads, sandwiches, or using as a base for refreshing summer drinks, these cucumbers provide a satisfying crunch and subtle flavor. Rich in vitamins and minerals, they contribute to hydration and overall health, making them a smart choice for health-conscious consumers.",
     price: 50000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     quantity: 20,
     size: "medium",
@@ -144,7 +144,7 @@ const rawProducts = [
     description:
       "Our small bunches of fresh cilantro are perfect for those who enjoy adding a burst of flavor to their dishes without waste. These aromatic herbs are carefully cultivated to ensure maximum freshness and flavor. Cilantro is not only delicious but also packed with antioxidants and vitamins, potentially offering benefits such as improved digestion and detoxification support. Ideal for garnishing tacos, adding to salsas, or infusing Asian-inspired dishes with authentic flavor.",
     price: 50000,
-    image: "/cilantro.svg",
+    image: "/images/cilantro.svg",
     category: "groceries",
     quantity: 20,
     size: "small",
@@ -171,7 +171,7 @@ const rawProducts = [
     description:
       "Our large garden cucumbers are the epitome of freshness and crunch. Perfect for those who love to experiment in the kitchen, these cucumbers are ideal for creating refreshing salads, pickling, or even as a base for cool summer soups. Their size makes them perfect for slicing into uniform rounds for sandwiches or crudité platters. Packed with hydrating properties and essential nutrients, these cucumbers are not just delicious but also contribute to your daily health goals.",
     price: 50000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     quantity: 22,
     size: "large",
@@ -198,7 +198,7 @@ const rawProducts = [
     description:
       "Our medium-sized cherry tomatoes offer the perfect balance of sweetness and acidity. These vibrant, juicy tomatoes are ideal for salads, roasting, or eating as a healthy snack. Packed with lycopene, vitamins, and antioxidants, they not only taste great but also offer numerous health benefits, including supporting heart health and potentially reducing the risk of certain cancers. Their convenient size makes them perfect for meal prep or adding a burst of flavor to any dish.",
     price: 70000,
-    image: "/tomatoes.svg",
+    image: "/images/tomatoes.svg",
     category: "groceries",
     quantity: 30,
     size: "medium",
@@ -225,7 +225,7 @@ const rawProducts = [
     description:
       "Our medium-sized garden cucumbers are the perfect all-rounder for your kitchen needs. With their crisp texture and refreshing taste, these cucumbers are versatile enough for a wide range of culinary applications. Whether you're slicing them for sandwiches, dicing them for salads, or using them as a base for tzatziki, these cucumbers deliver consistent quality and flavor. Rich in vitamins and minerals, they're a healthy addition to any meal, supporting hydration and overall wellness.",
     price: 60000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     quantity: 40,
     size: "medium",
@@ -252,7 +252,7 @@ const rawProducts = [
     description:
       "Our small cherry tomatoes are bursting with flavor and nutrition. These tiny, sweet morsels are perfect for snacking, adding to salads, or roasting for a delicious side dish. Despite their small size, they pack a powerful nutritional punch, rich in vitamins C and K, potassium, and antioxidants like lycopene. Their convenient size and irresistible taste make them a favorite among kids and adults alike, encouraging healthy eating habits in the most delicious way possible.",
     price: 70000,
-    image: "/tomatoes.svg",
+    image: "/images/tomatoes.svg",
     category: "groceries",
     quantity: 50,
     size: "small",
@@ -279,7 +279,7 @@ const rawProducts = [
     description:
       "Our large bunches of fresh cilantro are perfect for cilantro enthusiasts and those who love to cook in bulk. This aromatic herb adds a distinctive, citrusy flavor to a wide variety of cuisines, from Mexican to Indian to Thai. Rich in antioxidants and vitamins, cilantro offers potential health benefits including improved digestion and detoxification support. The generous size of these bunches ensures you'll have plenty for garnishing, making sauces, or adding to your favorite recipes throughout the week.",
     price: 30000,
-    image: "/cilantro.svg",
+    image: "/images/cilantro.svg",
     category: "groceries",
     quantity: 20,
     size: "large",
@@ -306,7 +306,7 @@ const rawProducts = [
     description:
       "Our medium-sized garden cucumbers offer the perfect balance of crispness and juiciness. Ideal for a variety of culinary uses, from refreshing salads to cool summer gazpachos. These cucumbers are not only delicious but also packed with nutrients, providing hydration, vitamins, and minerals essential for overall health. Their versatile size makes them perfect for slicing, dicing, or enjoying as a healthy snack, catering to all your cucumber needs.",
     price: 10000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     quantity: 35,
     size: "medium",
@@ -333,7 +333,7 @@ const rawProducts = [
     description:
       "Our small garden cucumbers are perfect for those who prefer a more delicate size or for creating beautiful garnishes and hors d'oeuvres. Despite their smaller stature, these cucumbers pack all the crisp texture and refreshing flavor you expect. They're ideal for pickling, adding to salads, or enjoying as a low-calorie snack. Rich in vitamins and minerals, these cucumbers contribute to your daily nutrient intake while keeping you hydrated and satisfied.",
     price: 20000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     quantity: 12,
     size: "small",
@@ -360,7 +360,7 @@ const rawProducts = [
     description:
       "Our small bunches of fresh cilantro are perfect for those who enjoy adding a burst of flavor to their dishes without waste. These carefully cultivated herbs offer a vibrant, citrusy taste that can elevate a wide range of dishes, from Mexican salsas to Indian chutneys. Rich in antioxidants and vitamins, cilantro not only enhances flavor but also offers potential health benefits, including improved digestion and detoxification support. Ideal for garnishing or adding fresh, aromatic notes to your culinary creations.",
     price: 50000,
-    image: "/cilantro.svg",
+    image: "/images/cilantro.svg",
     category: "groceries",
     quantity: 20,
     size: "small",
@@ -387,7 +387,7 @@ const rawProducts = [
     description:
       "Our premium medium-sized garden cucumbers are the epitome of freshness and quality. These cucumbers offer the perfect balance of crispness and juiciness, making them versatile for a wide range of culinary applications. Whether you're creating refreshing salads, pickling for later use, or adding a cool crunch to your sandwiches, these cucumbers deliver consistent flavor and texture. Packed with essential nutrients and high water content, they're not just delicious but also contribute to your daily hydration and overall health goals.",
     price: 90000,
-    image: "/cucumber.svg",
+    image: "/images/cucumber.svg",
     category: "groceries",
     quantity: 16,
     size: "medium",
@@ -414,7 +414,7 @@ const rawProducts = [
     description:
       "Our small cherry tomatoes are little bursts of sunshine in every bite. These sweet, juicy tomatoes are perfect for snacking, adding to salads, or roasting for a delicious side dish. Despite their small size, they're packed with flavor and nutrients, including lycopene, vitamins C and K, and potassium. Their convenient size makes them a hit with kids and adults alike, encouraging healthy eating in the most delicious way possible. Whether used in cooking or enjoyed fresh, these cherry tomatoes are sure to brighten up any meal.",
     price: 80000,
-    image: "/tomatoes.svg",
+    image: "/images/tomatoes.svg",
     category: "groceries",
     quantity: 32,
     size: "small",
@@ -438,7 +438,7 @@ const rawProducts = [
   },
 
   {
-    image: "/cake.svg",
+    image: "/images/cake.svg",
     name: "Chocolate Cake",
     description:
       "Rich, moist, and decadently chocolaty, our Chocolate Cake is a pastry lover's dream. Perfect for birthdays, celebrations, or as a luxurious dessert, this cake is sure to delight your taste buds with every bite.",
@@ -464,7 +464,7 @@ const rawProducts = [
     totalReviews: 18,
   },
   {
-    image: "/tomatoes.svg",
+    image: "/images/tomatoes.svg",
     name: "Tomatoes",
     description:
       "Fresh, juicy, and vibrant red, our tomatoes are ideal for elevating your cooking. Whether you're making sauces, salads, or stews, these tomatoes add a burst of flavor and nutrition to every dish.",
@@ -490,7 +490,7 @@ const rawProducts = [
     totalReviews: 28,
   },
   {
-    image: "/meatpie.svg",
+    image: "/images/meatpie.svg",
     name: "Meatpie",
     description:
       "Golden and flaky on the outside, hearty and savory on the inside, our Meatpie is packed with deliciously seasoned meat filling. A perfect snack or light meal, it's a classic favorite for all occasions.",
@@ -516,7 +516,7 @@ const rawProducts = [
     totalReviews: 15,
   },
   {
-    image: "/cherry-danish-pastry.svg",
+    image: "/images/cherry-danish-pastry.svg",
     name: "Cherry Danish Pastry",
     description:
       "Our Cherry Danish Pastry combines layers of buttery, flaky dough with a luscious cherry topping for a perfect balance of tart and sweet. This large-sized pastry is an indulgent treat, ideal for special occasions or simply enjoying with your morning coffee.",
@@ -543,7 +543,7 @@ const rawProducts = [
     totalReviews: 22,
   },
   {
-    image: "/croissant.svg",
+    image: "/images/croissant.svg",
     name: "Croissant",
     description:
       "Buttery, flaky, and delightfully airy, our Croissant is a small-sized classic pastry that pairs perfectly with jam, coffee, or simply on its own. Whether for breakfast or a quick snack, it delivers timeless French elegance in every bite.",
@@ -570,7 +570,7 @@ const rawProducts = [
     totalReviews: 30,
   },
   {
-    image: "/danish-pastry.svg",
+    image: "/images/danish-pastry.svg",
     name: "Danish Pastry",
     description:
       "Indulge in the buttery and flaky delight of our Danish Pastry, crafted to perfection with layers of golden dough and a hint of sweetness. Ideal for breakfast or as a mid-day treat, this medium-sized pastry pairs beautifully with a hot cup of coffee or tea. Perfect for those who appreciate the art of classic baking.",
@@ -597,7 +597,7 @@ const rawProducts = [
     totalReviews: 25,
   },
   {
-    image: "/glazed-doughnut.svg",
+    image: "/images/glazed-doughnut.svg",
     name: "Glazed Doughnut",
     description:
       "Treat yourself to the melt-in-your-mouth experience of our Glazed Doughnut. With its perfectly smooth and shiny sugar glaze, this small pastry is the ultimate indulgence for sweet tooths everywhere. Enjoy it as a snack or a dessert that brings joy with every bite.",
@@ -624,7 +624,7 @@ const rawProducts = [
     totalReviews: 20,
   },
   {
-    image: "/jam-filled-doughtnut.svg",
+    image: "/images/jam-filled-doughtnut.svg",
     name: "Jam Filled Doughnut",
     description:
       "Bursting with rich and fruity jam, our Jam Filled Doughnut is a large-sized pastry that redefines indulgence. Every bite reveals a generous helping of sweet filling encased in a soft, golden exterior. Perfect for celebrations or as a special treat to brighten your day.",
@@ -651,7 +651,7 @@ const rawProducts = [
     totalReviews: 18,
   },
   {
-    image: "/plain-cookie.svg",
+    image: "/images/plain-cookie.svg",
     name: "Cookie",
     description:
       "Crunchy, sweet, and irresistibly satisfying, our classic Cookie is a small-sized pastry that’s perfect for snacking on the go or enjoying at home. With a rich buttery flavor and a delightful texture, it’s a timeless favorite for cookie lovers of all ages.",
@@ -678,7 +678,7 @@ const rawProducts = [
     totalReviews: 12,
   },
   {
-    image: "/sausage-roll.svg",
+    image: "/images/sausage-roll.svg",
     name: "Sausage Roll",
     description:
       "Savor the savory goodness of our Sausage Roll, featuring a perfectly seasoned sausage wrapped in a flaky, golden pastry. This small-sized delight is ideal for quick snacks, parties, or as a hearty addition to your meal. Enjoy the perfect balance of flavor and texture in every bite.",
@@ -705,7 +705,7 @@ const rawProducts = [
     totalReviews: 22,
   },
   {
-    image: "/single-cream-bun.svg",
+    image: "/images/single-cream-bun.svg",
     name: "Cream Bun",
     description:
       "Soft, fluffy, and filled with a luscious cream center, our Cream Bun is a small-sized pastry that’s pure comfort food. Perfect for tea time or as a sweet ending to your day, it’s a delightful combination of lightness and indulgence in every bite.",
@@ -720,12 +720,12 @@ const rawProducts = [
     reviews: [
       {
         user: "Isabella",
-        comment: "So soft and creamy, loved it!",
+        comment: "The cucumbers I bought were fresh and crunchy! Perfect for my salads and snacks. They had a great flavor and lasted a good week in my fridge without going bad. Definitely will be purchasing again.",
         rating: 5.0,
       },
       {
         user: "William",
-        comment: "A perfect treat for tea time.",
+        comment: "The cucumbers were decent, but a few were a little softer than I expected. Most were fresh, though, and worked well in my salad. Not the best batch I've gotten, but still usable.",
         rating: 4.6,
       },
     ],
