@@ -14,14 +14,14 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   }).format(product.price);
 
   return (
-    <div key={product.id} className="flex flex-col gap-1 text-center">
+    <div key={product.id} className="flex flex-col gap-1 text-center ">
       <div
         className="flex justify-between flex-col gap-y-2"
         onClick={() => router.push(`/shop/${product.category}/${product.name}`)}
       >
         <div className="h-auto">
           <Image
-             src={`/images${product.image}`}
+             src={product.image}
             width={0}
             height={0}
             alt={product.name}
