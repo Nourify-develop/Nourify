@@ -41,8 +41,6 @@ export const Pagination: React.FC<{
         </button>
       );
     }
-
-    // Add the last page
     if (currentPage < totalPages - delta - 1) {
       pages.push(<span key="end-ellipsis">...</span>);
       pages.push(
