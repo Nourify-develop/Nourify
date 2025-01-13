@@ -20,7 +20,7 @@ const newsletter = () => {
             <input
               type="email"
               placeholder="Email address"
-              className="w-full text-black pl-3.5 placeholder-gray-6  p-3 bg-transparent outline-none placeholder-[#1E1E1E80] md:text-[20px] text-[12px] font-space"
+              className="w-full text-black pl-3.5 placeholder-gray-6  p-3 bg-transparent outline-none placeholder-[#1E1E1E80] md:text-[20px] text-[18px] font-space"
             />
             <button
               className="bg-secondary text-white font-medium text-[18px] lg:text-[20px]  lg:py-2 lg:px-6 px-3 py-3 rounded-full hover:bg-green-800 transition ease-linear duration-300  "
