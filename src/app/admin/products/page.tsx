@@ -69,8 +69,8 @@ console.log("useproducts", products)
       <div className="flex flex-col gap-11">
         {" "}
         <div className="flex w-full gap-2 justify-between">
-          <div className="relative w-full max-w-sm text-primary-2/70 ">
-            <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+          <div className="relative w-full max-w-[39rem] text-primary-2/70 ">
+            <div className="absolute top-1/2 left-4 transform -translate-y-1/2 ">
               <Search />
             </div>
 
@@ -78,7 +78,7 @@ console.log("useproducts", products)
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-10 rounded-[50px] pl-12 px-3.5 py-3 placeholder:text-primary-2/70"
+              className="w-full bg-gray-10 rounded-[50px] pl-12 px-3.5 py-3 placeholder:text-primary-2/70 outline-none"
               placeholder="Search for products..."
             />
           </div>
