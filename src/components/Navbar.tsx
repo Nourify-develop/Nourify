@@ -35,6 +35,19 @@ function Navbar() {
     { name: "Contact Us", link: "/contact-us", id: 4 },
   ];
 
+  const MOBILE_MENU_LINKS = [
+    { name: "Home", link: "/", id: 1 },
+    { name: "Shop", link: "/shop", id: 2 },
+    { name: "cart", link: "/cart", id: 3 },
+    { name: "About Us", link: "/about-us", id: 4 },
+    { name: "Contact Us", link: "/contact-us", id: 5 },
+    { name: "Create Account", link: "/signup", id: 6 },
+    { name: "Login to your Account", link: "/login", id: 7 },
+
+  ];
+
+
+
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -191,7 +204,7 @@ function Navbar() {
 
           {/* TODO: HAMBURGER ICON and add the "OPEN" class dynamically.*/}
           {/* FIXME: WORKS */}
-          <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 rounded-full flex justify-center items-center">
+          <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 relative z-50 rounded-full flex justify-center items-center">
             <button
               onClick={toggleMobileMenu}
               ref={hamburgerRef}
@@ -206,7 +219,10 @@ function Navbar() {
           {/* TODO: MOBILE MENU - make sure the hidden class is applied and then removed dynamically.*/}
           {/* FIXME: WORKS */}
 
-          <div  ref={mobileMenuRef}>
+          <div  ref={mobileMenuRef} className="">
+          {showMobileMenu && (
+          <div className="w-screen h-screen bg-black/20  backdrop-blur-3xl fixed top-0 left-0"></div>)}
+
             <AnimatePresence>
               {showMobileMenu && (
                 <motion.ul
@@ -214,52 +230,24 @@ function Navbar() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute md:hidden flex flex-col items-center self-end py-8 mt-10 z-[1000] space-y-6 bg-white backdrop-blur-md sm:w-auto sm:self-center left-6 right-6 drop-shadow-md"
+                  className="fixed md:hidden bg-white w-[70%] text-center right-[-20px] h-screen  top-0 flex pt-20 items-center flex-col px-3 gap-2 "
+                  // className="absolute md:hidden flex flex-col w-1/2 h-screen items-center self-end py-8 mt-10 z-[1000] space-y-6 bg-white backdrop-blur-md     right-0 drop-shadow-md"
                 >
-                  {MENU_LINKS.map(({ link, name }) => (
-                    <li className="relative">
+                  {MOBILE_MENU_LINKS.map(({ link, name, id }) => (
+                    <li className={`relative w-full   ${id == 6 ? 'pt-10 border-t border-primary-2/20' : 'pt-0'} ${id == 5 ? 'pb-10 ' : 'pb-0'} `}>
                       <Link
                         href={link}
                         key={link}
                         onClick={handleLinkClick}
-                        className={`${
-                          pathname === link && "active"
-                        } text-[1.125rem] font-medium font-sans transition-all ease-in-out duration-300 text-gray-500 nav_links`}
+                        className={` ${
+                          pathname === link && "text-green bg-[#087D400D] "
+                        } text-[1.125rem] font-medium font-sans py-3 transition-all rounded-md ease-in-out duration-300 text-gray-500 hover:text-green hover:bg-[#087D400D] flex justify-center items-center`}
                       >
                         {name}
                       </Link>
                     </li>
                   ))}
-                  <div className="flex items-center  gap-5 bg-gray-200 px-1 sm:ml-3 lg:ml-[1rem] py-1 rounded-full">
-                    <Link
-                      href={"/cart"}
-                      className="bg-gray-3 rounded-full w-14 h-14 flex justify-center items-center relative cursor-pointer"
-                    >
-                      {/* <IoCartOutline className="text-white" size={" 25px"} /> */}
-                      <Image 
-                      src={'/icons/shopping-cart-01.svg'}
-                      alt="Shoppng cart"
-                      width={35}
-                      height={35}
-                      />
-                      <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[20px] w-[20px] rounded-full text-[10px] text-white flex items-center justify-center">
-                        2
-                      </p>
-                    </Link>
-
-                    <div
-                      onClick={toggleLoginMenu}
-                      className="bg-green rounded-full w-14 h-14 flex justify-center items-center cursor-pointer"
-                    >
-                      {/* <RxAvatar className="text-white" size={"25px"} /> */}
-                      <Image 
-                      src={'/icons/user-circle.svg'}
-                      alt="user circle"
-                      width={35}
-                      height={35}
-                      />
-                    </div>
-                  </div>
+                 
                 </motion.ul>
               )}{" "}
             </AnimatePresence>
