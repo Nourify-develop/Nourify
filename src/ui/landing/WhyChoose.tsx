@@ -39,7 +39,7 @@ export default function WhyChoose() {
                   <Typography.h4 className="!text-gray-4 ">
                     {item.title}
                   </Typography.h4>
-                  <Typography.p isGray className="!text-[0.875em] lg:w-[80%]">
+                  <Typography.p isGray className="!text-[0.875em] lg:w-[80%] !text-primary-2/70">
                     {item.text}
                   </Typography.p>
                 </aside>

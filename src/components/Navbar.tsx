@@ -8,6 +8,7 @@ import { RxAvatar } from "react-icons/rx";
 import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Wrapper from "@/layout/wrapper";
+import Image from "next/image";
 
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -15,6 +16,9 @@ function Navbar() {
   const [showLoginMenu, setShowLoginMenu] = useState<boolean>(false);
 
   const [hoverState, setHoverState] = useState("none");
+  const mobileMenuRef = useRef<HTMLDivElement>(null);
+  const hamburgerRef = useRef<HTMLButtonElement>(null);
+
 
   const toggleMobileMenu = useCallback(() => {
     setShowMobileMenu((current) => !current);
@@ -31,11 +35,48 @@ function Navbar() {
     { name: "Contact Us", link: "/contact-us", id: 4 },
   ];
 
+  const MOBILE_MENU_LINKS = [
+    { name: "Home", link: "/", id: 1 },
+    { name: "Shop", link: "/shop", id: 2 },
+    { name: "cart", link: "/cart", id: 3 },
+    { name: "About Us", link: "/about-us", id: 4 },
+    { name: "Contact Us", link: "/contact-us", id: 5 },
+    { name: "Create Account", link: "/signup", id: 6 },
+    { name: "Login to your Account", link: "/login", id: 7 },
+
+  ];
+
+
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        mobileMenuRef.current &&
+        !mobileMenuRef.current.contains(event.target as Node) &&
+        hamburgerRef.current &&
+        !hamburgerRef.current.contains(event.target as Node)
+      ) {
+        setShowMobileMenu(false);
+      }
+    };
+    
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const handleLinkClick = () => {
+    setShowMobileMenu(false);
+  };
+
   const removeLoginMenu = () => {
     if (showLoginMenu) {
       setShowLoginMenu(false);
     }
   };
+
 
   return (
     <Wrapper
@@ -67,7 +108,6 @@ function Navbar() {
           <Logo />
         </div>
 
-        
         <div className="flex items-center justify-end">
           <div className="relative w-[60%] sm:w-auto   flex items-center gap-[5px] md:gap-[1px] lg:gap-[3px] bg-[#F4F4F4] rounded-full ml-4 mr-[.5rem]  px-2 py-2 transition-all duration-300 ">
             <span>
@@ -84,23 +124,35 @@ function Navbar() {
             />
           </div>
           <div className="hidden md:flex items-center  gap-5 bg-gray-200 px-1 sm:ml-3 lg:ml-[1rem] py-1 rounded-full">
-            <Link
-              href={"/cart"}
-              className="bg-gray-3 rounded-full p-1 lg:p-2 relative cursor-pointer"
-            >
-              <IoCartOutline className="text-white" size={" 25px"} />
-              <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
-                2
-              </p>
-            </Link>
+                    <Link
+                      href={"/cart"}
+                      className="bg-gray-3 rounded-full w-10 h-10 flex justify-center items-center relative cursor-pointer"
+                    >
+                      {/* <IoCartOutline className="text-white" size={" 25px"} /> */}
+                      <Image 
+                      src={'/icons/shopping-cart-01.svg'}
+                      alt="Shoppng cart"
+                      width={25}
+                      height={25}
+                      />
+                      <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
+                        2
+                      </p>
+                    </Link>
 
-            <div
-              onClick={toggleLoginMenu}
-              className="bg-green rounded-full md:p-1 lg:p-2 cursor-pointer"
-            >
-              <RxAvatar className="text-white" size={"25px"} />
-            </div>
-          </div>
+                    <div
+                      onClick={toggleLoginMenu}
+                      className="bg-green rounded-full w-10 h-10 flex justify-center items-center cursor-pointer"
+                    >
+                      {/* <RxAvatar className="text-white" size={"25px"} /> */}
+                      <Image 
+                      src={'/icons/user-circle.svg'}
+                      alt="user circle"
+                      width={25}
+                      height={25}
+                      />
+                    </div>
+                  </div>
 
           {/* TODO: MAKE A DROPDOWN FOR CREATE ACCOUNT AND LOGIN */}
           {/* FIXME: WORKS */}
@@ -152,9 +204,10 @@ function Navbar() {
 
           {/* TODO: HAMBURGER ICON and add the "OPEN" class dynamically.*/}
           {/* FIXME: WORKS */}
-          <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 rounded-full flex justify-center items-center">
+          <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 relative z-50 rounded-full flex justify-center items-center">
             <button
               onClick={toggleMobileMenu}
+              ref={hamburgerRef}
               className={`${showMobileMenu ? "open" : null}
             "hamburger  cursor-pointer  focus:outline-none flex flex-col gap-1 justify-center items-center`}
             >
@@ -166,7 +219,10 @@ function Navbar() {
           {/* TODO: MOBILE MENU - make sure the hidden class is applied and then removed dynamically.*/}
           {/* FIXME: WORKS */}
 
-          <div>
+          <div  ref={mobileMenuRef} className="">
+          {showMobileMenu && (
+          <div className="w-screen h-screen bg-black/20  backdrop-blur-3xl fixed top-0 left-0"></div>)}
+
             <AnimatePresence>
               {showMobileMenu && (
                 <motion.ul
@@ -174,21 +230,24 @@ function Navbar() {
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.5 }}
-                  className="absolute md:hidden flex flex-col items-center self-end py-8 mt-20 z-[1000] space-y-6 bg-white backdrop-blur-md sm:w-auto sm:self-center left-6 right-6 drop-shadow-md"
+                  className="fixed md:hidden bg-white w-[70%] text-center right-[-20px] h-screen  top-0 flex pt-20 items-center flex-col px-3 gap-2 "
+                  // className="absolute md:hidden flex flex-col w-1/2 h-screen items-center self-end py-8 mt-10 z-[1000] space-y-6 bg-white backdrop-blur-md     right-0 drop-shadow-md"
                 >
-                  {MENU_LINKS.map(({ link, name }) => (
-                    <li className="relative">
+                  {MOBILE_MENU_LINKS.map(({ link, name, id }) => (
+                    <li className={`relative w-full   ${id == 6 ? 'pt-10 border-t border-primary-2/20' : 'pt-0'} ${id == 5 ? 'pb-10 ' : 'pb-0'} `}>
                       <Link
                         href={link}
                         key={link}
-                        className={`${
-                          pathname === link && "active"
-                        } text-[1.125rem] font-medium font-sans transition-all ease-in-out duration-300 text-gray-500 nav_links`}
+                        onClick={handleLinkClick}
+                        className={` ${
+                          pathname === link && "text-green bg-[#087D400D] "
+                        } text-[1.125rem] font-medium font-sans py-3 transition-all rounded-md ease-in-out duration-300 text-gray-500 hover:text-green hover:bg-[#087D400D] flex justify-center items-center`}
                       >
                         {name}
                       </Link>
                     </li>
                   ))}
+                 
                 </motion.ul>
               )}{" "}
             </AnimatePresence>
