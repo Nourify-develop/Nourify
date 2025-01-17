@@ -9,9 +9,4 @@ export const inputFields = [
     placeholder: "Email",
     type: "email",
   },
-  {
-    name: "phoneNumber",
-    placeholder: "Phone Number",
-    type: "number",
-  },
 ];

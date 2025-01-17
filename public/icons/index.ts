@@ -7,6 +7,7 @@ import Products from "./product-loading.svg";
 import Customers from "./user-group.svg";
 import Help from "./help-circle.svg";
 import Settings from "./settings-01.svg";
+import AboutMobile from "./aboutus-mobile.svg";
 
 export {
   Logo,
@@ -18,4 +19,5 @@ export {
   Products,
   Settings,
   Transaction,
+  AboutMobile,
 };

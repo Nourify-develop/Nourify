@@ -2,7 +2,6 @@
 import React, { useState } from "react";
 import Wrapper from "@/layout/wrapper";
 import { Button } from "../../components/ui/input";
-import { IoMdArrowDropdown } from "react-icons/io";
 import { inputFields } from "./_data";
 
 interface FormValues {
@@ -43,7 +42,7 @@ const page = () => {
   return (
     <div>
       <section
-        className="w-full h-[60vh] bg-black bg-cover bg-center relative"
+        className="w-full h-[40vh] sm:h-[60vh] bg-black bg-cover sm:bg-center relative"
         style={{
           backgroundImage: "url('/images/contact-us-background-image.svg')",
         }}
@@ -58,12 +57,12 @@ const page = () => {
         </Wrapper>
       </section>
       <Wrapper className="flex flex-col justify-center items-center">
-        <h1 className="text-[2.5rem] font-bold ">Got a Question?</h1>
-        <h2 className="text-[1.3rem] md:text-[1.563rem] mb-[4rem]">
+        <h1 className="text-[2rem] sm:text-[2.5rem] font-bold ">Got a Question?</h1>
+        <h2 className="text-[0.9rem] font-medium sm:text-[1.3rem] md:text-[1.563rem] mb-4 sm:mb-[4rem]">
           We're here to help. You can email us using the form below.
         </h2>
-        <div className="flex flex-col  w-[80%]">
-          <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="flex flex-col w-  sm:w-[80%]">
+          <form onSubmit={handleSubmit} className="space-y-6 w-">
             {inputFields.map(({ name, placeholder, type }) => (
               <input
                 type={type}
@@ -71,41 +70,18 @@ const page = () => {
                 value={formValues[name as keyof FormValues]}
                 placeholder={placeholder}
                 onChange={handleInputChange(name as keyof FormValues)}
-                className="input-field placeholder:text-sm p-4 w-full h-full rounded-[50px] focus:outline-0 appearance-none hover:bg-gray-200 transition-colors ease-in duration-150 "
+                className="input-field placeholder:text-sm p-4 w-full h-full rounded-[50px] focus:outline-0 appearance-none border border-gray-1 hover:bg-gray-200 transition-colors ease-in duration-150 "
                 required
               />
             ))}
-            <label htmlFor="subject" className="mt-3 inline-block">
-              Subject
-            </label>
-            <div className="relative w-full">
-              <select
-                name="Other"
-                id="Other"
-                aria-placeholder="Other"
-                value={formValues.selectValue}
-                onChange={handleInputChange("selectValue")}
-                className="placeholder:text-sm text-sm text-gray-3 p-4 w-full h-full rounded-[50px] appearance-none focus:outline-0 bg-gray-1  hover:bg-gray-200 transition-colors ease-in duration-150 "
-              >
-                <option value="" disabled hidden>
-                  Other
-                </option>
-                <option value="Other">Other</option>
-                <option value="Option 1">Option 1</option>
-                <option value="Option 2">Option 2</option>
-              </select>
-              <span>
-                <IoMdArrowDropdown className="text-gray-3 absolute right-8 top-4" />
-              </span>
-                        
-            </div>
+          
             <textarea
               name="Message"
               id="Message"
               placeholder="Message"
               value={formValues.message}
               onChange={handleInputChange("message")}
-              className="input-field placeholder:text-sm px-4 pt-4 pb-24 w-full h-full rounded-[30px] focus:outline-0 bg-gray-1  hover:bg-gray-200 transition-colors ease-in duration-150 "
+              className="input-field placeholder:text-sm px-4 pt-4 pb-24 w-full h-full rounded-2xl sm:rounded-[30px] focus:outline-0 border border-gray-1  bg-gray-1  hover:bg-gray-200 transition-colors ease-in duration-150 "
             ></textarea>
 
             <Button
