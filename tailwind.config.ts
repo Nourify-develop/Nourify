@@ -43,6 +43,7 @@ const config: Config = {
           "10": "#F5F5F5",
           "11": "#F2F1F6",
           "12": "#585858",
+          "13":"#AAAAAA",
           light: "#EBEBEB",
           "light-2": "#ECECEC",
         },
