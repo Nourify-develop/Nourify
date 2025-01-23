@@ -9,7 +9,7 @@ function Logo() {
       <img
         src="/icons/Nourify.svg"
         alt="Nourify Logo"
-        className="w-[7.55rem] h-[4rem] md:w-[8rem] md:h-[4rem] lg:w-[8.55rem] lg:h-[4.375rem] drop-shadow-xl transition-all duration-300"
+        className="w-[7.55rem] h-[4rem] md:w-[6rem] md:h-[4rem] lg:w-[8.55rem] lg:h-[4.375rem] drop-shadow-xl transition-all duration-300"
       />
     </Link>
   );
