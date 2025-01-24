@@ -372,7 +372,7 @@ function Navbar() {
                     >
                       <ShoppingCart className="text-white" />
                       {cart.length > 0 ? (
-                        <p className="absolute top-4 md:-top-1 -right-2 md:right-1 lg:-right-1 bg-red-600 px-1.5  rounded-full text-sm text-white flex items-center justify-center">
+                        <p className="absolute -top-1 md:-top-1 -right-2 md:right-1 lg:-right-1 bg-red-600 px-1.5  rounded-full text-sm text-white flex items-center justify-center">
                           {cart.length}
                         </p>
                       ) : (
