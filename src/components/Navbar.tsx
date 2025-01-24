@@ -9,10 +9,12 @@ import { usePathname } from "next/navigation";
 import { AnimatePresence, motion } from "framer-motion";
 import Wrapper from "@/layout/wrapper";
 import Image from "next/image";
+import { ShoppingCart } from "lucide-react";
+import useCart from "@/hooks/useCart";
 
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
-
+  const { cart } = useCart();
   const [showLoginMenu, setShowLoginMenu] = useState<boolean>(false);
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
@@ -58,7 +60,6 @@ function Navbar() {
     { name: "Contact Us", link: "/contact-us", id: 4 },
   ];
 
-
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       if (
@@ -89,50 +90,50 @@ function Navbar() {
 
   // Animation variants for the mobile menu
   const menuVariants = isSmallScreen
-  ? {
-      closed: {
-        y: "-100%", // Slide from the top for smaller screens
-        opacity: 0,
-      },
-      open: {
-        y: 0,
-        opacity: 1,
-        transition: {
-          type: "spring",
-          stiffness: 300,
-          damping: 30,
+    ? {
+        closed: {
+          y: "-100%", // Slide from the top for smaller screens
+          opacity: 0,
         },
-      },
-      exit: {
-        y: "-100%",
-        opacity: 0,
-        transition: {
-          duration: 0.3,
+        open: {
+          y: 0,
+          opacity: 1,
+          transition: {
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          },
         },
-      },
-    }
-  : {
-      closed: {
-        x: "-100%", // Slide from the left for larger screens
-        opacity: 0,
-      },
-      open: {
-        x: 0,
-        opacity: 1,
-        transition: {
-          type: "spring",
-          stiffness: 300,
-          damping: 30,
+        exit: {
+          y: "-100%",
+          opacity: 0,
+          transition: {
+            duration: 0.3,
+          },
         },
-      },
-      exit: {
-        x: "-100%",
-        opacity: 0,
-        transition: {
-          duration: 0.3,
+      }
+    : {
+        closed: {
+          x: "-100%", // Slide from the left for larger screens
+          opacity: 0,
         },
-      },
-    };
+        open: {
+          x: 0,
+          opacity: 1,
+          transition: {
+            type: "spring",
+            stiffness: 300,
+            damping: 30,
+          },
+        },
+        exit: {
+          x: "-100%",
+          opacity: 0,
+          transition: {
+            duration: 0.3,
+          },
+        },
+      };
 
   const backdropVariants = {
     closed: {
@@ -207,16 +208,14 @@ function Navbar() {
                 href={"/cart"}
                 className="bg-gray-3 rounded-full w-10 h-10 flex justify-center items-center relative cursor-pointer"
               >
-                {/* <IoCartOutline className="text-white" size={" 25px"} /> */}
-                <Image
-                  src={"/icons/shopping-cart-01.svg"}
-                  alt="Shoppng cart"
-                  width={25}
-                  height={25}
-                />
-                <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
-                  2
-                </p>
+                <ShoppingCart className="text-white" />
+                {cart.length > 0 ? (
+                  <p className="absolute top-4 md:-top-1 -right-2 md:right-1 lg:-right-1 bg-red-600 px-1.5  rounded-full text-sm text-white flex items-center justify-center">
+                    {cart.length}
+                  </p>
+                ) : (
+                  ""
+                )}
               </Link>
 
               <div
@@ -371,16 +370,14 @@ function Navbar() {
                       onClick={handleLinkClick}
                       className="bg-green rounded-full w-10 h-10 flex justify-center items-center relative cursor-pointer"
                     >
-                      {/* <IoCartOutline className="text-white" size={" 25px"} /> */}
-                      <Image
-                        src={"/icons/shopping-cart-01.svg"}
-                        alt="Shoppng cart"
-                        width={25}
-                        height={25}
-                      />
-                      <p className="absolute top-0 md:top-1 right-0 md:right-1 lg:right-2  bg-[#FF0000] border border-white h-[15px] w-[15px] rounded-full text-[10px] text-white flex items-center justify-center">
-                        2
-                      </p>
+                      <ShoppingCart className="text-white" />
+                      {cart.length > 0 ? (
+                        <p className="absolute top-4 md:-top-1 -right-2 md:right-1 lg:-right-1 bg-red-600 px-1.5  rounded-full text-sm text-white flex items-center justify-center">
+                          {cart.length}
+                        </p>
+                      ) : (
+                        ""
+                      )}
                     </Link>
 
                     <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 relative z-[1001]  rounded-full flex justify-center items-center">
