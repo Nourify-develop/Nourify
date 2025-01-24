@@ -2,17 +2,28 @@ import { useState, useEffect } from "react";
 
 const useCart = () => {
   const [cart, setCart] = useState<any[]>([]);
+  const [userQuantityLength, setUserQuantityLength] = useState<number>(0);
 
   // Load cart from localStorage on component mount
   useEffect(() => {
     const storedCart = JSON.parse(localStorage.getItem("cart") || "[]");
     setCart(storedCart);
+    updateUserQuantityLength(storedCart);
   }, []);
+
+  // Helper to calculate total userQuantity
+  const updateUserQuantityLength = (updatedCart: any[]) => {
+    const totalQuantity = updatedCart.reduce(
+      (total, item) => total + (item.userQuantity || 0),
+      0
+    );
+    setUserQuantityLength(totalQuantity);
+  };
 
   // Add to cart
   const addToCart = (product: any, userQuantity: number) => {
     const existingProductIndex = cart.findIndex(
-      (item) => item.id === product.id // Use product.id directly
+      (item) => item.id === product.id
     );
 
     let updatedCart = [...cart];
@@ -26,6 +37,7 @@ const useCart = () => {
 
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateUserQuantityLength(updatedCart);
   };
 
   // Remove from cart and reset quantity
@@ -38,11 +50,16 @@ const useCart = () => {
 
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateUserQuantityLength(updatedCart);
   };
+
+  // Remove all items from the cart
   const removeAllCart = () => {
     setCart([]);
     localStorage.setItem("cart", JSON.stringify([])); // Clear cart in localStorage
+    updateUserQuantityLength([]);
   };
+
   // Check if a product is in the cart
   const isInCart = (productId: number) => {
     return cart.some((item) => item.id === productId);
@@ -56,16 +73,17 @@ const useCart = () => {
 
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+    updateUserQuantityLength(updatedCart);
   };
 
   return {
     cart,
+    userQuantityLength,
     addToCart,
     removeFromCart,
     removeAllCart,
     isInCart,
     updateQuantity,
-
   };
 };
 
