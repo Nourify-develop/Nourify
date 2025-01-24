@@ -677,7 +677,60 @@ const rawProducts = [
     ],
     totalReviews: 12,
   },
-
+  {
+    image: "/images/sausage-roll.svg",
+    name: "Sausage Roll",
+    description:
+      "Savor the savory goodness of our Sausage Roll, featuring a perfectly seasoned sausage wrapped in a flaky, golden pastry. This small-sized delight is ideal for quick snacks, parties, or as a hearty addition to your meal. Enjoy the perfect balance of flavor and texture in every bite.",
+    category: "pastries",
+    size: "small",
+    quantity: 30,
+    price: 25000,
+    status: "In Stock",
+    limitedOffer: true,
+    expressDelivery: false,
+    rating: 4.2,
+    reviews: [
+      {
+        user: "Benjamin",
+        comment: "So tasty and well-seasoned!",
+        rating: 4.5,
+      },
+      {
+        user: "Emma",
+        comment: "A bit greasy but delicious overall.",
+        rating: 4.0,
+      },
+    ],
+    totalReviews: 22,
+  },
+  {
+    image: "/images/single-cream-bun.svg",
+    name: "Cream Bun",
+    description:
+      "Soft, fluffy, and filled with a luscious cream center, our Cream Bun is a small-sized pastry that’s pure comfort food. Perfect for tea time or as a sweet ending to your day, it’s a delightful combination of lightness and indulgence in every bite.",
+    category: "pastries",
+    size: "small",
+    quantity: 70,
+    price: 5000,
+    status: "In Stock",
+    limitedOffer: false,
+    expressDelivery: true,
+    rating: 4.8,
+    reviews: [
+      {
+        user: "Isabella",
+        comment: "The cucumbers I bought were fresh and crunchy! Perfect for my salads and snacks. They had a great flavor and lasted a good week in my fridge without going bad. Definitely will be purchasing again.",
+        rating: 5.0,
+      },
+      {
+        user: "William",
+        comment: "The cucumbers were decent, but a few were a little softer than I expected. Most were fresh, though, and worked well in my salad. Not the best batch I've gotten, but still usable.",
+        rating: 4.6,
+      },
+    ],
+    totalReviews: 30,
+  },
 ];
 const { generateProductData } = useProductGenerator();
 export const products = generateProductData(rawProducts);
