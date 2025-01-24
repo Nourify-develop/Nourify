@@ -8,56 +8,60 @@ import { ChevronRight, Delete, Dot, Minus, Plus, Trash2 } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { Fragment, useState } from "react";
+import { toast } from "sonner";
 
 const page = () => {
   const router = useRouter();
   const { cart, updateQuantity, removeFromCart, removeAllCart } = useCart();
-  const [selectedItems, setSelectedItems] = useState<number[]>([]); // Explicitly define type
+
+  const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
   const { showModal } = useModal();
   const handleSelectAll = () => {
-    if (selectedItems.length === cart.length) {
-      setSelectedItems([]); // Unselect all
+    if (selectedProducts.length === cart.length) {
+      setSelectedProducts([]);
     } else {
-      setSelectedItems(cart.map((item) => item.id)); // Select all
+      setSelectedProducts(cart.map((product) => product.id));
     }
   };
 
-  const handleSelectItem = (id: number) => {
-    if (selectedItems.includes(id)) {
-      setSelectedItems(selectedItems.filter((itemId) => itemId !== id)); // Unselect
+  const handleSelectProduct = (id: number) => {
+    if (selectedProducts.includes(id)) {
+      setSelectedProducts(selectedProducts.filter((ProductId) => ProductId !== id));
     } else {
-      setSelectedItems([...selectedItems, id]); // Select
+      setSelectedProducts([...selectedProducts, id]);
     }
   };
-  const handleIncreaseQuantity = (itemId: number, currentQuantity: number) => {
-    updateQuantity(itemId, currentQuantity + 1);
+  const handleIncreaseQuantity = (productId: number, currentQuantity: number) => {
+    updateQuantity(productId, currentQuantity + 1);
   };
 
-  const handleDecreaseQuantity = (itemId: number, currentQuantity: number) => {
+  const handleDecreaseQuantity = (productId: number, currentQuantity: number) => {
     if (currentQuantity > 1) {
-      updateQuantity(itemId, currentQuantity - 1);
+      updateQuantity(productId, currentQuantity - 1);
     }
   };
-  const handleRemove = (itemId: number) => {
+  const handleRemove = (productId: number) => {
     showModal(
-      "Are you sure you want to remove this item from your cart?",
+      "Are you sure you want to remove this product from your cart?",
       () => {
-        removeFromCart(itemId); // Remove the item from cart if confirmed
+        removeFromCart(productId); 
+        toast.success("Product removed from cart");
       }
     );
   };
   const handleClearAll = () => {
     showModal(
-      "Are you sure you want to clear all items from your cart?",
+      "Are you sure you want to clear all products from your cart?",
       () => {
         removeAllCart();
+        toast.success("All products removed from cart");
       }
     );
   };
   const calculateTotal = () => {
     return cart
-      .filter((item) => selectedItems.includes(item.id)) // Filter selected items
-      .reduce((acc, item) => acc + item.price * item.userQuantity, 0)
+      .filter((product) => selectedProducts.includes(product.id)) 
+      .reduce((acc, product) => acc + product.price * product.userQuantity, 0)
       .toLocaleString(undefined, {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2,
@@ -96,7 +100,7 @@ const page = () => {
                 <input
                   type="checkbox"
                   className="checkbox__input"
-                  checked={selectedItems.length === cart.length}
+                  checked={selectedProducts.length === cart.length}
                   onClick={handleSelectAll}
                   readOnly
                 />
@@ -110,7 +114,7 @@ const page = () => {
           </div>
           <div className="">
             {cart.length > 0 ? (
-              cart.map((item, index) => (
+              cart.map((product, index) => (
                 <div
                   key={index}
                   className="flex w-full items-center gap-x-2.5 md:gap-x-8"
@@ -120,8 +124,8 @@ const page = () => {
                       <input
                         type="checkbox"
                         className="checkbox__input"
-                        checked={selectedItems.includes(item.id)}
-                        onChange={() => handleSelectItem(item.id)}
+                        checked={selectedProducts.includes(product.id)}
+                        onChange={() => handleSelectProduct(product.id)}
                       />
                       <span className="checkbox__inner h-5 w-5"></span>
                     </label>
@@ -130,8 +134,8 @@ const page = () => {
                     <div className="flex  gap-4">
                       <div className="px-1.5 py-2.5 bg-gray-10 ">
                         <img
-                          src={item.image}
-                          alt={item.name}
+                          src={product.image}
+                          alt={product.name}
                           className="h-24 md:h-36 w-auto  object-contain rounded-[10px]"
                         />
                       </div>
@@ -139,22 +143,22 @@ const page = () => {
                       <div className="flex flex-col justify-between">
                         <div className="space-y-2">
                           <p className="text-sm md:text-base text-gray-6">
-                            {item.category}
+                            {product.category}
                           </p>{" "}
                           <div className="flex gap-x-4">
                             {" "}
                             <h5 className="font-medium text-lg md:text-xl text-gray-8">
-                              {item.name}
+                              {product.name}
                             </h5>{" "}
                             <p
                               className={` hidden md:flex items-center text-xs pr-2 rounded-2xl ${
-                                item.status === "In Stock"
+                                product.status === "In Stock"
                                   ? "text-green-1 bg-green-1/30"
                                   : "text-red-600 bg-red-600/30"
                               }`}
                             >
                               <Dot />
-                              {item.status}
+                              {product.status}
                             </p>
                           </div>
                         </div>
@@ -162,7 +166,7 @@ const page = () => {
                           {" "}
                           <p className="text-lg font-bold text-gray-8">
                             ₦
-                            {item.price.toLocaleString(undefined, {
+                            {product.price.toLocaleString(undefined, {
                               minimumFractionDigits: 2,
                               maximumFractionDigits: 2,
                             })}
@@ -171,30 +175,30 @@ const page = () => {
                         <div className="hidden md:flex flex-col gap-y-2">
                           <p className="text-gray-6 text-sm">size </p>
                           <p className="text-gray-8 text-base">
-                            {capitalizeFirstLetter(item.size)}
+                            {capitalizeFirstLetter(product.size)}
                           </p>
                         </div>
                         <div className="hidden md:flex flex-col gap-y-2">
                           <p className="text-sm text-gray-5">
-                            Qty: {item.userQuantity}
+                            Qty: {product.userQuantity}
                           </p>
                           <div className="flex bg-gray-10 rounded-full w-fit text-gray-8 px-3.5 py-1.5 gap-y-3 text-sm">
                             <button
                               onClick={() =>
                                 handleDecreaseQuantity(
-                                  item.id,
-                                  item.userQuantity
+                                  product.id,
+                                  product.userQuantity
                                 )
                               }
                             >
                               <Minus className="h-4" />
                             </button>
-                            <p>{item.userQuantity}</p>
+                            <p>{product.userQuantity}</p>
                             <button
                               onClick={() =>
                                 handleIncreaseQuantity(
-                                  item.id,
-                                  item.userQuantity
+                                  product.id,
+                                  product.userQuantity
                                 )
                               }
                             >
@@ -209,7 +213,7 @@ const page = () => {
                         {" "}
                         <p className="text-xl font-bold text-gray-8">
                           ₦
-                          {item.price.toLocaleString(undefined, {
+                          {product.price.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
                             maximumFractionDigits: 2,
                           })}
@@ -219,13 +223,13 @@ const page = () => {
                         {" "}
                         <button
                           className="rounded-full bg-gray-10 p-2 text-red-600"
-                          onClick={() => handleRemove(item.id)}
+                          onClick={() => handleRemove(product.id)}
                         >
                           <Trash2 className="h-4" />
                         </button>
                         <button
                           onClick={() =>
-                            router.push(`/shop/${item.category}/${item.name}`)
+                            router.push(`/shop/${product.category}/${product.name}`)
                           }
                           className="rounded-full bg-gray-10 px-4 py-2 text-green-1 flex text-sm"
                         >
@@ -236,26 +240,26 @@ const page = () => {
                     <div className="flex md:hidden flex-col items-end justify-between= gap-y-10">
                       <p
                         className={` flex w-fit items-center text-xs pr-2 rounded-2xl ${
-                          item.status === "In Stock"
+                          product.status === "In Stock"
                             ? "text-green-1 bg-green-1/30"
                             : "text-red-600 bg-red-600/30"
                         }`}
                       >
                         <Dot />
-                        {item.status}
+                        {product.status}
                       </p>
                       <div className="flex bg-gray-10 rounded-full  text-gray-8 px-3 py-2 gap-x-3 text-base">
                         <button
                           onClick={() =>
-                            handleDecreaseQuantity(item.id, item.userQuantity)
+                            handleDecreaseQuantity(product.id, product.userQuantity)
                           }
                         >
                           <Minus className="h-5" />
                         </button>
-                        <p>{item.userQuantity}</p>
+                        <p>{product.userQuantity}</p>
                         <button
                           onClick={() =>
-                            handleIncreaseQuantity(item.id, item.userQuantity)
+                            handleIncreaseQuantity(product.id, product.userQuantity)
                           }
                         >
                           <Plus className="h-5" />
@@ -304,7 +308,7 @@ const page = () => {
           </div>
         </div>
         <div className="flex flex-col sm:flex-row justify-end items-center gap-3">
-          <Link href="/shop" className="w-full">
+          <Link href="/shop" className="w-full md:w-fit">
             <Button
               text="Continue Shopping "
               bg="bg-gray-7 hover:bg-gray-3"
