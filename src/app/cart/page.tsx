@@ -164,7 +164,7 @@ const page = () => {
                         </div>
                         <div>
                           {" "}
-                          <p className="text-lg font-bold text-gray-8">
+                          <p className="flex md:hidden text-lg font-bold text-gray-8">
                             ₦
                             {product.price.toLocaleString(undefined, {
                               minimumFractionDigits: 2,
@@ -208,7 +208,7 @@ const page = () => {
                         </div>
                       </div>
                     </div>
-                    <div className="hidden md:flex flex-col justify-between gap-y-20">
+                    <div className="hidden md:flex flex-col justify-between gap-y-16">
                       <div>
                         {" "}
                         <p className="text-xl font-bold text-gray-8">
@@ -219,7 +219,7 @@ const page = () => {
                           })}
                         </p>
                       </div>
-                      <div className=" flex flex-col items-end gap-y-2">
+                      <div className=" flex flex-col items-end gap-y-3">
                         {" "}
                         <button
                           className="rounded-full bg-gray-10 p-2 text-red-600"
