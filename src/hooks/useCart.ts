@@ -39,7 +39,10 @@ const useCart = () => {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
   };
-
+  const removeAllCart = () => {
+    setCart([]);
+    localStorage.setItem("cart", JSON.stringify([])); // Clear cart in localStorage
+  };
   // Check if a product is in the cart
   const isInCart = (productId: number) => {
     return cart.some((item) => item.id === productId);
@@ -59,8 +62,10 @@ const useCart = () => {
     cart,
     addToCart,
     removeFromCart,
+    removeAllCart,
     isInCart,
     updateQuantity,
+
   };
 };
 
