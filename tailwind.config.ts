@@ -28,8 +28,12 @@ const config: Config = {
         secondary: {
           DEFAULT: "#079C4E",
           foreground: "hsl(var(--secondary-foreground))",
+          '2':'#14CF3D',
         },
         yellow: "#FFA500",
+        neon: "#D6AB27",
+        red: '#EB4E4E',
+        'dark-red': '#FF0000',
         gray: {
           "1": "#F4F4F4",
           "2": "#D9D9D9",

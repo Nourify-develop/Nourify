@@ -20,16 +20,16 @@ const UserNavbar: React.FC = () => {
 
   return (
     <nav
-      className="bg-white px-[24px] py-2.5 w-full border-b-[0.5px] rounded-t-xl border-primary-2/20"
+      className="bg-white px-[24px] py-2.5 w-full border-b-[0.5px] rounded-t-xl border-primary-2/20 fixd top-0"
       role="navbar"
     >
       <div className="flex items-center justify-between w-full gap-2">
         {/* Header dynamically updates */}
-        <h1 className="text-lg font-bold uppercase w">{currentRoute}</h1>
+        <h1 className="text-lg font-bold uppercase pl-8">{currentRoute}</h1>
 
         {/* Logo */}
         <div className="flex gap-2 w">
-          <div className="absolute md:relative top-full left-0 w-full flex items-center gap-[5px] md:gap-[1px] lg:gap-[3px] bg-[#F4F4F4] md:rounded-full md:ml-4 lg:mr-[1rem]  md:px-1 md:py-1 lg:px-2 lg:py-2 transition-all duration-300 md:w-[100%]">
+          <div className="hidden md:relative top-full left-0 w-full flex items-center gap-[5px] md:gap-[1px] lg:gap-[3px] bg-[#F4F4F4] md:rounded-full md:ml-4 lg:mr-[1rem]  md:px-1 md:py-1 lg:px-2 lg:py-2 transition-all duration-300 md:w-[100%]">
             <span>
               <CiSearch
                 className="text-primary pl-2 md:pl-0"

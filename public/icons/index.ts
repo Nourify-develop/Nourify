@@ -8,6 +8,13 @@ import Customers from "./user-group.svg";
 import Help from "./help-circle.svg";
 import Settings from "./settings-01.svg";
 import AboutMobile from "./aboutus-mobile.svg";
+import TradeUp from "./trade-up.svg";
+import TradeDown from "./trade-down.svg";
+import TotalOrder from "./total-order.svg";
+import CompletedOrder from "./completed-order.svg";
+import PendingOrder from "./pending-order.svg";
+import CanceledOrder from "./canceled-order.svg";
+import Export from "./download-04.svg";
 
 export {
   Logo,
@@ -20,4 +27,11 @@ export {
   Settings,
   Transaction,
   AboutMobile,
+  CanceledOrder,
+  CompletedOrder,
+  PendingOrder,
+  TotalOrder,
+  TradeDown,
+  TradeUp,
+  Export,
 };
