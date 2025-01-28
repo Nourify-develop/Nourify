@@ -48,7 +48,7 @@ const OurProducts: React.FC = () => {
   return (
     <Wrapper id="our-products" className="bg-white flex flex-col py-10 gap-7 ">
       <div className="flex justify-between flex-col gap-7 lg:flex-row text-center md:text-left w-full">
-        <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1">
+        <h1 className="uppercase font-bold text-[2rem] leading-9 flex-1 text-gray-8">
           our&nbsp;products
         </h1>
         <p className="font-medium text-base md:text-xl text-primary-2 flex-1">

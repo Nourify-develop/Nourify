@@ -7,7 +7,7 @@ type WrapperProps = {
 
 export default function Wrapper({ children, className, ...props }: WrapperProps) {
   return (
-    <div className={`mx-auto w-full max-w-[120em] px-[4%] py-12 ${className}`} {...props}>
+    <div className={`mx-auto w-full max-w-[120em] px-[4%] py-8 md:py-12 ${className}`} {...props}>
       {children}
     </div>
   )

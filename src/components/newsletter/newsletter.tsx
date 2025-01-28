@@ -16,15 +16,15 @@ const newsletter = () => {
           </p>
         </div>
         <div className="flex justify-center lg:mt-6 w-[90%] md:w-[70%] lg:w-[85%] mx-auto">
-          <form className="flex items-center w-full p-2.5 bg-white lg:w-[610px]  rounded-full z-20">
+          <form className="flex items-center w-full p-1 pr-2 md:p-2.5 bg-white lg:w-[610px]  rounded-full z-20">
             <input
               type="email"
               placeholder="Email address"
-              className="w-full text-black pl-3.5 placeholder-gray-6  p-3 bg-transparent outline-none placeholder-[#1E1E1E80] md:text-[20px] text-[12px] font-space"
+              className="w-full text-black pl-3.5 placeholder-gray-6  p-3 bg-transparent outline-none placeholder-[#1E1E1E80] md:text-[20px] text-[14px] font-space"
             />
             <button
-              className="bg-secondary text-white font-medium text-[18px] lg:text-[20px]  lg:py-2 lg:px-6 px-3 py-3 rounded-full hover:bg-green-800 transition ease-linear duration-300  "
-              // Disable the button while loading
+              className="bg-secondary text-white font-medium text-[14px] md:text-[20px]  md:py-3 md:px-6 px-5 py-2 rounded-full hover:bg-green-800 transition ease-linear duration-300  "
+             
             >
               Subscribe
             </button>

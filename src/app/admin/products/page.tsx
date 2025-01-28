@@ -23,7 +23,8 @@ const page = () => {
     setEditingProduct(product); // Set product to be edited
     setIsModalOpen(true);
   };
-
+  
+console.log("useproducts", products)
   // const closeModal = () => {
   //   setIsModalOpen(false);
   //   setEditingProduct(null); // Reset after closing modal
@@ -39,35 +40,38 @@ const page = () => {
       setSelectedStock((prev) => (prev === filter ? null : filter));
     }
   };
-
-  const filteredProducts = products.filter((product: Product) => {
-    const matchesSearch =
-      searchTerm === "" ||
-      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      product.quantity.toString().includes(searchTerm) ||
-      product.price.toString().includes(searchTerm);
-
-    const matchesCategory =
-      !selectedCategory ||
-      selectedCategory.toLowerCase() === product.category.toLowerCase();
-
-    const matchesStock =
-      !selectedStock ||
-      (selectedStock === "In Stock" &&
-        product.status.toLowerCase() === "in stock") ||
-      (selectedStock === "Out of stock" &&
-        product.status.toLowerCase() === "out of stock");
-
-    return matchesSearch && matchesCategory && matchesStock;
-  });
+  
+  const filteredProducts = React.useMemo(() => {
+    return products.filter((product) => {
+      const matchesSearch =
+        searchTerm === "" ||
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.quantity.toString().includes(searchTerm) ||
+        product.price.toString().includes(searchTerm);
+  
+      const matchesCategory =
+        !selectedCategory ||
+        selectedCategory.toLowerCase() === product.category.toLowerCase();
+  
+      const matchesStock =
+        !selectedStock ||
+        (selectedStock === "In Stock" &&
+          product.status.toLowerCase() === "in stock") ||
+        (selectedStock === "Out of stock" &&
+          product.status.toLowerCase() === "out of stock");
+  
+      return matchesSearch && matchesCategory && matchesStock;
+    });
+  }, [products, searchTerm, selectedCategory, selectedStock]);
+  
 
   return (
     <div className="py-5">
       <div className="flex flex-col gap-11">
         {" "}
         <div className="flex w-full gap-2 justify-between">
-          <div className="relative w-full max-w-sm text-primary-2/70 ">
-            <div className="absolute top-1/2 left-4 transform -translate-y-1/2">
+          <div className="relative w-full max-w-[39rem] text-primary-2/70 ">
+            <div className="absolute top-1/2 left-4 transform -translate-y-1/2 ">
               <Search />
             </div>
 
@@ -75,7 +79,7 @@ const page = () => {
               type="text"
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="w-full bg-gray-10 rounded-[50px] pl-12 px-3.5 py-3 placeholder:text-primary-2/70"
+              className="w-full bg-gray-10 rounded-[50px] pl-12 px-3.5 py-3 placeholder:text-primary-2/70 outline-none"
               placeholder="Search for products..."
             />
           </div>
