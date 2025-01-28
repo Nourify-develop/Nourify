@@ -26,16 +26,24 @@ const page = () => {
 
   const handleSelectProduct = (id: number) => {
     if (selectedProducts.includes(id)) {
-      setSelectedProducts(selectedProducts.filter((ProductId) => ProductId !== id));
+      setSelectedProducts(
+        selectedProducts.filter((ProductId) => ProductId !== id)
+      );
     } else {
       setSelectedProducts([...selectedProducts, id]);
     }
   };
-  const handleIncreaseQuantity = (productId: number, currentQuantity: number) => {
+  const handleIncreaseQuantity = (
+    productId: number,
+    currentQuantity: number
+  ) => {
     updateQuantity(productId, currentQuantity + 1);
   };
 
-  const handleDecreaseQuantity = (productId: number, currentQuantity: number) => {
+  const handleDecreaseQuantity = (
+    productId: number,
+    currentQuantity: number
+  ) => {
     if (currentQuantity > 1) {
       updateQuantity(productId, currentQuantity - 1);
     }
@@ -44,7 +52,7 @@ const page = () => {
     showModal(
       "Are you sure you want to remove this product from your cart?",
       () => {
-        removeFromCart(productId); 
+        removeFromCart(productId);
         toast.success("Product removed from cart");
       }
     );
@@ -60,7 +68,7 @@ const page = () => {
   };
   const calculateTotal = () => {
     return cart
-      .filter((product) => selectedProducts.includes(product.id)) 
+      .filter((product) => selectedProducts.includes(product.id))
       .reduce((acc, product) => acc + product.price * product.userQuantity, 0)
       .toLocaleString(undefined, {
         minimumFractionDigits: 2,
@@ -86,12 +94,21 @@ const page = () => {
         </Fragment>
       </nav>
       <section className="w-full py-6">
-        <Typography.h3>
-          CART{" "}
-          <span className="text-xs text-gray-5 font-light">
-            ({cart.length} {cart.length === 1 ? "product" : "products"})
-          </span>
-        </Typography.h3>
+        <div className="flex justify-between">
+          {" "}
+          <h3 className="text-bold flex items-center text-xl md:text-[30px]">
+            CART{" "}
+            <span className="text-sm md:text-xl text-gray-5 font-light">
+              ({cart.length} {cart.length === 1 ? "product" : "products"})
+            </span>
+          </h3>
+          <button
+            className="inline-block text-red-600 text-sm"
+            onClick={handleClearAll}
+          >
+            Clear cart
+          </button>
+        </div>
         <div className="pt-8">
           {" "}
           <div className="flex justify-between w-full">
@@ -104,11 +121,14 @@ const page = () => {
                   onClick={handleSelectAll}
                   readOnly
                 />
-                <span className="checkbox__inner  h-6 w-6"></span>
+                <span className="checkbox__inner  h-5 w-5 md:h-6 md:w-6"></span>
               </label>
-              <p>Select all</p>
+              <p className="text-sm md:text-2xl text-gray-8">Select all</p>
             </button>
-            <button className="text-red-600" onClick={handleClearAll}>
+            <button
+              className="hidden md:inline-blocktext-red-600 text-xl"
+              onClick={handleClearAll}
+            >
               Clear all
             </button>
           </div>
@@ -127,37 +147,37 @@ const page = () => {
                         checked={selectedProducts.includes(product.id)}
                         onChange={() => handleSelectProduct(product.id)}
                       />
-                      <span className="checkbox__inner h-5 w-5"></span>
+                      <span className="checkbox__inner h-4 w-4 md:h-5 md:w-5"></span>
                     </label>
                   </div>
                   <div className="flex items-center justify-between  border-b-[0.5px] py-7.5 border-primary-2/40 w-full ">
                     <div className="flex  gap-4">
-                      <div className="px-1.5 py-2.5 bg-gray-10 ">
+                      <div className="px-2 md:px-6 py-3 md:py-12 bg-gray-10 ">
                         <img
                           src={product.image}
                           alt={product.name}
-                          className="h-24 md:h-36 w-auto  object-contain rounded-[10px]"
+                          className="h-20 md:h-36 w-auto  object-contain rounded-[10px]"
                         />
                       </div>
 
                       <div className="flex flex-col justify-between">
                         <div className="space-y-2">
-                          <p className="text-sm md:text-base text-gray-6">
+                          <p className="text-[11px] md:text-lg text-gray-6 font-medium">
                             {product.category}
                           </p>{" "}
                           <div className="flex gap-x-4">
                             {" "}
-                            <h5 className="font-medium text-lg md:text-xl text-gray-8">
+                            <h5 className="font-medium md:font-bold text-sm md:text-lg md:text-[28px] text-gray-8">
                               {product.name}
                             </h5>{" "}
                             <p
-                              className={` hidden md:flex items-center text-xs pr-2 rounded-2xl ${
+                              className={` hidden md:flex gap-x-1 items-center text-sm px-5 rounded-2xl ${
                                 product.status === "In Stock"
-                                  ? "text-green-1 bg-green-1/30"
+                                  ? "text-secondary bg-secondary/10"
                                   : "text-red-600 bg-red-600/30"
                               }`}
                             >
-                              <Dot />
+                              <span className="text-xl">•</span>
                               {product.status}
                             </p>
                           </div>
@@ -172,17 +192,17 @@ const page = () => {
                             })}
                           </p>
                         </div>
-                        <div className="hidden md:flex flex-col gap-y-2">
-                          <p className="text-gray-6 text-sm">size </p>
-                          <p className="text-gray-8 text-base">
+                        <div className="hidden md:flex flex-col ">
+                          <p className="text-gray-6 text-lg">size </p>
+                          <p className="text-gray-8 text-xl">
                             {capitalizeFirstLetter(product.size)}
                           </p>
                         </div>
                         <div className="hidden md:flex flex-col gap-y-2">
-                          <p className="text-sm text-gray-5">
+                          <p className="text-lg text-gray-5">
                             Qty: {product.userQuantity}
                           </p>
-                          <div className="flex bg-gray-10 rounded-full w-fit text-gray-8 px-3.5 py-1.5 gap-y-3 text-sm">
+                          <div className="flex bg-gray-10 rounded-full w-fit text-gray-8 px-6 py-3 gap-x-5 text-sm border-[1px] border-gray-light-2 ">
                             <button
                               onClick={() =>
                                 handleDecreaseQuantity(
@@ -191,7 +211,7 @@ const page = () => {
                                 )
                               }
                             >
-                              <Minus className="h-4" />
+                              <Minus className="h-4 focus-within::text-red-600 active:text-red-600" />
                             </button>
                             <p>{product.userQuantity}</p>
                             <button
@@ -202,16 +222,16 @@ const page = () => {
                                 )
                               }
                             >
-                              <Plus className="h-4" />
+                              <Plus className="h-4 focus-within::text-green-700 active:text-green-700" />
                             </button>
                           </div>
                         </div>
                       </div>
                     </div>
-                    <div className="hidden md:flex flex-col justify-between gap-y-16">
+                    <div className="hidden md:flex flex-col justify-between gap-y-20 xl:gap-y-24">
                       <div>
                         {" "}
-                        <p className="text-xl font-bold text-gray-8">
+                        <p className="text-3xl font-bold text-gray-8">
                           ₦
                           {product.price.toLocaleString(undefined, {
                             minimumFractionDigits: 2,
@@ -225,15 +245,17 @@ const page = () => {
                           className="rounded-full bg-gray-10 p-2 text-red-600"
                           onClick={() => handleRemove(product.id)}
                         >
-                          <Trash2 className="h-4" />
+                          <Trash2 className="h-6" />
                         </button>
                         <button
                           onClick={() =>
-                            router.push(`/shop/${product.category}/${product.name}`)
+                            router.push(
+                              `/shop/${product.category}/${product.name}`
+                            )
                           }
-                          className="rounded-full bg-gray-10 px-4 py-2 text-green-1 flex text-sm"
+                          className="rounded-full bg-gray-10 px-4 py-2 text-green-1 flex items-center text-lg"
                         >
-                          View Product <ChevronRight className="h-4" />
+                          View Product <ChevronRight className="h-6" />
                         </button>
                       </div>
                     </div>
@@ -248,18 +270,24 @@ const page = () => {
                         <Dot />
                         {product.status}
                       </p>
-                      <div className="flex bg-gray-10 rounded-full  text-gray-8 px-3 py-2 gap-x-3 text-base">
+                      <div className="flex bg-gray-10 rounded-full  text-gray-8 px-3 py-2 gap-x-2 text-base border-[1px] border-gray-light-2">
                         <button
                           onClick={() =>
-                            handleDecreaseQuantity(product.id, product.userQuantity)
+                            handleDecreaseQuantity(
+                              product.id,
+                              product.userQuantity
+                            )
                           }
                         >
                           <Minus className="h-5" />
                         </button>
-                        <p>{product.userQuantity}</p>
+                        <p className="text-sm">{product.userQuantity}</p>
                         <button
                           onClick={() =>
-                            handleIncreaseQuantity(product.id, product.userQuantity)
+                            handleIncreaseQuantity(
+                              product.id,
+                              product.userQuantity
+                            )
                           }
                         >
                           <Plus className="h-5" />
@@ -307,13 +335,13 @@ const page = () => {
             <p>₦{calculateTotal()}</p>
           </div>
         </div>
-        <div className="flex flex-col sm:flex-row justify-end items-center gap-3">
+        <div className="flex flex-col-reverse sm:flex-row justify-end items-center gap-3">
           <Link href="/shop" className="w-full md:w-fit">
             <Button
               text="Continue Shopping "
-              bg="bg-gray-7 hover:bg-gray-3"
-              border="border-gray-7 hover:border-gray-3"
-              color="text-white"
+              bg="bg-green-1/10 hover:bg-gray-3"
+              border="border-green-1/10 hover:border-green-1/30"
+              color="text-green-1"
             />
           </Link>
           <Button
