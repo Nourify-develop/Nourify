@@ -40,6 +40,7 @@ console.log("useproducts", products)
       setSelectedStock((prev) => (prev === filter ? null : filter));
     }
   };
+  
   const filteredProducts = React.useMemo(() => {
     return products.filter((product) => {
       const matchesSearch =
