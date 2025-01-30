@@ -19,13 +19,13 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         className="flex justify-between flex-col gap-y-2"
         onClick={() => router.push(`/shop/${product.category}/${product.name}`)}
       >
-        <div className="h-auto">
+        <div className="h-auto overflow-hidden">
           <Image
-             src={product.image}
+            src={product.image}
             width={0}
             height={0}
             alt={product.name}
-            className="w-full h-auto cursor-pointer bg-gray-10 px-2 py-6 rounded-[8px]"
+            className="w-full h-auto cursor-pointer bg-gray-10 px-2 py-6 rounded-[8px] object-cover hover:scale-105 transition duration-700"
             title={product.name}
             aria-label={product.name}
             aria-labelledby={product.name}

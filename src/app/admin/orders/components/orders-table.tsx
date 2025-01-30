@@ -113,7 +113,8 @@ export function OrdersTable({ data }: { data: Order[] }) {
 
   return (
     <div>
-      <div className="rounded border-2 border-gray-light overflow-x-auto">
+      <div className="rounded border-2 space-y-5 border-gray-light overflow-x-auto ">
+        <h4 className="pt-5 pl-5 w-full text-xl font-bold text-gray-8">Recent Orders</h4>
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -127,7 +128,7 @@ export function OrdersTable({ data }: { data: Order[] }) {
                         : header.column.id === "products"
                         ? "p-0 sm:p-3 "
                         : header.column.id === "status"
-                          ?' hidden md:table-cell'
+                        ? " hidden md:table-cell"
                         : "text-nowrap"
                     }
                   >
@@ -147,7 +148,7 @@ export function OrdersTable({ data }: { data: Order[] }) {
               table.getRowModel().rows.map((row) => (
                 <TableRow
                   key={row.id}
-                  className="cursor-pointer hover:bg-muted/50"
+                  className="cursor-pointer hover:bg-gray-2/50"
                   onClick={() => setSelectedOrder(row.original)}
                 >
                   {row.getVisibleCells().map((cell) => (
@@ -159,7 +160,7 @@ export function OrdersTable({ data }: { data: Order[] }) {
                           : cell.column.id === "products"
                           ? "max-w-[120px] p-0 sm:p-3 truncate text-ellipsis md:max-w-none md:whitespace-nowrap"
                           : cell.column.id === "status"
-                          ? 'hidden md:table-cell'
+                          ? "hidden md:table-cell"
                           : "text-gray-8/90"
                       }
                     >

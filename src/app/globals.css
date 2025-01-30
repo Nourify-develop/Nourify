@@ -103,6 +103,52 @@ body {
 .input-field:hover {
   background-color: #d9d9d9;
 }
+
+.customize>p {
+  color: #848484;
+}
+
+.customize>span {
+  color: #404040;
+}
+
+.custom-scrollbar {
+   /* Set the height of the scrollable container */
+  transition: overflow-y 0.3s ease-in-out; /* Smooth transition for the scrollbar */
+}
+
+.custom-scrollbar:hover {
+  overflow-y: auto; /* Show the scrollbar on hover */
+  transition: opacity 200ms ease-in-out; /* Smooth transition for the scrollbar appearance */
+}
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px; /* Width of the entire scrollbar */
+  background: transparent; /* Background of the scrollbar track */
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for the scrollbar appearance */
+  opacity: 0; /* Hide the scrollbar initially */
+}
+
+.custom-scrollbar:hover::-webkit-scrollbar {
+  opacity: 1; /* Show the scrollbar on hover */
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: #f1f1f1; /* Background of the scrollbar track */
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #888; /* Color of the scrollbar handle */
+  border-radius: 10px;
+  border: 2px solid #f1f1f1; /* Padding around the handle */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  width: 8px;
+  background-color: #555; /* Color of the scrollbar handle on hover */
+}
+
 /* 
 @font-face {
   font-family: "SF Pro Display";
