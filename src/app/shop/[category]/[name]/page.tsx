@@ -237,7 +237,7 @@ export default function ProductDisplay() {
                 </span>
               </section>
 
-              <section className="flex md:flex-col md:gap-y-4 gap-[10px]">
+              <section className="md:flex md:flex-col md:gap-y-4 gap-[10px]  hidden">
                 <Button
                   className={`${
                     product.status === "Out of Stock"
@@ -362,6 +362,30 @@ export default function ProductDisplay() {
         </aside>
       </section>
       <Maylike />
+      <section className="flex md:flex-col md:gap-y-4 gap-[10px]  md:hidden sticky bottom-0 bg-white z-10 py-4">
+                <Button
+                  className={`${
+                    product.status === "Out of Stock"
+                      ? "cursor-not-allowed pointer-events-none"
+                      : " "
+                  } w-full rounded-3xl text-lg font-normal order-2 md:order-1`}
+                  disabled={product.status === "Out of Stock"}
+                >
+                  Buy Now
+                </Button>
+                <Button
+                  variant="outline"
+                  className={`${
+                    product.status === "Out of Stock"
+                      ? " cursor-not-allowed pointer-events-none"
+                      : ""
+                  } md:w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2`}
+                  onClick={handleCartClick}
+                  disabled={product.status === "Out of Stock"}
+                >
+                  {isInCart(product.id) ? "Remove from Cart" : "Add to Cart"}
+                </Button>
+              </section>
     </Wrapper>
   );
 }

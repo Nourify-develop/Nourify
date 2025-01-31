@@ -44,7 +44,7 @@ const PasswordSettings = () => {
   ];
 
   return (
-    <div className="flex flex-col justify-center  gap-5 w-full px-5 sm:px-10 pb-10">
+    <div className="flex flex-col justify-center  gap-5 w-full  sm:px-10 pb-10">
       <form className="space-y-[2rem]">
         {PasswordInputDetails.map((input, idx) => (
           <div key={idx}>
