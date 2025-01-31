@@ -21,7 +21,7 @@ const Page: React.FC = () => {
           Account Settings
         </h1>
 
-        <div className="text-gray-4 flex gap-5 sm:gap-20 justify-center sm:justify-start py-5">
+        <div className="text-gray-4 flex gap-5 sm:gap-20 md:justify-center sm:justify-start py-5">
           {(["profile", "password"] as const).map((tab) => (
             <button
               key={tab}

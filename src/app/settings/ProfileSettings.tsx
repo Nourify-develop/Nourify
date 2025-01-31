@@ -32,9 +32,10 @@ const ProfileSettings = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center  gap-5 w-full px-5 sm:px-10 pb-10 ">
-      <div className="flex flex-col gap-5 justify-center items-center">
-        <div className="w-[200px] h-[200px] sm:w-[250px] sm:h-[250px] rounded-full border-2 border-green-1">
+    <div className="flex flex-col justify-center  gap-5 w-full   pb-10 ">
+      <div className="flex flex-col gap-5 justify-center md:items-center">
+          <div className="flex gap-[10px] items-center ">
+        <div className="md:w-[200px] w-[100px] md:h-[200px] h-[100px] sm:w-[250px] sm:h-[250px] rounded-full border-2 border-green-1">
           {image ? (
             <Image
               src={image}
@@ -49,8 +50,11 @@ const ProfileSettings = () => {
             </span>
           )}
         </div>
+          <p className="font-medium text-lg md:hidden block">David Okpata</p>
+          
+          </div>
 
-        <div className=" w-full flex items-center justify-center gap-4  flex-col sm:flex-row">
+        <div className=" w-full md:flex items-center justify-center gap-4  flex-col sm:flex-row hidden">
           <div className="sm:w-auto w-full text-center ">
             <input
               type="file"
