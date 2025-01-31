@@ -362,7 +362,7 @@ export default function ProductDisplay() {
         </aside>
       </section>
       <Maylike />
-      <section className="flex md:flex-col md:gap-y-4 gap-[10px]  md:hidden">
+      <section className="flex md:flex-col md:gap-y-4 gap-[10px]  md:hidden sticky bottom-0 bg-white z-10 py-4">
                 <Button
                   className={`${
                     product.status === "Out of Stock"
