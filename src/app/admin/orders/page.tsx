@@ -49,7 +49,7 @@ export default function OrdersPage() {
       <div className="flex items-center justify-end">
         <button
           onClick={exportToCSV}
-          className="border-[0.5px] flex gap-1 items-center text-base bg-white rounded-full px-4 xl:px-6 py-2 xl:py-2.5 text-secondary"
+          className="border-[0.5px] flex gap-1 items-center text-base hover:bg-secondary-2/20 duration-200 bg-white rounded-full px-4 xl:px-6 py-2 xl:py-2.5 text-secondary"
         >
           <Image src={Export} alt='trade-up'  />
           Export CSV

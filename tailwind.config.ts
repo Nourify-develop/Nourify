@@ -28,12 +28,12 @@ const config: Config = {
         secondary: {
           DEFAULT: "#079C4E",
           foreground: "hsl(var(--secondary-foreground))",
-          '2':'#14CF3D',
+          "2": "#14CF3D",
         },
         yellow: "#FFA500",
         neon: "#D6AB27",
-        red: '#EB4E4E',
-        'dark-red': '#FF0000',
+        red: "#EB4E4E",
+        "dark-red": "#FF0000",
         gray: {
           "1": "#F4F4F4",
           "2": "#D9D9D9",
@@ -57,6 +57,7 @@ const config: Config = {
           DEFAULT: "#087D40",
           dark: "#013115",
           1: "#079C4E",
+          2: "#207C4C",
         },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

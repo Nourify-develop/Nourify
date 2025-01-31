@@ -53,7 +53,9 @@ const SettingsSidebar: FC<Iproperties> = ({ className }) => {
       <div
         className={` ${className} pl-5 pt-5 h-full relative hidden lg:flex flex-col gap-8 items-start justify-center bg-white-200 w-full md:w-[200px] xl:w-[270px]  md:justify-start `}
       >
-        <Image src={Logo} alt="" />
+        <Link href={'/'}>
+          <Image src={Logo} alt="" />
+        </Link>
         <section className=" flex flex-col gap-y-3 w-full">
           {sideItems.map((item, index) => (
             <Link
