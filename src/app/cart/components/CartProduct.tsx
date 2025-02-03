@@ -61,9 +61,9 @@ const CartProduct: React.FC<CartProductProps> = ({
         {offset <= -window.innerWidth * 0.1 && (
           <button
             onClick={() => onRemove(product.id)}
-            className="text-white p-2 ml-2"
+            className="text-white p-2"
           >
-            <Trash2 />
+            <Trash2 className="w-16"/>
           </button>
         )}
       </div>

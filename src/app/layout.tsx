@@ -4,7 +4,6 @@ import "./../styles/checkbox.css";
 import { Metadata } from "next";
 import Head from "next/head";
 import RootClientLayout from "./RootClientLayout ";
-import { ModalProvider } from "@/context/ModalContext";
 
 export const metadata: Metadata = {
   title: "Nourify",
@@ -25,9 +24,7 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ModalProvider>
-          <RootClientLayout>{children}</RootClientLayout>
-        </ModalProvider>
+        <RootClientLayout>{children}</RootClientLayout>
       </body>
     </html>
   );

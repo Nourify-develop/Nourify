@@ -1,18 +1,23 @@
 "use client";
 
 import Typography from "@/components/typography";
-import { useModal } from "@/context/ModalContext";
+
 import useCart from "@/hooks/useCart";
 import Wrapper from "@/layout/wrapper";
 import { Fragment, useState } from "react";
-import SwipeableCartItem from "./components/CartItem";
+import SwipeableCartItem from "./components/CartProduct";
 import Link from "next/link";
 import { Button } from "@/components/ui/input";
+import { ConfirmModal } from "./common/deleteProductModal";
 
 const Page = () => {
   const { cart, updateQuantity, removeFromCart, removeAllCart } = useCart();
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
-  const { showModal } = useModal();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [modalMessage, setModalMessage] = useState("");
+  const [onConfirmAction, setOnConfirmAction] = useState<() => void>(
+    () => () => {}
+  );
 
   const handleSelectAll = () => {
     if (selectedProducts.length === cart.length) {
@@ -49,21 +54,17 @@ const Page = () => {
   };
 
   const handleRemove = (productId: number) => {
-    showModal(
-      "Are you sure you want to remove this product from your cart?",
-      () => {
-        removeFromCart(productId);
-      }
-    );
+    setModalMessage("Remove Item from Cart");
+    setOnConfirmAction(() => () => removeFromCart(productId));
+    setIsModalOpen(true);
   };
 
   const handleClearAll = () => {
-    showModal(
-      "Are you sure you want to clear all products from your cart?",
-      () => {
-        removeAllCart();
-      }
+    setModalMessage(
+      "Remove all Items from Cart"
     );
+    setOnConfirmAction(() => () => removeAllCart());
+    setIsModalOpen(true);
   };
 
   const calculateTotal = () => {
@@ -183,6 +184,15 @@ const Page = () => {
           />
         </div>
       </section>
+      <ConfirmModal
+        isOpen={isModalOpen}
+        message={modalMessage}
+        onConfirm={() => {
+          onConfirmAction();
+          setIsModalOpen(false);
+        }}
+        onClose={() => setIsModalOpen(false)}
+      />
     </Wrapper>
   );
 };

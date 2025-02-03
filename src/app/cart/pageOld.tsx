@@ -1,7 +1,7 @@
 "use client";
 import Typography from "@/components/typography";
 import { Button } from "@/components/ui/input";
-import { useModal } from "@/context/ModalContext";
+import { useModal } from "@/app/cart/common/deleteProductModal";
 import useCart from "@/hooks/useCart";
 import Wrapper from "@/layout/wrapper";
 import { ChevronRight, Delete, Dot, Minus, Plus, Trash2 } from "lucide-react";
