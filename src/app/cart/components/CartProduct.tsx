@@ -7,7 +7,7 @@ import { ChevronRight, Dot, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import useFormat from "@/hooks/useFormat";
 
-interface SwipeableCartItemProps {
+interface CartProductProps {
   product: any;
   onRemove: (id: number) => void;
   onIncreaseQuantity: (id: number, quantity: number) => void;
@@ -16,7 +16,7 @@ interface SwipeableCartItemProps {
   isSelected: boolean;
 }
 
-const SwipeableCartItem: React.FC<SwipeableCartItemProps> = ({
+const CartProduct: React.FC<CartProductProps> = ({
   product,
   onRemove,
   onIncreaseQuantity,
@@ -218,4 +218,4 @@ const SwipeableCartItem: React.FC<SwipeableCartItemProps> = ({
   );
 };
 
-export default SwipeableCartItem;
+export default CartProduct;

@@ -5,7 +5,7 @@ import { useModal } from "@/context/ModalContext";
 import useCart from "@/hooks/useCart";
 import Wrapper from "@/layout/wrapper";
 import { Fragment, useState } from "react";
-import SwipeableCartItem from "./components/SwipeableCartItem";
+import SwipeableCartItem from "./components/CartItem";
 import Link from "next/link";
 import { Button } from "@/components/ui/input";
 
