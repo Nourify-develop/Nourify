@@ -1,16 +1,17 @@
 // app/layout.tsx (Server Component)
-import "./globals.css";
-import "./../styles/checkbox.css";
 import { Metadata } from "next";
-import Head from "next/head";
 import RootClientLayout from "./RootClientLayout ";
-import { ModalProvider } from "@/context/ModalContext";
+import "./../styles/checkbox.css";
+import "./globals.css";
+import initApiClient from "@/config/init";
+import AuthQueryProvider from "@/context/AuthQueryProvider";
 
 export const metadata: Metadata = {
   title: "Nourify",
   description: "Where Healthy Choices Meet Peak Freshness",
 };
 
+initApiClient();
 export default function RootLayout({
   children,
 }: {
@@ -25,9 +26,9 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <ModalProvider>
+        <AuthQueryProvider>
           <RootClientLayout>{children}</RootClientLayout>
-        </ModalProvider>
+        </AuthQueryProvider>
       </body>
     </html>
   );
