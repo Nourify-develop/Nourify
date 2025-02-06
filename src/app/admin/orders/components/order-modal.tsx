@@ -23,7 +23,6 @@ import {
   Table,
 } from "@/components/ui/table";
 import { flexRender } from "@tanstack/react-table";
-// import { table } from "console";
 import { columns } from "../../products/components/_data";
 
 interface OrderModalProps {
@@ -65,7 +64,7 @@ export function OrderModal({ isOpen, onClose, order }: OrderModalProps) {
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           onClick={onClose}
-          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex justify-center items-center"
+          className="fixed inset-0 z-50 bg-black/30 backdrop-blur-[2px] flex justify-center items-center"
         >
           <motion.div
             initial={{ scale: 0.95, opacity: 0 }}

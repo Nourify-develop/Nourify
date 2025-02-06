@@ -123,7 +123,13 @@ body {
 }
 
 .custom-scrollbar::-webkit-scrollbar {
-  width: 6px; /* Width of the entire scrollbar */
+  width: 5px; /* Width of the entire scrollbar */
+  background: transparent; /* Background of the scrollbar track */
+  transition: opacity 0.3s ease-in-out; /* Smooth transition for the scrollbar appearance */
+  opacity: 0; /* Hide the scrollbar initially */
+}
+.custom-scrollbar-invisible::-webkit-scrollbar {
+  width: 0px; /* Width of the entire scrollbar */
   background: transparent; /* Background of the scrollbar track */
   transition: opacity 0.3s ease-in-out; /* Smooth transition for the scrollbar appearance */
   opacity: 0; /* Hide the scrollbar initially */
