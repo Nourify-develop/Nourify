@@ -49,7 +49,6 @@ const CartProduct: React.FC<CartProductProps> = ({
       setShowConfirm(false);
     },
   });
- 
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -63,7 +62,7 @@ const CartProduct: React.FC<CartProductProps> = ({
             onClick={() => onRemove(product.id)}
             className="text-white p-2"
           >
-            <Trash2 className="w-16"/>
+            <Trash2 className="w-16" />
           </button>
         )}
       </div>
@@ -91,12 +90,14 @@ const CartProduct: React.FC<CartProductProps> = ({
           </div>
           <div className="flex items-center justify-between pr-2 border-b-[0.5px] py-7.5 border-primary-2/40 w-full ">
             <div className="flex  gap-4">
-              <div className="px-2 md:px-6 py-3 md:py-12 bg-gray-10 ">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-20 md:h-36 w-auto  object-contain rounded-[10px]"
-                />
+              <div className=" px-2 md:px-6 py-3 md:py-12 bg-gray-10 ">
+                <div className="h-20 md:h-36 w-20 md:w-36">
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-contain rounded-[10px]"
+                  />
+                </div>
               </div>
 
               <div className="flex flex-col justify-between">

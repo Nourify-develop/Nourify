@@ -176,7 +176,7 @@ const Page = () => {
           <Link href="/shop" className="w-full md:w-fit">
             <Button
               text="Continue Shopping "
-              bg="bg-green-1/10 hover:bg-gray-3"
+              bg="bg-green-1/10 hover:bg-white"
               border="border-green-1/10 hover:border-green-1/30"
               color="text-green-1"
             />
