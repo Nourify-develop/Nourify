@@ -113,7 +113,7 @@ const CartProduct: React.FC<CartProductProps> = ({
                       className={` hidden md:flex gap-x-1 items-center text-sm px-5 rounded-2xl ${
                         product.status === "In Stock"
                           ? "text-secondary bg-secondary/10"
-                          : "text-red-600 bg-red-600/30"
+                          : "text-red bg-red/30"
                       }`}
                     >
                       <span className="text-xl">•</span>
@@ -143,7 +143,7 @@ const CartProduct: React.FC<CartProductProps> = ({
                         onDecreaseQuantity(product.id, product.userQuantity)
                       }
                     >
-                      <Minus className="h-4 focus-within::text-red-600 active:text-red-600" />
+                      <Minus className="h-4 focus-within::text-red active:text-red" />
                     </button>
                     <p>{product.userQuantity}</p>
                     <button
@@ -167,7 +167,7 @@ const CartProduct: React.FC<CartProductProps> = ({
               <div className=" flex flex-col items-end gap-y-3">
                 {" "}
                 <button
-                  className="rounded-full bg-gray-10 p-2 text-red-600"
+                  className="rounded-full bg-gray-10 p-2 text-red"
                   onClick={() => onRemove(product.id)}
                 >
                   <Trash2 className="h-6" />
@@ -187,7 +187,7 @@ const CartProduct: React.FC<CartProductProps> = ({
                 className={` flex w-fit items-center text-xs pr-2 rounded-2xl ${
                   product.status === "In Stock"
                     ? "text-green-1 bg-green-1/30"
-                    : "text-red-600 bg-red-600/30"
+                    : "text-red bg-red/30"
                 }`}
               >
                 <Dot />
