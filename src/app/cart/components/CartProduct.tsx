@@ -27,6 +27,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   const [offset, setOffset] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
   const { formatPrice, capitalizeFirstLetter } = useFormat();
   const handlers = useSwipeable({
     onSwiping: (eventData) => {
@@ -92,6 +93,9 @@ const CartProduct: React.FC<CartProductProps> = ({
             <div className="flex  gap-4">
               <div className=" px-2 md:px-6 py-3 md:py-12 bg-gray-10 ">
                 <div className="h-20 md:h-36 w-20 md:w-36">
+                  {isLoading && (
+                    <div className="h-full w-full bg-gray-300 animate-pulse rounded-[10px]" />
+                  )}
                   <img
                     src={product.image}
                     alt={product.name}

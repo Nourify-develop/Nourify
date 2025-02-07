@@ -160,7 +160,7 @@ function Navbar() {
         )}
       </AnimatePresence>
       <Wrapper
-        className=" bg-white sticky top-0 !py-3 shadow-xl !h-fit backdrop-blur-sm z-[997]"
+        className="  sticky top-0 !py-3 shadow-xl !h-fit backdrop-blur-sm z-[997]"
         onClick={removeLoginMenu}
       >
         <div className="flex items-center justify-between w-full font-sans lg:px-0 relative">

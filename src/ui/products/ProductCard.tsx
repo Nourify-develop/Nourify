@@ -1,14 +1,16 @@
+"use client";
 import { LuShoppingCart } from "react-icons/lu";
 import { Product } from "../../types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import useCart from "@/hooks/useCart";
 import { toast } from "sonner";
+import { useState } from "react";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const router = useRouter();
   const { cart, addToCart, removeFromCart, updateQuantity } = useCart();
-
+  const [isImageLoading, setIsImageLoading] = useState(true);
   // Check if the product is in the cart
   const cartItem = cart.find((item) => item.id === product.id);
   const userQuantity = cartItem ? cartItem.userQuantity : 0;
@@ -38,16 +40,22 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
         className="flex justify-between flex-col gap-y-2"
         onClick={() => router.push(`/shop/${product.category}/${product.name}`)}
       >
-        <div className="h-auto overflow-hidden">
+        <div className="h-auto overflow-hidden relative">
+          {isImageLoading && (
+            <div className="absolute inset-0 bg-gray-200 animate-pulse rounded-[8px]" />
+          )}
           <Image
             src={product.image}
             width={0}
             height={0}
             alt={product.name}
-            className="w-full h-auto cursor-pointer bg-gray-10 px-2 py-6 rounded-[8px] object-cover hover:scale-105 transition duration-700"
+            className={`w-full h-auto cursor-pointer bg-gray-10 px-2 py-6 rounded-[8px] object-cover hover:scale-105 transition duration-700 ${
+              isImageLoading ? "opacity-0" : "opacity-100"
+            }`}
             title={product.name}
             aria-label={product.name}
             aria-labelledby={product.name}
+            onLoadingComplete={() => setIsImageLoading(false)}
           />
         </div>
         <h3 className="text-base md:text-lg text-left font-medium text-gray-4 overflow-hidden text-ellipsis whitespace-nowrap">
