@@ -23,7 +23,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
         <div className="p-2 bg-red/20 w-fit rounded-full">
           <CircleAlert className="text-red" />
         </div>
-        <div className="mb-3">
+        <div className="mb-3 text-left">
           <p className="font-bold text-xl text-gray-8">{message}</p>
           <p className="text-sm font-medium text-gray-5">
             Are you sure you want to remove this item?{" "}
@@ -33,13 +33,13 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
         </div>
         <div className="flex justify-between w-full font-semibold text-base gap-4">
           <button
-            className="border-[1px] border-[#D5D7DA] py-2.5 px-8 rounded-full shrink-0"
+            className="border-[1px] border-[#D5D7DA] hover:bg-gray-1 py-2.5 px-8 rounded-[12px] shrink-0"
             onClick={onClose}
           >
             Cancel
           </button>
           <button
-            className="bg-red text-white border-[1px] border-red py-2.5 px-8 rounded-full shrink-0"
+            className="bg-red hover:bg-dark-red text-white border-[1px] border-red py-2.5 px-8 rounded-[12px] shrink-0"
             onClick={() => {
               onConfirm();
               onClose();
