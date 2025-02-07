@@ -2,9 +2,16 @@ import { LuShoppingCart } from "react-icons/lu";
 import { Product } from "../../types";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+import useCart from "@/hooks/useCart";
+import { toast } from "sonner";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const router = useRouter();
+  const { cart, addToCart, removeFromCart, updateQuantity } = useCart();
+
+  // Check if the product is in the cart
+  const cartItem = cart.find((item) => item.id === product.id);
+  const userQuantity = cartItem ? cartItem.userQuantity : 0;
 
   // Format the price with commas and ₦ symbol
   const formattedPrice = new Intl.NumberFormat("en-NG", {
@@ -12,7 +19,19 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
     currency: "NGN",
     minimumFractionDigits: 0,
   }).format(product.price);
+  const handleAddToCart = () => {
+    if (userQuantity === 0) {
+      toast.success(`Product added to cart`);
+    }
+    addToCart(product, 1);
+  };
 
+  const handleRemoveFromCart = () => {
+    if (userQuantity === 1) {
+      toast.error(`Product removed from cart`);
+    }
+    removeFromCart(product.id);
+  };
   return (
     <div key={product.id} className="flex flex-col gap-1 text-center ">
       <div
@@ -42,9 +61,36 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           </span>
           <span className="text-xs text-gray-5"> / pack</span>
         </p>
-        <button className=" py-2 px-3 transition-all duration-500 ease-linear rounded-md bg-gray-11 hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group">
-          <LuShoppingCart className="h-5 w-5 lg:h-6 lg:w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white" />
-        </button>
+        {/* Render quantity buttons if product is in cart */}
+        {userQuantity > 0 ? (
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() =>
+                userQuantity > 1
+                  ? updateQuantity(product.id, userQuantity - 1)
+                  : handleRemoveFromCart()
+              }
+              className="px-3 py-2 bg-gray-11 hover:bg-red text-white rounded-md transition-all duration-500 ease-linear"
+            >
+              -
+            </button>
+            <span className="text-lg font-medium">{userQuantity}</span>
+            <button
+              onClick={handleAddToCart}
+              className="px-3 py-2 bg-gray-11 hover:bg-green-500 text-white rounded-md transition-all duration-500 ease-linear"
+            >
+              +
+            </button>
+          </div>
+        ) : (
+          // Render Add to Cart button if not in cart
+          <button
+            onClick={handleAddToCart}
+            className="py-2 px-3 transition-all duration-500 ease-linear rounded-md bg-gray-11 hover:bg-secondary focus-within:hover:bg-secondary active:hover:bg-secondary group"
+          >
+            <LuShoppingCart className="h-5 w-5 lg:h-6 lg:w-6 transition-all duration-500 ease-linear text-gray-6 group-hover:text-white" />
+          </button>
+        )}
       </div>
     </div>
   );
