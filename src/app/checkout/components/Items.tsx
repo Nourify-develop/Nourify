@@ -1,10 +1,10 @@
-"use client";
+"use client"
 
-import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, ChevronUp, Trash2 } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+import { useState, useEffect } from "react"
+import { motion, AnimatePresence } from "framer-motion"
+import { Trash2 } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Button } from "@/components/ui/button"
 
 const items = [
   {
@@ -14,8 +14,7 @@ const items = [
     price: 50000.0,
     quantity: 1,
     size: "Large",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-cPYgBS5qvqmZSsgojlOULZycFWDjdL.png",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-cPYgBS5qvqmZSsgojlOULZycFWDjdL.png",
   },
   {
     id: 2,
@@ -24,8 +23,7 @@ const items = [
     price: 50000.0,
     quantity: 1,
     size: "Large",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-cPYgBS5qvqmZSsgojlOULZycFWDjdL.png",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-cPYgBS5qvqmZSsgojlOULZycFWDjdL.png",
   },
   {
     id: 3,
@@ -34,16 +32,30 @@ const items = [
     price: 50000.0,
     quantity: 1,
     size: "Large",
-    image:
-      "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-cPYgBS5qvqmZSsgojlOULZycFWDjdL.png",
+    image: "https://hebbkx1anhila5yf.public.blob.vercel-storage.com/image-cPYgBS5qvqmZSsgojlOULZycFWDjdL.png",
   },
-];
+]
 
-export function Items() {
-  const [isExpanded, setIsExpanded] = useState(false);
+export function Items({
+  onTotalPriceChange,
+  onItemsChange,
+}: {
+  onTotalPriceChange: (total: number) => void
+  onItemsChange: (items: any) => void
+}) {
+  const [isExpanded, setIsExpanded] = useState(false)
+
+  useEffect(() => {
+    const totalPrice = items.reduce((sum, item) => sum + item.price * item.quantity, 0)
+    onTotalPriceChange(totalPrice)
+  }, [onTotalPriceChange])
+
+  useEffect(() => {
+    onItemsChange(items)
+  }, [onItemsChange])
 
   return (
-    <Card className="border-[1.5px] border-gray-light-2">
+    <Card>
       <CardHeader>
         <CardTitle>Items</CardTitle>
       </CardHeader>
@@ -62,9 +74,7 @@ export function Items() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ delay: index * 0.1 }}
-                className={`flex items-center gap-4 p-4 ${
-                  index !== 0 ? "border-t" : ""
-                }`}
+                className={`flex items-center gap-4 p-4 ${index !== 0 ? "border-t" : ""}`}
               >
                 <img
                   src={item.image || "/placeholder.svg"}
@@ -72,38 +82,29 @@ export function Items() {
                   className="h-16 w-16 rounded-md object-cover"
                 />
                 <div className="flex-1">
-                  <p className="text-sm text-muted-foreground">
-                    {item.category}
-                  </p>
+                  <p className="text-sm text-muted-foreground">{item.category}</p>
                   <h3 className="font-medium">{item.name}</h3>
-                  <div className="mt-1 flex flex-col text-sm text-muted-foreground">
+                  <div className="mt-1 text-sm text-muted-foreground">
                     <span>Quantity: {item.quantity}</span>
-                    {/* <span className="mx-2">•</span> */}
+                    <span className="mx-2">•</span>
                     <span>Size: {item.size}</span>
                   </div>
                 </div>
                 <div className="text-right">
                   <p className="font-medium">₦{item.price.toLocaleString()}</p>
-                  <Button
-                    variant="ghost"
-                    size="icon"
-                    className="mt-2 text-destructive p-2 bg-gray-light-2 p2 rounded-full hover:bg-dark-red/80 duration-300"
-                  >
-                    <Trash2 className="h-8 w-8 text-dark-red hover:text-white duration-300" />
+                  <Button variant="ghost" size="icon" className="mt-2 text-destructive">
+                    <Trash2 className="h-4 w-4" />
                   </Button>
                 </div>
               </motion.div>
             ))}
           </motion.div>
         </AnimatePresence>
-        <button
-          className="mt-5 w-full !no-underline bg-gray-10 border flex items-center justify-center gap-2 border-gray-light-2 !py-2 text-secondary rounded-full"
-          onClick={() => setIsExpanded(!isExpanded)}
-        >
+        <Button variant="link" className="mt-4 w-full" onClick={() => setIsExpanded(!isExpanded)}>
           {isExpanded ? "see less" : "see all items"}
-          {isExpanded ?   <ChevronUp/>: <ChevronDown/>}
-        </button>
+        </Button>
       </CardContent>
     </Card>
-  );
+  )
 }
+

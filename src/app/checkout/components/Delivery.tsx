@@ -7,7 +7,7 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
+import { Input } from "@/components/ui/input-field";
 import { Label } from "@/components/ui/label";
 import {
   Card,
@@ -28,13 +28,13 @@ export function DeliveryDetails({
 }: DeliveryDetailsProps) {
   return (
     <>
-      <Card className="border-[1.5px] border-gray-light-2">
+      <Card className="border-[1.5px] border-gray-light-2 flex flex-col ">
         <CardHeader className="flex flex-row items-center justify-between">
           <div>
-            <CardTitle className="text-xl font-bold text-primary-2/80">
+            <CardTitle className="text-base sm:text-xl font-bold text-primary-2/80">
               Delivery Details
             </CardTitle>
-            <CardDescription className="text-base font-medium text-[#9f9f9f]">
+            <CardDescription className="text-xs sm:text-base font-medium text-[#9f9f9f]">
               Please enter your information for delivery
             </CardDescription>
           </div>
@@ -45,23 +45,29 @@ export function DeliveryDetails({
             Edit
           </button>
         </CardHeader>
-        <CardContent>
-          <div className="grid grid-cols-2 gap-4">
+        <CardContent className="pt-0">
+          <div className="flex flex-col sm:grid-cols-2 gap-4">
             <div>
-              <Label className="text-sm text-[#9f9f9f]">Name</Label>
-              <p className="text-gray-8 text-lg font-medium">John Doe</p>
+              <Label className="text-xs sm:text-sm text-[#9f9f9f]">Name</Label>
+              <p className="text-gray-8 text-xs sm:text-lg font-medium">John Doe</p>
             </div>
             <div>
-              <Label className="text-sm text-[#9f9f9f]">Phone</Label>
-              <p className="text-gray-8 text-lg font-medium">+234 (81) 4123-4567</p>
+              <Label className="text-xs sm:text-sm text-[#9f9f9f]">Phone</Label>
+              <p className="text-gray-8 text-xs sm:text-lg font-medium">
+                +234 (81) 4123-4567
+              </p>
             </div>
             <div className="col-span-2">
-              <Label className="text-sm text-[#9f9f9f]">Email address</Label>
-              <p className="text-gray-8 text-lg font-medium">johndoe484@gmail.com</p>
+              <Label className="text-xs sm:text-sm text-[#9f9f9f]">Email address</Label>
+              <p className="text-gray-8 text-xs sm:text-lg font-medium">
+                johndoe484@gmail.com
+              </p>
             </div>
             <div className="col-span-2">
-              <Label className="text-sm text-[#9f9f9f]">Address</Label>
-              <p className="text-gray-8 text-lg font-medium">123, Elmwood Avenue, Springfield, IL 62701, Abuja, Nigeria</p>
+              <Label className="text-xs sm:text-sm text-[#9f9f9f]">Address</Label>
+              <p className="text-gray-8 text-xs sm:text-lg font-medium">
+                123, Elmwood Avenue, Springfield, IL 62701, Abuja, Nigeria
+              </p>
             </div>
           </div>
         </CardContent>

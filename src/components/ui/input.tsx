@@ -1,26 +1,67 @@
-import * as React from "react"
+import React, { useState } from "react";
+import { FaLock } from "react-icons/fa6";
+import { IoEyeOffOutline, IoEyeOutline } from "react-icons/io5";
 
-import { cn } from "@/lib/utils"
-
-export interface InputProps
-  extends React.InputHTMLAttributes<HTMLInputElement> {}
-
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
-  ({ className, type, ...props }, ref) => {
-    return (
+interface inputFields {
+  name: string;
+  label: string;
+  type?: string;
+  value?: string;
+  onchange?: React.ChangeEventHandler<HTMLInputElement>;
+}
+interface btn {
+  bg?: string;
+  border?: string;
+  text: string;
+  color?: string;
+  onclick?: React.MouseEventHandler<HTMLButtonElement>;
+}
+const Input = (props: inputFields) => {
+  return (
+    <div className="text-sm flex flex-col gap-2">
+      <label htmlFor={props.name} className="text-primary-2/80">
+        {props.label}
+      </label>
       <input
-        type={type}
-        className={cn(
-          "flex h-10 w-full rounded-[50px] border border-secondary bg-[#F8F7FB] input-field px-5 py-3 text-sm ring-offset-secondary file:border-0 file:bg-secondary file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring focus-visible:ring-secondary focus-visible:ring-rig focus-visible:ring-offse-2 disabled:cursor-not-allowed disabled:opacity-50",
-          className
-        )}
-        ref={ref}
-        {...props}
+        type={props.type}
+        className="rounded-full input-field_ bg-primary-2/5 border border-primary-2/5 p-4 focus:outline-0 "
+        placeholder={props.label}
+        id={props.name}
+        defaultValue={props.value}
+        onChange={props.onchange}
       />
-    )
-  }
-)
-Input.displayName = "Input"
+    </div>
+  );
+};
 
-export { Input }
+export default Input;
+export const TextArea = (props: inputFields) => {
+  return (
+    <div className="text-sm flex flex-col gap-2">
+      <label htmlFor={props.name} className="text-primary-2/80">
+        {props.label}
+      </label>
 
+      <textarea
+        name={props.name}
+        className="rounded-lg border border-primary-2/5  resize-none input-field_ bg-primary-2/5 text-primary-2/50 p-4 focus:outline-0"
+        id={props.name}
+        cols={30}
+        rows={5}
+      >
+        {props.value}
+      </textarea>
+    </div>
+  );
+};
+
+export const Button = (props: btn) => {
+  return (
+    <button
+      onClick={props.onclick}
+      className={`rounded-full py-2 px-8  w-full sm:w-auto ${props.bg} border-2 ${props.border} ${props.color}  duration-300`}
+    >
+      {props.text}
+    </button>
+  );
+};
