@@ -9,6 +9,7 @@ import SwipeableCartItem from "./components/CartProduct";
 import Link from "next/link";
 import { Button } from "@/components/ui/input";
 import { ConfirmModal } from "./common/deleteProductModal";
+import { toast } from "sonner";
 
 const Page = () => {
   const { cart, updateQuantity, removeFromCart, removeAllCart } = useCart();
@@ -54,16 +55,20 @@ const Page = () => {
   };
 
   const handleRemove = (productId: number) => {
-    setModalMessage("Remove Item from Cart");
-    setOnConfirmAction(() => () => removeFromCart(productId));
+    setModalMessage("Remove Product from Cart");
+    setOnConfirmAction(() => () => {
+      removeFromCart(productId);
+      toast.success("Product removed from cart");
+    });
     setIsModalOpen(true);
   };
 
   const handleClearAll = () => {
-    setModalMessage(
-      "Remove all Items from Cart"
-    );
-    setOnConfirmAction(() => () => removeAllCart());
+    setModalMessage("Remove all Products from Cart");
+    setOnConfirmAction(() => () => {
+      removeAllCart();
+      toast.success("All Products removed from cart");
+    });
     setIsModalOpen(true);
   };
 
@@ -171,7 +176,7 @@ const Page = () => {
           <Link href="/shop" className="w-full md:w-fit">
             <Button
               text="Continue Shopping "
-              bg="bg-green-1/10 hover:bg-gray-3"
+              bg="bg-green-1/10 hover:bg-white"
               border="border-green-1/10 hover:border-green-1/30"
               color="text-green-1"
             />

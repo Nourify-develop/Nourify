@@ -27,6 +27,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   const [offset, setOffset] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(true);
   const { formatPrice, capitalizeFirstLetter } = useFormat();
   const handlers = useSwipeable({
     onSwiping: (eventData) => {
@@ -49,7 +50,6 @@ const CartProduct: React.FC<CartProductProps> = ({
       setShowConfirm(false);
     },
   });
- 
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -63,7 +63,7 @@ const CartProduct: React.FC<CartProductProps> = ({
             onClick={() => onRemove(product.id)}
             className="text-white p-2"
           >
-            <Trash2 className="w-16"/>
+            <Trash2 className="w-16" />
           </button>
         )}
       </div>
@@ -91,12 +91,17 @@ const CartProduct: React.FC<CartProductProps> = ({
           </div>
           <div className="flex items-center justify-between pr-2 border-b-[0.5px] py-7.5 border-primary-2/40 w-full ">
             <div className="flex  gap-4">
-              <div className="px-2 md:px-6 py-3 md:py-12 bg-gray-10 ">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="h-20 md:h-36 w-auto  object-contain rounded-[10px]"
-                />
+              <div className=" px-2 md:px-6 py-3 md:py-12 bg-gray-10 ">
+                <div className="h-20 md:h-36 w-20 md:w-36">
+                  {isLoading && (
+                    <div className="h-full w-full bg-gray-300 animate-pulse rounded-[10px]" />
+                  )}
+                  <img
+                    src={product.image}
+                    alt={product.name}
+                    className="h-full w-full object-contain rounded-[10px]"
+                  />
+                </div>
               </div>
 
               <div className="flex flex-col justify-between">
@@ -113,7 +118,7 @@ const CartProduct: React.FC<CartProductProps> = ({
                       className={` hidden md:flex gap-x-1 items-center text-sm px-5 rounded-2xl ${
                         product.status === "In Stock"
                           ? "text-secondary bg-secondary/10"
-                          : "text-red-600 bg-red-600/30"
+                          : "text-red bg-red/30"
                       }`}
                     >
                       <span className="text-xl">•</span>
@@ -143,7 +148,7 @@ const CartProduct: React.FC<CartProductProps> = ({
                         onDecreaseQuantity(product.id, product.userQuantity)
                       }
                     >
-                      <Minus className="h-4 focus-within::text-red-600 active:text-red-600" />
+                      <Minus className="h-4 focus-within::text-red active:text-red" />
                     </button>
                     <p>{product.userQuantity}</p>
                     <button
@@ -167,7 +172,7 @@ const CartProduct: React.FC<CartProductProps> = ({
               <div className=" flex flex-col items-end gap-y-3">
                 {" "}
                 <button
-                  className="rounded-full bg-gray-10 p-2 text-red-600"
+                  className="rounded-full bg-gray-10 p-2 text-red"
                   onClick={() => onRemove(product.id)}
                 >
                   <Trash2 className="h-6" />
@@ -187,7 +192,7 @@ const CartProduct: React.FC<CartProductProps> = ({
                 className={` flex w-fit items-center text-xs pr-2 rounded-2xl ${
                   product.status === "In Stock"
                     ? "text-green-1 bg-green-1/30"
-                    : "text-red-600 bg-red-600/30"
+                    : "text-red bg-red/30"
                 }`}
               >
                 <Dot />
