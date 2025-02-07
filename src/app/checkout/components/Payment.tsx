@@ -148,7 +148,7 @@ export function PaymentOptions({ onValidChange }: { onValidChange: (isValid: boo
                     </div>
                   </div>
 
-                  <div className="grid  sm:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-2 gap-4">
                     <div className="space-y-2">
                       <Label htmlFor="month" className="text-sm">
                         Month
@@ -163,7 +163,7 @@ export function PaymentOptions({ onValidChange }: { onValidChange: (isValid: boo
                       {errors.month && <p className="text-red-500 text-xs">{errors.month.message}</p>}
                     </div>
 
-                    <div className="flex flex-row sm:flex-col gap-5 sm:gap-0"> 
+                    <div className="flex flex-row gap-5 sm:gap-4"> 
                       <div className="space-y-2">
                         <Label htmlFor="year" className="text-sm">
                           Year
