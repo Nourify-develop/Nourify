@@ -3,12 +3,16 @@ import { ReactNode, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation"; // App Router version of useRouter
 import NProgress from "nprogress";
 import "../styles/nprogress.css";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/context/AuthContext";
 
-export default function RootClientLayout({ children }: { children: ReactNode }) {
+export default function RootClientLayout({
+  children,
+}: {
+  children: ReactNode;
+}) {
   const router = useRouter();
 
   const pathname = usePathname();
@@ -18,14 +22,13 @@ export default function RootClientLayout({ children }: { children: ReactNode }) 
 
   // Add NProgress for route changes
   useEffect(() => {
-
     NProgress.configure({
-      minimum: 0.2, 
+      minimum: 0.2,
       easing: "ease", // Animation easing
-      speed: 500, 
-      showSpinner: false, 
+      speed: 500,
+      showSpinner: false,
     });
-    
+
     const handleStart = () => NProgress.start();
     const handleComplete = () => NProgress.done();
 
