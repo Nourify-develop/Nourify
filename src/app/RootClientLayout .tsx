@@ -50,7 +50,7 @@ export default function RootClientLayout({
       {!excludeNavbarFooter && <Navbar />}
       <main>{children}</main>
       {!excludeNavbarFooter && <Footer />}
-      <Toaster position="top-right" expand={false} richColors />
+      <Toaster position="top-right" expand={false} richColors closeButton />
     </AuthProvider>
   );
 }

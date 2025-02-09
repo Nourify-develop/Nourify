@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/input";
 import { RiArrowDropDownLine } from "react-icons/ri";
 import { formSelectFields, formInputFields } from "./_data";
 import useProducts from "@/hooks/useProducts";
-import { products } from "../../../../ui/products/_data";
 import { Product } from "@/types";
 import { useUniqueImage } from "@/hooks/useUniqueImages";
 import { toast } from "sonner";
@@ -30,7 +29,6 @@ const ProductModal: React.FC<ProductModalProps> = ({ product, closeModal }) => {
   const randomImage = useUniqueImage();
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [image, setImage] = useState("");
-  console.log("product", product);
   const [formValues, setFormValues] = useState<FormValues>({
     image: "",
     name: "",

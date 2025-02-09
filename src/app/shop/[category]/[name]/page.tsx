@@ -1,7 +1,7 @@
 "use client";
 import Wrapper from "@/layout/wrapper";
 import { useParams, usePathname, useSearchParams } from "next/navigation";
-import { products } from "@/ui/products/_data";
+
 import { reviewDrop, route, size } from "./_data";
 import Link from "next/link";
 import { Fragment, useEffect, useState } from "react";
@@ -18,19 +18,30 @@ import {
 } from "@/components/ui/select";
 import { CaretRightIcon } from "@radix-ui/react-icons";
 import Maylike from "../../components/alsolike";
+import useCart from "@/hooks/useCart";
+import useProducts from "@/hooks/useProducts";
+import { toast } from "sonner";
 
 export default function ProductDisplay() {
   const { category, name } = useParams();
+  const { products } = useProducts();
+  const { addToCart, removeFromCart, isInCart, updateQuantity, cart } = useCart();
+  console.log("quantiy", updateQuantity);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const [count, setCount] = useState<number>(1);
   const [selectedSize, setSelectedSize] = useState<string | null>(
     searchParams.get("size")
   );
+  console.log("prudt", products);
   const decodedName = decodeURIComponent(`${name}`);
   const product = products.find(
     (p) => p.category === category && p.name === decodedName
   );
+  console.log("theactuc", product);
+  useEffect(() => {
+    setSelectedSize(searchParams.get("size"));
+  }, [searchParams]);
 
   if (!product) {
     return <div>Product Not Found</div>;
@@ -41,9 +52,6 @@ export default function ProductDisplay() {
 
   const routeData = route(category as string, decodedName);
 
-  useEffect(() => {
-    setSelectedSize(searchParams.get("size"));
-  }, [searchParams]);
 
   const handleSizeClick = (key: string) => {
     setSelectedSize(key);
@@ -60,7 +68,31 @@ export default function ProductDisplay() {
     "2": 4,
     "1": 2,
   };
-console.log(product)
+  console.log("product.id", product.id);
+  const handleCartClick = () => {
+    const productId = String(product.id); // Ensure id is stored as a string
+    if (isInCart(product.id)) {
+      removeFromCart(product.id);
+      setCount(0); // Reset local state for quantity
+      toast.success(`Removed from cart!`);
+    } else {
+      addToCart({ productId, ...product }, count); // Spread other product details
+      toast.success(`Added to cart!`);
+    }
+  };
+
+  const handleQuantityChange = (newQuantity: number) => {
+    if (newQuantity <= 0) {
+      removeFromCart(product.id); // Reset the cart for this product
+      setCount(0); // Reset local state for quantity
+      toast.success(`Removed from cart!`);
+    } else {
+      updateQuantity(product.id, newQuantity);
+      setCount(newQuantity);
+    }
+  };
+
+
   return (
     <Wrapper className="bg-white ">
       <nav className="flex items-center gap-x-3 text-gray-5 border-b border-gray-2 py-2">
@@ -88,7 +120,7 @@ console.log(product)
             alt={product.name}
             className="md:w-[50%] w-full h-auto"
           />
-          
+
           <aside className="md:w-[50%] w-full flex flex-col gap-y-4">
             <section className="flex flex-col gap-y-6">
               <div className="flex justify-between items-center pt-4">
@@ -132,17 +164,54 @@ console.log(product)
                 <sub className="text-sm font-normal">/per pack</sub>
               </Typography.h1>
 
-              <section className="flex flex-col gap-y-2">
+              <section
+                className={`${
+                  product.status === "Out of Stock" ? "cursor-not-allowed" : ""
+                } flex flex-col gap-y-2`}
+              >
                 <Typography.p isGray>Quantity</Typography.p>
-                <span className="w-max flex items-center gap-x-4 bg-gray-2 px-1.5 py-1 rounded-2xl">
+                <span
+                  className={`${
+                    product.status === "Out of Stock"
+                      ? "cursor-not-allowed pointer-events-none"
+                      : " "
+                  } w-max flex items-center gap-x-4 bg-gray-2 px-1.5 py-1 rounded-2xl`}
+                >
                   <button
                     type="button"
-                    onClick={() => setCount((prev) => Math.max(1, prev - 1))}
+                    onClick={() => {
+                      const newCount = count - 1;
+                      setCount(newCount);
+                      if (newCount > 0) {
+                        handleQuantityChange(newCount);
+                      } else {
+                        setCount(0);
+                        removeFromCart(product.id);
+                        toast.success(`Removed from cart!`);
+                      }
+                    }}
+                    className={`${
+                      product.status === "Out of Stock"
+                        ? "cursor-not-allowed"
+                        : ""
+                    } `}
                   >
                     <Minus width={18} />
                   </button>
                   {count}
-                  <button type="button" onClick={() => setCount(count + 1)}>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const newCount = count + 1;
+                      setCount(newCount);
+                      handleQuantityChange(newCount);
+                    }}
+                    className={`${
+                      product.status === "Out of Stock"
+                        ? "cursor-not-allowed"
+                        : ""
+                    } `}
+                  >
                     <Plus width={18} />
                   </button>
                 </span>
@@ -160,6 +229,7 @@ console.log(product)
                           ? "bg-gray-6 text-white duration-200"
                           : "bg-gray-2 text-gray-4"
                       }`}
+                      disabled={product.status === "Out of Stock"}
                     >
                       {item.title}
                     </button>
@@ -167,15 +237,28 @@ console.log(product)
                 </span>
               </section>
 
-              <section className="flex md:flex-col md:gap-y-4 gap-[10px]">
-                <Button className="w-full rounded-3xl text-lg font-normal order-2 md:order-1">
+              <section className="md:flex md:flex-col md:gap-y-4 gap-[10px]  hidden">
+                <Button
+                  className={`${
+                    product.status === "Out of Stock"
+                      ? "cursor-not-allowed pointer-events-none"
+                      : " "
+                  } w-full rounded-3xl text-lg font-normal order-2 md:order-1`}
+                  disabled={product.status === "Out of Stock"}
+                >
                   Buy Now
                 </Button>
                 <Button
                   variant="outline"
-                  className="md:w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2"
+                  className={`${
+                    product.status === "Out of Stock"
+                      ? " cursor-not-allowed pointer-events-none"
+                      : ""
+                  } md:w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2`}
+                  onClick={handleCartClick}
+                  disabled={product.status === "Out of Stock"}
                 >
-                  Add to Cart
+                  {isInCart(product.id) ? "Remove from Cart" : "Add to Cart"}
                 </Button>
               </section>
             </section>
@@ -224,7 +307,10 @@ console.log(product)
                     <span>{item.rating}</span>
                   </span>
                 </span>
-                <Typography.p isGray className="text-primary-2/70 text-sm font-medium mt-[10px]">
+                <Typography.p
+                  isGray
+                  className="text-primary-2/70 text-sm font-medium mt-[10px]"
+                >
                   {item.comment}
                 </Typography.p>
                 <div className="flex items-center gap-x-[10px] mt-5">
@@ -242,7 +328,9 @@ console.log(product)
 
         <aside className="w-full pt-4">
           <nav className="flex items-center justify-between">
-            <Typography.h3 className="!text-gray-4 md:text-[22px] text-base font-medium ">Ratings</Typography.h3>
+            <Typography.h3 className="!text-gray-4 md:text-[22px] text-base font-medium ">
+              Ratings
+            </Typography.h3>
             <span>
               <Typography.h3 className="!text-gray-4 flex items-center">
                 {product.rating}{" "}
@@ -274,6 +362,30 @@ console.log(product)
         </aside>
       </section>
       <Maylike />
+      <section className="flex md:flex-col md:gap-y-4 gap-[10px]  md:hidden sticky bottom-0 bg-white z-10 py-4">
+                <Button
+                  className={`${
+                    product.status === "Out of Stock"
+                      ? "cursor-not-allowed pointer-events-none"
+                      : " "
+                  } w-full rounded-3xl text-lg font-normal order-2 md:order-1`}
+                  disabled={product.status === "Out of Stock"}
+                >
+                  Buy Now
+                </Button>
+                <Button
+                  variant="outline"
+                  className={`${
+                    product.status === "Out of Stock"
+                      ? " cursor-not-allowed pointer-events-none"
+                      : ""
+                  } md:w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2`}
+                  onClick={handleCartClick}
+                  disabled={product.status === "Out of Stock"}
+                >
+                  {isInCart(product.id) ? "Remove from Cart" : "Add to Cart"}
+                </Button>
+              </section>
     </Wrapper>
   );
 }

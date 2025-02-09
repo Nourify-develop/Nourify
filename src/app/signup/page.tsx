@@ -81,7 +81,13 @@ const SignUp = () => {
   
       // Get the Firebase ID token
       const token = await user.getIdToken();
+      const result = await signInWithPopup(auth, provider);
+      const signedInUser = result.user;
+      console.log( signedInUser);
   
+  
+      const idToken = await signedInUser.getIdToken( true);
+      console.log("idtoken", idToken)
       // Prepare user data for Firestore
       const userData = {
         firstName: user.displayName?.split(" ")[0] || "",

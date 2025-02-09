@@ -20,7 +20,6 @@ export const NavSearch: React.FC<NavSearchProps> = ({
   setIsSearchOpen,
   onSearch,
   handleSearchClick,
-  handleSearchClose,
   inputRef,
   isSmallScreen,
 }) => {
@@ -76,7 +75,7 @@ export const NavSearch: React.FC<NavSearchProps> = ({
             focus:ring-2 focus:ring-green-1/20
             ${
               isSearchOpen || !isSmallScreen
-                ? "w-36 md:w-64 border border-green-1 md:border-0 md:bg-[#F4F4F4]"
+                ? "w-36 lg:w-64  border border-green-1 md:border-0 md:bg-[#F4F4F4]"
                 : "bg-[#F4F4F4] h-10 w-10"
             }
           `}
