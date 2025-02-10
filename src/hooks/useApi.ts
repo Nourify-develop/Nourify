@@ -1,98 +1,90 @@
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
-import { handleGenericError } from "@/lib/errorHandler";
-import {
-  deleteData,
-  fetchData,
-  patchData,
-  postData,
-  updateData,
-} from "@/config/api";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { fetchData, postData, updateData } from "@/config/api";
+import { handleGenericError } from "@/lib/errorHandler";
 
-export const useFetchData = (endpoint: string, queryKey: any) => {
+export const usePostMutation = <T>(
+  endpoint: string,
+  queryKey: string | readonly unknown[]
+) => {
+  const queryClient = useQueryClient(); // Ensure useQueryClient is correctly imported
+
+  const mutation = useMutation({
+    mutationFn: async (newData: T) => {
+      try {
+        const response = await postData(endpoint, newData);
+        return response;
+      } catch (error) {
+        throw error || new Error("An unexpected error occurred");
+      }
+    },
+    onSuccess: (data) => {
+      if (queryKey) {
+        const normalizedQueryKey = Array.isArray(queryKey)
+          ? queryKey
+          : [queryKey];
+        queryClient.invalidateQueries({ queryKey: normalizedQueryKey });
+        const successMessage =
+          data?.response || data?.message || "Operation successful";
+        toast.success(successMessage);
+      }
+    },
+    onError: (error) => {
+      const errorMessage = handleGenericError(error);
+      toast.error(errorMessage);
+      throw new Error(errorMessage);
+    },
+  });
+
+  return mutation;
+};
+
+export const useGetQuery = (url: string, key: string) => {
   return useQuery({
-    queryKey: [queryKey, endpoint], // Combined key for caching
-    queryFn: () => fetchData(endpoint), // Fetch function that returns a promise
+    queryKey: [key, url],
+    queryFn: async () => {
+      const response = await fetchData(url);
+      return response.data;
+    },
     refetchOnWindowFocus: false,
+    staleTime: 1000 * 60,
   });
 };
 
-export const useCreateData = (endpoint: string, queryKey: any) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await postData(endpoint, data);
-      return response.data;
+export const usePutMutation = <T>(
+  endpoint: string,
+  queryKey: string | readonly unknown[]
+) => {
+  const queryClient = useQueryClient(); // Ensure useQueryClient is correctly imported
+
+  const mutation = useMutation({
+    mutationFn: async (updatedData: T) => {
+      try {
+        const response = await updateData(endpoint, updatedData);
+        return response;
+      } catch (error) {
+        throw error || new Error("An unexpected error occurred");
+      }
     },
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(queryKey);
-      return response;
+    onSuccess: (data) => {
+      if (queryKey) {
+        const normalizedQueryKey = Array.isArray(queryKey)
+          ? queryKey
+          : [queryKey];
+        queryClient.invalidateQueries({ queryKey: normalizedQueryKey });
+        const successMessage =
+          data?.response || data?.message || "Update successful";
+        toast.success(successMessage);
+        return data;
+      }
+      console.log("Successful");
     },
-    onError: (error: any) => {
+    onError: (error) => {
       const errorMessage = handleGenericError(error);
       toast.error(errorMessage);
-      console.log(errorMessage);
+      console.log("Errored");
       throw new Error(errorMessage);
     },
   });
-};
-
-export const useUpdateData = (endpoint: string, queryKey: any) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (newData: any) => {
-      const response = await updateData(endpoint, newData);
-      return response.data;
-    },
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(queryKey);
-      return response;
-    },
-    onError: (error: any) => {
-      const errorMessage = handleGenericError(error);
-      console.log(errorMessage);
-      toast.error(errorMessage);
-      throw new Error(errorMessage);
-    },
-  });
-};
-
-export const usePatchData = (endpoint: string, queryKey: any) => {
-  const queryClient = useQueryClient();
-  return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await patchData(endpoint, data);
-      return response.data;
-    },
-    onSuccess: (response) => {
-      queryClient.invalidateQueries(queryKey);
-      return response;
-    },
-    onError: (error: any) => {
-      const errorMessage = handleGenericError(error);
-      console.log(errorMessage);
-      toast.error(errorMessage);
-      throw new Error(errorMessage);
-    },
-  });
-};
-
-export const useDeleteData = (endpoint: string, queryKey: any) => {
-  const queryClient = useQueryClient();
-
-  return useMutation({
-    mutationFn: async (data: any) => {
-      const response = await deleteData(endpoint);
-      return response.data;
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries(queryKey);
-    },
-    onError: (error: any) => {
-      const errorMessage = handleGenericError(error);
-      console.log(errorMessage);
-      toast.error(errorMessage);
-      throw new Error(errorMessage);
-    },
-  });
+  return mutation;
 };

@@ -3,7 +3,7 @@ import { toast } from "sonner";
 
 export default function initApiClient() {
   const apiClient = axios.create({
-    baseURL: process.env.NEXT_API_PUBLIC_URL || "",
+    baseURL: process.env.NEXT_PUBLIC_API_URL,
     withCredentials: false,
     headers: {
       "Content-Type": "application/json",
