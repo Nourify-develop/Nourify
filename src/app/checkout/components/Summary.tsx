@@ -33,7 +33,7 @@ export function Summary({
       <CardContent className="grid gap-4">
         <div className="flex items-center justify-between">
           <span>Items</span>
-          {/* <span>{items.length}</span> */}
+          <span>{items.length}</span>
         </div>
         <div className="flex items-center justify-between text-destructive">
           <span>Discount</span>

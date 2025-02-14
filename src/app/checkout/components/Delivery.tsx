@@ -112,9 +112,9 @@ export function DeliveryDetails({
       </Card>
 
       <Modal isOpen={isOpen} onClose={handleClose}>
-        <div className="p-6">
+        <div className="p-3 sm:p-6">
           <div className="flex flex-col gap-2 mb-6">
-              <Image src={EditIcon} alt="" />
+            <Image src={EditIcon} alt="" />
             <h2 className="text-xl font-semibold">Edit Personal Information</h2>
           </div>
 
@@ -156,11 +156,11 @@ export function DeliveryDetails({
                 className="mt-1"
               />
             </div>
-            <div className="flex gap-3 justify-end pt-4 w-full">
+            <div className="flex flex-col-reverse sm:flex-row gap-3 justify-end pt-4 w-full">
               <button
                 type="button"
                 onClick={handleClose}
-                className=" py-2.5 rounded-full border !w-fit px-10 border-primary-2/50"
+                className=" py-2.5 rounded-full border sm:!w-fit px-10 border-[#D5D7DA]"
               >
                 Cancel
               </button>
