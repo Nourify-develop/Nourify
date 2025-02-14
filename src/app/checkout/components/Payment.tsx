@@ -65,7 +65,7 @@ export function PaymentOptions({ onValidChange }: { onValidChange: (isValid: boo
           <div className="space-y-4">
             <div className="space-y-2">
               <div className="flex items-center space-x-2">
-                <label className="checkbox flex">
+                <label className="checkbox flex cursor-pointer">
                   <input
                     type="checkbox"
                     className="checkbox__input"
@@ -213,7 +213,7 @@ export function PaymentOptions({ onValidChange }: { onValidChange: (isValid: boo
 
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <label className="checkbox flex">
+                <label className="checkbox flex cursor-pointer">
                   <input
                     type="checkbox"
                     className="checkbox__input"
