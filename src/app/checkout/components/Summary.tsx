@@ -1,28 +1,39 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
+import { Button } from "@/components/ui/button";
+import {
+  Card,
+  CardContent,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
 
 interface SummaryProps {
-  isPaymentValid: boolean
-  onPayNowClick: () => void
-  totalPrice: number
-  items: Array<{ id: number; name: string; price: number; quantity: number }>
+  isPaymentValid: boolean;
+  onPayNowClick: () => void;
+  totalPrice: number;
+  items: Array<{ id: number; name: string; price: number; quantity: number }>;
 }
 
-export function Summary({ isPaymentValid, onPayNowClick, totalPrice, items }: SummaryProps) {
-  const discount = 2500
-  const shippingFee = 1600
-  const total = totalPrice - discount + shippingFee
+export function Summary({
+  isPaymentValid,
+  onPayNowClick,
+  totalPrice,
+  items,
+}: SummaryProps) {
+  const discount = 2500;
+  const shippingFee = 1600;
+  const total = totalPrice - discount + shippingFee;
 
   return (
-    <Card className="sticky top-8 sm:w-[384px] bg-[#F8F7FB] border-0">
+    <Card className="sticky top-8 lg:w-[384px] sm:w-72 bg-[#F8F7FB] border-0">
       <CardHeader>
         <CardTitle>Summary</CardTitle>
       </CardHeader>
       <CardContent className="grid gap-4">
         <div className="flex items-center justify-between">
           <span>Items</span>
-          {/* <span>{items.length}</span> */}
+          <span>{items.length}</span>
         </div>
         <div className="flex items-center justify-between text-destructive">
           <span>Discount</span>
@@ -43,7 +54,11 @@ export function Summary({ isPaymentValid, onPayNowClick, totalPrice, items }: Su
         </div>
       </CardContent>
       <CardFooter className="flex flex-col gap-4">
-        <Button className="w-full hidden sm:flex rounded-full" onClick={onPayNowClick} disabled={!isPaymentValid} >
+        <Button
+          className="w-full hidden sm:flex rounded-full"
+          onClick={onPayNowClick}
+          disabled={!isPaymentValid}
+        >
           Pay Now
         </Button>
         <p className="text-center text-sm text-muted-foreground">
@@ -58,6 +73,5 @@ export function Summary({ isPaymentValid, onPayNowClick, totalPrice, items }: Su
         </p>
       </CardFooter>
     </Card>
-  )
+  );
 }
-
