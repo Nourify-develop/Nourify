@@ -7,6 +7,7 @@ import useCart from "@/hooks/useCart";
 import { toast } from "sonner";
 import { useState } from "react";
 import { Minus, Plus } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
   const router = useRouter();
@@ -70,25 +71,43 @@ const ProductCard: React.FC<{ product: Product }> = ({ product }) => {
           </span>
           <span className="text-xs text-gray-5"> / pack</span>
         </p>
-        <div className="relative  group ">
+        <motion.div className="relative group" whileTap={{ scale: 0.95 }}>
           <button
             onClick={userQuantity > 0 ? handleRemoveFromCart : handleAddToCart}
             className={`${
               userQuantity ? "border-gray-6 border-[0.5px]" : ""
-            } py-2 px-3  transition-all duration-500 ease-in-out rounded-md bg-gray-11 hover:bg-secondary flex items-center justify-center w-[45px] h-[40px]`}
+            } py-2 px-3 transition-all duration-500 ease-in-out rounded-md bg-gray-11 hover:bg-secondary flex items-center justify-center w-[45px] h-[40px] overflow-hidden`}
           >
-            {userQuantity > 0 ? (
-              <Minus className="h-5 w-4 lg:h-6 lg:w-5  text-gray-6 group-hover:text-white" />
-            ) : (
-              <LuShoppingCart className="h-5 w-5 lg:h-6 lg:w-6  text-gray-6 group-hover:text-white" />
-            )}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={userQuantity > 0 ? "minus" : "cart"}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.2 }}
+              >
+                {userQuantity > 0 ? (
+                  <Minus className="h-5 w-4 lg:h-6 lg:w-5 text-gray-6 group-hover:text-white" />
+                ) : (
+                  <LuShoppingCart className="h-5 w-5 lg:h-6 lg:w-6 text-gray-6 group-hover:text-white" />
+                )}
+              </motion.div>
+            </AnimatePresence>
           </button>
-          {userQuantity > 0 && (
-            <div className="absolute -top-2 -right-2 bg-secondary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold group-hover:border-[2px] group-hover:border-white">
-              {userQuantity}
-            </div>
-          )}
-        </div>
+          <AnimatePresence>
+            {userQuantity > 0 && (
+              <motion.div
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                exit={{ scale: 0, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="absolute -top-2 -right-2 bg-secondary text-white rounded-full w-5 h-5 flex items-center justify-center text-xs font-bold group-hover:border-[2px] group-hover:border-white"
+              >
+                {userQuantity}
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </motion.div>
       </div>
     </div>
   );
