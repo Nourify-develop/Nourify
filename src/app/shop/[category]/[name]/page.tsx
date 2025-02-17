@@ -379,7 +379,7 @@ export default function ProductDisplay() {
                     product.status === "Out of Stock"
                       ? " cursor-not-allowed pointer-events-none"
                       : ""
-                  } md:w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2`}
+                  } w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2`}
                   onClick={handleCartClick}
                   disabled={product.status === "Out of Stock"}
                 >
