@@ -1,6 +1,7 @@
-import axios from "./axios"
+import axios from "./axios";
 
-const RegisterUrl = "/auth/register"
+
+const RegisterUrl = "api/auth/register"
 interface RegisterPayload {
     firstName: string;
     lastName: string;
@@ -15,7 +16,7 @@ export const registerUser = async (userData:RegisterPayload)=>{
         return response.data
     } catch (error: unknown) {
         
-        console.error('Registration failed:', error.response?.data || error.message);
+      
         throw error;
     }
 }

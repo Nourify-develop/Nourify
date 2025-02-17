@@ -130,9 +130,9 @@ const SignUp = () => {
       password,
       agreeToTerms,
       }
-      console.log("Submitting userData:", userData); 
+      
       const response = await registerUser(userData)
-      console.log(response)
+     
 router.push("/login")
       setFirstName("")
       setLastName("")

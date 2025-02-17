@@ -17,71 +17,92 @@ import {
 } from "firebase/auth"; // Importing Firebase methods
 import app from "@/lib/firebaseConfig"; // Firebase configuration
 import { TailSpin } from "react-loader-spinner"; // Loading spinner component
+//import { console } from "inspector";
+import { signinUser } from "@/api/Signin";
 
 const Login = () => {
   // State declarations
   const [passwordVisible, setPasswordVisible] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const db = getFirestore(app);
   // Router and auth initialization
   const router = useRouter();
-  const auth = getAuth(app);
-  const googleProvider = new GoogleAuthProvider();
+  // const auth = getAuth(app);
+  // const googleProvider = new GoogleAuthProvider();
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
+const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  e.preventDefault();
+  setLoading(true);
+  setError("")
+  try {
+    const userDate = {email, password}
+    
+    const response = await signinUser(userDate)
+    
+router.push("/")
 
+    
+  }
+  catch{
+    setError(error || "An error occurred while logging in.")
+  }finally{
+    setLoading(false)
+  }
+}
   // Handle login with email and password
-  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
+  // const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     const userCredential = await signInWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     const user = userCredential.user;
 
-      if (!user.emailVerified) {
-        await auth.signOut();
-        toast.error("Please verify your email before logging in.");
-        setLoading(false);
-        return;
-      }
+  //     if (!user.emailVerified) {
+  //       await auth.signOut();
+  //       toast.error("Please verify your email before logging in.");
+  //       setLoading(false);
+  //       return;
+  //     }
 
-      // Get the Firebase ID token
-      const token = await user.getIdToken();
+  //     // Get the Firebase ID token
+  //     const token = await user.getIdToken();
 
-      // Fetch user data from Firestore
-      const userDoc = await getDoc(doc(db, "users", user.uid));
-      if (userDoc.exists()) {
-        const userData = userDoc.data();
+  //     // Fetch user data from Firestore
+  //     const userDoc = await getDoc(doc(db, "users", user.uid));
+  //     if (userDoc.exists()) {
+  //       const userData = userDoc.data();
 
-        // Add the token to the user data object
-        const userDataWithToken = { ...userData, token };
+  //       // Add the token to the user data object
+  //       const userDataWithToken = { ...userData, token };
 
-        // Store the updated user data with the token in localStorage
-        localStorage.setItem("userData", JSON.stringify(userDataWithToken));
+  //       // Store the updated user data with the token in localStorage
+  //       localStorage.setItem("userData", JSON.stringify(userDataWithToken));
 
-        toast.success("Login successful!");
+  //       toast.success("Login successful!");
 
-        setTimeout(() => {
-          router.push("/");
-        }, 2000);
-      } else {
-        throw new Error("User data not found.");
-      }
-    } catch (error: any) {
-      handleError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //       setTimeout(() => {
+  //         router.push("/");
+  //       }, 2000);
+  //     } else {
+  //       throw new Error("User data not found.");
+  //     }
+  //   } catch (error: any) {
+  //     handleError(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   // Handle login with Google
   const handleGoogleSignIn = async () => {
