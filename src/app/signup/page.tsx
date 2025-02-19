@@ -19,6 +19,7 @@ import { toast } from "sonner";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import { TailSpin } from "react-loader-spinner";
+import { registerUser } from "@/api/Register";
 
 const SignUp = () => {
   const auth = getAuth(app);
@@ -29,6 +30,7 @@ const SignUp = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [agreeToTerms, setAgreeToTerms] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
   const [passwordVisible, setPasswordVisible] = useState(false);
@@ -37,41 +39,41 @@ const SignUp = () => {
     setPasswordVisible(!passwordVisible);
   };
 
-  const handleSignUp = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setLoading(true);
-    try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        email,
-        password
-      );
-      const user = userCredential.user;
-      await setDoc(doc(db, "users", user.uid), {
-        firstName,
-        lastName,
-        email,
-        uid: user.uid,
-      });
+  // const handleSignUp = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   setLoading(true);
+  //   try {
+  //     const userCredential = await createUserWithEmailAndPassword(
+  //       auth,
+  //       email,
+  //       password
+  //     );
+  //     const user = userCredential.user;
+  //     await setDoc(doc(db, "users", user.uid), {
+  //       firstName,
+  //       lastName,
+  //       email,
+  //       uid: user.uid,
+  //     });
 
-      // Send verification email
-      await sendEmailVerification(user);
-      toast.success("Verification email sent! Please check your inbox.");
+  //     // Send verification email
+  //     await sendEmailVerification(user);
+  //     toast.success("Verification email sent! Please check your inbox.");
 
-      setTimeout(() => {
-        toast.success("Redirecting to Login page.");
-      }, 3000);
-      setTimeout(() => {
-        router.push("/login");
-      }, 6000);
-    } catch (error: any) {
-      setError(error.message);
-      console.log(error.message);
-      handleAuthError(error);
-    } finally {
-      setLoading(false);
-    }
-  };
+  //     setTimeout(() => {
+  //       toast.success("Redirecting to Login page.");
+  //     }, 3000);
+  //     setTimeout(() => {
+  //       router.push("/login");
+  //     }, 6000);
+  //   } catch (error: any) {
+  //     setError(error.message);
+  //     console.log(error.message);
+  //     handleAuthError(error);
+  //   } finally {
+  //     setLoading(false);
+  //   }
+  // };
 
   const handleGoogleSignIn = async () => {
     const provider = new GoogleAuthProvider();
@@ -116,6 +118,33 @@ const SignUp = () => {
     }
   };
   
+  const handleSignUp = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setLoading(true);
+  setError("");
+  try {
+    const userData = {
+      firstName,
+      lastName,
+      email,
+      password,
+      agreeToTerms,
+      }
+      
+      const response = await registerUser(userData)
+     
+router.push("/login")
+      setFirstName("")
+      setLastName("")
+      setEmail("")
+      setPassword("")
+      setAgreeToTerms(false)
+      setLoading(false);
+  } catch (error) {
+    setError(error as string);
+    setLoading(false);
+  }
+  }
   const handleAuthError = (error: any) => {
     switch (error.code) {
       case "auth/invalid-email":
@@ -267,7 +296,8 @@ const SignUp = () => {
             </div>
           </div>
           <div className="flex gap-2 items-center ">
-            <input type="checkbox" required />
+            <input type="checkbox" checked={agreeToTerms}
+            onChange={(e) => setAgreeToTerms(e.target.checked)} required />
             <label className="text-gray text-sm leading-[16px]">
               I agree with Nourify's{" "}
               <Link href={``} className="text-secondary underline ">

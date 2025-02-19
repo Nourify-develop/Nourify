@@ -4,7 +4,7 @@ import Typography from "@/components/typography";
 
 import useCart from "@/hooks/useCart";
 import Wrapper from "@/layout/wrapper";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import SwipeableCartItem from "./components/CartProduct";
 import Link from "next/link";
 import { Button } from "@/components/ui/input";
@@ -16,10 +16,10 @@ const Page = () => {
   const [selectedProducts, setSelectedProducts] = useState<number[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [modalMessage, setModalMessage] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const [onConfirmAction, setOnConfirmAction] = useState<() => void>(
     () => () => {}
   );
-
   const handleSelectAll = () => {
     if (selectedProducts.length === cart.length) {
       setSelectedProducts([]);
@@ -81,7 +81,14 @@ const Page = () => {
         maximumFractionDigits: 2,
       });
   };
+  useEffect(() => {
+    // Set a 3-second timer to stop the loading state
+    const timer = setTimeout(() => {
+      setIsLoading(false); // Stop loading after 3 seconds
+    }, 3000);
 
+    return () => clearTimeout(timer); // Cleanup the timer on component unmount
+  }, []);
   return (
     <Wrapper className="bg-white">
       <nav className="flex items-center gap-x-1 text-gray-5 border-b border-gray-2 py-2">
@@ -123,7 +130,30 @@ const Page = () => {
             </button>
           </div>
           <div className="">
-            {cart.length > 0 ? (
+            {isLoading ? (
+              Array(2)
+                .fill(null)
+                .map((_, index) => (
+                  <div className=" py-7.5 flex w-full gap-x-2.5 md:gap-x-8  animate-pulse items-center border-b-[0.5px]  border-primary-2/40 ">
+                    <div>
+                      <label className="checkbox">
+                        <input type="checkbox" className="checkbox__input" />
+                        <span className="checkbox__inner h-5 w-5"></span>
+                      </label>
+                    </div>
+                    <div className="flex gap-x-4 w-full">
+                      {" "}
+                      <div className="px-2 md:px-6 py-3 md:py-12 bg-gray-300 animate-pulse rounded-[10px]">
+                        <div className="h-20 md:h-36 w-20 md:w-36  " />
+                      </div>
+                      <div className="flex flex-col gap-y-2   w-full animate-pulse ">
+                        <div className="h-8 md:h-full w-full   bg-gray-300 rounded-[10px]" />
+                        <div className="h-8 md:h-full w-full   bg-gray-300 rounded-[10px]" />
+                      </div>
+                    </div>
+                  </div>
+                ))
+            ) : cart.length > 0 ? (
               cart.map((product, index) => (
                 <SwipeableCartItem
                   key={index}
@@ -136,7 +166,7 @@ const Page = () => {
                 />
               ))
             ) : (
-              <p className="text-center text-gray-5">Your cart is empty.</p>
+              <p className="text-center text-gray-500">Your cart is empty.</p>
             )}
           </div>
         </div>

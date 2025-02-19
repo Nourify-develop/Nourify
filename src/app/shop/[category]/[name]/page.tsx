@@ -26,19 +26,16 @@ export default function ProductDisplay() {
   const { category, name } = useParams();
   const { products } = useProducts();
   const { addToCart, removeFromCart, isInCart, updateQuantity, cart } = useCart();
-  console.log("quantiy", updateQuantity);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const [count, setCount] = useState<number>(1);
   const [selectedSize, setSelectedSize] = useState<string | null>(
     searchParams.get("size")
   );
-  console.log("prudt", products);
   const decodedName = decodeURIComponent(`${name}`);
   const product = products.find(
     (p) => p.category === category && p.name === decodedName
   );
-  console.log("theactuc", product);
   useEffect(() => {
     setSelectedSize(searchParams.get("size"));
   }, [searchParams]);
@@ -68,7 +65,6 @@ export default function ProductDisplay() {
     "2": 4,
     "1": 2,
   };
-  console.log("product.id", product.id);
   const handleCartClick = () => {
     const productId = String(product.id); // Ensure id is stored as a string
     if (isInCart(product.id)) {
@@ -379,7 +375,7 @@ export default function ProductDisplay() {
                     product.status === "Out of Stock"
                       ? " cursor-not-allowed pointer-events-none"
                       : ""
-                  } md:w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2`}
+                  } w-full rounded-3xl text-lg text-green-1 font-normal order-1 md:order-2`}
                   onClick={handleCartClick}
                   disabled={product.status === "Out of Stock"}
                 >

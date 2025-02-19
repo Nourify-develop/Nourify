@@ -89,3 +89,41 @@ export type LoginMenuItem = {
 };
 
 export type Tab = "profile" | "password";
+
+
+export interface AdminLoginTypes {
+  email: string;
+  password: string;
+}
+
+export interface AdminSignUpTypes {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  agreeToTerms: boolean;
+  isAdmin: boolean;
+}
+
+// export interface AdminProduct {
+//   id: number;
+//   image: string;
+//   name: string;
+//   productId: number;
+//   category: string;
+//   quantity: number;
+//   price: number;
+//   status: string;
+// }
+
+// export interface AdminError {
+//   message: string;
+//   code?: number;
+//   details?: string[];
+// }
+
+// export interface AdminResponse<T> {
+//   success: boolean;
+//   data?: T;
+//   error?: AdminError;
+// }

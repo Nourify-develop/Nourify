@@ -5,6 +5,7 @@ import "./../styles/checkbox.css";
 import "./globals.css";
 import initApiClient from "@/config/init";
 import AuthQueryProvider from "@/context/AuthQueryProvider";
+import { Toaster } from "sonner";
 
 export const metadata: Metadata = {
   title: "Nourify",
@@ -26,9 +27,12 @@ export default function RootLayout({
         />
       </head>
       <body>
-        <AuthQueryProvider>
-          <RootClientLayout>{children}</RootClientLayout>
-        </AuthQueryProvider>
+        <RootClientLayout>
+          <AuthQueryProvider>
+            <Toaster position="top-right" richColors />
+            {children}
+          </AuthQueryProvider>
+        </RootClientLayout>
       </body>
     </html>
   );

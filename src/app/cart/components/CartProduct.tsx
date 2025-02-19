@@ -1,7 +1,7 @@
 "use client";
 
 import type React from "react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import { ChevronRight, Dot, Minus, Plus, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
@@ -27,7 +27,7 @@ const CartProduct: React.FC<CartProductProps> = ({
   const [offset, setOffset] = useState(0);
   const [showConfirm, setShowConfirm] = useState(false);
   const router = useRouter();
-  const [isLoading, setIsLoading] = useState(true);
+  const [isImageLoading, setIsImageLoading] = useState(true);
   const { formatPrice, capitalizeFirstLetter } = useFormat();
   const handlers = useSwipeable({
     onSwiping: (eventData) => {
@@ -50,6 +50,23 @@ const CartProduct: React.FC<CartProductProps> = ({
       setShowConfirm(false);
     },
   });
+
+  const [productImage, setProductImage] = useState<string | null>(null);
+
+  useEffect(() => {
+    setIsImageLoading(true); // Ensure loading state resets
+
+    const imageTimeout = setTimeout(() => {
+      const img = new Image();
+      img.src = product.image;
+      img.onload = () => {
+        setProductImage(product.image);
+        setIsImageLoading(false);
+      };
+    }, 1000); // Adjust delay as needed (e.g., 1000ms = 1 sec)
+
+    return () => clearTimeout(imageTimeout); // Cleanup
+  }, [product.image]);
 
   return (
     <div className="relative w-full overflow-hidden">
@@ -91,17 +108,24 @@ const CartProduct: React.FC<CartProductProps> = ({
           </div>
           <div className="flex items-center justify-between pr-2 border-b-[0.5px] py-7.5 border-primary-2/40 w-full ">
             <div className="flex  gap-4">
-              <div className=" px-2 md:px-6 py-3 md:py-12 bg-gray-10 ">
-                <div className="h-20 md:h-36 w-20 md:w-36">
-                  {isLoading && (
-                    <div className="h-full w-full bg-gray-300 animate-pulse rounded-[10px]" />
-                  )}
-                  <img
-                    src={product.image}
-                    alt={product.name}
-                    className="h-full w-full object-contain rounded-[10px]"
-                  />
-                </div>
+              <div
+                className={`${
+                  isImageLoading ? "" : "px-2 md:px-6 py-3 md:py-12"
+                }  bg-gray-10 `}
+              >
+                {isImageLoading ? (
+                  <div className="px-2 md:px-6 py-3 md:py-12 bg-gray-300 animate-pulse rounded-[10px]">
+                    <div className="h-20 md:h-36 w-20 md:w-36  " />
+                  </div>
+                ) : (
+                  <div className="h-20 md:h-36 w-20 md:w-36">
+                    <img
+                      src={productImage!}
+                      alt={product.name}
+                      className="h-full w-full object-contain rounded-[10px]"
+                    />
+                  </div>
+                )}
               </div>
 
               <div className="flex flex-col justify-between">
@@ -165,7 +189,7 @@ const CartProduct: React.FC<CartProductProps> = ({
             <div className="hidden md:flex flex-col justify-between gap-y-20 xl:gap-y-24">
               <div>
                 {" "}
-                <p className="text-3xl font-bold text-gray-8">
+                <p className="text-2xl font-bold text-gray-8">
                   ₦{formatPrice(product.price * product.userQuantity)}
                 </p>
               </div>

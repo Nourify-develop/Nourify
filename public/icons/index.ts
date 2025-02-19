@@ -19,6 +19,7 @@ import AlertNoti from "./Frame 1618868728.svg";
 import Visa from "./Visa.svg";
 import Maestro from "./Maestro.svg";
 import Mastercard from "./Mastercard.svg";
+import EditIcon from "./Featured icon.svg";
 
 export {
   Logo,
@@ -42,4 +43,5 @@ export {
   Maestro,
   Mastercard,
   Visa,
+  EditIcon,
 };
