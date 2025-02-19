@@ -22,8 +22,8 @@ import { TailSpin } from "react-loader-spinner";
 import { registerUser } from "@/api/Register";
 
 const SignUp = () => {
-  // const auth = getAuth(app);
-  // const db = getFirestore(app);
+  const auth = getAuth(app);
+  const db = getFirestore(app);
   const router = useRouter();
 
   const [firstName, setFirstName] = useState("");
@@ -75,48 +75,48 @@ const SignUp = () => {
   //   }
   // };
 
-  // const handleGoogleSignIn = async () => {
-  //   const provider = new GoogleAuthProvider();
-  //   try {
-  //     const googleSigninData = await signInWithPopup(auth, provider);
-  //     const user = googleSigninData.user;
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const googleSigninData = await signInWithPopup(auth, provider);
+      const user = googleSigninData.user;
   
-  //     // Get the Firebase ID token
-  //     const token = await user.getIdToken();
-  //     const result = await signInWithPopup(auth, provider);
-  //     const signedInUser = result.user;
-  //     console.log( signedInUser);
+      // Get the Firebase ID token
+      const token = await user.getIdToken();
+      const result = await signInWithPopup(auth, provider);
+      const signedInUser = result.user;
+      console.log( signedInUser);
   
   
-  //     const idToken = await signedInUser.getIdToken( true);
-  //     console.log("idtoken", idToken)
-  //     // Prepare user data for Firestore
-  //     const userData = {
-  //       firstName: user.displayName?.split(" ")[0] || "",
-  //       lastName: user.displayName?.split(" ")[1] || "",
-  //       email: user.email,
-  //       uid: user.uid,
-  //       image: user.photoURL,
-  //       token, // Include the token in user data
-  //     };
+      const idToken = await signedInUser.getIdToken( true);
+      console.log("idtoken", idToken)
+      // Prepare user data for Firestore
+      const userData = {
+        firstName: user.displayName?.split(" ")[0] || "",
+        lastName: user.displayName?.split(" ")[1] || "",
+        email: user.email,
+        uid: user.uid,
+        image: user.photoURL,
+        token, // Include the token in user data
+      };
   
-  //     // Save user data to Firestore
-  //     await setDoc(doc(db, "users", user.uid), userData);
+      // Save user data to Firestore
+      await setDoc(doc(db, "users", user.uid), userData);
   
-  //     // Save user data to local storage
-  //     localStorage.setItem("userData", JSON.stringify(userData));
+      // Save user data to local storage
+      localStorage.setItem("userData", JSON.stringify(userData));
   
-  //     // Log user data to the console
-  //     console.log("User Data:", userData);
-  //     // Redirect after a timeout
-  //     setTimeout(() => {
-  //       router.push("/");
-  //     }, 2000);
-  //   } catch (error: any) {
-  //     setError(error.message);
-  //     handleAuthError(error);
-  //   }
-  // };
+      // Log user data to the console
+      console.log("User Data:", userData);
+      // Redirect after a timeout
+      setTimeout(() => {
+        router.push("/");
+      }, 2000);
+    } catch (error: any) {
+      setError(error.message);
+      handleAuthError(error);
+    }
+  };
   
   const handleSignUp = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -215,7 +215,7 @@ router.push("/login")
         </div>
         <div className="flex flex-col gap-5">
           <button
-            // onClick={handleGoogleSignIn}
+            onClick={handleGoogleSignIn}
             className="w-full text-primary-2/70 flex justify-center gap-2 items-center py-3 bg-gray-1 hover:bg-gray-2 transition rounded-[50px]"
           >
             <img src="/googleg logo 1.svg" />
