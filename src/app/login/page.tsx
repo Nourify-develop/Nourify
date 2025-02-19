@@ -30,32 +30,43 @@ const Login = () => {
   const db = getFirestore(app);
   // Router and auth initialization
   const router = useRouter();
-  // const auth = getAuth(app);
-  // const googleProvider = new GoogleAuthProvider();
+  const auth = getAuth(app);
+  const googleProvider = new GoogleAuthProvider();
 
   // Toggle password visibility
   const togglePasswordVisibility = () => {
     setPasswordVisible(!passwordVisible);
   };
-const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
-  e.preventDefault();
-  setLoading(true);
-  setError("")
-  try {
-    const userDate = {email, password}
-    
-    const response = await signinUser(userDate)
-    
-router.push("/")
-
-    
-  }
-  catch{
-    setError(error || "An error occurred while logging in.")
-  }finally{
-    setLoading(false)
-  }
-}
+  const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setLoading(true);
+    setError("");
+  
+    try {
+      const userData = { email, password };
+      const response = await signinUser(userData);
+  
+      if (response?.message === "success") {
+        console.log("Login successful:", response);
+  
+        // Store ID and Token in cookies
+        document.cookie = `NOURIFY_ID=${response.data._id}; path=/`;
+        document.cookie = `NOURIFY_TOKEN=${response.token}; path=/`;
+  
+        toast.success("Login successful");
+        router.push("/");
+      } else {
+        toast.error(response?.message || "Login failed");
+      }
+    } catch (err) {
+      console.error("Login error:", err);
+      setError("An error occurred while logging in.");
+      toast.error("An error occurred while logging in.");
+    } finally {
+      setLoading(false);
+    }
+  };
+  
   // Handle login with email and password
   // const handleLogin = async (e: React.FormEvent<HTMLFormElement>) => {
   //   e.preventDefault();
