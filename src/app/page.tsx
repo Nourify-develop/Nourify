@@ -5,7 +5,7 @@ import WhyChoose from "@/ui/landing/WhyChoose";
 
 import Newsletter from "@/components/newsletter/newsletter";
 
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/navbar/Navbar";
 import Testimonials from "@/ui/landing/Testimonials";
 
 export default function Home() {

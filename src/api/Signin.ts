@@ -12,7 +12,7 @@ interface SigninPayLoad {
 export const signinUser = async (userData: SigninPayLoad) => {
   try {
     const response = await axios.post(SignUrl, userData);
-   
+    localStorage.setItem("userData", JSON.stringify(response.data.data));
     console.log("Response:", response.data);
     return response.data; // This will be processed in `handleLogin`
   } catch (error: any) {
