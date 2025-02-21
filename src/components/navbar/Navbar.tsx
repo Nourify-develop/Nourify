@@ -5,10 +5,11 @@ import { useEffect, useRef, useState } from "react";
 import Logo from "../Logo";
 import { NavSearch } from "./NavSearch";
 import { LoginMenu } from "./LoginMenu";
-import { MobileMenu } from "./MobileMenu";
+// import { MobileMenu } from "./MobileMenu";
 import { UserSection } from "./UserSection";
 import { HamburgerButton } from "./HamburgerButton";
 import { NavLink } from "./NavLink";
+import { MobileMenu } from "./MobileMenu";
 
 function Navbar() {
   const [showMobileMenu, setShowMobileMenu] = useState(false);
@@ -20,7 +21,7 @@ function Navbar() {
 
   const mobileMenuRef = useRef<HTMLDivElement>(null);
   const hamburgerRef = useRef<HTMLButtonElement>(null);
-  const loginMenuRef = useRef<HTMLUListElement>(null);
+  const loginMenuRef = useRef<HTMLDivElement>(null);
   const loginButtonRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 

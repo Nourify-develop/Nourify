@@ -7,7 +7,7 @@ type HamburgerButtonProps = {
 };
 
 export const HamburgerButton = ({ showMobileMenu, toggleMobileMenu, hamburgerRef }: HamburgerButtonProps) => (
-  <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 relative z-[1001] rounded-full flex justify-center items-center">
+  <div className="w-10 h-10 md:hidden cursor-pointer bg-gray-1 border border-gray-light-2 relative z-[1002] rounded-full flex justify-center items-center">
     <button
       onClick={toggleMobileMenu}
       ref={hamburgerRef}

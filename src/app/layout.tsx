@@ -6,6 +6,7 @@ import "./globals.css";
 import initApiClient from "@/config/init";
 import AuthQueryProvider from "@/context/AuthQueryProvider";
 import { Toaster } from "sonner";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata: Metadata = {
   title: "Nourify",
@@ -29,7 +30,9 @@ export default function RootLayout({
       <body>
         <RootClientLayout>
           <AuthQueryProvider>
-            <Toaster position="top-right" richColors />
+            <AuthProvider>
+              <Toaster position="top-right" richColors />
+            </AuthProvider>
             {children}
           </AuthQueryProvider>
         </RootClientLayout>

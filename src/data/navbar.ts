@@ -17,11 +17,11 @@ export const MOBILE_AUTH_ITEMS: LoginMenuItem[] = [
   {
     text: "Login",
     href: "/login",
-    className: "border border-green text-green hover:bg-green/80 hover:text-white",
+    className: "border border-green text-green ",
   },
   {
     text: "Sign Up",
     href: "/signup",
-    className: "bg-green text-white hover:bg-green/80",
+    className: "bg-green text-white hover:bg-green/50",
   },
 ];
