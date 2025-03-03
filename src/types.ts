@@ -75,6 +75,19 @@ export interface Column {
   header: string;
 }
 
+export type MenuLink = {
+  name: string;
+  link: string;
+  id: number;
+};
+
+export type LoginMenuItem = {
+  text: string;
+  href: string;
+  state?: string;
+  className?: string;
+};
+
 export type Tab = "profile" | "password";
 
 

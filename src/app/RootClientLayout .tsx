@@ -3,7 +3,7 @@ import { ReactNode, useEffect } from "react";
 import { usePathname, useRouter } from "next/navigation"; // App Router version of useRouter
 import NProgress from "nprogress";
 import "../styles/nprogress.css";
-import Navbar from "../components/Navbar";
+import Navbar from "../components/navbar/Navbar";
 import Footer from "@/components/Footer";
 import { Toaster } from "sonner";
 import { AuthProvider } from "@/context/AuthContext";

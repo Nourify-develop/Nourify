@@ -1,7 +1,10 @@
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+"use client";  // Add this at the very top
+
+import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 
 // Define the type for your user data
 interface UserData {
+  _id: string;
   firstName: string;
   lastName: string;
   email: string;
