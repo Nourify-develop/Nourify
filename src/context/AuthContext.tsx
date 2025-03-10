@@ -1,6 +1,14 @@
-"use client";  // Add this at the very top
+"use client"; // Add this at the very top
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import axios from "@/api/axios";
+import React, {
+  createContext,
+  useContext,
+  useState,
+  useEffect,
+  ReactNode,
+} from "react";
+import { toast } from "sonner";
 
 // Define the type for your user data
 interface UserData {
@@ -17,34 +25,68 @@ interface AuthContextProps {
   user: UserData | null;
   setUser: (userData: UserData | null) => void;
   logout: () => void;
+  loading: boolean;
 }
 
-// Initialize the context with default values
 const AuthContext = createContext<AuthContextProps | undefined>(undefined);
 
 // Create a provider component
-export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+export const AuthProvider: React.FC<{ children: ReactNode }> = ({
+  children,
+}) => {
   const [user, setUser] = useState<UserData | null>(null);
+  const [loading, setLoading] = useState(true);
 
-  // Load user data from localStorage on initial render
-  useEffect(() => {
-    const storedUserData = localStorage.getItem("userData");
-    if (storedUserData) {
-      const parsedUserData = JSON.parse(storedUserData);
-      setUser(parsedUserData);
-      console.log("Loaded user data from localStorage:", parsedUserData);
+  const getCookie = (name: string) => {
+    const cookies = document.cookie.split("; ");
+    const cookie = cookies.find((row) => row.startsWith(`${name}=`));
+    return cookie ? cookie.split("=")[1] : null;
+  };
+
+  const getUserData = async () => {
+    try {
+      const userId = getCookie("NOURIFY_ID");
+      const token = getCookie("NOURIFY_TOKEN");
+
+      if (!userId || !token) {
+        setLoading(false);
+        return;
+      }
+
+      const response = await axios.get(`/api/users/${userId}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      console.log("User Data:", response.data);
+      setUser(response.data.data);
+    } catch (error: any) {
+      console.error(
+        "Error fetching user data:",
+        error.response?.data || error.message
+      );
+      toast.error(error.response?.data?.message || "Login request failed");
+    } finally {
+      setLoading(false);
     }
+  };
+
+  useEffect(() => {
+    getUserData();
   }, []);
 
-  // Function to log out the user
   const logout = () => {
     console.log("Logging out user:", user);
     setUser(null);
-    localStorage.removeItem("userData");
+    document.cookie =
+      "NOURIFY_ID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+    document.cookie =
+      "NOURIFY_TOKEN=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/";
+
     console.log("User logged out and localStorage cleared.");
   };
 
-  // Set the user data and log the change
   const updateUser = (userData: UserData | null) => {
     setUser(userData);
     if (userData) {
@@ -55,7 +97,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   };
 
   return (
-    <AuthContext.Provider value={{ user, setUser: updateUser, logout }}>
+    <AuthContext.Provider value={{ user, setUser: updateUser, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );
