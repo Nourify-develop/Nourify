@@ -60,7 +60,7 @@ const FormInput: React.FC<FormInputProps> = ({
           </span>
         )}
       </div>
-      {error && <p className="text-red-500 text-xs mt-1">{error}</p>}
+      {error && <p className="text-red -mt-1 text-xs ">{error}</p>}
     </div>
   )
 }
