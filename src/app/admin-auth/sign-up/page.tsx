@@ -11,7 +11,19 @@ import { toast } from "sonner";
 
 export default function AdminSignUp() {
   const { mutate, isPending } = usePostMutation(ADMIN_AUTH.SIGN_UP, "sign_up");
-  const { register, formState: { errors }, handleSubmit } = useForm<AdminSignUpTypes>({
+
+
+console.log("Mutation function:", mutate); // Check if mutate exists
+console.log("Is pending state:", isPending);
+
+if (!mutate) {
+  console.error("🚨 Mutate function is undefined!");
+}
+  const {
+    register,
+    formState: { errors },
+    handleSubmit,
+  } = useForm<AdminSignUpTypes>({
     resolver: yupResolver(adminSignUpSchema),
   });
 
@@ -23,9 +35,32 @@ export default function AdminSignUp() {
     }
   };
 
+  const handleRegister = (data: AdminSignUpTypes) => {
+    console.log("🔵 Submitting form data:", data);
+  
+    mutate(
+      { ...data, isAdmin: true },
+      {
+        onSuccess: (response) => {
+          console.log("✅ Mutation successful:", response);
+          toast.success("Admin sign-up successful!");
+        },
+        onError: (error) => {
+          console.error("❌ Mutation failed:", error);
+          toast.error(`Error during sign-up: ${error.message || error}`);
+        },
+      }
+    );
+  };
+  
+  
+
   return (
     <div>
-      <form className="w-full flex flex-col gap-4" onSubmit={handleSubmit(handleFormSubmit)}>
+      <form
+        className="w-full flex flex-col gap-4"
+        onSubmit={handleSubmit(handleRegister)}
+      >
         <FormInput
           type="text"
           label="First Name"
@@ -42,7 +77,7 @@ export default function AdminSignUp() {
           type="email"
           label="Email"
           {...register("email")}
-          error={errors.email?.message} 
+          error={errors.email?.message}
         />
         <FormInput
           type="password"
@@ -52,14 +87,25 @@ export default function AdminSignUp() {
         />
 
         <span className="flex items-center gap-2">
-          <input type="checkbox" {...register("agreeToTerms")} id="check" className="h-4 w-4 border border-gray-300 checked:bg-green-1" />
-          <label htmlFor="check" className="text-lg">Do you agree to the terms?</label>
-          {errors.agreeToTerms?.message && <span className="mt-1 text-red">{errors.agreeToTerms?.message}</span>}
+          <input
+            type="checkbox"
+            {...register("agreeToTerms")}
+            id="check"
+            className="h-4 w-4 border border-gray-300 checked:bg-green-1"
+          />
+          <label htmlFor="check" className="text-lg">
+            Do you agree to the terms?
+          </label>
+          {errors.agreeToTerms?.message && (
+            <span className="mt-1 text-red">
+              {errors.agreeToTerms?.message}
+            </span>
+          )}
         </span>
 
-        <Button type="submit" variant="default" className="rounded-full text-lg" onClick={handleSubmit(handleFormSubmit)}>
+        <button type="submit" className="rounded-full text-lg focus:border focus:border-black bg-secondary-2 py-2.5">
           {isPending ? "Loading..." : "Register"}
-        </Button>
+        </button>
       </form>
     </div>
   );

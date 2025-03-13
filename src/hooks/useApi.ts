@@ -11,10 +11,13 @@ export const usePostMutation = <T>(
 
   const mutation = useMutation({
     mutationFn: async (newData: T) => {
+      console.log("API Call initiated: ", newData);
       try {
         const response = await postData(endpoint, newData);
+        console.log('API response')
         return response;
       } catch (error) {
+        console.log('API error')
         throw error || new Error("An unexpected error occurred");
       }
     },
